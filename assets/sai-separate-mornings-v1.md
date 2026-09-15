@@ -1,0 +1,7 @@
+# SAI separate mornings — v6
+
+Created with built-in image_gen. AI lifestyle concept featuring fictional adults, not real user testimonials. Saved as `sai-separate-mornings-v1.png` and embedded in teaser-v6.html.
+
+## Final prompt
+
+Create a photorealistic youthful lifestyle campaign diptych for a cute Korean/Japanese couple smart ring app targeting adults aged 20-28. Wide landscape 1536x1024. Two equally sized side-by-side photographic panels with a clean pale butter-yellow narrow divider, NO text. LEFT: adult East Asian woman about 23 in her own bright apartment desk corner, short casual hair, oversized pale lavender T-shirt, holding an iced coffee and smiling at her phone, playful tiny stickers on the phone, a smooth silver smart ring on her index finger. RIGHT: adult East Asian man about 24 in his separate compact apartment by a window, mint casual T-shirt and tousled hair, holding a phone and smiling, a smooth silver smart ring on his hand, breakfast toast plate on desk. Show both from waist up. Separate locations clearly, not living together; relaxed early dating energy, everyday spontaneous candid expressions, cool fresh daylight, lavender mint butter yellow accents, warm natural skin tones, authentic student/young adult apartment details, light analog camera feel but high quality crisp photograph. No bed, no bedroom, no marriage or wedding elements, no formal clothing, no romantic embrace, no roses, no luxury hotel, no typography, no logos, no watermarks. Leave some negative space near upper corners. Both are unequivocally adults.

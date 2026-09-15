@@ -1,0 +1,9 @@
+# Layered couple ring styling
+
+Generated using the built-in image_gen tool, with the previous SAI ring image as reference. This is an AI styling concept, not an official Oura image or verified final product specification.
+
+Asset: `sai-rings-layered-v1.png`. Embedded in `teaser-v4.html`; v3 is preserved.
+
+## Final prompt
+
+Use case: product-mockup / jewelry editorial. Create a photorealistic luxury jewelry campaign image for SAI couple smart-ring landing page. Reference image: the previous generated pair of silver and champagne gold smart rings; preserve their broad smooth rounded bands and metallic material identity, but show them worn as stylish ring stacks. Show exactly two adult hands from two different people gently resting together, one extending diagonally from upper left and one from lower right. Natural realistic hand anatomy, soft warm skin tones, understated cream linen sleeve edges. One person's index finger wears ONE silver smart ring with one very thin plain silver stacking band directly adjacent on the same finger. The other person's index finger wears ONE champagne gold smart ring with two delicate thin gold stacking bands directly adjacent on the same finger, one subtly beaded. Smart rings remain clearly identifiable as wider sleek bands, jewelry is elegant and wearable, no bulky gemstone, no watch or bracelet. Intimate understated couple mood, modern Korean/Japanese jewelry editorial styling, candid gentle touch rather than engagement proposal. Macro-quality brushed and polished metal reflections, real skin texture, soft natural window daylight. Square composition, camera close to hands, both complete ring stacks centered with plenty of breathing room. Background pale warm cream and very pale sage fabric blending softly, no hard frame, no text, no logo, no watermark. This is a styling concept, not an official brand image. Return saved local image path for integration.
