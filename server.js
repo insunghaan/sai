@@ -73,6 +73,147 @@ async function getAccessToken() {
   throw new Error('Unable to acquire Google Cloud access token');
 }
 
+const IPV4_PATTERN =
+  /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+const IPV6_PATTERN =
+  /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
+
+function isValidIp(ip) {
+  return typeof ip === 'string' && (IPV4_PATTERN.test(ip) || IPV6_PATTERN.test(ip));
+}
+
+function isPrivateIp(ip) {
+  if (ip === '127.0.0.1' || ip === '::1' || ip === 'localhost') return true;
+  if (ip.startsWith('10.') || ip.startsWith('192.168.')) return true;
+  if (ip.startsWith('172.')) {
+    const parts = ip.split('.');
+    const second = parseInt(parts[1], 10);
+    if (!Number.isNaN(second) && second >= 16 && second <= 31) return true;
+  }
+  return false;
+}
+
+function extractClientIp(req) {
+  const forwardedFor = req.headers['x-forwarded-for'];
+  if (forwardedFor) {
+    const firstIp = forwardedFor.split(',')[0]?.trim();
+    if (firstIp && isValidIp(firstIp)) return firstIp;
+  }
+  const realIp = req.headers['x-real-ip'];
+  if (realIp && isValidIp(realIp.trim())) return realIp.trim();
+  const cfIp = req.headers['cf-connecting-ip'];
+  if (cfIp && isValidIp(cfIp.trim())) return cfIp.trim();
+  return null;
+}
+
+async function resolveGeoLocation(req, clientHint = {}) {
+  const clientIp = extractClientIp(req);
+  const clientTimezone = clientHint.timezone?.trim() || null;
+  const clientLanguage = clientHint.language?.trim() || req.headers['accept-language']?.split(',')[0]?.trim() || null;
+
+  const fallbackGeo = {
+    country_code: null,
+    country: null,
+    region: null,
+    city: null,
+    timezone: clientTimezone,
+    client_timezone: clientTimezone,
+    client_language: clientLanguage,
+  };
+
+  if (!clientIp || isPrivateIp(clientIp)) {
+    return fallbackGeo;
+  }
+
+  try {
+    const res = await fetch(`https://ipwho.is/${encodeURIComponent(clientIp)}`, {
+      signal: AbortSignal.timeout(1500),
+      headers: {
+        'Accept': 'application/json',
+        'User-Agent': 'SAI-Waitlist-Geo/1.0',
+      },
+    });
+
+    if (!res.ok) return fallbackGeo;
+
+    const data = await res.json();
+    if (data && data.success === true) {
+      return {
+        country_code: data.country_code || null,
+        country: data.country || null,
+        region: data.region || null,
+        city: data.city || null,
+        timezone: data.timezone?.id || clientTimezone,
+        client_timezone: clientTimezone,
+        client_language: clientLanguage,
+      };
+    }
+  } catch (err) {
+    // Graceful fallback on lookup timeout or network failure
+  }
+
+  return fallbackGeo;
+}
+
+const FEATURE_LABELS = {
+  ko: {
+    checkin: '아침 체크인 & 컨디션 공유',
+    calendar: '우리의 리듬 캘린더',
+    care: '내가 챙길게',
+    pulse: '심박이 빛으로 닿는 순간',
+    breathe: '같은 속도로 쉬는 24초',
+    walk: '각자의 걸음, 하나의 길',
+    garden: '잘 잔 날, 함께 피어나',
+    date: '함께한 순간',
+    rhythm: '우리 둘 다 편한 시간',
+    cycle: '생리 주기 예상 & 선택 공유',
+    chat: '둘만의 대화'
+  },
+  ja: {
+    checkin: '朝のチェックイン＆体調共有',
+    calendar: 'ふたりのリズムカレンダー',
+    care: '私がするね',
+    pulse: '心拍が光で届く瞬間',
+    breathe: '同じペースで休む24秒',
+    walk: 'それぞれの歩み、ひとつの道',
+    garden: '眠れた日に、一緒に咲く',
+    date: 'ふたりの瞬間',
+    rhythm: 'ふたりとも都合のいい時間',
+    cycle: '生理周期の予測＆選択共有',
+    chat: 'ふたりのトーク'
+  }
+};
+
+const BUDGET_LABELS = {
+  ko: {
+    undecided: '아직 잘 모르겠어요',
+    low: '월 5,000원 미만',
+    mid: '월 5,000~10,000원',
+    high: '월 10,000원 이상'
+  },
+  ja: {
+    undecided: 'まだわからない',
+    low: '月500円未満',
+    mid: '月500〜1,000円',
+    high: '月1,000円以上'
+  }
+};
+
+const COUNTRY_LABELS = {
+  ko: {
+    KR: '한국',
+    JP: '일본',
+    other: '그 외',
+    OTHER: '그 외'
+  },
+  ja: {
+    KR: '韓国',
+    JP: '日本',
+    other: 'その他',
+    OTHER: 'その他'
+  }
+};
+
 async function saveWaitlistEntry(collection, email, data) {
   const token = await getAccessToken();
   const encodedDocId = encodeURIComponent(email);
@@ -99,13 +240,67 @@ async function saveWaitlistEntry(collection, email, data) {
     console.warn('Could not check existing doc, using current timestamp for created_at:', err.message);
   }
 
+  const countryCode = data.country || (data.market === 'JP' ? 'JP' : 'KR');
+  const countryLabel = (typeof data.country_label === 'string' && data.country_label.trim())
+    ? data.country_label.trim()
+    : (COUNTRY_LABELS[data.language]?.[countryCode] || countryCode);
+
+  const featureCode = data.feature || '';
+  const featureLabel = (typeof data.feature_label === 'string' && data.feature_label.trim())
+    ? data.feature_label.trim()
+    : (FEATURE_LABELS[data.language]?.[featureCode] || featureCode);
+
+  const budgetCode = data.budget || '';
+  const budgetLabel = (typeof data.budget_label === 'string' && data.budget_label.trim())
+    ? data.budget_label.trim()
+    : (BUDGET_LABELS[data.language]?.[budgetCode] || budgetCode);
+
+  // Build geo_location map
+  const geo = data.geo_location || {};
+  const geoFields = {
+    country_code: geo.country_code ? { stringValue: String(geo.country_code) } : { nullValue: null },
+    country: geo.country ? { stringValue: String(geo.country) } : { nullValue: null },
+    region: geo.region ? { stringValue: String(geo.region) } : { nullValue: null },
+    city: geo.city ? { stringValue: String(geo.city) } : { nullValue: null },
+    timezone: geo.timezone ? { stringValue: String(geo.timezone) } : { nullValue: null },
+    client_timezone: geo.client_timezone ? { stringValue: String(geo.client_timezone) } : { nullValue: null },
+    client_language: geo.client_language ? { stringValue: String(geo.client_language) } : { nullValue: null }
+  };
+
+  // If existing doc had geo_location and current has nulls, preserve existing geo fields
+  if (existingFields.geo_location?.mapValue?.fields) {
+    const existingGeo = existingFields.geo_location.mapValue.fields;
+    for (const [k, v] of Object.entries(existingGeo)) {
+      if (geoFields[k]?.nullValue !== undefined && v && v.stringValue) {
+        geoFields[k] = v;
+      }
+    }
+  }
+
   const fields = {
     email: { stringValue: email },
     market: { stringValue: data.market },
     language: { stringValue: data.language },
-    country: { stringValue: data.country },
-    feature: { stringValue: data.feature },
-    budget: { stringValue: data.budget },
+    country: { stringValue: countryCode },
+    country_label: { stringValue: countryLabel },
+    feature: { stringValue: featureCode },
+    feature_label: { stringValue: featureLabel },
+    budget: { stringValue: budgetCode },
+    budget_label: { stringValue: budgetLabel },
+    dropdown_selections: {
+      mapValue: {
+        fields: {
+          country: { stringValue: countryLabel },
+          feature: { stringValue: featureLabel },
+          budget: { stringValue: budgetLabel }
+        }
+      }
+    },
+    geo_location: {
+      mapValue: {
+        fields: geoFields
+      }
+    },
     source: { stringValue: data.source || 'sai_landing' },
     consent_version: { stringValue: data.consent_version || '2026-09-17' },
     created_at: { timestampValue: createdAt },
@@ -208,12 +403,21 @@ const server = http.createServer((req, res) => {
         const feature = typeof data.feature === 'string' ? data.feature.trim() : '';
         const budget = typeof data.budget === 'string' ? data.budget.trim() : '';
 
+        const geoLocation = await resolveGeoLocation(req, {
+          timezone: typeof data.client_timezone === 'string' ? data.client_timezone : undefined,
+          language: typeof data.client_language === 'string' ? data.client_language : undefined
+        });
+
         const docData = {
           market,
           language,
           country,
+          country_label: typeof data.country_label === 'string' ? data.country_label.trim() : undefined,
           feature,
+          feature_label: typeof data.feature_label === 'string' ? data.feature_label.trim() : undefined,
           budget,
+          budget_label: typeof data.budget_label === 'string' ? data.budget_label.trim() : undefined,
+          geo_location: geoLocation,
           source: 'sai_landing',
           consent_version: '2026-09-17',
           utm_source: typeof data.utm_source === 'string' ? data.utm_source.trim() : undefined,
