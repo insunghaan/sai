@@ -78,7 +78,9 @@ async function saveWaitlistEntry(collection, email, data) {
   const encodedDocId = encodeURIComponent(email);
   const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${collection}/${encodedDocId}`;
 
+  // Preserve original created_at if document already exists
   let createdAt = new Date().toISOString();
+  let existingFields = {};
   try {
     const getRes = await fetch(url, {
       headers: { 'Authorization': `Bearer ${token}` },
@@ -86,27 +88,38 @@ async function saveWaitlistEntry(collection, email, data) {
     });
     if (getRes.ok) {
       const existing = await getRes.json();
-      if (existing?.fields?.created_at?.timestampValue) {
-        createdAt = existing.fields.created_at.timestampValue;
+      if (existing?.fields) {
+        existingFields = existing.fields;
+        if (existing.fields.created_at?.timestampValue) {
+          createdAt = existing.fields.created_at.timestampValue;
+        }
       }
     }
   } catch (err) {
     console.warn('Could not check existing doc, using current timestamp for created_at:', err.message);
   }
 
-  const body = {
-    fields: {
-      email: { stringValue: email },
-      country: { stringValue: data.country || '' },
-      feature: { stringValue: data.feature || '' },
-      budget: { stringValue: data.budget || '' },
-      locale: { stringValue: data.locale || 'ko' },
-      client_ip: { stringValue: data.client_ip || '' },
-      user_agent: { stringValue: data.user_agent || '' },
-      created_at: { timestampValue: createdAt },
-      updated_at: { timestampValue: new Date().toISOString() }
-    }
+  const fields = {
+    email: { stringValue: email },
+    market: { stringValue: data.market },
+    language: { stringValue: data.language },
+    country: { stringValue: data.country },
+    feature: { stringValue: data.feature },
+    budget: { stringValue: data.budget },
+    source: { stringValue: data.source || 'sai_landing' },
+    consent_version: { stringValue: data.consent_version || '2026-09-17' },
+    created_at: { timestampValue: createdAt },
+    updated_at: { timestampValue: new Date().toISOString() }
   };
+
+  // Attribution UTM parameters (store when present in incoming data, or preserve existing if already present)
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(k => {
+    if (typeof data[k] === 'string' && data[k].trim()) {
+      fields[k] = { stringValue: data[k].trim() };
+    } else if (existingFields[k]?.stringValue) {
+      fields[k] = { stringValue: existingFields[k].stringValue };
+    }
+  });
 
   const patchRes = await fetch(url, {
     method: 'PATCH',
@@ -114,7 +127,7 @@ async function saveWaitlistEntry(collection, email, data) {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify({ fields }),
     signal: AbortSignal.timeout(5000)
   });
 
@@ -175,29 +188,42 @@ const server = http.createServer((req, res) => {
           return;
         }
 
-        const country = typeof data.country === 'string' ? data.country.trim().toUpperCase() : 'OTHER';
-        const feature = typeof data.feature === 'string' ? data.feature.trim() : '';
-        const budget = typeof data.budget === 'string' ? data.budget.trim() : '';
-        const locale = typeof data.locale === 'string' ? data.locale.trim().toLowerCase() : 'ko';
-
-        let targetCollection = 'sai_waitlist_other';
-        if (country === 'KR') {
-          targetCollection = 'sai_waitlist_kr';
-        } else if (country === 'JP') {
-          targetCollection = 'sai_waitlist_jp';
+        // Validate consent
+        if (!data.consent || data.consent_version !== '2026-09-17') {
+          res.statusCode = 400;
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          res.end(JSON.stringify({ error: 'Consent is required' }));
+          return;
         }
 
-        const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress || '';
-        const userAgent = req.headers['user-agent'] || '';
+        // Routing is strictly determined by the active SAI experience / language
+        const language = (typeof data.language === 'string' && data.language.trim().toLowerCase() === 'ja')
+          ? 'ja'
+          : ((typeof data.locale === 'string' && data.locale.trim().toLowerCase() === 'ja') ? 'ja' : 'ko');
+        const market = language === 'ja' ? 'JP' : 'KR';
+        const targetCollection = language === 'ja' ? 'sai_waitlist_jp' : 'sai_waitlist_kr';
 
-        await saveWaitlistEntry(targetCollection, email, {
+        // Residence country from form answer
+        const country = typeof data.country === 'string' ? data.country.trim().toUpperCase() : (market === 'JP' ? 'JP' : 'KR');
+        const feature = typeof data.feature === 'string' ? data.feature.trim() : '';
+        const budget = typeof data.budget === 'string' ? data.budget.trim() : '';
+
+        const docData = {
+          market,
+          language,
           country,
           feature,
           budget,
-          locale,
-          client_ip: clientIp,
-          user_agent: userAgent
-        });
+          source: 'sai_landing',
+          consent_version: '2026-09-17',
+          utm_source: typeof data.utm_source === 'string' ? data.utm_source.trim() : undefined,
+          utm_medium: typeof data.utm_medium === 'string' ? data.utm_medium.trim() : undefined,
+          utm_campaign: typeof data.utm_campaign === 'string' ? data.utm_campaign.trim() : undefined,
+          utm_content: typeof data.utm_content === 'string' ? data.utm_content.trim() : undefined,
+          utm_term: typeof data.utm_term === 'string' ? data.utm_term.trim() : undefined
+        };
+
+        await saveWaitlistEntry(targetCollection, email, docData);
 
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
