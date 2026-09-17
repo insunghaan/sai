@@ -1,0 +1,13 @@
+{
+  "name": "sai",
+  "version": "1.0.0",
+  "description": "SAI - Production Landing Page",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
