@@ -2,3 +2,4 @@
 .gitignore
 .github
 *.log
+node_modules

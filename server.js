@@ -6,6 +6,7 @@ const path = require('node:path');
 const PORT = parseInt(process.env.PORT, 10) || 8080;
 const HOST = '0.0.0.0';
 const PUBLIC_DIR = __dirname;
+const PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT || 'ubeeslab';
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -35,14 +36,97 @@ const FAVICON_SVG = Buffer.from(
   'utf-8'
 );
 
-const server = http.createServer((req, res) => {
-  if (req.method !== 'GET' && req.method !== 'HEAD') {
-    res.statusCode = 405;
-    res.setHeader('Allow', 'GET, HEAD');
-    res.end('Method Not Allowed');
-    return;
+let cachedToken = null;
+let tokenExpiry = 0;
+
+async function getAccessToken() {
+  const now = Date.now();
+  if (cachedToken && now < tokenExpiry - 60000) {
+    return cachedToken;
   }
 
+  // 1. Production (Cloud Run metadata server)
+  try {
+    const metaRes = await fetch('http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token', {
+      headers: { 'Metadata-Flavor': 'Google' },
+      signal: AbortSignal.timeout(1000)
+    });
+    if (metaRes.ok) {
+      const data = await metaRes.json();
+      cachedToken = data.access_token;
+      tokenExpiry = now + (data.expires_in * 1000);
+      return cachedToken;
+    }
+  } catch (_) {}
+
+  // 2. Local development fallback (gcloud CLI)
+  try {
+    const { execSync } = require('node:child_process');
+    const token = execSync('gcloud auth print-access-token', { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+    if (token) {
+      cachedToken = token;
+      tokenExpiry = now + (30 * 60 * 1000);
+      return cachedToken;
+    }
+  } catch (_) {}
+
+  throw new Error('Unable to acquire Google Cloud access token');
+}
+
+async function saveWaitlistEntry(collection, email, data) {
+  const token = await getAccessToken();
+  const encodedDocId = encodeURIComponent(email);
+  const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${collection}/${encodedDocId}`;
+
+  let createdAt = new Date().toISOString();
+  try {
+    const getRes = await fetch(url, {
+      headers: { 'Authorization': `Bearer ${token}` },
+      signal: AbortSignal.timeout(3000)
+    });
+    if (getRes.ok) {
+      const existing = await getRes.json();
+      if (existing?.fields?.created_at?.timestampValue) {
+        createdAt = existing.fields.created_at.timestampValue;
+      }
+    }
+  } catch (err) {
+    console.warn('Could not check existing doc, using current timestamp for created_at:', err.message);
+  }
+
+  const body = {
+    fields: {
+      email: { stringValue: email },
+      country: { stringValue: data.country || '' },
+      feature: { stringValue: data.feature || '' },
+      budget: { stringValue: data.budget || '' },
+      locale: { stringValue: data.locale || 'ko' },
+      client_ip: { stringValue: data.client_ip || '' },
+      user_agent: { stringValue: data.user_agent || '' },
+      created_at: { timestampValue: createdAt },
+      updated_at: { timestampValue: new Date().toISOString() }
+    }
+  };
+
+  const patchRes = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(5000)
+  });
+
+  if (!patchRes.ok) {
+    const errText = await patchRes.text();
+    throw new Error(`Firestore API error (${patchRes.status}): ${errText}`);
+  }
+
+  return await patchRes.json();
+}
+
+const server = http.createServer((req, res) => {
   let pathname;
   try {
     const parsed = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
@@ -58,6 +142,80 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.end('OK');
+    return;
+  }
+
+  // Waitlist API endpoint
+  if (pathname === '/api/waitlist') {
+    if (req.method !== 'POST') {
+      res.statusCode = 405;
+      res.setHeader('Allow', 'POST');
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      res.end(JSON.stringify({ error: 'Method Not Allowed' }));
+      return;
+    }
+
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk;
+      if (body.length > 100 * 1024) {
+        req.destroy();
+      }
+    });
+
+    req.on('end', async () => {
+      try {
+        const data = JSON.parse(body || '{}');
+        const email = typeof data.email === 'string' ? data.email.trim().toLowerCase() : '';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email) || email.length > 254) {
+          res.statusCode = 400;
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          res.end(JSON.stringify({ error: 'Valid email is required' }));
+          return;
+        }
+
+        const country = typeof data.country === 'string' ? data.country.trim().toUpperCase() : 'OTHER';
+        const feature = typeof data.feature === 'string' ? data.feature.trim() : '';
+        const budget = typeof data.budget === 'string' ? data.budget.trim() : '';
+        const locale = typeof data.locale === 'string' ? data.locale.trim().toLowerCase() : 'ko';
+
+        let targetCollection = 'sai_waitlist_other';
+        if (country === 'KR') {
+          targetCollection = 'sai_waitlist_kr';
+        } else if (country === 'JP') {
+          targetCollection = 'sai_waitlist_jp';
+        }
+
+        const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress || '';
+        const userAgent = req.headers['user-agent'] || '';
+
+        await saveWaitlistEntry(targetCollection, email, {
+          country,
+          feature,
+          budget,
+          locale,
+          client_ip: clientIp,
+          user_agent: userAgent
+        });
+
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.end(JSON.stringify({ success: true, collection: targetCollection }));
+      } catch (err) {
+        console.error('Waitlist submission error:', err);
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.end(JSON.stringify({ error: 'Internal Server Error' }));
+      }
+    });
+    return;
+  }
+
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.statusCode = 405;
+    res.setHeader('Allow', 'GET, HEAD');
+    res.end('Method Not Allowed');
     return;
   }
 
