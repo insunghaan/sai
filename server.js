@@ -222,6 +222,7 @@ async function saveWaitlistEntry(collection, email, data) {
   // Preserve original created_at if document already exists
   let createdAt = new Date().toISOString();
   let existingFields = {};
+  let alreadyExisted = false;
   try {
     const getRes = await fetch(url, {
       headers: { 'Authorization': `Bearer ${token}` },
@@ -231,6 +232,7 @@ async function saveWaitlistEntry(collection, email, data) {
       const existing = await getRes.json();
       if (existing?.fields) {
         existingFields = existing.fields;
+        alreadyExisted = true;
         if (existing.fields.created_at?.timestampValue) {
           createdAt = existing.fields.created_at.timestampValue;
         }
@@ -331,7 +333,85 @@ async function saveWaitlistEntry(collection, email, data) {
     throw new Error(`Firestore API error (${patchRes.status}): ${errText}`);
   }
 
-  return await patchRes.json();
+  const firestoreResponse = await patchRes.json();
+  return {
+    alreadyExisted,
+    createdAt,
+    firestoreResponse
+  };
+}
+
+async function sendSlackWaitlistNotification(params) {
+  const webhookUrl = process.env.SLACK_WAITLIST_WEBHOOK_URL?.trim();
+  if (!webhookUrl) {
+    return false;
+  }
+
+  const geo = params.geo_location || {};
+  const locationParts = [];
+  if (geo.city) locationParts.push(geo.city);
+  if (geo.region && geo.region !== geo.city) locationParts.push(geo.region);
+  if (geo.country) locationParts.push(geo.country);
+  const locationStr = locationParts.length > 0 ? locationParts.join(', ') : '위치 미상';
+  const tzStr = geo.timezone || geo.client_timezone || '미상';
+
+  const isJp = params.market === 'JP';
+  const flag = isJp ? '🇯🇵 JP' : '🇰🇷 KR';
+  const statusBadge = params.alreadyExisted ? '*(기존 신청자 정보 업데이트)*' : '*(신규 사전신청)*';
+  const headerText = isJp
+    ? `✨ [SAI ${flag}] 新しい事前登録が届きました！`
+    : `✨ [SAI ${flag}] 새로운 사전신청이 접수되었습니다!`;
+
+  const details = [
+    `• *이메일:* \`${params.email}\` ${statusBadge}`,
+    `• *마켓 / 언어:* ${flag} (${params.language || 'ko'})`,
+    `• *거주 국가:* ${params.country_label || params.country || '미선택'}`,
+    `• *기대 기능:* ${params.feature_label || params.feature || '미선택'}`,
+    `• *구독 희망 예산:* ${params.budget_label || params.budget || '미선택'}`,
+    `• *접속 위치:* ${locationStr}`,
+    `• *타임존:* ${tzStr}`,
+    params.utm_source ? `• *유입 경로 (UTM):* ${params.utm_source}${params.utm_campaign ? ` / ${params.utm_campaign}` : ''}` : null,
+    `• *접수 일시:* ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })} (KST)`,
+  ].filter(Boolean).join('\n');
+
+  const payload = {
+    text: `[SAI ${flag}] 새로운 사전신청: ${params.email} (${locationStr})`,
+    blocks: [
+      {
+        type: 'header',
+        text: {
+          type: 'plain_text',
+          text: headerText,
+          emoji: true,
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: details,
+        },
+      },
+    ],
+  };
+
+  try {
+    const res = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(2500),
+    });
+
+    if (!res.ok) {
+      console.warn(`[SAI Slack Notification] Webhook returned HTTP ${res.status}: ${res.statusText}`);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.warn(`[SAI Slack Notification] Failed to deliver Slack message: ${err.message}`);
+    return false;
+  }
 }
 
 const server = http.createServer((req, res) => {
@@ -427,7 +507,27 @@ const server = http.createServer((req, res) => {
           utm_term: typeof data.utm_term === 'string' ? data.utm_term.trim() : undefined
         };
 
-        await saveWaitlistEntry(targetCollection, email, docData);
+        const saveResult = await saveWaitlistEntry(targetCollection, email, docData);
+
+        // Non-blocking Slack notification
+        sendSlackWaitlistNotification({
+          email,
+          market,
+          language,
+          country: docData.country,
+          country_label: COUNTRY_LABELS[language]?.[docData.country] || docData.country,
+          feature: docData.feature,
+          feature_label: FEATURE_LABELS[language]?.[docData.feature] || docData.feature,
+          budget: docData.budget,
+          budget_label: BUDGET_LABELS[language]?.[docData.budget] || docData.budget,
+          geo_location: geoLocation,
+          utm_source: docData.utm_source,
+          utm_campaign: docData.utm_campaign,
+          alreadyExisted: saveResult.alreadyExisted,
+          createdAt: saveResult.createdAt
+        }).catch(err => {
+          console.warn('[SAI Slack Notification] Unhandled error:', err.message);
+        });
 
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
