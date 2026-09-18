@@ -826,6 +826,10 @@
       box-shadow: 0 6px 20px rgba(74, 99, 62, 0.28);
     }
 
+    .s5-mobile-slider-wrap {
+      display: none;
+    }
+
     .v9-experience-stage {
       display: grid;
       grid-template-columns: 290px 400px 290px;
@@ -1937,10 +1941,246 @@
         grid-template-columns: 1fr;
         gap: 3.2rem;
       }
-      .v9-experience-stage {
-        grid-template-columns: 1fr;
+      .story-tabs {
+        display: none !important;
+      }
+      .v9-experience {
+        padding: 4rem 0 4.5rem;
+      }
+      .experience-header {
+        margin-bottom: 1.8rem;
+      }
+      .experience-header h2 {
+        font-size: clamp(1.8rem, 5.5vw, 2.3rem);
+        margin-bottom: 0.6rem;
+      }
+      .experience-header p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .s5-desktop-stage {
+        display: none !important;
+      }
+      .s5-mobile-slider-wrap {
+        display: block;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+      .s5-mobile-slider {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 1.5rem;
+        -webkit-overflow-scrolling: touch;
+        gap: 14px;
+        padding: 0.6rem 0 1rem;
+        margin: 0 -1.5rem;
+        scrollbar-width: none;
+      }
+      .s5-mobile-slider::-webkit-scrollbar {
+        display: none;
+      }
+      .s5-slide {
+        flex: 0 0 calc(100vw - 84px);
+        max-width: 326px;
+        min-width: 275px;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+      }
+      .s5-slide:first-child {
+        margin-left: 1.5rem;
+      }
+      .s5-slide:last-child {
+        margin-right: 1.5rem;
+      }
+      .s5-slide .s5-phone {
+        width: 100%;
+        height: 405px;
+        min-height: 405px;
+        max-height: 405px;
+        border-radius: 34px;
+        padding: 1.4rem 1.35rem 1.25rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: #ffffff;
+        box-shadow: 0 16px 40px rgba(35, 45, 30, 0.08), 0 2px 8px rgba(35, 45, 30, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.95);
+        animation: none;
+        overflow: hidden;
+      }
+      .s5-slide .s5-phone-top {
+        margin-bottom: 0.35rem;
+      }
+      .s5-slide .s5-phone p {
+        font-size: 0.85rem;
+        margin-bottom: 0.15rem;
+      }
+      .s5-slide .s5-phone h3 {
+        font-size: 1.28rem;
+        margin-bottom: 0.45rem;
+      }
+      .s5-slide .s5-score {
+        margin: 0.2rem 0 0.3rem;
+        gap: 0.45rem;
+      }
+      .s5-slide .s5-score span {
+        font-size: 1.35rem;
+      }
+      .s5-slide .s5-score strong {
+        font-size: 2.1rem;
+      }
+      .s5-slide .s5-score small {
+        font-size: 0.92rem;
+        margin-right: 0.25rem;
+      }
+      .s5-slide .s5-chart {
+        height: 60px;
+        margin: 0.3rem 0 0.45rem;
+        padding-bottom: 0.3rem;
+        gap: 6px;
+      }
+      .s5-slide .s5-chart i {
+        border-radius: 4px;
+      }
+      .s5-slide .s5-chart small {
+        font-size: 0.72rem;
+      }
+      .s5-slide .s5-phone-row {
+        padding: 0.4rem 0;
+        font-size: 0.86rem;
+      }
+      .s5-slide .s5-heart-stage {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        height: 84px;
+        margin: 0.5rem auto 0.4rem auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+      }
+      .s5-slide .s5-heart-wrap {
+        position: relative;
+        z-index: 2;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+      }
+      .s5-slide .s5-heart-3d-img {
+        width: 52px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+      .s5-slide .s5-pulse-number {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0.2rem auto 0.4rem auto;
+      }
+      .s5-slide .s5-calendar-preview {
+        margin: 0.65rem 0;
+        gap: 5px;
+      }
+      .s5-slide .s5-calendar-preview span {
+        width: 28px;
+        height: 28px;
+        font-size: 0.72rem;
+      }
+      .s5-slide .s5-phone-bottom {
+        font-size: 0.84rem;
+        margin-top: auto;
+        padding-top: 0.45rem;
+        text-align: center;
+      }
+      .s5-slide .s5-float {
+        margin-top: 0.85rem;
+        background: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 0.85rem 1.15rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 0.92rem;
+        box-shadow: 0 8px 24px rgba(35, 45, 30, 0.07);
+        height: 72px;
+        min-height: 72px;
+        max-height: 72px;
+        box-sizing: border-box;
+        animation: none;
+      }
+      .s5-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin: 0.9rem 0 1.4rem;
+      }
+      .s5-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(35, 45, 30, 0.18);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .s5-dot.active {
+        width: 24px;
+        border-radius: 10px;
+        background: var(--green-deep);
+      }
+      .s5-mobile-notes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        width: 100%;
+        box-sizing: border-box;
+        align-items: stretch;
         max-width: 440px;
         margin: 0 auto;
+      }
+      .s5-mobile-notes .v9-side-note {
+        padding: 1.15rem 0.95rem 1.05rem;
+        border-radius: 20px;
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 0.45rem;
+        animation: none;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.95);
+        box-shadow: 0 10px 24px rgba(35, 45, 30, 0.05);
+      }
+      .s5-mobile-notes .v9-side-note.peach {
+        background: rgba(254, 247, 242, 0.85);
+        border-color: rgba(235, 214, 201, 0.65);
+      }
+      .s5-mobile-notes .v9-side-note span {
+        font-size: 1.25rem;
+      }
+      .s5-mobile-notes .v9-side-note p {
+        font-size: 0.85rem;
+        line-height: 1.38;
+        word-break: keep-all;
+        margin: 0;
+      }
+      .s5-mobile-notes .v9-side-note small {
+        font-size: 0.64rem;
+        letter-spacing: 0.04em;
       }
       .calendar-grid-wrap {
         grid-template-columns: 1fr;
@@ -2050,8 +2290,10 @@
         font-size: clamp(1.78rem, 5.8vw, 2.35rem);
         line-height: 1.28;
       }
+
     }
   </style>
+  <script defer src="/sai-analytics.js"></script>
 </head>
 <body data-entry="teaser">
   <div id="root"></div>
@@ -2107,8 +2349,8 @@
       };
     }
 
-    function visualPreview() {
-      if (visualMode === 'me') {
+    function visualPreview(mode = visualMode) {
+      if (mode === 'me') {
         return `
           <div class="s5-phone">
             <div class="s5-phone-top">
@@ -2139,7 +2381,7 @@
           </div>
         `;
       }
-      if (visualMode === 'us') {
+      if (mode === 'us') {
         return `
           <div class="s5-phone">
             <div class="s5-phone-top">
@@ -2473,7 +2715,8 @@
                     ['days', t('함께한 순간', 'ふたりの瞬間')]
                   ].map(([k, l]) => `<button data-visual="${k}" aria-pressed="${visualMode === k}">${l}</button>`).join('')}
                 </div>
-                <div class="v9-experience-stage">
+                <!-- Desktop Stage -->
+                <div class="v9-experience-stage s5-desktop-stage">
                   <div class="v9-side-note">
                     <span>☾</span>
                     <p>${t('수면과 몸의 변화,<br>나의 속도로.', '睡眠とからだの変化を、<br>自分のペースで。')}</p>
@@ -2486,6 +2729,37 @@
                     <span>♡</span>
                     <p>${t('나누고 싶은 만큼,<br>너에게.', '分かち合いたい分だけ、<br>あなたへ。')}</p>
                     <small>OUR LITTLE WORLD</small>
+                  </div>
+                </div>
+                <!-- Mobile Slider Stage -->
+                <div class="s5-mobile-slider-wrap">
+                  <div class="s5-mobile-slider" id="s5MobileSlider" role="region" aria-label="${t('일상 체험 슬라이더', '日常体験スライダー')}">
+                    <div class="s5-slide" data-slide="0">
+                      ${visualPreview('me')}
+                    </div>
+                    <div class="s5-slide" data-slide="1">
+                      ${visualPreview('us')}
+                    </div>
+                    <div class="s5-slide" data-slide="2">
+                      ${visualPreview('days')}
+                    </div>
+                  </div>
+                  <div class="s5-dots" aria-hidden="true">
+                    <button class="s5-dot active" data-goto="0" aria-label="1"></button>
+                    <button class="s5-dot" data-goto="1" aria-label="2"></button>
+                    <button class="s5-dot" data-goto="2" aria-label="3"></button>
+                  </div>
+                  <div class="s5-mobile-notes">
+                    <div class="v9-side-note">
+                      <span>☾</span>
+                      <p>${t('수면과 몸의 변화,<br>나의 속도로.', '睡眠とからだの変化を、<br>自分のペースで。')}</p>
+                      <small>MY RHYTHM</small>
+                    </div>
+                    <div class="v9-side-note peach">
+                      <span>♡</span>
+                      <p>${t('나누고 싶은 만큼,<br>너에게.', '分かち合いたい分だけ、<br>あなたへ。')}</p>
+                      <small>OUR LITTLE WORLD</small>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2764,6 +3038,37 @@
 
       // 3. iMessage-style dynamic typing animation
       initMessageTypingAnimation();
+
+      // 4. Mobile experience slider dots & touch interaction
+      const slider = $('#s5MobileSlider');
+      if (slider) {
+        const dots = document.querySelectorAll('.s5-dots .s5-dot');
+        dots.forEach(d => {
+          d.onclick = () => {
+            const idx = parseInt(d.dataset.goto, 10);
+            const slides = slider.querySelectorAll('.s5-slide');
+            if (slides[idx]) {
+              slides[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            }
+          };
+        });
+
+        let scrollDebounce;
+        slider.addEventListener('scroll', () => {
+          clearTimeout(scrollDebounce);
+          scrollDebounce = setTimeout(() => {
+            const scrollLeft = slider.scrollLeft;
+            const slide = slider.querySelector('.s5-slide');
+            if (!slide) return;
+            const slideW = slide.offsetWidth;
+            const gap = 14;
+            const currentIdx = Math.min(dots.length - 1, Math.max(0, Math.round(scrollLeft / (slideW + gap))));
+            dots.forEach((dot, i) => {
+              dot.classList.toggle('active', i === currentIdx);
+            });
+          }, 40);
+        }, { passive: true });
+      }
     }
 
     // STRICT INVARIANT: Always render landing page. NEVER render mockup or prototype views.
