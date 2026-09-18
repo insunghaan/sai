@@ -2,11 +2,14 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
+const { Firestore } = require('@google-cloud/firestore');
+const welcome = require('./server/welcome');
 
 const PORT = parseInt(process.env.PORT, 10) || 8080;
 const HOST = '0.0.0.0';
 const PUBLIC_DIR = __dirname;
 const PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT || 'ubeeslab';
+const db = new Firestore({ projectId: PROJECT_ID });
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -215,130 +218,17 @@ const COUNTRY_LABELS = {
 };
 
 async function saveWaitlistEntry(collection, email, data) {
-  const token = await getAccessToken();
-  const encodedDocId = encodeURIComponent(email);
-  const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${collection}/${encodedDocId}`;
-
-  // Preserve original created_at if document already exists
-  let createdAt = new Date().toISOString();
-  let existingFields = {};
-  let alreadyExisted = false;
-  try {
-    const getRes = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${token}` },
-      signal: AbortSignal.timeout(3000)
-    });
-    if (getRes.ok) {
-      const existing = await getRes.json();
-      if (existing?.fields) {
-        existingFields = existing.fields;
-        alreadyExisted = true;
-        if (existing.fields.created_at?.timestampValue) {
-          createdAt = existing.fields.created_at.timestampValue;
-        }
-      }
-    }
-  } catch (err) {
-    console.warn('Could not check existing doc, using current timestamp for created_at:', err.message);
-  }
-
-  const countryCode = data.country || (data.market === 'JP' ? 'JP' : 'KR');
-  const countryLabel = (typeof data.country_label === 'string' && data.country_label.trim())
-    ? data.country_label.trim()
-    : (COUNTRY_LABELS[data.language]?.[countryCode] || countryCode);
-
-  const featureCode = data.feature || '';
-  const featureLabel = (typeof data.feature_label === 'string' && data.feature_label.trim())
-    ? data.feature_label.trim()
-    : (FEATURE_LABELS[data.language]?.[featureCode] || featureCode);
-
-  const budgetCode = data.budget || '';
-  const budgetLabel = (typeof data.budget_label === 'string' && data.budget_label.trim())
-    ? data.budget_label.trim()
-    : (BUDGET_LABELS[data.language]?.[budgetCode] || budgetCode);
-
-  // Build geo_location map
-  const geo = data.geo_location || {};
-  const geoFields = {
-    country_code: geo.country_code ? { stringValue: String(geo.country_code) } : { nullValue: null },
-    country: geo.country ? { stringValue: String(geo.country) } : { nullValue: null },
-    region: geo.region ? { stringValue: String(geo.region) } : { nullValue: null },
-    city: geo.city ? { stringValue: String(geo.city) } : { nullValue: null },
-    timezone: geo.timezone ? { stringValue: String(geo.timezone) } : { nullValue: null },
-    client_timezone: geo.client_timezone ? { stringValue: String(geo.client_timezone) } : { nullValue: null },
-    client_language: geo.client_language ? { stringValue: String(geo.client_language) } : { nullValue: null }
-  };
-
-  // If existing doc had geo_location and current has nulls, preserve existing geo fields
-  if (existingFields.geo_location?.mapValue?.fields) {
-    const existingGeo = existingFields.geo_location.mapValue.fields;
-    for (const [k, v] of Object.entries(existingGeo)) {
-      if (geoFields[k]?.nullValue !== undefined && v && v.stringValue) {
-        geoFields[k] = v;
-      }
-    }
-  }
-
-  const fields = {
-    email: { stringValue: email },
-    market: { stringValue: data.market },
-    language: { stringValue: data.language },
-    country: { stringValue: countryCode },
-    country_label: { stringValue: countryLabel },
-    feature: { stringValue: featureCode },
-    feature_label: { stringValue: featureLabel },
-    budget: { stringValue: budgetCode },
-    budget_label: { stringValue: budgetLabel },
-    dropdown_selections: {
-      mapValue: {
-        fields: {
-          country: { stringValue: countryLabel },
-          feature: { stringValue: featureLabel },
-          budget: { stringValue: budgetLabel }
-        }
-      }
-    },
-    geo_location: {
-      mapValue: {
-        fields: geoFields
-      }
-    },
-    source: { stringValue: data.source || 'sai_landing' },
-    consent_version: { stringValue: data.consent_version || '2026-09-17' },
-    created_at: { timestampValue: createdAt },
-    updated_at: { timestampValue: new Date().toISOString() }
-  };
-
-  // Attribution UTM parameters (store when present in incoming data, or preserve existing if already present)
-  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(k => {
-    if (typeof data[k] === 'string' && data[k].trim()) {
-      fields[k] = { stringValue: data[k].trim() };
-    } else if (existingFields[k]?.stringValue) {
-      fields[k] = { stringValue: existingFields[k].stringValue };
-    }
+  const country = data.country || (data.market === 'JP' ? 'JP' : 'KR');
+  const feature = data.feature || '';
+  const budget = data.budget || '';
+  const countryLabel = data.country_label || COUNTRY_LABELS[data.language]?.[country] || country;
+  const featureLabel = data.feature_label || FEATURE_LABELS[data.language]?.[feature] || feature;
+  const budgetLabel = data.budget_label || BUDGET_LABELS[data.language]?.[budget] || budget;
+  return welcome.saveSignup(db, collection, email, {
+    ...data, country, feature, budget,
+    country_label: countryLabel, feature_label: featureLabel, budget_label: budgetLabel,
+    dropdown_selections: { country: countryLabel, feature: featureLabel, budget: budgetLabel }
   });
-
-  const patchRes = await fetch(url, {
-    method: 'PATCH',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ fields }),
-    signal: AbortSignal.timeout(5000)
-  });
-
-  if (!patchRes.ok) {
-    const errText = await patchRes.text();
-    throw new Error(`Firestore API error (${patchRes.status}): ${errText}`);
-  }
-
-  const firestoreResponse = await patchRes.json();
-  return {
-    alreadyExisted,
-    createdAt,
-    firestoreResponse
-  };
 }
 
 async function sendSlackWaitlistNotification(params) {
@@ -433,6 +323,24 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // Authenticated retry endpoint: processes queued jobs, never historical signups.
+  if (pathname === '/api/waitlist/welcome-retry') {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    if (!welcome.authorized(req.headers.authorization)) {
+      res.statusCode = 401; res.end(JSON.stringify({ error: 'Unauthorized' })); return;
+    }
+    if (req.method !== 'POST') {
+      res.statusCode = 405; res.setHeader('Allow', 'POST'); res.end(JSON.stringify({ error: 'Method Not Allowed' })); return;
+    }
+    welcome.dispatchPending(db).then(counts => {
+      res.statusCode = 200; res.end(JSON.stringify({ counts }));
+    }).catch(() => {
+      console.error('SAI welcome retry failed');
+      res.statusCode = 500; res.end(JSON.stringify({ error: 'Retry failed' }));
+    });
+    return;
+  }
+
   // Waitlist API endpoint
   if (pathname === '/api/waitlist') {
     if (req.method !== 'POST') {
@@ -509,6 +417,13 @@ const server = http.createServer((req, res) => {
 
         const saveResult = await saveWaitlistEntry(targetCollection, email, docData);
 
+        // Await the initial send: Cloud Run may suspend CPU after the response.
+        // Signup is already durable; a mail error must not undo a successful signup.
+        if (saveResult.queued) {
+          try { await welcome.dispatchWelcome(db, saveResult.welcomeId); }
+          catch { console.error('SAI welcome dispatch failed; inspect outbox'); }
+        }
+
         // Non-blocking Slack notification
         sendSlackWaitlistNotification({
           email,
@@ -580,6 +495,10 @@ const server = http.createServer((req, res) => {
   // Block hidden files or server configuration files
   const baseName = path.basename(filePath);
   if (
+    filePath.startsWith(path.join(PUBLIC_DIR, 'server') + path.sep) ||
+    filePath.startsWith(path.join(PUBLIC_DIR, 'tests') + path.sep) ||
+    filePath.startsWith(path.join(PUBLIC_DIR, 'docs') + path.sep) ||
+    filePath.startsWith(path.join(PUBLIC_DIR, 'node_modules') + path.sep) ||
     baseName.startsWith('.') ||
     baseName === 'Dockerfile' ||
     baseName === 'cloudbuild.yaml' ||
