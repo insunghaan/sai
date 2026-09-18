@@ -404,10 +404,12 @@
 
     .editorial-photo-card {
       position: relative;
+      aspect-ratio: 16 / 9;
       border-radius: 36px;
       overflow: hidden;
       box-shadow: var(--shadow-lg);
       background: #f8f8f8;
+      isolation: isolate;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     }
     .editorial-photo-card:hover {
@@ -532,7 +534,369 @@
       letter-spacing: -0.015em;
     }
 
-    /* 3. SECTION 3: HAND + RING CLOSE-UP (HEROIC EDITORIAL SECTION) */
+    .sleep-share-card {
+      position: absolute;
+      left: 1.35rem;
+      bottom: 1.35rem;
+      z-index: 2;
+      width: min(270px, calc(100% - 2.7rem));
+      padding: 1.15rem 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(22px) saturate(155%);
+      -webkit-backdrop-filter: blur(22px) saturate(155%);
+      box-shadow: 0 16px 38px rgba(22, 30, 18, 0.16);
+    }
+
+    .sleep-share-card-head,
+    .sleep-share-card-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .sleep-share-card-head {
+      margin-bottom: 0.55rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      color: var(--text-soft);
+    }
+
+    .sleep-share-card-head b {
+      color: var(--green-primary);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+    }
+
+    .sleep-share-card strong {
+      display: block;
+      font-size: 1.92rem;
+      line-height: 1.08;
+      color: var(--text-dark);
+      letter-spacing: -0.04em;
+      margin-bottom: 0.45rem;
+    }
+
+    .sleep-share-card-status {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .sleep-share-card-status span:last-child {
+      color: var(--green-primary);
+    }
+
+    .lifestyle-privacy {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.9rem 1.15rem;
+      border-radius: 18px;
+      background: var(--bg-sage-subtle);
+      border: 1px solid rgba(74, 99, 62, 0.09);
+    }
+
+    .lifestyle-privacy > span {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--green-primary);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .lifestyle-privacy strong,
+    .lifestyle-privacy small {
+      display: block;
+    }
+
+    .lifestyle-privacy strong {
+      color: var(--text-dark);
+      font-size: 0.94rem;
+      line-height: 1.35;
+    }
+
+    .lifestyle-privacy small {
+      margin-top: 0.12rem;
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      line-height: 1.35;
+    }
+
+    /* 3. SIGNATURE FEATURE: SEND A BEAT */
+    .heartbeat-feature-section {
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 0;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(190, 116, 104, 0.15), transparent 31%),
+        radial-gradient(circle at 18% 88%, rgba(112, 143, 92, 0.12), transparent 34%),
+        linear-gradient(135deg, #fbf7f2 0%, #ffffff 50%, #f0f4ed 100%);
+      border-top: 1px solid rgba(45, 60, 35, 0.06);
+      border-bottom: 1px solid rgba(45, 60, 35, 0.06);
+    }
+
+    .heartbeat-feature-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: clamp(3rem, 7vw, 6.5rem);
+    }
+
+    .heartbeat-feature-copy {
+      max-width: 520px;
+    }
+
+    .heartbeat-feature-copy h2 {
+      font-size: clamp(3rem, 5.4vw, 4.75rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+      margin-bottom: 1.55rem;
+    }
+
+    .heartbeat-feature-copy h2 em {
+      color: #9b5751;
+      font-style: normal;
+    }
+
+    .heartbeat-feature-copy > p {
+      max-width: 470px;
+      font-size: 1.22rem;
+      color: var(--text-muted);
+      line-height: 1.76;
+      margin-bottom: 1.8rem;
+    }
+
+    .heartbeat-privacy-line {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--green-deep);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .heartbeat-privacy-line i {
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green-accent);
+      box-shadow: 0 0 0 6px rgba(116, 149, 97, 0.12);
+    }
+
+    .heartbeat-demo-shell {
+      position: relative;
+      min-height: 540px;
+      padding: 2rem;
+      border-radius: 44px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 30px 80px rgba(74, 58, 48, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .heartbeat-demo-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--text-soft);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .heartbeat-demo-top b {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: #f3eee8;
+      color: #8a625a;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+    }
+
+    .heartbeat-demo-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1.2rem 0 0.7rem;
+    }
+
+    .heartbeat-demo-main > p {
+      color: var(--text-soft);
+      font-size: 0.83rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.15rem;
+    }
+
+    .heartbeat-demo-main h3 {
+      color: var(--text-dark);
+      font-size: clamp(1.55rem, 2.7vw, 2.05rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.25rem;
+    }
+
+    .heartbeat-demo-heart {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 160px;
+      height: 150px;
+      margin: 0.25rem auto;
+    }
+
+    .heartbeat-demo-heart::before,
+    .heartbeat-demo-heart::after {
+      content: "";
+      position: absolute;
+      inset: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(230, 70, 86, 0.30), rgba(236, 126, 129, 0.10) 48%, transparent 72%);
+      filter: blur(7px);
+      animation: heartbeatFeatureGlow 1.54s cubic-bezier(0.15, 0.8, 0.25, 1) infinite;
+    }
+
+    .heartbeat-demo-heart::after {
+      animation-delay: -0.77s;
+    }
+
+    .heartbeat-demo-heart img {
+      position: relative;
+      z-index: 2;
+      width: 78px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 22px rgba(211, 49, 68, 0.26));
+      animation: heartbeatFeatureBeat 1.54s ease-in-out infinite;
+    }
+
+    @keyframes heartbeatFeatureGlow {
+      0% { transform: scale(0.65); opacity: 0.9; }
+      55% { opacity: 0.38; }
+      100% { transform: scale(2.45); opacity: 0; }
+    }
+
+    @keyframes heartbeatFeatureBeat {
+      0%, 100% { transform: scale(1); }
+      12% { transform: scale(1.16); }
+      24% { transform: scale(1.02); }
+      38% { transform: scale(1.11); }
+      58% { transform: scale(1); }
+    }
+
+    .heartbeat-demo-bpm {
+      color: var(--text-dark);
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.2rem;
+    }
+
+    .heartbeat-demo-bpm small {
+      color: var(--text-soft);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .heartbeat-send-button {
+      min-width: 210px;
+    }
+
+    .heartbeat-send-button:disabled {
+      cursor: wait;
+      opacity: 0.72;
+      transform: none;
+    }
+
+    .heartbeat-demo-status {
+      min-height: 1.5em;
+      margin-top: 0.75rem;
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .heartbeat-demo-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+      padding-top: 1.15rem;
+      border-top: 1px solid rgba(45, 60, 35, 0.08);
+    }
+
+    .heartbeat-demo-step {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.65rem 0.7rem;
+      border-radius: 14px;
+      color: var(--text-soft);
+      background: rgba(244, 246, 240, 0.72);
+      font-size: 0.75rem;
+      font-weight: 700;
+      transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    }
+
+    .heartbeat-demo-step b {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: var(--text-soft);
+      background: #ffffff;
+      font-size: 0.68rem;
+    }
+
+    .heartbeat-demo-step:first-child,
+    .heartbeat-demo-shell.is-sending .heartbeat-demo-step:nth-child(2),
+    .heartbeat-demo-shell.is-sent .heartbeat-demo-step {
+      color: var(--green-deep);
+      background: rgba(226, 236, 214, 0.78);
+      transform: translateY(-2px);
+    }
+
+    .heartbeat-demo-shell.is-sending .heartbeat-demo-heart img {
+      animation: heartbeatFeatureSend 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .heartbeat-demo-shell.is-sent .heartbeat-demo-heart img {
+      animation: heartbeatFeatureArrive 0.55s cubic-bezier(0.2, 1.5, 0.4, 1) both;
+    }
+
+    @keyframes heartbeatFeatureSend {
+      0% { transform: scale(1); opacity: 1; }
+      45% { transform: scale(0.72) translateX(56px); opacity: 0.35; }
+      55% { transform: scale(0.72) translateX(-56px); opacity: 0; }
+      100% { transform: scale(1) translateX(0); opacity: 1; }
+    }
+
+    @keyframes heartbeatFeatureArrive {
+      0% { transform: scale(0.82); }
+      55% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* 4. SECTION 3: HAND + RING CLOSE-UP (HEROIC EDITORIAL SECTION) */
     .ring-macro-section {
       padding: 7rem 0;
       background: var(--bg-page);
@@ -1395,6 +1759,28 @@
       line-height: 1.74;
     }
 
+    .product-feature-summary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.5rem;
+    }
+
+    .product-feature-summary span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 0.55rem 0.95rem;
+      border: 1px solid rgba(74, 99, 62, 0.11);
+      border-radius: 999px;
+      background: var(--bg-sage-subtle);
+      color: var(--green-deep);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
     .product-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1937,6 +2323,17 @@
         grid-template-columns: 1fr;
         gap: 3.2rem;
       }
+      .heartbeat-feature-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+      .heartbeat-feature-copy {
+        max-width: 680px;
+      }
+      .heartbeat-demo-shell {
+        width: min(100%, 620px);
+        margin: 0 auto;
+      }
       .interruption-grid {
         grid-template-columns: 1fr;
         gap: 3.2rem;
@@ -2291,6 +2688,72 @@
         line-height: 1.28;
       }
 
+      .lifestyle-section,
+      .heartbeat-feature-section {
+        padding: 4.6rem 0;
+      }
+
+      .editorial-photo-card {
+        border-radius: 26px;
+      }
+
+      .sleep-share-card {
+        left: 0.9rem;
+        bottom: 0.9rem;
+        width: min(245px, calc(100% - 1.8rem));
+        padding: 0.9rem 1rem;
+        border-radius: 18px;
+      }
+
+      .sleep-share-card strong {
+        font-size: 1.55rem;
+      }
+
+      .heartbeat-feature-copy h2 {
+        font-size: clamp(2.55rem, 11vw, 3.7rem);
+      }
+
+      .heartbeat-feature-copy > p {
+        font-size: 1.05rem;
+      }
+
+      .heartbeat-demo-shell {
+        min-height: 510px;
+        padding: 1.35rem;
+        border-radius: 30px;
+      }
+
+      .heartbeat-demo-heart {
+        width: 138px;
+        height: 132px;
+      }
+
+      .heartbeat-demo-steps {
+        gap: 0.35rem;
+      }
+
+      .heartbeat-demo-step {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 0.35rem;
+        min-height: 74px;
+        padding: 0.55rem 0.25rem;
+        font-size: 0.68rem;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
     }
   </style>
   <script defer src="/sai-analytics.js"></script>
@@ -2327,7 +2790,7 @@
     })();
 
     const urlParams = new URLSearchParams(window.location.search);
-    let visualMode = ['me', 'us', 'days'].includes(urlParams.get('tab')) ? urlParams.get('tab') : 'me';
+    let visualMode = ['me', 'us', 'days'].includes(urlParams.get('tab')) ? urlParams.get('tab') : 'us';
 
     function toast(msg) {
       const el = $('#toast');
@@ -2355,10 +2818,10 @@
           <div class="s5-phone">
             <div class="s5-phone-top">
               <svg xmlns="http://www.w3.org/2000/svg" width="130" height="40" viewBox="0 0 290 90" role="img" aria-label="SAI"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="35" cy="46" rx="22" ry="28" transform="rotate(-18 35 46)" fill="#e1ebc9" stroke="#769766" stroke-width="5"/><ellipse cx="72" cy="46" rx="22" ry="28" transform="rotate(18 72 46)" fill="#f6deca" stroke="#bc9578" stroke-width="5"/><path d="M28 52q6 7 12 0M66 52q6 7 12 0" stroke="#4c6943" stroke-width="2.7"/><path d="M164 28c-7-10-32-11-35 2-4 18 37 10 36 29-1 15-29 16-39 6M187 68l23-45 23 45M259 24v44" stroke="#354c36" stroke-width="8"/></g><g fill="#4c6943"><circle cx="29" cy="43" r="2.1"/><circle cx="39" cy="43" r="2.1"/><circle cx="67" cy="43" r="2.1"/><circle cx="77" cy="43" r="2.1"/></g></svg>
-              <span>MY RHYTHM</span>
+              <span>SLEEP SHARE</span>
             </div>
-            <p>${t('나를 알아가는 시간', '自分を知る時間')}</p>
-            <h3>${t('어젯밤, 잘 쉬었어요.', '昨夜は、よく休めました。')}</h3>
+            <p>JIWOO → SUMIN</p>
+            <h3>${t('수면 요약이 도착했어요.', '睡眠のまとめが届きました。')}</h3>
             <div class="s5-score">
               <span>☾</span>
               <strong>7<small>h</small> 42<small>m</small></strong>
@@ -2367,16 +2830,16 @@
               ${[62, 80, 69, 85, 73, 90, 86].map((n, i) => `<div><i style="height:${n}%"></i><small>${i + 2}</small></div>`).join('')}
             </div>
             <div class="s5-phone-row">
-              <span>${t('안정 시 심박', '安静時心拍')}<b>58 <small>bpm</small></b></span>
-              <span>HRV<b>42 <small>ms</small></b></span>
+              <span>${t('수면 시간', '睡眠時間')}<b>7h 42m</b></span>
+              <span>${t('오늘의 상태', '今日の状態')}<b>${t('평온', '穏やか')}</b></span>
             </div>
-            <div class="s5-phone-bottom">${t('나만의 7일 · 30일 추세', '自分の7日・30日の傾向')}</div>
+            <div class="s5-phone-bottom">${t('내가 고른 요약만 공유', '選んだまとめだけを共有')}</div>
           </div>
           <div class="s5-float">
             <span>🌱</span>
             <div>
-              <strong>${t('오늘의 나는, 평온해요', '今日の私は、穏やか')}</strong>
-              <small>${t('나의 아침 체크인', '自分の朝のチェックイン')}</small>
+              <strong>${t('오늘은, 평온해요', '今日は、穏やか')}</strong>
+              <small>${t('지우의 아침 · 공유됨', 'ジウの朝 · 共有済み')}</small>
             </div>
           </div>
         `;
@@ -2386,10 +2849,10 @@
           <div class="s5-phone">
             <div class="s5-phone-top">
               <svg xmlns="http://www.w3.org/2000/svg" width="130" height="40" viewBox="0 0 290 90" role="img" aria-label="SAI"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="35" cy="46" rx="22" ry="28" transform="rotate(-18 35 46)" fill="#e1ebc9" stroke="#769766" stroke-width="5"/><ellipse cx="72" cy="46" rx="22" ry="28" transform="rotate(18 72 46)" fill="#f6deca" stroke="#bc9578" stroke-width="5"/><path d="M28 52q6 7 12 0M66 52q6 7 12 0" stroke="#4c6943" stroke-width="2.7"/><path d="M164 28c-7-10-32-11-35 2-4 18 37 10 36 29-1 15-29 16-39 6M187 68l23-45 23 45M259 24v44" stroke="#354c36" stroke-width="8"/></g><g fill="#4c6943"><circle cx="29" cy="43" r="2.1"/><circle cx="39" cy="43" r="2.1"/><circle cx="67" cy="43" r="2.1"/><circle cx="77" cy="43" r="2.1"/></g></svg>
-              <span>HEARTBEAT TOUCH</span>
+              <span>SEND A BEAT</span>
             </div>
             <p>SUMIN → JIWOO</p>
-            <h3>${t('네 리듬이 도착했어.', 'あなたのリズムが届いた。')}</h3>
+            <h3>${t('말 대신, 심박 하나.', '言葉の代わりに、鼓動をひとつ。')}</h3>
             <div class="s5-heart-stage">
               <div class="s5-heart-glow-spread g1"></div>
               <div class="s5-heart-glow-spread g2"></div>
@@ -2398,12 +2861,12 @@
               </div>
             </div>
             <div class="s5-pulse-number">78 <small>bpm</small></div>
-            <div class="s5-phone-bottom">${t('심박 한 번, 마음 한 번.', '心拍ひとつ、気持ちひとつ。')}</div>
+            <div class="s5-phone-bottom">${t('보내고 싶은 순간에만', '送りたい瞬間だけ')}</div>
           </div>
           <div class="s5-float peach">
             <span>🍑</span>
             <div>
-              <strong>${t('네 리듬, 느꼈어 ♡', 'リズム、受け取ったよ ♡')}</strong>
+              <strong>${t('지우가 느꼈어요 ♡', 'ジウが受け取りました ♡')}</strong>
               <small>${t('상대의 수신 확인', '相手の受け取り確認')}</small>
             </div>
           </div>
@@ -2583,21 +3046,21 @@
                 <div class="hero-content">
                   <span class="eyebrow">${t('둘만의 작은 일상, 사이', 'ふたりの小さな日常、SAI')}</span>
                   <h1 class="hero-title">${t('내 하루에,<br><span>네가 쏙.</span>', 'わたしの毎日に、<br><span>あなたがひょこっ。</span>')}</h1>
-                  <p class="hero-desc">${t('내 리듬도, 네 기분도.<br>우리끼리 함께 쓰는 감성 스마트링.', '自分のリズムも、あなたの気分も。<br>ふたりで寄り添うスマートリング。')}</p>
+                  <p class="hero-desc">${t('잠든 밤은 나누고, 뛰는 지금은 보내요.<br>수면 공유와 심박 보내기로 이어지는 둘만의 스마트링.', '眠った夜を分かち合い、いまの鼓動を届ける。<br>睡眠と鼓動でつながる、ふたりのスマートリング。')}</p>
                   <div class="hero-actions">
                     <button class="btn-primary" data-action="signup">${t('사이 먼저 만나기', 'SAIにいち早く出会う')} ↗</button>
-                    <a class="btn-secondary" href="#experience">${t('일상 둘러보기', '日常を見る')}</a>
+                    <a class="btn-secondary" href="#sleep-share">${t('둘의 연결 보기', 'ふたりのつながりを見る')}</a>
                   </div>
                 </div>
                 <div class="hero-art">
                   <img class="hero-art-img" src="/assets/hero-ring-v3-transparent.webp?v=20260917_v3" width="1254" height="1254" alt="${t('실버와 샴페인 골드 커플 스마트링', 'シルバーとシャンパンゴールドのペアスマートリング')}" fetchpriority="high">
                   <div class="floating-note top">
-                    <span>☾ ${t('어젯밤, 잘 쉬었어요.', '昨夜は、よく休めました。')}</span>
-                    <small>7h 42m · ${t('수면 리듬 예시', '睡眠リズムの例')}</small>
+                    <span>☾ ${t('수면 요약이 공유됐어요.', '睡眠のまとめを共有しました。')}</span>
+                    <small>7h 42m · ${t('내가 고른 요약만', '選んだまとめだけ')}</small>
                   </div>
                   <div class="floating-note bottom">
-                    <span>♡ ${t('네 리듬, 느꼈어.', 'リズム、受け取ったよ。')}</span>
-                    <small>78 bpm · ${t('지우의 수신 확인', 'ジウの受け取り確認')}</small>
+                    <span>♡ ${t('심박을 보냈어요.', '心拍を送りました。')}</span>
+                    <small>78 bpm · ${t('지우가 느꼈어요', 'ジウが受け取りました')}</small>
                   </div>
                 </div>
               </div>
@@ -2605,29 +3068,65 @@
 
             <!-- Ritual Strip -->
             <div class="teaser-ritual">
-              <span>☾ ${t('나의 리듬', '自分のリズム')}</span>
+              <span>☾ ${t('수면 공유', '睡眠を共有')}</span>
               <i>·</i>
-              <span>♡ ${t('너에게 닿는 마음', 'あなたに届く気持ち')}</span>
+              <span>♡ ${t('심박 보내기', '心拍を送る')}</span>
               <i>·</i>
               <span>◷ ${t('함께한 순간', 'ふたりの瞬間')}</span>
             </div>
 
-            <!-- 2. REAL COUPLE MOMENT: BRIGHT MORNING INTIMACY -->
-            <section class="lifestyle-section">
+            <!-- 2. SIGNATURE FEATURE: SLEEP SHARE -->
+            <section class="lifestyle-section" id="sleep-share" aria-labelledby="sleep-share-title">
               <div class="container lifestyle-grid">
                 <div class="editorial-photo-card">
                   <img src="/assets/couple-morning-v6.webp?v=20260918_v6" width="1024" height="576" loading="lazy" alt="${t('따뜻한 아침 햇살 아래 머그잔을 쥐고 다정하게 곁에 머무는 20대 커플과 페어 스마트링', '朝のあたたかな陽ざしのなかでマグカップを手に寄り添う20代カップルとペアスマートリング')}">
+                  <div class="sleep-share-card" aria-label="${t('공유된 수면 요약 예시', '共有された睡眠サマリーの例')}">
+                    <div class="sleep-share-card-head"><span>JIWOO'S MORNING</span><b>${t('공유됨', '共有済み')}</b></div>
+                    <strong>7h 42m</strong>
+                    <div class="sleep-share-card-status"><span>${t('오늘의 상태', '今日の状態')}</span><span>${t('평온해요', '穏やかです')}</span></div>
+                  </div>
                 </div>
                 <div class="lifestyle-copy">
-                  <span class="eyebrow">01 / MORNING INTIMACY</span>
-                  <h2><span class="lifestyle-msg-bubble" id="lifestyle-msg-bubble"><span class="msg-typing-ghost" aria-hidden="true">${t('잘잤어?', 'よく眠れた？')}</span><span class="msg-typing-wrap"><span class="msg-typing-text" id="lifestyle-typing-text">${t('잘잤어?', 'よく眠れた？')}</span><span class="msg-typing-cursor"></span></span></span>${t('가 조금 더<br>다정해지는 방법.', 'が、<br>少しやさしくなる。')}</h2>
-                  <p>${t('각자의 속도로 깨어나도, 아침의 온도는 함께 이어집니다. 스마트링이 기록한 고요한 밤의 쉼을 나누며 둘만의 다정한 하루가 시작돼요.', 'それぞれのペースで目覚めても、朝の温もりはふたりでつながる。スマートリングが記録した静かな夜の休息を分かち合い、ふたりの一日がはじまります。')}</p>
-                  <blockquote class="lifestyle-quote">${t('“말하지 않아도 전해지는 서로의 컨디션, 그것만으로도 아침이 든든해져요.”', '「言葉にしなくても伝わるお互いの体調、それだけで朝が心強くなる。」')}</blockquote>
+                  <span class="eyebrow">01 / SLEEP SHARE</span>
+                  <h2 id="sleep-share-title"><span class="lifestyle-msg-bubble" id="lifestyle-msg-bubble"><span class="msg-typing-ghost" aria-hidden="true">${t('잘 잤어?', 'よく眠れた？')}</span><span class="msg-typing-wrap"><span class="msg-typing-text" id="lifestyle-typing-text">${t('잘 잤어?', 'よく眠れた？')}</span><span class="msg-typing-cursor"></span></span></span>${t(' 묻기 전에,<br>밤이 먼저 닿아요.', 'と聞く前に、<br>夜がそっと届く。')}</h2>
+                  <p>${t('수면 시간과 오늘의 컨디션을 내가 고른 만큼만 나눠요. 서로 다른 곳에서 깨어나도, 아침의 첫 안부는 함께 시작됩니다.', '睡眠時間と今日のコンディションを、選んだ分だけ共有。別々の場所で目覚めても、朝の最初のあいさつは一緒にはじまります。')}</p>
+                  <div class="lifestyle-privacy">
+                    <span>✓</span>
+                    <div><strong>${t('고른 만큼만 공유해요.', '選んだ分だけ共有。')}</strong><small>${t('상세 건강 데이터는 나에게만.', '詳しい健康データは自分だけに。')}</small></div>
+                  </div>
                 </div>
               </div>
             </section>
 
-            <!-- 3. HAND + RING CLOSE-UP (HEROIC EDITORIAL SECTION) -->
+            <!-- 3. SIGNATURE FEATURE: HEARTBEAT SEND -->
+            <section class="heartbeat-feature-section" id="heartbeat-send" aria-labelledby="heartbeat-feature-title">
+              <div class="container heartbeat-feature-grid">
+                <div class="heartbeat-feature-copy">
+                  <span class="eyebrow">02 / SEND A BEAT</span>
+                  <h2 id="heartbeat-feature-title">${t('말 대신,<br><em>심박 하나.</em>', '言葉の代わりに、<br><em>鼓動をひとつ。</em>')}</h2>
+                  <p>${t('보고 싶은 순간, 지금의 심박을 보내요. 네가 느꼈다면 작은 답장이 돌아옵니다.', '会いたくなった瞬間、今の心拍を届ける。相手が受け取ると、小さな返事が戻ってきます。')}</p>
+                  <div class="heartbeat-privacy-line"><i aria-hidden="true"></i><span>${t('보내고 싶은 순간에만. 심박 공유는 기본 OFF.', '送りたい瞬間だけ。心拍共有は初期設定でオフ。')}</span></div>
+                </div>
+                <div class="heartbeat-demo-shell" data-heartbeat-demo aria-label="${t('심박 보내기 체험', '心拍を送る体験')}">
+                  <div class="heartbeat-demo-top"><span>SEND A BEAT · SUMIN → JIWOO</span><b>${t('기능 미리보기', '機能プレビュー')}</b></div>
+                  <div class="heartbeat-demo-main">
+                    <p>NOW · SUMIN</p>
+                    <h3>${t('지금의 심박을 보낼까요?', 'いまの心拍を届けますか？')}</h3>
+                    <div class="heartbeat-demo-heart" aria-hidden="true"><img src="/assets/heart-3d.webp?v=20260918" width="219" height="189" alt=""></div>
+                    <div class="heartbeat-demo-bpm">78 <small>bpm</small></div>
+                    <button class="btn-primary heartbeat-send-button" type="button" data-heartbeat-send><span>${t('심박 보내보기', '心拍を送ってみる')}</span> ↗</button>
+                    <div class="heartbeat-demo-status" data-heartbeat-status aria-live="polite">${t('보낼 준비가 되었어요.', '送る準備ができました。')}</div>
+                  </div>
+                  <div class="heartbeat-demo-steps" aria-hidden="true">
+                    <div class="heartbeat-demo-step"><b>1</b><span>${t('심박 선택', '心拍を選ぶ')}</span></div>
+                    <div class="heartbeat-demo-step"><b>2</b><span>${t('지우에게 전송', 'ジウへ送る')}</span></div>
+                    <div class="heartbeat-demo-step"><b>3</b><span>${t('느꼈어', '受け取ったよ')}</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 4. HAND + RING CLOSE-UP (HEROIC EDITORIAL SECTION) -->
             <section class="ring-macro-section">
               <div class="container">
                 <div class="macro-header">
@@ -2677,16 +3176,16 @@
                     <div class="dark-card">
                       <div class="dark-card-head">
                         <span>☾</span>
-                        <h3>${t('나의 리듬', '自分のリズム')}</h3>
+                        <h3>${t('수면 공유', '睡眠を共有')}</h3>
                       </div>
-                      <p>${t('수면 주기와 안정 시 심박, 내 몸의 변화를 나만의 속도로 차분하게 살핍니다.', '睡眠サイクルと安静時心拍、からだの変化を自分のペースで静かに見つめます。')}</p>
+                      <p>${t('수면 시간과 오늘의 컨디션 중, 내가 고른 요약만 상대와 나눕니다.', '睡眠時間と今日のコンディションから、選んだまとめだけを相手と共有します。')}</p>
                     </div>
                     <div class="dark-card">
                       <div class="dark-card-head">
                         <span>♡</span>
-                        <h3>${t('마음의 교감', '気持ちの交感')}</h3>
+                        <h3>${t('심박 보내기', '心拍を送る')}</h3>
                       </div>
-                      <p>${t('지금의 심박을 빛으로 보내고, 네가 보낸 온기를 가볍게 터치해 확인합니다.', '今の心拍を光にして届け、あなたが送った温もりをそっとタップして確かめます。')}</p>
+                      <p>${t('보고 싶은 순간 지금의 심박을 보내고, 상대가 느꼈다는 작은 답장을 받습니다.', '会いたくなった瞬間に心拍を届け、相手が受け取ったという小さな返事をもらいます。')}</p>
                     </div>
                     <div class="dark-card">
                       <div class="dark-card-head">
@@ -2704,41 +3203,41 @@
             <section class="v9-experience" id="experience">
               <div class="container">
                 <div class="experience-header">
-                  <span class="eyebrow">DAILY INTERACTION</span>
-                  <h2>${t('둘만의 세계를 만나는 방법', 'ふたりの世界に出会う方法')}</h2>
-                  <p>${t('화면을 탭하여 사이에서 펼쳐지는 일상을 먼저 살펴보세요.', 'タップして、SAIで広がる日常のワンシーンを体験してください。')}</p>
+                  <span class="eyebrow">TWO WAYS TO FEEL CLOSER</span>
+                  <h2>${t('잠든 밤부터,<br>뛰는 지금까지.', '眠った夜から、<br>いまの鼓動まで。')}</h2>
+                  <p>${t('수면 공유와 심박 보내기가 SAI에서 어떻게 이어지는지 살펴보세요.', '睡眠の共有と心拍を送る体験が、SAIでどうつながるのか見てみましょう。')}</p>
                 </div>
                 <div class="story-tabs" role="group" aria-label="${t('체험 탭', '体験タブ')}">
                   ${[
-                    ['me', t('나의 리듬', '自分のリズム')],
-                    ['us', t('너에게 닿는 마음', 'あなたに届く気持ち')],
+                    ['us', t('심박 보내기', '心拍を送る')],
+                    ['me', t('수면 공유', '睡眠を共有')],
                     ['days', t('함께한 순간', 'ふたりの瞬間')]
                   ].map(([k, l]) => `<button data-visual="${k}" aria-pressed="${visualMode === k}">${l}</button>`).join('')}
                 </div>
                 <!-- Desktop Stage -->
                 <div class="v9-experience-stage s5-desktop-stage">
-                  <div class="v9-side-note">
-                    <span>☾</span>
-                    <p>${t('수면과 몸의 변화,<br>나의 속도로.', '睡眠とからだの変化を、<br>自分のペースで。')}</p>
-                    <small>MY RHYTHM</small>
+                  <div class="v9-side-note peach">
+                    <span>♡</span>
+                    <p>${t('보고 싶은 순간,<br>심박 하나.', '会いたい瞬間、<br>鼓動をひとつ。')}</p>
+                    <small>SEND A BEAT</small>
                   </div>
                   <div id="s5-preview" role="region" aria-live="polite">
                     ${visualPreview()}
                   </div>
-                  <div class="v9-side-note peach">
-                    <span>♡</span>
-                    <p>${t('나누고 싶은 만큼,<br>너에게.', '分かち合いたい分だけ、<br>あなたへ。')}</p>
-                    <small>OUR LITTLE WORLD</small>
+                  <div class="v9-side-note">
+                    <span>☾</span>
+                    <p>${t('고른 만큼,<br>수면 요약을.', '選んだ分だけ、<br>睡眠のまとめを。')}</p>
+                    <small>SLEEP SHARE</small>
                   </div>
                 </div>
                 <!-- Mobile Slider Stage -->
                 <div class="s5-mobile-slider-wrap">
                   <div class="s5-mobile-slider" id="s5MobileSlider" role="region" aria-label="${t('일상 체험 슬라이더', '日常体験スライダー')}">
                     <div class="s5-slide" data-slide="0">
-                      ${visualPreview('me')}
+                      ${visualPreview('us')}
                     </div>
                     <div class="s5-slide" data-slide="1">
-                      ${visualPreview('us')}
+                      ${visualPreview('me')}
                     </div>
                     <div class="s5-slide" data-slide="2">
                       ${visualPreview('days')}
@@ -2750,15 +3249,15 @@
                     <button class="s5-dot" data-goto="2" aria-label="3"></button>
                   </div>
                   <div class="s5-mobile-notes">
-                    <div class="v9-side-note">
-                      <span>☾</span>
-                      <p>${t('수면과 몸의 변화,<br>나의 속도로.', '睡眠とからだの変化を、<br>自分のペースで。')}</p>
-                      <small>MY RHYTHM</small>
-                    </div>
                     <div class="v9-side-note peach">
                       <span>♡</span>
-                      <p>${t('나누고 싶은 만큼,<br>너에게.', '分かち合いたい分だけ、<br>あなたへ。')}</p>
-                      <small>OUR LITTLE WORLD</small>
+                      <p>${t('보고 싶은 순간,<br>심박 하나.', '会いたい瞬間、<br>鼓動をひとつ。')}</p>
+                      <small>SEND A BEAT</small>
+                    </div>
+                    <div class="v9-side-note">
+                      <span>☾</span>
+                      <p>${t('고른 만큼,<br>수면 요약을.', '選んだ分だけ、<br>睡眠のまとめを。')}</p>
+                      <small>SLEEP SHARE</small>
                     </div>
                   </div>
                 </div>
@@ -2830,6 +3329,11 @@
                   <div class="product-quote-en">A ring for me. A ring for you. One little world between us.</div>
                   <h2>${t('나를 위한 링 하나. 너를 위한 링 하나.<br>우리 사이의 작은 세계.', 'わたしにひとつのリング。あなたにひとつのリング。<br>ふたりの間にある、小さな世界。')}</h2>
                   <p>${t('손끝에는 절제된 아름다움을, 일상에는 둘만의 연결을.', '指先には洗練された美しさを、日常にはふたりのつながりを。')}</p>
+                  <div class="product-feature-summary" aria-label="${t('SAI 핵심 경험', 'SAIの主な体験')}">
+                    <span>☾ ${t('수면 요약 공유', '睡眠のまとめを共有')}</span>
+                    <span>♡ ${t('심박 보내기', '心拍を送る')}</span>
+                    <span>◷ ${t('둘만의 기록', 'ふたりだけの記録')}</span>
+                  </div>
                 </div>
                 <div class="product-grid">
                   <article class="product-card">
@@ -2852,7 +3356,7 @@
                       </div>
                     </div>
                     <h3>${t('둘을 위한 월 멤버십', 'ふたりのための月額メンバーシップ')}</h3>
-                    <p>${t('내 기록에서 둘의 일상까지. 두 사람의 리듬을 엮어내는 전용 관계 알고리즘과 프라이빗 아카이브를 제공합니다.', '自分の記録から、ふたりの日常まで。ふたりのリズムを結びつける専用アルゴリズムとプライベートアーカイブ。')}</p>
+                    <p>${t('수면 공유와 심박 보내기, 둘만의 기록까지. 두 사람의 리듬을 하나의 경험으로 엮는 전용 관계 알고리즘과 프라이빗 아카이브를 제공합니다.', '睡眠の共有、心拍を送る体験、ふたりの記録まで。ふたりのリズムをひとつの体験に結ぶ専用アルゴリズムとプライベートアーカイブ。')}</p>
                   </article>
                 </div>
                 <p class="product-footnote">${t('가격 및 최종 상세 사양은 공식 출시 전 사전 신청자에게 가장 먼저 공개됩니다.', '価格および詳細仕様は、公式リリース前に事前登録者へいち早くお知らせします。')}</p>
@@ -2929,19 +3433,26 @@
       }
 
       const isJa = (lang === 'ja');
-      const fullText = isJa ? "よく眠れた？" : "잘잤어?";
+      const fullText = isJa ? "よく眠れた？" : "잘 잤어?";
+
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        textEl.textContent = fullText;
+        if (cursorEl) cursorEl.style.display = 'none';
+        return;
+      }
 
       // Natural typing cadence frames
       const koFrames = [
         { text: "ㅈ", delay: 110 },
         { text: "자", delay: 90 },
         { text: "잘", delay: 130 },
-        { text: "잘ㅈ", delay: 100 },
-        { text: "잘자", delay: 90 },
-        { text: "잘잤", delay: 140 },
-        { text: "잘잤ㅇ", delay: 100 },
-        { text: "잘잤어", delay: 120 },
-        { text: "잘잤어?", delay: 280 }
+        { text: "잘 ", delay: 80 },
+        { text: "잘 ㅈ", delay: 100 },
+        { text: "잘 자", delay: 90 },
+        { text: "잘 잤", delay: 140 },
+        { text: "잘 잤ㅇ", delay: 100 },
+        { text: "잘 잤어", delay: 120 },
+        { text: "잘 잤어?", delay: 280 }
       ];
 
       const jaFrames = [
@@ -3009,6 +3520,36 @@
       }
     }
 
+    function initHeartbeatDemo() {
+      const demo = document.querySelector('[data-heartbeat-demo]');
+      const sendButton = document.querySelector('[data-heartbeat-send]');
+      const status = document.querySelector('[data-heartbeat-status]');
+      if (!demo || !sendButton || !status) return;
+
+      if (window._heartbeatDemoTimer) {
+        clearTimeout(window._heartbeatDemoTimer);
+        window._heartbeatDemoTimer = null;
+      }
+
+      sendButton.onclick = () => {
+        if (sendButton.disabled) return;
+        sendButton.disabled = true;
+        demo.classList.remove('is-sent');
+        demo.classList.add('is-sending');
+        demo.setAttribute('aria-busy', 'true');
+        status.textContent = t('지우에게 심박을 보내는 중…', 'ジウへ心拍を送っています…');
+
+        window._heartbeatDemoTimer = setTimeout(() => {
+          demo.classList.remove('is-sending');
+          demo.classList.add('is-sent');
+          demo.setAttribute('aria-busy', 'false');
+          status.textContent = t('지우가 느꼈어요. 작은 답장이 도착했어요.', 'ジウが受け取りました。小さな返事が届きました。');
+          sendButton.disabled = false;
+          sendButton.querySelector('span').textContent = t('한 번 더 보내기', 'もう一度送る');
+        }, 920);
+      };
+    }
+
     function bind() {
       // 1. Story tabs interaction
       document.querySelectorAll('[data-visual]').forEach(btn => {
@@ -3039,7 +3580,10 @@
       // 3. iMessage-style dynamic typing animation
       initMessageTypingAnimation();
 
-      // 4. Mobile experience slider dots & touch interaction
+      // 4. Signature heartbeat-send interaction preview
+      initHeartbeatDemo();
+
+      // 5. Mobile experience slider dots & touch interaction
       const slider = $('#s5MobileSlider');
       if (slider) {
         const dots = document.querySelectorAll('.s5-dots .s5-dot');
