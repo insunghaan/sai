@@ -428,12 +428,89 @@
 
     /* Section 2 Title: +2pt increase */
     .lifestyle-copy h2 {
-      font-size: clamp(2.4rem, 4.5vw, 3.65rem);
+      font-size: clamp(2.3rem, 4.4vw, 3.65rem);
       font-weight: 700;
-      line-height: 1.22;
+      line-height: 1.25;
       letter-spacing: -0.03em;
       margin-bottom: 1.5rem;
       color: var(--text-dark);
+    }
+
+    /* Brand green dynamic typing bubble (80% scale, single-run) */
+    .lifestyle-msg-bubble {
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      background: var(--green-primary);
+      background: linear-gradient(135deg, #58774b 0%, #435b37 100%);
+      color: #ffffff;
+      font-size: 0.80em;
+      padding: 0.14em 0.54em 0.18em 0.54em;
+      border-radius: 9999px;
+      vertical-align: 0.10em;
+      margin-right: 0.30em;
+      box-shadow: 0 4px 14px rgba(70, 95, 60, 0.24), 0 2px 5px rgba(70, 95, 60, 0.14);
+      font-weight: 700;
+      white-space: nowrap;
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+      transform-origin: left center;
+      transition: filter 0.2s ease;
+    }
+
+    .lifestyle-msg-bubble:hover {
+      filter: brightness(1.05);
+    }
+
+    .lifestyle-msg-bubble.bubble-pop {
+      animation: msgBubblePop 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes msgBubblePop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.06); }
+      100% { transform: scale(1); }
+    }
+
+    /* Ghost text ensures the bubble maintains its exact width and never causes adjacent text to jump */
+    .msg-typing-ghost {
+      visibility: hidden;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0;
+      line-height: 1.15;
+    }
+
+    .msg-typing-wrap {
+      position: absolute;
+      left: 0.54em;
+      right: 0.54em;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .msg-typing-text {
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .msg-typing-cursor {
+      display: inline-block;
+      width: 2.2px;
+      height: 0.9em;
+      background-color: #ffffff;
+      margin-left: 2px;
+      border-radius: 1px;
+      vertical-align: -0.05em;
+      animation: msgCursorBlink 0.75s infinite;
+    }
+
+    @keyframes msgCursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     /* Section 2 Body: +2pt increase */
@@ -690,8 +767,10 @@
 
     /* 5. INTERACTIVE RHYTHM PREVIEW */
     .v9-experience {
-      padding: 7rem 0;
-      background: var(--bg-page);
+      padding: 7.5rem 0;
+      background: #f4f6f0;
+      background: linear-gradient(180deg, #f6f8f3 0%, #edf2ea 100%);
+      position: relative;
     }
 
     .experience-header {
@@ -728,18 +807,17 @@
       border-radius: 9999px;
       font-size: 0.98rem;
       font-weight: 600;
-      background: rgba(255, 255, 255, 0.78);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: #ffffff;
       color: var(--text-muted);
-      border: 1px solid rgba(45, 60, 35, 0.1);
-      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(45, 60, 35, 0.12);
+      box-shadow: 0 4px 14px rgba(35, 45, 30, 0.05);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .story-tabs button:hover {
       transform: translateY(-2px);
       border-color: rgba(74, 99, 62, 0.3);
       color: var(--text-dark);
+      box-shadow: 0 6px 18px rgba(35, 45, 30, 0.08);
     }
     .story-tabs button[aria-pressed="true"] {
       background: var(--green-primary);
@@ -758,13 +836,11 @@
 
     /* Side notes: 28px + Glassmorphism + subtle floating sway */
     .v9-side-note {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(24px) saturate(160%);
-      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      background: #ffffff;
       border-radius: 28px;
       padding: 2rem 2.1rem;
-      box-shadow: var(--shadow-glass);
-      border: 1px solid var(--border-glass);
+      box-shadow: 0 16px 36px rgba(35, 45, 30, 0.07), 0 2px 8px rgba(35, 45, 30, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.95);
       display: flex;
       flex-direction: column;
       gap: 0.7rem;
@@ -774,8 +850,9 @@
       animation: sideNoteFloatLeft 6.5s ease-in-out infinite;
     }
     .v9-side-note.peach {
-      background: rgba(255, 252, 248, 0.8);
-      border-color: rgba(255, 255, 255, 0.95);
+      background: #fffdf9;
+      border: 1px solid rgba(240, 200, 170, 0.3);
+      box-shadow: 0 16px 36px rgba(220, 140, 100, 0.08), 0 2px 8px rgba(35, 45, 30, 0.03);
       animation: sideNoteFloatRight 6.5s ease-in-out infinite 0.8s;
     }
     .v9-side-note:hover {
@@ -815,20 +892,18 @@
     /* Interactive Mobile Phone Card: 48px + Glassmorphism + Gentle Breathing Glow */
     .s5-phone {
       width: 100%;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      background: #ffffff;
       border-radius: 48px;
       padding: 2.6rem 2.2rem;
-      box-shadow: 0 24px 60px rgba(35, 45, 30, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-      border: 1px solid var(--border-glass);
+      box-shadow: 0 24px 64px rgba(35, 45, 30, 0.09), 0 4px 16px rgba(35, 45, 30, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.95);
       position: relative;
       animation: phoneGlowBreath 6s ease-in-out infinite;
     }
 
     @keyframes phoneGlowBreath {
-      0%, 100% { box-shadow: 0 24px 60px rgba(35, 45, 30, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.95); }
-      50% { box-shadow: 0 28px 68px rgba(74, 99, 62, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.98); }
+      0%, 100% { box-shadow: 0 24px 64px rgba(35, 45, 30, 0.08), 0 4px 16px rgba(35, 45, 30, 0.03); }
+      50% { box-shadow: 0 28px 72px rgba(74, 99, 62, 0.14), 0 6px 20px rgba(74, 99, 62, 0.06); }
     }
 
     .s5-phone-top {
@@ -930,24 +1005,82 @@
       margin-left: 0.5rem;
     }
 
-    .s5-heart {
+    .s5-heart-stage {
+      position: relative;
+      width: 84px;
+      height: 74px;
+      margin: 1.1rem auto 0.7rem auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 1.6rem 0;
+    }
+
+    /* Soft ambient gradient glow diffusion (NO lines/borders) */
+    .s5-heart-glow-spread {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 52px;
+      height: 52px;
+      margin-top: -26px;
+      margin-left: -26px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(circle, rgba(255, 75, 105, 0.34) 0%, rgba(255, 120, 145, 0.14) 48%, transparent 75%);
+      filter: blur(8px);
+      animation: s5HeartGlowSpread 2.2s cubic-bezier(0.15, 0.8, 0.25, 1) infinite;
+    }
+
+    .s5-heart-glow-spread.g1 { animation-delay: 0s; }
+    .s5-heart-glow-spread.g2 { animation-delay: -1.1s; }
+
+    @keyframes s5HeartGlowSpread {
+      0% {
+        transform: scale(0.65);
+        opacity: 0.9;
+      }
+      50% {
+        opacity: 0.45;
+      }
+      100% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
+    }
+
+    .s5-heart-wrap {
       position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: s5HeartPulse 1.6s ease-in-out infinite;
     }
-    .s5-heart span {
-      font-size: 3.4rem;
-      color: #e07462;
-      animation: heartbeatPulse 1.4s infinite;
+
+    .s5-heart-3d-img {
+      width: 50px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 16px rgba(225, 45, 70, 0.26)) drop-shadow(0 2px 6px rgba(225, 45, 70, 0.14));
     }
-    @keyframes heartbeatPulse {
-      0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(224, 116, 98, 0)); }
-      20% { transform: scale(1.18); filter: drop-shadow(0 4px 14px rgba(224, 116, 98, 0.45)); }
-      40% { transform: scale(1.04); }
-      60% { transform: scale(1.22); filter: drop-shadow(0 4px 18px rgba(224, 116, 98, 0.55)); }
-      80%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(224, 116, 98, 0)); }
+
+    @keyframes s5HeartPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      14% {
+        transform: scale(1.14);
+      }
+      28% {
+        transform: scale(1.02);
+      }
+      42% {
+        transform: scale(1.11);
+      }
+      60% {
+        transform: scale(1);
+      }
     }
 
     .s5-pulse-number {
@@ -993,21 +1126,20 @@
     /* Sub-float: 22px + Glassmorphism + Gentle Float Motion */
     .s5-float {
       margin-top: 1.6rem;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border: 1px solid var(--border-glass);
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.95);
       border-radius: 22px;
       padding: 0.95rem 1.4rem;
       display: flex;
       align-items: center;
       gap: 0.85rem;
       font-size: 0.94rem;
-      box-shadow: var(--shadow-glass);
+      box-shadow: 0 10px 28px rgba(35, 45, 30, 0.08);
       animation: floatSubNote 5s ease-in-out infinite;
     }
     .s5-float.peach {
-      background: rgba(255, 251, 246, 0.85);
+      background: #fffdf9;
+      border-color: rgba(240, 200, 170, 0.3);
     }
     .s5-float small {
       display: block;
@@ -1312,33 +1444,112 @@
       transform: scale(1.04) rotate(1deg);
     }
 
-    .membership-emblem {
-      width: 136px;
-      height: 136px;
-      border-radius: 9999px;
-      background: linear-gradient(135deg, #f2f5ec 0%, #e1e9d8 100%);
-      border: 2px dashed rgba(74, 99, 62, 0.35);
+    .membership-heart-stage {
+      position: relative;
+      width: 150px;
+      height: 150px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
-      animation: emblemBreath 5s ease-in-out infinite;
     }
-    @keyframes emblemBreath {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+
+    /* Core ambient warm glow directly under heart */
+    .membership-heart-stage::before {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 75, 105, 0.25) 0%, rgba(255, 110, 135, 0.10) 50%, transparent 75%);
+      filter: blur(10px);
+      z-index: 1;
+      pointer-events: none;
+      animation: heartCoreGlow 3.2s ease-in-out infinite;
     }
-    .membership-emblem span {
-      font-size: 2.2rem;
-      color: var(--green-primary);
+
+    /* Outward softly diffusing gradient waves (NO lines/borders, pure soft gradient spread) */
+    .heart-gradient-wave {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 64px;
+      height: 64px;
+      margin-top: -32px;
+      margin-left: -32px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(circle, rgba(255, 75, 105, 0.24) 0%, rgba(255, 115, 140, 0.10) 45%, rgba(255, 145, 165, 0.02) 70%, transparent 80%);
+      filter: blur(10px);
+      animation: heartGradientSpread 3.6s cubic-bezier(0.15, 0.8, 0.25, 1) infinite;
     }
-    .membership-emblem small {
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--green-deep);
+
+    .heart-gradient-wave.w1 { animation-delay: 0s; }
+    .heart-gradient-wave.w2 { animation-delay: -1.8s; }
+
+    @keyframes heartGradientSpread {
+      0% {
+        transform: scale(0.65);
+        opacity: 0.85;
+      }
+      50% {
+        opacity: 0.45;
+      }
+      100% {
+        transform: scale(2.4);
+        opacity: 0;
+      }
+    }
+
+    @keyframes heartCoreGlow {
+      0%, 100% {
+        transform: scale(0.95);
+        opacity: 0.55;
+      }
+      50% {
+        transform: scale(1.18);
+        opacity: 0.9;
+      }
+    }
+
+    .heart-3d-wrap {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: heartGentlePulse 3.2s ease-in-out infinite;
+    }
+
+    .heart-3d-img {
+      width: 60px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 16px rgba(225, 45, 70, 0.22)) drop-shadow(0 2px 5px rgba(225, 45, 70, 0.14));
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    }
+
+    .product-card:hover .heart-3d-img {
+      transform: scale(1.08) translateY(-2px);
+      filter: drop-shadow(0 12px 22px rgba(225, 45, 70, 0.30)) drop-shadow(0 3px 8px rgba(225, 45, 70, 0.18));
+    }
+
+    @keyframes heartGentlePulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      12% {
+        transform: scale(1.06);
+      }
+      22% {
+        transform: scale(1.01);
+      }
+      34% {
+        transform: scale(1.05);
+      }
+      55% {
+        transform: scale(1);
+      }
     }
 
     .product-card h3 {
@@ -1799,6 +2010,10 @@
         width: 100%;
         max-width: 280px;
       }
+      .lifestyle-copy h2 {
+        font-size: clamp(1.78rem, 5.8vw, 2.35rem);
+        line-height: 1.28;
+      }
     }
   </style>
 </head>
@@ -1833,7 +2048,8 @@
       } catch { return {}; }
     })();
 
-    let visualMode = 'me';
+    const urlParams = new URLSearchParams(window.location.search);
+    let visualMode = ['me', 'us', 'days'].includes(urlParams.get('tab')) ? urlParams.get('tab') : 'me';
 
     function toast(msg) {
       const el = $('#toast');
@@ -1890,7 +2106,13 @@
             </div>
             <p>SUMIN → JIWOO</p>
             <h3>${t('네 리듬이 도착했어.', 'あなたのリズムが届いた。')}</h3>
-            <div class="s5-heart"><span>♡</span></div>
+            <div class="s5-heart-stage">
+              <div class="s5-heart-glow-spread g1"></div>
+              <div class="s5-heart-glow-spread g2"></div>
+              <div class="s5-heart-wrap">
+                <img src="/assets/heart-3d.webp?v=20260918" width="219" height="189" alt="${t('심박 3D 하트', '心拍3Dハート')}" class="s5-heart-3d-img">
+              </div>
+            </div>
             <div class="s5-pulse-number">78 <small>bpm</small></div>
             <div class="s5-phone-bottom">${t('심박 한 번, 마음 한 번.', '心拍ひとつ、気持ちひとつ。')}</div>
           </div>
@@ -2114,7 +2336,7 @@
                 </div>
                 <div class="lifestyle-copy">
                   <span class="eyebrow">01 / MORNING INTIMACY</span>
-                  <h2>${t('“잘 잤어?”가<br>조금 더 다정해지는 방법.', '「よく眠れた？」が、<br>少しやさしくなる。')}</h2>
+                  <h2><span class="lifestyle-msg-bubble" id="lifestyle-msg-bubble"><span class="msg-typing-ghost" aria-hidden="true">${t('잘잤어?', 'よく眠れた？')}</span><span class="msg-typing-wrap"><span class="msg-typing-text" id="lifestyle-typing-text">${t('잘잤어?', 'よく眠れた？')}</span><span class="msg-typing-cursor"></span></span></span>${t('가 조금 더<br>다정해지는 방법.', 'が、<br>少しやさしくなる。')}</h2>
                   <p>${t('각자의 속도로 깨어나도, 아침의 온도는 함께 이어집니다. 스마트링이 기록한 고요한 밤의 쉼을 나누며 둘만의 다정한 하루가 시작돼요.', 'それぞれのペースで目覚めても、朝の温もりはふたりでつながる。スマートリングが記録した静かな夜の休息を分かち合い、ふたりの一日がはじまります。')}</p>
                   <blockquote class="lifestyle-quote">${t('“말하지 않아도 전해지는 서로의 컨디션, 그것만으로도 아침이 든든해져요.”', '「言葉にしなくても伝わるお互いの体調、それだけで朝が心強くなる。」')}</blockquote>
                 </div>
@@ -2305,9 +2527,12 @@
                   <article class="product-card">
                     <span class="product-card-tag">02 / SAI TOGETHER</span>
                     <div class="product-card-visual">
-                      <div class="membership-emblem">
-                        <span>♡</span>
-                        <small>TOGETHER</small>
+                      <div class="membership-heart-stage">
+                        <div class="heart-gradient-wave w1"></div>
+                        <div class="heart-gradient-wave w2"></div>
+                        <div class="heart-3d-wrap">
+                          <img src="/assets/heart-3d.webp?v=20260918" width="219" height="189" loading="lazy" alt="${t('사이 투게더 3D 하트', 'SAI TOGETHER 3Dハート')}" class="heart-3d-img">
+                        </div>
                       </div>
                     </div>
                     <h3>${t('둘을 위한 월 멤버십', 'ふたりのための月額メンバーシップ')}</h3>
@@ -2372,6 +2597,102 @@
       `;
     }
 
+    function initMessageTypingAnimation() {
+      const textEl = document.getElementById('lifestyle-typing-text');
+      const bubbleEl = document.getElementById('lifestyle-msg-bubble');
+      const cursorEl = bubbleEl ? bubbleEl.querySelector('.msg-typing-cursor') : null;
+      if (!textEl || !bubbleEl) return;
+
+      if (window._msgTypingTimer) {
+        clearTimeout(window._msgTypingTimer);
+        window._msgTypingTimer = null;
+      }
+      if (window._msgTypingObserver) {
+        window._msgTypingObserver.disconnect();
+        window._msgTypingObserver = null;
+      }
+
+      const isJa = (lang === 'ja');
+      const fullText = isJa ? "よく眠れた？" : "잘잤어?";
+
+      // Natural typing cadence frames
+      const koFrames = [
+        { text: "ㅈ", delay: 110 },
+        { text: "자", delay: 90 },
+        { text: "잘", delay: 130 },
+        { text: "잘ㅈ", delay: 100 },
+        { text: "잘자", delay: 90 },
+        { text: "잘잤", delay: 140 },
+        { text: "잘잤ㅇ", delay: 100 },
+        { text: "잘잤어", delay: 120 },
+        { text: "잘잤어?", delay: 280 }
+      ];
+
+      const jaFrames = [
+        { text: "よ", delay: 120 },
+        { text: "よく", delay: 120 },
+        { text: "よくね", delay: 120 },
+        { text: "よくねむ", delay: 120 },
+        { text: "よくねむれ", delay: 120 },
+        { text: "よくねむれた", delay: 140 },
+        { text: "よく眠れた", delay: 160 },
+        { text: "よく眠れた？", delay: 280 }
+      ];
+
+      const frames = isJa ? jaFrames : koFrames;
+      let hasRun = false;
+
+      function runOnce() {
+        if (hasRun) return;
+        hasRun = true;
+        let frameIdx = 0;
+        textEl.textContent = "";
+        if (cursorEl) {
+          cursorEl.style.opacity = '1';
+          cursorEl.style.display = 'inline-block';
+        }
+
+        function typeStep() {
+          if (frameIdx < frames.length) {
+            textEl.textContent = frames[frameIdx].text;
+            const d = frames[frameIdx].delay;
+            frameIdx++;
+            window._msgTypingTimer = setTimeout(typeStep, d);
+          } else {
+            // Completed typing: subtle pop bounce
+            bubbleEl.classList.remove('bubble-pop');
+            void bubbleEl.offsetWidth;
+            bubbleEl.classList.add('bubble-pop');
+
+            // Softly fade out cursor after 1.2s to cleanly seal the delivered message
+            window._msgTypingTimer = setTimeout(() => {
+              if (cursorEl) {
+                cursorEl.style.transition = 'opacity 0.4s ease';
+                cursorEl.style.opacity = '0';
+              }
+            }, 1200);
+          }
+        }
+
+        typeStep();
+      }
+
+      const section = bubbleEl.closest('.lifestyle-section');
+      if (section && 'IntersectionObserver' in window) {
+        window._msgTypingObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !hasRun) {
+              runOnce();
+              window._msgTypingObserver.disconnect();
+            }
+          });
+        }, { threshold: 0.25 });
+        window._msgTypingObserver.observe(section);
+      } else {
+        runOnce();
+      }
+    }
+
     function bind() {
       // 1. Story tabs interaction
       document.querySelectorAll('[data-visual]').forEach(btn => {
@@ -2398,6 +2719,9 @@
           }
         };
       });
+
+      // 3. iMessage-style dynamic typing animation
+      initMessageTypingAnimation();
     }
 
     // STRICT INVARIANT: Always render landing page. NEVER render mockup or prototype views.
