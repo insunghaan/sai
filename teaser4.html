@@ -182,7 +182,7 @@
       letter-spacing: 0.02em;
       color: var(--text-dark);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-      margin-bottom: 1.1rem;
+      margin-bottom: 1.25rem;
     }
 
     .gradient-pill.red {
@@ -371,7 +371,7 @@
       display: inline-block;
     }
     .hero-title {
-      font-size: clamp(3.17rem, 5.4vw, 4.57rem);
+      font-size: clamp(3.42rem, 5.7vw, 4.82rem);
       font-weight: 900;
       line-height: 1.15;
       letter-spacing: -0.035em;
@@ -580,17 +580,18 @@
 
     /* 02. SECTION: SLEEP SHARE */
     .section-wrap {
-      padding: 5.5rem 0;
+      padding: 7.0rem 0 5.5rem;
       position: relative;
       scroll-margin-top: 75px;
       background: #ffffff;
     }
     .section-head {
       max-width: 680px;
-      margin-bottom: 3.0rem;
+      padding-top: 1.2rem;
+      margin-bottom: 3.2rem;
     }
     .section-title {
-      font-size: clamp(2.17rem, 3.4vw, 2.87rem);
+      font-size: clamp(2.42rem, 3.6vw, 3.12rem);
       font-weight: 900;
       line-height: 1.25;
       letter-spacing: -0.03em;
@@ -1018,79 +1019,144 @@
       transform: translateY(-4px);
     }
 
-    /* 04. SECTION: LARGE MAGAZINE CARDS */
-    .magazine-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
-      margin-top: 3.5rem;
-    }
-    .magazine-card {
+    /* 04. SECTION: WIDE HORIZONTAL STORY SLIDER */
+    .story-slider-outer {
+      width: 100%;
       position: relative;
+      overflow: visible;
+      margin-top: 1.5rem;
+    }
+    .story-slider-track {
+      display: flex;
+      gap: 1.8rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      /* Left margin matches the standard container start line: */
+      padding-left: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
+      padding-right: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
+      padding-top: 0.8rem;
+      padding-bottom: 2.2rem;
+    }
+    .story-slider-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .story-slide-card {
+      position: relative;
+      flex: 0 0 clamp(500px, 46vw, 620px);
+      width: clamp(500px, 46vw, 620px);
+      height: 520px;
+      scroll-snap-align: start;
       border-radius: 32px;
       overflow: hidden;
-      background: #FAF9F6;
+      background: #111218;
       border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: var(--shadow-card);
-      height: 480px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 2.2rem;
+      padding: 2.6rem 2.4rem;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      cursor: grab;
+      user-select: none;
     }
-    .magazine-card:hover {
+    .story-slide-card:active {
+      cursor: grabbing;
+    }
+    .story-slide-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.12);
     }
-    .magazine-card-bg {
+
+    .story-card-bg {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.85);
-      transition: transform 0.5s ease;
+      object-position: center 46%;
+      filter: brightness(0.88);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+      transform: scale(1.02);
     }
-    .magazine-card:hover .magazine-card-bg {
-      transform: scale(1.04);
-      filter: brightness(0.9);
+    .story-slide-card:nth-child(1) .story-card-bg {
+      object-position: center 46%;
     }
-    .magazine-card:nth-child(3) .magazine-card-bg {
-      object-position: center 36%;
+    .story-slide-card:nth-child(2) .story-card-bg {
+      object-position: center 48%;
     }
-    .magazine-card-gradient {
+    .story-slide-card:nth-child(3) .story-card-bg {
+      object-position: center 48%;
+    }
+    .story-slide-card:hover .story-card-bg {
+      transform: scale(1.06);
+      filter: brightness(0.92);
+    }
+
+    .story-card-gradient {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(10, 10, 14, 0.88) 100%);
+      background: linear-gradient(180deg, transparent 32%, rgba(10, 10, 14, 0.55) 60%, rgba(10, 10, 14, 0.92) 100%);
       pointer-events: none;
     }
-    .magazine-card-content {
+
+    .story-card-content {
       position: relative;
       z-index: 2;
     }
-    .magazine-tag {
-      font-size: 0.75rem;
+    .story-tag {
+      font-size: 0.80rem;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: #ddd6fe;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
     }
-    .magazine-tag.red {
+    .story-tag.red {
       color: #fecdd3;
     }
-    .magazine-card-title {
-      font-size: 1.42rem;
-      font-weight: 800;
-      line-height: 1.3;
-      margin-bottom: 0.6rem;
+    .story-card-title {
+      font-size: 1.62rem;
+      font-weight: 900;
+      line-height: 1.32;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.7rem;
       color: #ffffff;
     }
-    .magazine-card-desc {
-      font-size: 0.92rem;
-      color: rgba(255, 255, 255, 0.82);
-      line-height: 1.45;
+    .story-card-desc {
+      font-size: 0.98rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+    }
+
+    /* Slider Pagination Only */
+    .story-slider-pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 0.5rem;
+    }
+    .story-slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      background: rgba(0, 0, 0, 0.18);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .story-slider-dot:hover {
+      background: rgba(0, 0, 0, 0.35);
+    }
+    .story-slider-dot.active {
+      width: 32px;
+      background: #1a1a1a;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
     /* 04-A. OUR RHYTHM ARCHIVE */
@@ -1430,7 +1496,7 @@
       animation: floatSmooth 5s ease-in-out infinite alternate;
     }
     .cta-title {
-      font-size: clamp(2.57rem, 5.2vw, 3.97rem);
+      font-size: clamp(2.82rem, 5.5vw, 4.22rem);
       font-weight: 900;
       line-height: 1.18;
       letter-spacing: -0.03em;
@@ -1707,12 +1773,34 @@
         grid-template-columns: minmax(0, 1fr);
         gap: 2.2rem;
       }
-      .magazine-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 1.5rem;
+      .story-slider-track {
+        padding-left: 1.2rem !important;
+        padding-right: 1.2rem !important;
+        gap: 1.0rem !important;
+        padding-bottom: 1.4rem !important;
       }
-      .magazine-card {
-        height: 380px;
+      .story-slide-card {
+        flex: 0 0 82vw !important;
+        width: 82vw !important;
+        height: 480px !important;
+        border-radius: 24px !important;
+        padding: 1.8rem 1.4rem !important;
+      }
+      .story-card-title {
+        font-size: 1.35rem !important;
+        font-weight: 900 !important;
+      }
+      .story-card-desc {
+        font-size: 0.88rem !important;
+      }
+      .story-slide-card:nth-child(1) .story-card-bg {
+        object-position: center 46% !important;
+      }
+      .story-slide-card:nth-child(2) .story-card-bg {
+        object-position: center 46% !important;
+      }
+      .story-slide-card:nth-child(3) .story-card-bg {
+        object-position: center 48% !important;
       }
       .rhythm-archive-grid {
         grid-template-columns: minmax(0, 1fr);
@@ -1753,8 +1841,9 @@
 
       /* Mobile First Screen Hero: Title, Sub, Buttons & Rings styled to match reference */
       .hero-section {
-        min-height: unset;
-        padding-top: 5.0rem !important;
+        min-height: calc(100dvh - 105px) !important;
+        min-height: calc(100vh - 105px) !important;
+        padding-top: 4.8rem !important;
         padding-bottom: 1.0rem !important;
         display: flex;
         flex-direction: column;
@@ -1783,7 +1872,7 @@
         font-weight: 600 !important;
       }
       .hero-title {
-        font-size: clamp(2.32rem, 8.0vw, 2.62rem) !important;
+        font-size: clamp(2.57rem, 8.5vw, 2.87rem) !important;
         font-weight: 900 !important;
         line-height: 1.18 !important;
         letter-spacing: -0.035em !important;
@@ -1852,19 +1941,20 @@
 
       /* Unified Section Mobile Padding, Head, Titles & Descs */
       .section-wrap, #sleep-share.section-wrap, #heartbeat-send.section-wrap, #sleep-garden.section-wrap {
-        padding: 3.5rem 0 !important;
+        padding: 5.2rem 0 4.5rem !important;
       }
       .section-head, #sleep-share .section-head, #heartbeat-send .section-head, #sleep-garden .section-head {
-        margin-bottom: 1.8rem !important;
+        padding-top: 1.0rem !important;
+        margin-bottom: 2.0rem !important;
         text-align: center !important;
         margin-left: auto !important;
         margin-right: auto !important;
       }
       .gradient-pill {
-        margin-bottom: 0.75rem !important;
+        margin-bottom: 1.0rem !important;
       }
       .section-title, #sleep-share .section-title, #heartbeat-send .section-title, #sleep-garden .section-title {
-        font-size: 1.92rem !important;
+        font-size: 2.17rem !important;
         font-weight: 900 !important;
         line-height: 1.28 !important;
         margin: 0 0 0.75rem 0 !important;
@@ -1998,7 +2088,7 @@
         max-width: 220px;
       }
       .cta-title {
-        font-size: 2.17rem !important;
+        font-size: 2.42rem !important;
         font-weight: 900 !important;
       }
 
@@ -2438,47 +2528,57 @@
           </section>
 
           <!-- 04. SECTION: MOMENTS & STORIES (순간과 이야기) -->
-          <section class="section-wrap" id="experience">
+          <section class="section-wrap" id="experience" style="overflow-x: clip;">
             <div class="container">
-              <div class="section-head" style="text-align:center; margin:0 auto 3.2rem;">
+              <div class="section-head">
                 <span class="gradient-pill">${t('04 / 순간과 이야기', '04 / ふたりの瞬間と記録')}</span>
                 <h2 class="section-title">${t('함께한 모든 순간이<br><span class="gradient-text">둘만의 이야기가 돼요.</span>', 'ふたりで重ねた瞬間が、<br><span class="gradient-text">かけがえのない記憶になる。</span>')}</h2>
                 <p class="section-desc">${t('둘만의 작은 신호들이 쌓여 하나의 특별한 궤적이 됩니다.', '小さなサインの積み重ねが、ふたりだけの特別な軌跡になります。')}</p>
               </div>
+            </div>
 
-              <div class="magazine-grid">
+            <!-- Wide Horizontal Story Slider (Spans full viewport width, uncropped by container) -->
+            <div class="story-slider-outer">
+              <div class="story-slider-track" id="storySliderTrack">
                 <!-- Card 1 -->
-                <div class="magazine-card">
-                  <img class="magazine-card-bg" src="/assets/story-moment-rain.webp" alt="${t('비 내리는 밤 손을 맞잡은 커플', '雨の夜、手を繋ぐカップル')}">
-                  <div class="magazine-card-gradient"></div>
-                  <div class="magazine-card-content">
-                    <div class="magazine-tag red">${t('심박의 순간', '鼓動の瞬間')}</div>
-                    <h3 class="magazine-card-title">${t('비 내리는 밤, 손끝으로 전해진 온기', '雨の夜、指先に伝わる温もり')}</h3>
-                    <p class="magazine-card-desc">${t('말하지 않아도 알 수 있는 심박의 미세한 떨림.', '言葉がなくても伝わる、かすかな鼓動のゆらぎ。')}</p>
+                <div class="story-slide-card" data-index="0">
+                  <img class="story-card-bg" src="/assets/story-moment-rain.webp" alt="${t('비 내리는 밤 손을 맞잡은 커플', '雨の夜、手を繋ぐカップル')}">
+                  <div class="story-card-gradient"></div>
+                  <div class="story-card-content">
+                    <div class="story-tag red">${t('심박의 순간', '鼓動の瞬間')}</div>
+                    <h3 class="story-card-title">${t('비 내리는 밤, 손끝으로 전해진 온기', '雨の夜、指先に伝わる温もり')}</h3>
+                    <p class="story-card-desc">${t('말하지 않아도 알 수 있는 심박의 미세한 떨림.', '言葉がなくても伝わる、かすかな鼓動のゆらぎ。')}</p>
                   </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="magazine-card">
-                  <img class="magazine-card-bg" src="/assets/story-moment-morning.webp" alt="${t('아침의 따뜻한 커피', '朝のあたたかいコーヒー')}">
-                  <div class="magazine-card-gradient"></div>
-                  <div class="magazine-card-content">
-                    <div class="magazine-tag">${t('수면의 기록', '睡眠の記録')}</div>
-                    <h3 class="magazine-card-title">${t('서로 다른 아침, 같은 안부', '離れた朝でも、同じ挨拶')}</h3>
-                    <p class="magazine-card-desc">${t('잠든 시간의 평온함을 나누며 시작하는 하루.', '穏やかな夜の時間を共有して始まる一日。')}</p>
+                <div class="story-slide-card" data-index="1">
+                  <img class="story-card-bg" src="/assets/story-moment-morning.webp" alt="${t('아침의 따뜻한 커피', '朝のあたたかいコーヒー')}">
+                  <div class="story-card-gradient"></div>
+                  <div class="story-card-content">
+                    <div class="story-tag">${t('수면의 기록', '睡眠の記録')}</div>
+                    <h3 class="story-card-title">${t('서로 다른 아침, 같은 안부', '離れた朝でも、同じ挨拶')}</h3>
+                    <p class="story-card-desc">${t('잠든 시간의 평온함을 나누며 시작하는 하루.', '穏やかな夜の時間を共有して始まる一日。')}</p>
                   </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="magazine-card">
-                  <img class="magazine-card-bg" src="/assets/story-moment-calendar.webp" alt="${t('캘린더에 기념일을 기록하는 순간', 'カレンダーに記念日を記す瞬間')}">
-                  <div class="magazine-card-gradient"></div>
-                  <div class="magazine-card-content">
-                    <div class="magazine-tag red">${t('둘만의 아카이브', 'ふたりのアーカイブ')}</div>
-                    <h3 class="magazine-card-title">${t('우리가 함께 지나온 날들', 'ふたりが一緒に歩んできた日々')}</h3>
-                    <p class="magazine-card-desc">${t('캘린더에 조용히 새겨지는 둘만의 기념일.', 'カレンダーにそっと刻まれる特別な記念日。')}</p>
+                <div class="story-slide-card" data-index="2">
+                  <img class="story-card-bg" src="/assets/story-moment-calendar.webp" alt="${t('캘린더에 기념일을 기록하는 순간', 'カレンダーに記念日を記す瞬間')}">
+                  <div class="story-card-gradient"></div>
+                  <div class="story-card-content">
+                    <div class="story-tag red">${t('둘만의 아카이브', 'ふたりのアーカイブ')}</div>
+                    <h3 class="story-card-title">${t('우리가 함께 지나온 날들', 'ふたりが一緒に歩んできた日々')}</h3>
+                    <p class="story-card-desc">${t('캘린더에 조용히 새겨지는 둘만의 기념일.', 'カレンダーにそっと刻まれる特別な記念日。')}</p>
                   </div>
                 </div>
+              </div>
+
+              <!-- Pagination Dots ONLY below slider -->
+              <div class="story-slider-pagination" id="storySliderDots">
+                <button class="story-slider-dot active" aria-label="1번 슬라이드" data-slide="0"></button>
+                <button class="story-slider-dot" aria-label="2번 슬라이드" data-slide="1"></button>
+                <button class="story-slider-dot" aria-label="3번 슬라이드" data-slide="2"></button>
               </div>
             </div>
           </section>
@@ -2592,7 +2692,7 @@
 
               <div class="product-pills-row">
                 <span class="gradient-pill">☾ ${t('수면 요약 공유', '睡眠要約の共有')}</span>
-                <span class="gradient-pill red">♡ ${t('심박 보내기', '心拍の送信')}</span>
+                <span class="gradient-pill">♡ ${t('심박 보내기', '心拍の送信')}</span>
                 <span class="gradient-pill">⏱ ${t('둘만의 기록', 'ふたりの記録')}</span>
               </div>
 
@@ -2777,6 +2877,60 @@
 
       // Typing motion for sleep share
       initTyping();
+
+      // Horizontal wide story slider
+      initStorySlider();
+    }
+
+    function initStorySlider() {
+      const track = $('#storySliderTrack');
+      const dots = $$('#storySliderDots .story-slider-dot');
+      if (!track || dots.length === 0) return;
+
+      const cards = $$('.story-slide-card');
+
+      // Click dot to scroll to corresponding card
+      dots.forEach((dot, index) => {
+        dot.onclick = () => {
+          if (cards[index]) {
+            const cardLeft = cards[index].offsetLeft;
+            const trackPaddingLeft = parseFloat(window.getComputedStyle(track).paddingLeft) || 0;
+            track.scrollTo({
+              left: cardLeft - trackPaddingLeft,
+              behavior: 'smooth'
+            });
+          }
+        };
+      });
+
+      // Update active dot on scroll
+      let scrollTimer = null;
+      track.addEventListener('scroll', () => {
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          const scrollPos = track.scrollLeft;
+          const trackPaddingLeft = parseFloat(window.getComputedStyle(track).paddingLeft) || 0;
+          let closestIndex = 0;
+          let minDiff = Infinity;
+
+          cards.forEach((card, index) => {
+            const cardLeft = card.offsetLeft - trackPaddingLeft;
+            const diff = Math.abs(scrollPos - cardLeft);
+            if (diff < minDiff) {
+              minDiff = diff;
+              closestIndex = index;
+            }
+          });
+
+          dots.forEach((dot, idx) => {
+            if (idx === closestIndex) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        }, 50);
+      }, { passive: true });
     }
 
     function initTyping() {
