@@ -1,0 +1,2796 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SAI — 둘만을 위한 스마트링, 사이 (Teaser 4)</title>
+  <meta name="description" content="잠든 밤은 나누고, 뛰는 지금은 보내요. 한국과 일본의 20대 커플을 위한 감성 스마트링, SAI.">
+  <meta property="og:title" content="SAI — 둘만을 위한 스마트링, 사이">
+  <meta property="og:description" content="둘만 아는 연결. 둘이 함께 쓰는 감성 커플 스마트링.">
+  <meta property="og:image" content="/assets/product-rings-duo-clean.webp">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Pretendard:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Pure White Tone Palette */
+      --bg-page: #ffffff;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #ffffff;
+      --bg-dark: #ffffff;
+      --bg-deep: #fafafa;
+      --bg-glass: rgba(255, 255, 255, 0.95);
+      --border-subtle: rgba(0, 0, 0, 0.07);
+      --border-card: rgba(0, 0, 0, 0.08);
+      --border-glow-violet: rgba(124, 58, 237, 0.16);
+      --border-glow-red: rgba(229, 72, 87, 0.22);
+
+      /* Refined Emotional Accents (Soft Warm Rose & Sage) */
+      --red-primary: #e54857;
+      --red-light: #ea5b69;
+      --red-neon: #e54857;
+      --red-glow: rgba(229, 72, 87, 0.16);
+      --red-soft-bg: #fff1f3;
+
+      --violet-primary: #7c3aed;
+      --violet-light: #6d28d9;
+      --violet-neon: #7c3aed;
+      --violet-glow: rgba(124, 58, 237, 0.12);
+      --violet-soft-bg: #f5f3ff;
+
+      --gradient-electric: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+      --gradient-electric-hover: linear-gradient(135deg, #27272a 0%, #3f3f46 100%);
+      --gradient-coral: linear-gradient(135deg, #e54857 0%, #fa6b78 100%);
+      --gradient-coral-hover: linear-gradient(135deg, #d63d4c 0%, #f05967 100%);
+      --gradient-text: linear-gradient(135deg, #18181b 0%, #e54857 100%);
+
+      /* High Legibility Typography */
+      --text-white: #18181b;
+      --text-dark: #18181b;
+      --text-muted: #52525b;
+      --text-subtle: #71717a;
+      --text-violet-tint: #4c1d95;
+      --text-red-tint: #e54857;
+
+      /* Elegant Warm Shadows */
+      --shadow-electric: 0 10px 24px rgba(24, 24, 27, 0.15);
+      --shadow-coral: 0 10px 24px rgba(229, 72, 87, 0.22);
+      --shadow-card: 0 12px 36px rgba(25, 20, 15, 0.05), 0 2px 8px rgba(25, 20, 15, 0.03);
+      --shadow-float: 0 16px 40px rgba(25, 20, 15, 0.08);
+
+      --font-sans: 'Pretendard', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      width: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg-page);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+    }
+
+    /* Ambient atmospheric soft subtle glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -15vw;
+      left: 10vw;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(245, 245, 250, 0.4) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(80px);
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      top: 30vh;
+      right: -10vw;
+      width: 55vw;
+      height: 55vw;
+      background: radial-gradient(circle, rgba(254, 242, 242, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(90px);
+    }
+
+    h1, h2, h3, h4, p, span, blockquote {
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    :lang(ja) {
+      word-break: normal;
+      line-break: strict;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background: none;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container, .container-wide {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+    }
+
+    /* Text Accent */
+    .gradient-text {
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    .hero-accent {
+      background: linear-gradient(135deg, #4a1922 0%, #d84555 50%, #e54857 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Badges & Pills */
+    .gradient-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.42rem 1.15rem;
+      border-radius: 9999px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-dark);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      margin-bottom: 1.1rem;
+    }
+
+    .gradient-pill.red {
+      background: var(--red-soft-bg);
+      border-color: rgba(229, 72, 87, 0.25);
+      color: var(--red-primary);
+      box-shadow: 0 2px 8px rgba(229, 72, 87, 0.06);
+    }
+
+    /* Buttons */
+    .btn-gradient {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--gradient-electric);
+      color: #ffffff;
+      padding: 1.05rem 2.2rem;
+      border-radius: 9999px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      box-shadow: var(--shadow-electric);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, filter 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-gradient::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-electric-hover);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+    .btn-gradient span {
+      position: relative;
+      z-index: 1;
+    }
+    .btn-gradient:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 16px 36px rgba(24, 24, 27, 0.25);
+    }
+    .btn-gradient:hover::before {
+      opacity: 1;
+    }
+    .btn-gradient:active {
+      transform: translateY(0);
+    }
+
+    .btn-coral {
+      background: var(--gradient-coral) !important;
+      box-shadow: var(--shadow-coral) !important;
+    }
+    .btn-coral:hover {
+      box-shadow: 0 16px 36px rgba(229, 72, 87, 0.35) !important;
+    }
+
+    .btn-glass {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ffffff;
+      color: var(--text-dark);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      padding: 1.05rem 2.0rem;
+      border-radius: 9999px;
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-glass:hover {
+      background: #fdfdfd;
+      border-color: rgba(0, 0, 0, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* GNB Header */
+    .teaser-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 249, 246, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 1.0rem 0;
+      transition: background 0.3s ease;
+    }
+    .teaser-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .brand-logo:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+    .brand-logo img, .brand-logo-img {
+      height: 34px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover {
+      color: var(--text-dark);
+    }
+    .lang-toggle {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+      padding: 0.42rem 0.95rem;
+      border-radius: 9999px;
+      letter-spacing: 0.06em;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+    }
+    .lang-toggle:hover {
+      border-color: rgba(0, 0, 0, 0.25);
+      transform: translateY(-1px);
+    }
+    .nav-btn-sm {
+      padding: 0.65rem 1.4rem;
+      font-size: 0.9rem;
+    }
+
+    /* 01. HERO SECTION */
+    .hero-section {
+      position: relative;
+      min-height: clamp(660px, 90vh, 850px);
+      display: flex;
+      align-items: center;
+      padding: 6.0rem 0 3.5rem;
+      overflow: hidden;
+      background: var(--bg-page);
+    }
+
+    /* Desktop Hero Stage */
+    .hero-content-container {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 3.5rem;
+    }
+    .hero-content-left {
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .hero-eyebrow {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #666666;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.9rem;
+      display: inline-block;
+    }
+    .hero-title {
+      font-size: clamp(3.0rem, 5.2vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      margin: 0 0 1.2rem 0;
+      color: #1a1a1a;
+      text-align: left;
+    }
+    .hero-title .hero-accent {
+      background: linear-gradient(135deg, #4a1922 0%, #d84555 50%, #e54857 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      font-style: normal;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      line-height: 1.68;
+      color: #4a4a4a;
+      margin-bottom: 2.2rem;
+      max-width: 490px;
+      text-align: left;
+    }
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 1rem;
+      align-items: center;
+    }
+    .hero-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background-color: #18181b;
+      color: #ffffff;
+      padding: 0.88rem 1.85rem;
+      font-size: 0.98rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      border: 1px solid #18181b;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .hero-btn-primary:hover {
+      background-color: #27272a;
+      border-color: #27272a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+    }
+    .hero-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+      color: #18181b;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      padding: 0.88rem 1.85rem;
+      font-size: 0.98rem;
+      font-weight: 500;
+      border-radius: 9999px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .hero-btn-secondary:hover {
+      background-color: #f4f4f5;
+      border-color: rgba(0, 0, 0, 0.28);
+      transform: translateY(-2px);
+      color: #000000;
+    }
+
+    /* Ritual Bar below Hero */
+    .teaser-ritual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1.15rem 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.45);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .teaser-ritual span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .teaser-ritual i {
+      font-style: normal;
+      opacity: 0.4;
+    }
+
+    /* Right Art Stage with Live Ring Illustration & Motion */
+    .hero-art {
+      position: relative;
+      flex: 1;
+      max-width: 520px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-art-img {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: contain !important;
+      filter: drop-shadow(0 24px 44px rgba(35, 45, 30, 0.08));
+      animation: heroRingFloat 7s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+    @keyframes heroRingFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-9px) scale(1.008); }
+    }
+
+    /* Floating notes: Glassmorphism + 20px rounded + distinct gentle micro-motion */
+    .hero-art .floating-note {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 0.85rem 1.35rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      box-shadow: 0 12px 32px rgba(35, 45, 30, 0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      z-index: 3;
+      transition: transform 0.3s ease;
+    }
+    .hero-art .floating-note:hover {
+      transform: scale(1.03);
+    }
+    .hero-art .floating-note.top {
+      top: 5%;
+      left: -15px;
+      border-color: rgba(124, 58, 237, 0.2);
+      animation: floatTopNote 6s ease-in-out infinite alternate;
+    }
+    .hero-art .floating-note.bottom {
+      bottom: 7%;
+      right: -10px;
+      border-color: rgba(229, 72, 87, 0.22);
+      animation: floatBottomNote 6.5s ease-in-out infinite alternate;
+    }
+    .hero-art .floating-note small {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-soft);
+    }
+    @keyframes floatTopNote {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-8px) rotate(0.4deg); }
+    }
+    @keyframes floatBottomNote {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(8px) rotate(-0.4deg); }
+    }
+    .pill-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .pill-icon.violet {
+      background: var(--violet-soft-bg);
+      color: var(--violet-primary);
+    }
+    .pill-icon.red {
+      background: var(--red-soft-bg);
+      color: var(--red-primary);
+    }
+    .pill-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .pill-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .pill-sub {
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+    }
+
+    @keyframes floatSmooth {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-8px); }
+    }
+
+    /* 02. SECTION: SLEEP SHARE */
+    .section-wrap {
+      padding: 5.5rem 0;
+      position: relative;
+      scroll-margin-top: 75px;
+      background: #ffffff;
+    }
+    .section-head {
+      max-width: 680px;
+      margin-bottom: 3.0rem;
+    }
+    .section-title {
+      font-size: clamp(2.0rem, 3.2vw, 2.7rem);
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      margin: 0 0 0.9rem 0;
+      color: var(--text-dark);
+    }
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Typing Message Bubble */
+    .typing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f3e8ff;
+      border: 1px solid #d8b4fe;
+      color: #6b21a8;
+      padding: 0.2rem 0.85rem;
+      border-radius: 9999px;
+      font-weight: 800;
+      font-size: 0.95em;
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.08);
+      vertical-align: baseline;
+    }
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.05em;
+      background-color: #7c3aed;
+      animation: blinkCursor 0.85s steps(1) infinite;
+      vertical-align: middle;
+    }
+    @keyframes blinkCursor {
+      50% { opacity: 0; }
+    }
+
+    /* Cinematic Sleep Share Container (Extra Large 16:9) */
+    .cinematic-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #11121b;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow-card);
+      min-height: 520px;
+      display: flex;
+      align-items: flex-end;
+    }
+    .cinematic-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.88);
+      transition: transform 0.6s ease;
+    }
+    .cinematic-frame:hover .cinematic-img {
+      transform: scale(1.03);
+    }
+    .cinematic-overlay-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8, 8, 12, 0.1) 0%, rgba(8, 8, 12, 0.75) 100%);
+      pointer-events: none;
+    }
+
+    /* Glass Status Card inside Cinematic Frame */
+    .sleep-overlay-card {
+      position: relative;
+      z-index: 2;
+      margin: 2.5rem;
+      max-width: 440px;
+      background: rgba(14, 15, 24, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(124, 58, 237, 0.35);
+      border-radius: 28px;
+      padding: 1.8rem 2.0rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(124, 58, 237, 0.15);
+      color: #ffffff;
+    }
+    .sleep-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+    .sleep-card-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #ddd6fe;
+    }
+    .sleep-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #a855f7;
+      background: rgba(124, 58, 237, 0.2);
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(124, 58, 237, 0.4);
+    }
+    .sleep-card-hours {
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+    .sleep-card-status-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .sleep-card-status-row strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Privacy Banner */
+    .privacy-tag-box {
+      margin-top: 1.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.85rem 1.4rem;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      font-size: 0.90rem;
+      color: var(--text-muted);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+    .privacy-icon {
+      color: #7c3aed;
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+    .privacy-tag-box strong {
+      color: var(--text-dark);
+    }
+
+    /* 03. SECTION: SEND A BEAT */
+    .beat-studio-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: 3.5rem;
+      align-items: center;
+      width: 100%;
+    }
+    .beat-card-wrap {
+      position: relative;
+      background: radial-gradient(circle at 50% 30%, rgba(229, 72, 87, 0.05) 0%, #ffffff 80%);
+      border: 1px solid rgba(229, 72, 87, 0.20);
+      border-radius: 36px;
+      padding: 2.8rem 2.4rem;
+      box-shadow: var(--shadow-card), 0 0 35px rgba(229, 72, 87, 0.06);
+      text-align: center;
+      overflow: hidden;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Pulse Expanding Wave on Beat Send */
+    .beat-ripple {
+      position: absolute;
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1;
+    }
+    .beat-ripple.active {
+      animation: rippleWave 1.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+    }
+    @keyframes rippleWave {
+      0% {
+        width: 120px;
+        height: 120px;
+        opacity: 0.85;
+        border: 2px solid var(--red-primary);
+        box-shadow: 0 0 25px rgba(229, 72, 87, 0.4);
+      }
+      100% {
+        width: 550px;
+        height: 550px;
+        opacity: 0;
+        border: 1px solid rgba(229, 72, 87, 0.2);
+        box-shadow: 0 0 50px transparent;
+      }
+    }
+
+    .heart-stage-wrap {
+      position: relative;
+      z-index: 2;
+      margin: 1.2rem 0;
+    }
+    .heart-3d-visual {
+      width: 130px;
+      height: 130px;
+      object-fit: contain;
+      margin: 0 auto;
+      filter: drop-shadow(0 15px 30px rgba(229, 72, 87, 0.3));
+      animation: heartbeatPulse 1.6s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+      transform-origin: center;
+    }
+    @keyframes heartbeatPulse {
+      0% {
+        transform: scale(1);
+        filter: drop-shadow(0 12px 25px rgba(229, 72, 87, 0.25));
+      }
+      12% {
+        transform: scale(1.10);
+        filter: drop-shadow(0 18px 35px rgba(229, 72, 87, 0.45));
+      }
+      24% {
+        transform: scale(1);
+        filter: drop-shadow(0 12px 25px rgba(229, 72, 87, 0.25));
+      }
+      36% {
+        transform: scale(1.15);
+        filter: drop-shadow(0 20px 40px rgba(229, 72, 87, 0.5));
+      }
+      65% {
+        transform: scale(1);
+        filter: drop-shadow(0 12px 25px rgba(229, 72, 87, 0.25));
+      }
+      100% {
+        transform: scale(1);
+        filter: drop-shadow(0 12px 25px rgba(229, 72, 87, 0.25));
+      }
+    }
+
+    .bpm-display {
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--text-dark);
+      margin: 1.0rem 0 0.4rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 8px;
+    }
+    .bpm-unit {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--red-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .beat-status-msg {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      min-height: 26px;
+      margin-bottom: 3.4rem;
+      position: relative;
+      z-index: 12;
+      transition: color 0.3s ease;
+    }
+    .beat-status-msg.sent {
+      color: var(--red-primary);
+      font-weight: 700;
+    }
+
+    /* Send Button Interactive & Tooltip */
+    .beat-btn-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .beat-tooltip {
+      position: absolute;
+      bottom: calc(100% + 4px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--red-primary);
+      color: #fff;
+      padding: 0.26rem 0.72rem;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      box-shadow: 0 6px 16px rgba(229, 72, 87, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 10;
+      animation: tooltipFloat 2.2s ease-in-out infinite alternate;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .beat-tooltip .tooltip-badge {
+      font-size: 0.72rem;
+      line-height: 1;
+    }
+    .beat-tooltip .tooltip-text {
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .beat-tooltip .tooltip-arrow {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid var(--red-primary);
+    }
+    @keyframes tooltipFloat {
+      0% { transform: translate(-50%, 0); }
+      100% { transform: translate(-50%, -2px); }
+    }
+    .btn-beat-send {
+      width: 100%;
+      max-width: 320px;
+      padding: 1.1rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      border-radius: 9999px;
+      background: var(--red-primary);
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(229, 72, 87, 0.35);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      z-index: 5;
+    }
+    .btn-beat-send:hover {
+      background: #d63d4c;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 16px 35px rgba(229, 72, 87, 0.45);
+    }
+    .btn-beat-send:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* 3-Step Flow Pills */
+    .beat-steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+      margin-top: 1.8rem;
+      z-index: 2;
+    }
+    .beat-step-pill {
+      background: #FAF9F6;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      padding: 0.65rem 0.5rem;
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+      transition: all 0.25s ease;
+    }
+    .beat-step-pill.active {
+      background: var(--red-soft-bg);
+      border-color: rgba(229, 72, 87, 0.35);
+      color: var(--red-primary);
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(229, 72, 87, 0.1);
+    }
+
+    /* 03. SECTION: SLEEP GARDEN */
+    .garden-studio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .garden-media-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+    .garden-rings-img {
+      width: 100%;
+      max-width: 580px;
+      height: auto !important;
+      aspect-ratio: 3 / 2 !important;
+      object-fit: contain !important;
+      display: block;
+      filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.06));
+      transition: transform 0.4s ease;
+    }
+    .garden-rings-img:hover {
+      transform: translateY(-4px);
+    }
+
+    /* 04. SECTION: LARGE MAGAZINE CARDS */
+    .magazine-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin-top: 3.5rem;
+    }
+    .magazine-card {
+      position: relative;
+      border-radius: 32px;
+      overflow: hidden;
+      background: #FAF9F6;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow-card);
+      height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.2rem;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+    .magazine-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    }
+    .magazine-card-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85);
+      transition: transform 0.5s ease;
+    }
+    .magazine-card:hover .magazine-card-bg {
+      transform: scale(1.04);
+      filter: brightness(0.9);
+    }
+    .magazine-card:nth-child(3) .magazine-card-bg {
+      object-position: center 36%;
+    }
+    .magazine-card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(10, 10, 14, 0.88) 100%);
+      pointer-events: none;
+    }
+    .magazine-card-content {
+      position: relative;
+      z-index: 2;
+    }
+    .magazine-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ddd6fe;
+      margin-bottom: 0.6rem;
+    }
+    .magazine-tag.red {
+      color: #fecdd3;
+    }
+    .magazine-card-title {
+      font-size: 1.42rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+      color: #ffffff;
+    }
+    .magazine-card-desc {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.45;
+    }
+
+    /* 04-A. OUR RHYTHM ARCHIVE */
+    .rhythm-archive-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: stretch;
+      margin-top: 3.0rem;
+    }
+    .rhythm-left-col {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      height: 100%;
+    }
+    .rhythm-photo-card {
+      position: relative;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow-card);
+      width: 100%;
+      height: 100%;
+      min-height: 480px;
+      flex: 1;
+      display: flex;
+    }
+    .rhythm-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .rhythm-photo-card:hover .rhythm-photo-img {
+      transform: scale(1.03);
+    }
+    .calendar-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 32px;
+      padding: 2.4rem 2.2rem;
+      box-shadow: var(--shadow-card);
+    }
+    .calendar-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.8rem;
+    }
+    .calendar-title-tag {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .calendar-month {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+    .cal-weekday {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-subtle);
+      padding-bottom: 0.6rem;
+    }
+    .cal-day {
+      min-height: 42px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      border-radius: 12px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .cal-day:hover {
+      background: #FAF9F6;
+    }
+    .cal-day.empty {
+      pointer-events: none;
+      opacity: 0;
+    }
+    .cal-day.active {
+      background: var(--red-primary);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(229, 72, 87, 0.35);
+    }
+    .cal-day.cycle {
+      border: 1px dashed rgba(229, 72, 87, 0.45);
+      background: var(--red-soft-bg);
+      color: var(--red-primary);
+    }
+    .cal-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--red-primary);
+      position: absolute;
+      bottom: 4px;
+    }
+    .cal-note-card {
+      background: #FAF9F6;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 20px;
+      padding: 1.2rem 1.4rem;
+      margin-top: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .cal-note-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--red-soft-bg);
+      color: var(--red-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .cal-note-meta {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-subtle);
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+    }
+    .cal-note-title {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+    .cal-note-desc {
+      font-size: 0.85rem;
+      color: var(--red-primary);
+      font-weight: 600;
+    }
+
+    /* 04-C. PRODUCT & MEMBERSHIP */
+    .product-pills-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.0rem;
+      margin: 2.0rem 0 3.5rem;
+    }
+    .product-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .product-glass-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 36px;
+      padding: 3.2rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    }
+    .product-card-head {
+      margin-bottom: 2.0rem;
+      text-align: left;
+    }
+    .product-card-num {
+      font-size: 0.80rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--red-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .product-card-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.02em;
+    }
+    .product-card-desc {
+      font-size: 0.96rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .product-card-media {
+      margin-top: auto;
+      padding-top: 2.0rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+    }
+    .product-duo-ring-img {
+      max-width: 290px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: contain !important;
+      filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.08));
+      animation: floatSmooth 5.5s ease-in-out infinite alternate;
+    }
+    .product-glass-card:nth-child(2) .product-card-media {
+      margin-top: 1.2rem;
+      padding-top: 1.0rem;
+      padding-bottom: 2.8rem;
+      min-height: 220px;
+    }
+    .product-heart-img {
+      max-width: 135px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 35px rgba(229, 72, 87, 0.25));
+      animation: heartbeatPulse 1.6s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+      transform-origin: center center;
+    }
+
+    /* 04-D. QUESTIONS (FAQ) */
+    #questions .section-head {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .faq-accordion-list {
+      max-width: 820px;
+      margin: 3.0rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .faq-item:hover {
+      border-color: rgba(0, 0, 0, 0.18);
+    }
+    .faq-item.open {
+      border-color: rgba(229, 72, 87, 0.35);
+      background: #ffffff;
+      box-shadow: 0 8px 25px rgba(229, 72, 87, 0.08);
+    }
+    .faq-question-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 1.5rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: left;
+      gap: 1.2rem;
+    }
+    .faq-toggle-icon {
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--red-primary);
+      transition: transform 0.3s ease;
+      line-height: 1;
+    }
+    .faq-item.open .faq-toggle-icon {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 1.8rem;
+      font-size: 0.96rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      text-align: left;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 250px;
+      padding: 0 1.8rem 1.6rem;
+    }
+
+    /* 05. SECTION: FINAL CONVERSION */
+    .cta-banner-wrap {
+      margin: 6.0rem 0 4.0rem;
+      position: relative;
+      border-radius: 40px;
+      background: linear-gradient(180deg, #ffffff 0%, #fff7f8 100%);
+      border: 1px solid rgba(229, 72, 87, 0.20);
+      padding: 5.0rem 2.0rem;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: var(--shadow-card), 0 20px 60px rgba(229, 72, 87, 0.06);
+    }
+    .cta-ring-img {
+      max-width: 290px;
+      margin: 0 auto 2.2rem;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: contain !important;
+      filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.08));
+      animation: floatSmooth 5s ease-in-out infinite alternate;
+    }
+    .cta-title {
+      font-size: clamp(2.4rem, 5.0vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      color: var(--text-dark);
+    }
+    .cta-desc {
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      line-height: 1.5;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 2.4rem;
+    }
+
+    /* Footer */
+    .teaser-footer {
+      padding: 3.5rem 0 5.0rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      font-size: 0.88rem;
+      color: var(--text-subtle);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-logo-img {
+      height: 24px;
+      width: auto;
+      display: block;
+      opacity: 0.9;
+      object-fit: contain;
+    }
+
+    /* Modal Styling */
+    dialog#modal,
+    dialog#modal * {
+      box-sizing: border-box;
+    }
+    dialog#modal {
+      border: none;
+      border-radius: 28px;
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 1.8rem 2.0rem 2.0rem;
+      max-width: 520px;
+      width: calc(100% - 2rem);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.16);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      z-index: 1000;
+    }
+    dialog#modal::backdrop {
+      background: rgba(15, 15, 20, 0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #FAF9F6;
+      color: var(--text-dark);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close-btn:hover {
+      background: #f0eee9;
+    }
+    .modal-head {
+      margin-bottom: 0.9rem;
+    }
+    .modal-head h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin: 0.35rem 0 0.2rem;
+      letter-spacing: -0.025em;
+      color: var(--text-dark);
+    }
+    .modal-head p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .form-group {
+      margin-bottom: 0.85rem;
+      text-align: left;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.7rem 0.95rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #fafafa;
+      color: var(--text-dark);
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-input:focus {
+      border-color: var(--red-primary);
+      box-shadow: 0 0 12px rgba(229, 72, 87, 0.2);
+    }
+
+    /* Unfolded Selection Chips & Cards */
+    .choice-pills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .choice-pill-item {
+      position: relative;
+      cursor: pointer;
+    }
+    .choice-pill-item input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .choice-pill-item span {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 0.85rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #fafafa;
+      color: var(--text-dark);
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .choice-pill-item input[type="radio"]:checked + span {
+      background: var(--text-dark);
+      color: #ffffff;
+      border-color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(24, 24, 27, 0.15);
+    }
+    .choice-pill-item:hover span {
+      border-color: rgba(0, 0, 0, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .choice-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 7px;
+    }
+    .choice-card-item {
+      position: relative;
+      cursor: pointer;
+    }
+    .choice-card-item input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .choice-card-item .card-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.6rem 0.75rem;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      background: #fafafa;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .choice-card-item:hover .card-inner {
+      border-color: rgba(0, 0, 0, 0.25);
+      background: #ffffff;
+      transform: translateY(-1px);
+    }
+    .choice-card-item input[type="radio"]:checked + .card-inner {
+      border-color: var(--red-primary);
+      background: var(--red-soft-bg);
+      box-shadow: 0 4px 14px rgba(229, 72, 87, 0.12);
+    }
+    .choice-card-item .card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.88rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+    }
+    .choice-card-item .card-texts {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .choice-card-item .card-texts strong {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.25;
+    }
+    .choice-card-item .card-texts small {
+      font-size: 0.70rem;
+      color: var(--text-subtle);
+      margin-top: 2px;
+    }
+
+    .form-checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      line-height: 1.35;
+    }
+    .form-checkbox-label input {
+      accent-color: var(--red-primary);
+      margin-top: 3px;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 960px) {
+      .hero-content-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2.0rem;
+      }
+      .hero-content-left {
+        max-width: 100%;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-title, .hero-desc {
+        text-align: center;
+      }
+      .hero-cta-group {
+        justify-content: center;
+      }
+      .teaser-ritual {
+        gap: 1.0rem;
+        font-size: 0.85rem;
+      }
+      .hero-art {
+        width: 100%;
+        max-width: 440px;
+        flex: none;
+      }
+      .beat-studio-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.2rem;
+      }
+      .magazine-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+      }
+      .magazine-card {
+        height: 380px;
+      }
+      .rhythm-archive-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.0rem;
+      }
+      .rhythm-photo-card {
+        min-height: unset;
+        height: 300px;
+        flex: none;
+      }
+      .product-cards-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.0rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container, .container-wide {
+        padding: 0 1.25rem;
+      }
+      .nav-link {
+        display: none;
+      }
+      .nav-btn-sm {
+        display: none;
+      }
+      .teaser-nav-inner {
+        gap: 0.5rem;
+      }
+      .brand-logo img, .brand-logo-img {
+        height: 28px;
+        width: auto;
+      }
+      .lang-toggle {
+        padding: 0.38rem 0.8rem;
+        font-size: 0.78rem;
+      }
+
+      /* Mobile First Screen Hero: Title, Sub, Buttons & Rings styled to match reference */
+      .hero-section {
+        min-height: unset;
+        padding-top: 5.0rem !important;
+        padding-bottom: 1.0rem !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .hero-content-container {
+        gap: 0.5rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+      .hero-content-left {
+        margin: 0 auto;
+        align-items: center;
+        text-align: center;
+        max-width: 100%;
+      }
+      .hero-eyebrow {
+        font-size: 0.84rem !important;
+        color: #666666 !important;
+        margin-bottom: 0.45rem !important;
+        font-weight: 600 !important;
+      }
+      .hero-title {
+        font-size: clamp(2.15rem, 7.5vw, 2.45rem) !important;
+        line-height: 1.18 !important;
+        letter-spacing: -0.035em !important;
+        margin: 0 0 0.55rem 0 !important;
+        text-align: center !important;
+      }
+      .hero-title .hero-accent {
+        background: linear-gradient(135deg, #4a1922 0%, #d84555 50%, #e54857 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        display: inline-block !important;
+      }
+      .hero-desc {
+        font-size: 0.88rem !important;
+        line-height: 1.52 !important;
+        margin-bottom: 1.15rem !important;
+        color: #555555 !important;
+        max-width: 325px !important;
+        text-align: center !important;
+      }
+      .hero-cta-group {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.65rem;
+        width: 100%;
+        margin-bottom: 1.1rem;
+      }
+      .hero-btn-primary, .hero-btn-secondary {
+        padding: 0.68rem 1.2rem !important;
+        font-size: 0.88rem !important;
+        font-weight: 650 !important;
+        white-space: nowrap;
+      }
+      .hero-btn-primary {
+        background-color: #18181b !important;
+        border-color: #18181b !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18) !important;
+      }
+      .hero-btn-secondary {
+        background-color: #ffffff !important;
+        border: 1px solid rgba(0, 0, 0, 0.16) !important;
+        color: #18181b !important;
+      }
+      .hero-art {
+        max-width: 290px;
+        width: 100%;
+        margin: 0.2rem auto 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: none;
+      }
+      .hero-art-img {
+        max-width: 265px;
+        width: 74%;
+        height: auto;
+        aspect-ratio: 1 / 1 !important;
+        object-fit: contain !important;
+      }
+      .hero-art .floating-note {
+        display: none !important; /* Keep mobile clean and compact so all fits in 1 screen */
+      }
+
+      /* Unified Section Mobile Padding, Head, Titles & Descs */
+      .section-wrap, #sleep-share.section-wrap, #heartbeat-send.section-wrap, #sleep-garden.section-wrap {
+        padding: 3.5rem 0 !important;
+      }
+      .section-head, #sleep-share .section-head, #heartbeat-send .section-head, #sleep-garden .section-head {
+        margin-bottom: 1.8rem !important;
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .gradient-pill {
+        margin-bottom: 0.75rem !important;
+      }
+      .section-title, #sleep-share .section-title, #heartbeat-send .section-title, #sleep-garden .section-title {
+        font-size: 1.75rem !important;
+        line-height: 1.28 !important;
+        margin: 0 0 0.75rem 0 !important;
+        text-align: center !important;
+      }
+      .section-desc, #sleep-share .section-desc, #heartbeat-send .section-desc, #sleep-garden .section-desc {
+        font-size: 0.92rem !important;
+        line-height: 1.55 !important;
+        text-align: center !important;
+      }
+
+      /* Section 01 Mobile Frame */
+      #sleep-share .privacy-tag-box {
+        margin-top: 0.8rem;
+        padding: 0.6rem 0.9rem;
+        font-size: 0.80rem;
+      }
+      .cinematic-frame {
+        min-height: 380px;
+        height: auto;
+        border-radius: 24px;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        background: #11121b;
+        padding-bottom: 0;
+      }
+      .cinematic-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .sleep-overlay-card {
+        position: relative;
+        left: unset;
+        bottom: unset;
+        transform: none;
+        margin: 1.0rem;
+        padding: 1.2rem;
+        border-radius: 20px;
+        width: calc(100% - 2.0rem);
+        max-width: 100%;
+        box-sizing: border-box;
+        text-align: left;
+      }
+      .sleep-card-hours {
+        font-size: 2.2rem;
+        margin-bottom: 0.4rem;
+      }
+      .sleep-card-status-row {
+        font-size: 0.84rem;
+        padding-top: 0.6rem;
+      }
+
+      /* Section 02 Mobile Beat Tooltip Protection */
+      .mobile-break {
+        display: block;
+      }
+      .beat-card-wrap {
+        padding: 1.5rem 1.2rem;
+        min-height: unset;
+        border-radius: 24px;
+      }
+      .heart-stage-wrap {
+        margin: 0.8rem 0;
+      }
+      .heart-3d-visual {
+        width: 105px;
+        height: 105px;
+      }
+      .bpm-display {
+        font-size: 2.6rem;
+        margin: 0.6rem 0 0.2rem;
+      }
+      .beat-status-msg {
+        font-size: 0.88rem;
+        margin-bottom: 3.4rem !important;
+        position: relative;
+        z-index: 12;
+        min-height: 20px;
+      }
+      .btn-beat-send {
+        padding: 0.9rem;
+        font-size: 0.96rem;
+      }
+      .beat-steps-row {
+        margin-top: 1.2rem;
+        gap: 6px;
+      }
+      .beat-step-pill {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.72rem;
+      }
+
+      /* Section 03 Sleep Garden Mobile */
+      .garden-studio-grid {
+        grid-template-columns: 1fr;
+        gap: 2.0rem;
+        text-align: center;
+      }
+      .garden-rings-img {
+        max-width: 330px;
+        margin: 0 auto;
+        aspect-ratio: 3 / 2 !important;
+        object-fit: contain !important;
+      }
+      .product-glass-card {
+        padding: 2.2rem 1.5rem;
+        border-radius: 26px;
+      }
+      .product-card-title {
+        font-size: 1.5rem;
+      }
+      .product-duo-ring-img {
+        max-width: 220px;
+      }
+      .calendar-card {
+        padding: 1.6rem 1.2rem;
+      }
+      .cal-day {
+        min-height: 36px;
+        font-size: 0.85rem;
+      }
+      .cta-banner-wrap {
+        padding: 3.5rem 1.2rem;
+        border-radius: 28px;
+      }
+      .cta-ring-img {
+        max-width: 220px;
+      }
+      .cta-title {
+        font-size: 2.0rem;
+      }
+
+      /* Mobile Modal Polish */
+      dialog#modal {
+        padding: 1.4rem 1.1rem 1.6rem !important;
+        border-radius: 22px !important;
+        max-height: 88vh !important;
+        width: calc(100% - 1.5rem) !important;
+      }
+      .modal-head {
+        margin-bottom: 0.75rem !important;
+      }
+      .modal-head h2 {
+        font-size: 1.25rem !important;
+      }
+      .form-group {
+        margin-bottom: 0.75rem !important;
+      }
+      .choice-pills-grid {
+        gap: 6px !important;
+      }
+      .choice-pill-item span {
+        padding: 0.4rem 0.72rem !important;
+        font-size: 0.78rem !important;
+      }
+      .choice-cards-grid {
+        gap: 6px !important;
+      }
+      .choice-card-item .card-inner {
+        padding: 0.5rem 0.6rem !important;
+      }
+      .choice-card-item .card-texts strong {
+        font-size: 0.78rem !important;
+      }
+      .choice-card-item .card-texts small {
+        font-size: 0.68rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <dialog id="modal"></dialog>
+
+  <script>
+    let lang = 'ko';
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      if (urlLang === 'ja' || urlLang === 'ko') {
+        lang = urlLang;
+      } else {
+        const saved = sessionStorage.getItem('sai-lang');
+        if (saved) lang = saved;
+      }
+    } catch (_) {}
+
+    function t(ko, ja) {
+      return lang === 'ja' ? ja : ko;
+    }
+
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => document.querySelectorAll(s);
+
+    function modal(content) {
+      const m = $('#modal');
+      m.innerHTML = `
+        <button class="modal-close-btn" id="modal-close-x" aria-label="${t('닫기', '閉じる')}">✕</button>
+        ${content}
+      `;
+      m.showModal();
+      $('#modal-close-x').onclick = () => m.close();
+      m.onclick = (e) => {
+        if (e.target === m) m.close();
+      };
+    }
+
+    function openSignupModal() {
+      modal(`
+        <div class="modal-head">
+          <img src="/assets/sai-brand-logo.png?v=2" alt="SAI" class="modal-logo-img" style="height:28px; width:auto; margin-bottom:1.0rem; display:block;">
+          <span class="gradient-pill red">${t('사전 예약 신청', '事前登録のご案内')}</span>
+          <h2 style="margin-top:0.8rem;">${t('둘만의 작은 세계,<br>가장 먼저 초대받으세요.', 'ふたりだけの小さな世界、<br>いち早くご招待します。')}</h2>
+          <p>${t('출시 알림과 함께 사전 예약 고객 전용 혜택을 보내드립니다.', 'リリース通知と共に事前登録限定の特別特典をお届けします。')}</p>
+        </div>
+        <form id="signup-form">
+          <div class="form-group">
+            <label class="form-label">${t('이메일 주소', 'メールアドレス')}</label>
+            <input class="form-input" type="email" name="email" required placeholder="${t('name@example.com', 'name@example.com')}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">${t('거주 지역', '居住地域')}</label>
+            <div class="choice-pills-grid">
+              <label class="choice-pill-item">
+                <input type="radio" name="country" value="KR" data-label="대한민국 (KR)" ${lang === 'ko' ? 'checked' : ''}>
+                <span>🇰🇷 ${t('대한민국 (KR)', '韓国 (KR)')}</span>
+              </label>
+              <label class="choice-pill-item">
+                <input type="radio" name="country" value="JP" data-label="일본 (JP)" ${lang === 'ja' ? 'checked' : ''}>
+                <span>🇯🇵 ${t('일본 (JP)', '日本 (JP)')}</span>
+              </label>
+              <label class="choice-pill-item">
+                <input type="radio" name="country" value="GLOBAL" data-label="기타 국가 (Global)">
+                <span>🌐 ${t('기타 국가 (Global)', 'その他 (Global)')}</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">${t('가장 기대되는 대표 기능', '最も楽しみにしている代表機能')}</label>
+            <div class="choice-cards-grid">
+              <label class="choice-card-item">
+                <input type="radio" name="feature" value="sleep_share" data-label="수면 공유" checked>
+                <div class="card-inner">
+                  <div class="card-icon">☾</div>
+                  <div class="card-texts">
+                    <strong>${t('수면 공유', '睡眠共有')}</strong>
+                    <small>${t('아침 첫 안부', '朝の最初の挨拶')}</small>
+                  </div>
+                </div>
+              </label>
+              <label class="choice-card-item">
+                <input type="radio" name="feature" value="heartbeat_send" data-label="심박 보내기">
+                <div class="card-inner">
+                  <div class="card-icon red">♡</div>
+                  <div class="card-texts">
+                    <strong>${t('심박 보내기', '心拍送信')}</strong>
+                    <small>${t('원터치 박동 전송', 'ワンタッチ鼓動')}</small>
+                  </div>
+                </div>
+              </label>
+              <label class="choice-card-item">
+                <input type="radio" name="feature" value="sleep_garden" data-label="수면 정원">
+                <div class="card-inner">
+                  <div class="card-icon green">🌸</div>
+                  <div class="card-texts">
+                    <strong>${t('수면 정원', '睡眠の庭')}</strong>
+                    <small>${t('둘만의 작은 꽃', 'ふたりの小さな花')}</small>
+                  </div>
+                </div>
+              </label>
+              <label class="choice-card-item">
+                <input type="radio" name="feature" value="timeline_archive" data-label="둘만의 기록">
+                <div class="card-inner">
+                  <div class="card-icon">⏱</div>
+                  <div class="card-texts">
+                    <strong>${t('둘만의 기록', 'ふたりの記録')}</strong>
+                    <small>${t('캘린더 & 아카이브', 'カレンダー＆記録')}</small>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">${t('예상 구매 희망 예산 (커플 세트)', '想定購入予算（ペアセット）')}</label>
+            <div class="choice-pills-grid">
+              <label class="choice-pill-item">
+                <input type="radio" name="budget" value="20-30" data-label="20만원 ~ 30만원대" checked>
+                <span>${t('20만원 ~ 30만원대', '2万円〜3万円台')}</span>
+              </label>
+              <label class="choice-pill-item">
+                <input type="radio" name="budget" value="30-40" data-label="30만원 ~ 40만원대">
+                <span>${t('30만원 ~ 40만원대', '3万円〜4万円台')}</span>
+              </label>
+              <label class="choice-pill-item">
+                <input type="radio" name="budget" value="40+" data-label="40만원 이상">
+                <span>${t('40만원 이상 (프리미엄)', '4万円以上（プレミアム）')}</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-checkbox-label">
+              <input type="checkbox" name="consent" required checked>
+              <span>${t('SAI 신제품 출시 및 사전 예약 알림 수신에 동의합니다.', 'SAIの新製品リリースおよび事前登録案内の受信に同意します。')}</span>
+            </label>
+          </div>
+          <button class="btn-gradient btn-coral" type="submit" style="width:100%; margin-top:0.8rem;">
+            <span>${t('사전 신청 완료하기 ↗', '事前登録を完了する ↗')}</span>
+          </button>
+        </form>
+      `);
+
+      $('#signup-form').onsubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const btn = form.querySelector('button[type="submit"]');
+        const prevText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<span>${t('등록 중...', '登録中...')}</span>`;
+
+        const fd = new FormData(form);
+        const email = (fd.get('email') || '').trim().toLowerCase();
+        const countryRadio = form.querySelector('input[name="country"]:checked');
+        const featureRadio = form.querySelector('input[name="feature"]:checked');
+        const budgetRadio = form.querySelector('input[name="budget"]:checked');
+
+        const country = countryRadio?.value || (lang === 'ja' ? 'JP' : 'KR');
+        const country_label = countryRadio?.getAttribute('data-label') || country;
+        const feature = featureRadio?.value || 'sleep_share';
+        const feature_label = featureRadio?.getAttribute('data-label') || feature;
+        const budget = budgetRadio?.value || '20-30';
+        const budget_label = budgetRadio?.getAttribute('data-label') || budget;
+        const client_timezone = Intl?.DateTimeFormat?.()?.resolvedOptions?.()?.timeZone || '';
+        const page_source = 'teaser4';
+
+        const payload = {
+          email,
+          market: lang === 'ja' ? 'JP' : 'KR',
+          language: lang === 'ja' ? 'ja' : 'ko',
+          country,
+          country_label,
+          feature,
+          feature_label,
+          budget,
+          budget_label,
+          lang,
+          client_timezone,
+          client_language: navigator?.language || (lang === 'ja' ? 'ja-JP' : 'ko-KR'),
+          source: 'sai_teaser4',
+          consent: true,
+          consent_version: '2026-09-22',
+          page_source,
+          submitted_at: new Date().toISOString()
+        };
+
+        try {
+          const res = await fetch('/api/waitlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.error || res.statusText);
+          }
+          $('#modal').close();
+          modal(`
+            <div class="modal-head" style="text-align:center;">
+              <img src="/assets/sai-brand-logo.png?v=2" alt="SAI" class="modal-logo-img" style="height:28px; width:auto; margin:0 auto 1.0rem; display:block;">
+              <span class="gradient-pill red">${t('신청 완료', '登録完了')}</span>
+              <h2 style="margin-top:1.0rem;">${t('사이의 가장 따뜻한 순간,<br>전달받았어요.', 'SAIの特別な瞬間、<br>受け取りました。')}</h2>
+              <p>${t('사전 신청이 완료되었습니다.<br>가장 먼저 소식을 전해드릴게요.', '事前登録が完了しました。<br>いち早く特別な案内をお届けします。')}</p>
+            </div>
+            <button class="btn-gradient" id="modal-ok-btn" style="width:100%; margin-top:1.5rem;">
+              <span>${t('확인', '確認')}</span>
+            </button>
+          `);
+          $('#modal-ok-btn').onclick = () => $('#modal').close();
+        } catch (err) {
+          alert(t('등록 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'エラーが発生しました。しばらくしてからもう一度お試しください。'));
+          btn.disabled = false;
+          btn.innerHTML = prevText;
+        }
+      };
+    }
+
+    function renderPage() {
+      $('#root').innerHTML = `
+        <!-- Navigation -->
+        <header class="teaser-nav">
+          <div class="container teaser-nav-inner">
+            <a class="brand-logo" href="/teaser4" aria-label="SAI">
+              <img src="/assets/sai-brand-logo.png?v=2" alt="SAI" class="brand-logo-img">
+            </a>
+            <div class="nav-actions">
+              <a class="nav-link" href="#sleep-share">${t('수면 공유', '睡眠共有')}</a>
+              <a class="nav-link" href="#heartbeat-send">${t('심박 보내기', '心拍送信')}</a>
+              <button class="lang-toggle" id="lang-btn">${lang === 'ko' ? 'KR / JP' : 'JP / KR'}</button>
+              <button class="btn-gradient nav-btn-sm" id="nav-signup-btn">
+                <span>${t('먼저 만나기', '事前登録')}</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <!-- 01. HERO SECTION -->
+          <section class="hero-section">
+            <div class="container hero-content-container">
+              <!-- Left-Aligned Content / Centered on Mobile -->
+              <div class="hero-content-left">
+                <span class="hero-eyebrow">${t('둘만의 작은 일상, 사이', 'ふたりだけの小さな日常、SAI')}</span>
+                <h1 class="hero-title">${t('내 하루에,<br><span class="hero-accent">네가 쏙.</span>', 'わたしの毎日に、<br><span class="hero-accent">あなたがひょこっ。</span>')}</h1>
+                <p class="hero-desc">${t('잠든 밤은 나누고, 뛰는 지금은 보내요.<br>수면 공유와 심박 보내기로 이어지는 둘만의 스마트링.', '眠った夜を分かち合い、いまの鼓動を届ける。<br>睡眠と鼓動でつながる、ふたりのスマートリング。')}</p>
+                
+                <!-- CTA group: Reference 3 buttons -->
+                <div class="hero-cta-group">
+                  <button class="hero-btn-primary" id="hero-signup-btn">
+                    <span>${t('사이 먼저 만나기 ↗', 'SAIといち早く出会う ↗')}</span>
+                  </button>
+                  <a class="hero-btn-secondary" href="#sleep-share">
+                    ${t('둘의 연결 보기', 'ふたりのつながりを見る')}
+                  </a>
+                </div>
+              </div>
+
+              <!-- Rings Stage (Live Ring Illustration & Motion) -->
+              <div class="hero-art">
+                <img src="/assets/hero-ring-v3-transparent.webp?v=20260917_v3" alt="${t('실버와 샴페인 골드 커플 스마트링', 'シルバーとシャンパンゴールドのペアスマートリング')}" class="hero-art-img" width="1254" height="1254" fetchpriority="high">
+                
+                <!-- Floating Sleep Note -->
+                <div class="floating-note top">
+                  <span>☾ ${t('수면 요약이 공유됐어요.', '睡眠のまとめを共有しました。')}</span>
+                  <small>7h 42m · ${t('내가 고른 요약만', '選んだまとめだけ')}</small>
+                </div>
+
+                <!-- Floating Heartbeat Note -->
+                <div class="floating-note bottom">
+                  <span>♡ ${t('심박을 보냈어요.', '心拍を送りました。')}</span>
+                  <small>78 bpm · ${t('지우가 느꼈어요', 'ジウが受け取りました')}</small>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Ritual Strip below Hero -->
+          <div class="teaser-ritual">
+            <span>☾ ${t('수면 공유', '睡眠を共有')}</span>
+            <i>·</i>
+            <span>♡ ${t('심박 보내기', '心拍を送る')}</span>
+            <i>·</i>
+            <span>◷ ${t('함께한 순간', 'ふたりの瞬間')}</span>
+          </div>
+
+          <!-- 02. SECTION: SLEEP SHARE (수면 공유) -->
+          <section class="section-wrap" id="sleep-share">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">${t('01 / 수면 공유', '01 / 睡眠共有')}</span>
+                <h2 class="section-title">
+                  <span class="typing-badge"><span id="typing-text">${t('잘 잤어?', 'よく眠れた？')}</span><span class="typing-cursor"></span></span>
+                  ${t(' 묻기 전에,<br>밤이 먼저 닿아요.', 'と聞く前に、<br>夜がそっと届く。')}
+                </h2>
+                <p class="section-desc">${t('수면 시간과 오늘의 컨디션을 내가 고른 만큼만 나눠요. 서로 다른 곳에서 깨어나도, 아침의 첫 안부는 함께 시작됩니다.', '睡眠時間と今日のコンディションを、選んだ分だけ共有。離れた場所で目覚めても、朝の挨拶はふたり同時に始まります。')}</p>
+                <div class="privacy-tag-box">
+                  <span class="privacy-icon">✓</span>
+                  <span><strong>${t('고른 만큼만 공유해요.', '選んだ分だけ共有。')}</strong> ${t('상세 건강 데이터는 나에게만 안전하게 보관됩니다.', '詳細な健康データは自分だけに安全に保管されます。')}</span>
+                </div>
+              </div>
+
+              <!-- Large Cinematic Sleep Frame -->
+              <div class="cinematic-frame">
+                <img class="cinematic-img" src="/assets/couple-morning-v6.webp" alt="${t('포근한 아침을 함께 맞이하는 커플', '穏やかな朝を一緒に迎えるカップル')}">
+                <div class="cinematic-overlay-gradient"></div>
+
+                <div class="sleep-overlay-card">
+                  <div class="sleep-card-header">
+                    <span class="sleep-card-label">${t('지우의 아침', 'ジウの朝')}</span>
+                    <span class="sleep-badge">● ${t('공유됨', '共有済み')}</span>
+                  </div>
+                  <div class="sleep-card-hours">7h 42m</div>
+                  <div class="sleep-card-status-row">
+                    <span>${t('오늘의 상태', '今日の状態')}</span>
+                    <strong>${t('평온해요 ✨', '穏やかです ✨')}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 03. SECTION: SEND A BEAT (심박 보내기) -->
+          <section class="section-wrap" id="heartbeat-send">
+            <div class="container">
+              <div class="beat-studio-grid">
+                <div class="section-head" style="margin-bottom:0;">
+                  <span class="gradient-pill red">${t('02 / 심박 보내기', '02 / 心拍送信')}</span>
+                  <h2 class="section-title">${t('말 대신,<br><span class="gradient-text">심박 하나.</span>', '言葉の代わりに、<br><span class="gradient-text">心拍をひとつ。</span>')}</h2>
+                  <p class="section-desc">${t('보고 싶은 순간, 지금의 심박을 보내요. 네가 느꼈다면 작은 답장이 돌아옵니다.', '会いたい瞬間、いまの心拍を送る。あなたが感じたら、小さな返事が届きます。')}</p>
+                  <div class="privacy-tag-box" style="margin-top:1.6rem; border-color:rgba(229,72,87,0.25); background:var(--red-soft-bg);">
+                    <span class="ritual-dot-red"></span>
+                    <span><strong>${t('보내고 싶은 순간에만.', '送りたい瞬間だけ。')}</strong><br class="mobile-break">${t('심박 공유는 기본 OFF입니다.', '心拍の共有はデフォルトでOFFです。')}</span>
+                  </div>
+                </div>
+
+                <!-- Heartbeat Studio Card -->
+                <div class="beat-card-wrap">
+                  <div class="beat-ripple" id="beat-ripple"></div>
+
+                  <div style="width:100%; display:flex; justify-content:space-between; align-items:center; z-index:2; flex-wrap:wrap; gap:8px;">
+                    <span class="beat-sender-label" style="font-size:0.75rem; font-weight:800; letter-spacing:0.04em; color:var(--red-primary);">${t('심박 보내기 · 수민 → 지우', '心拍送信 · スミン → ジウ')}</span>
+                    <span class="gradient-pill red" style="padding:0.2rem 0.6rem; font-size:0.7rem; white-space:nowrap; flex-shrink:0;">${t('실시간 데모', 'リアルタイム体験')}</span>
+                  </div>
+
+                  <div class="heart-stage-wrap">
+                    <img class="heart-3d-visual" src="/assets/heart-3d.webp" alt="${t('3D 펄스 하트', '3D鼓動ハート')}">
+                    <div class="bpm-display">
+                      <span id="bpm-val">78</span>
+                      <span class="bpm-unit">bpm</span>
+                    </div>
+                  </div>
+
+                  <div style="width:100%; z-index:2;">
+                    <div class="beat-status-msg" id="beat-msg">${t('지금의 심박을 보낼 준비가 되었습니다.', 'いまの心拍を送る準備ができました。')}</div>
+                    <div class="beat-btn-wrapper">
+                      <div class="beat-tooltip" id="beat-tooltip">
+                        <span class="tooltip-badge">✨</span>
+                        <span class="tooltip-text">${t('여기를 눌러보세요', 'ここを押してみてください')}</span>
+                        <span class="tooltip-arrow"></span>
+                      </div>
+                      <button class="btn-beat-send" id="beat-btn" type="button">
+                        <span>${t('심박 보내보기 ↗', '心拍を送ってみる ↗')}</span>
+                      </button>
+                    </div>
+
+                    <div class="beat-steps-row">
+                      <div class="beat-step-pill active" id="step-1">${t('1. 심박 선택', '1. 心拍選択')}</div>
+                      <div class="beat-step-pill" id="step-2">${t('2. 지우에게 전송', '2. 送信中')}</div>
+                      <div class="beat-step-pill" id="step-3">${t('3. 느꼈어 ♡', '3. 届いた ♡')}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 03. SECTION: SLEEP GARDEN (수면 정원) -->
+          <section class="section-wrap" id="sleep-garden">
+            <div class="container">
+              <div class="garden-studio-grid">
+                <div class="section-head" style="margin-bottom:0;">
+                  <span class="gradient-pill" style="border-color:rgba(124, 58, 237, 0.22); color:#6d28d9; background:#f5f3ff;">🌸 ${t('03 / 수면 정원', '03 / 睡眠の庭')}</span>
+                  <h2 class="section-title">${t('각자 시작해도,<br><span class="gradient-text">아침 인사는 같이.</span>', '別々に目覚めても、<br><span class="gradient-text">朝の挨拶はいっしょに。</span>')}</h2>
+                  <p class="section-desc">${t('둘 다 푹 쉰 날에는 우리 둘만의 정원에 작은 꽃 한 송이가 피어납니다. 함께 건강해지는 가장 사랑스러운 동기부여.', 'ふたりともぐっすり休んだ日には、ふたりだけの庭に小さな花が一輪咲きます。一緒に健やかになる、いちばん愛おしいきっかけ。')}</p>
+                  <div class="privacy-tag-box" style="margin-top:1.6rem; border-color:rgba(124, 58, 237, 0.18); background:#ffffff;">
+                    <span style="color:#7c3aed; font-weight:800;">🌸</span>
+                    <span><strong>${t('둘만의 정원에 피어나는 꽃.', 'ふたりの庭に咲く花。')}</strong><br class="mobile-break">${t('서로의 컨디션이 조용히 연결됩니다.', 'お互いのコンディションがそっと重なります。')}</span>
+                  </div>
+                </div>
+
+                <!-- Sleep Garden Master 3D Rings Render (3:2 aspect ratio guaranteed) -->
+                <div class="garden-media-stage">
+                  <img src="/assets/garden-rings-v3-transparent.webp" alt="${t('수면 정원 스마트링', 'SAI 睡眠の庭 スマートリング')}" class="garden-rings-img">
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 04. SECTION: MOMENTS & STORIES (순간과 이야기) -->
+          <section class="section-wrap" id="experience">
+            <div class="container">
+              <div class="section-head" style="text-align:center; margin:0 auto 3.2rem;">
+                <span class="gradient-pill">${t('04 / 순간과 이야기', '04 / ふたりの瞬間と記録')}</span>
+                <h2 class="section-title">${t('함께한 모든 순간이<br><span class="gradient-text">둘만의 이야기가 돼요.</span>', 'ふたりで重ねた瞬間が、<br><span class="gradient-text">かけがえのない記憶になる。</span>')}</h2>
+                <p class="section-desc">${t('둘만의 작은 신호들이 쌓여 하나의 특별한 궤적이 됩니다.', '小さなサインの積み重ねが、ふたりだけの特別な軌跡になります。')}</p>
+              </div>
+
+              <div class="magazine-grid">
+                <!-- Card 1 -->
+                <div class="magazine-card">
+                  <img class="magazine-card-bg" src="/assets/story-moment-rain.webp" alt="${t('비 내리는 밤 손을 맞잡은 커플', '雨の夜、手を繋ぐカップル')}">
+                  <div class="magazine-card-gradient"></div>
+                  <div class="magazine-card-content">
+                    <div class="magazine-tag red">${t('심박의 순간', '鼓動の瞬間')}</div>
+                    <h3 class="magazine-card-title">${t('비 내리는 밤, 손끝으로 전해진 온기', '雨の夜、指先に伝わる温もり')}</h3>
+                    <p class="magazine-card-desc">${t('말하지 않아도 알 수 있는 심박의 미세한 떨림.', '言葉がなくても伝わる、かすかな鼓動のゆらぎ。')}</p>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="magazine-card">
+                  <img class="magazine-card-bg" src="/assets/story-moment-morning.webp" alt="${t('아침의 따뜻한 커피', '朝のあたたかいコーヒー')}">
+                  <div class="magazine-card-gradient"></div>
+                  <div class="magazine-card-content">
+                    <div class="magazine-tag">${t('수면의 기록', '睡眠の記録')}</div>
+                    <h3 class="magazine-card-title">${t('서로 다른 아침, 같은 안부', '離れた朝でも、同じ挨拶')}</h3>
+                    <p class="magazine-card-desc">${t('잠든 시간의 평온함을 나누며 시작하는 하루.', '穏やかな夜の時間を共有して始まる一日。')}</p>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="magazine-card">
+                  <img class="magazine-card-bg" src="/assets/story-moment-calendar.webp" alt="${t('캘린더에 기념일을 기록하는 순간', 'カレンダーに記念日を記す瞬間')}">
+                  <div class="magazine-card-gradient"></div>
+                  <div class="magazine-card-content">
+                    <div class="magazine-tag red">${t('둘만의 아카이브', 'ふたりのアーカイブ')}</div>
+                    <h3 class="magazine-card-title">${t('우리가 함께 지나온 날들', 'ふたりが一緒に歩んできた日々')}</h3>
+                    <p class="magazine-card-desc">${t('캘린더에 조용히 새겨지는 둘만의 기념일.', 'カレンダーにそっと刻まれる特別な記念日。')}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 04-A. SECTION: OUR RHYTHM ARCHIVE (둘만의 리듬 아카이브) -->
+          <section class="section-wrap" id="rhythm-archive">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">${t('둘만의 리듬 아카이브', 'ふたりのリズムアーカイブ')}</span>
+                <h2 class="section-title">${t('함께한 순간이<br><span class="gradient-text">차곡차곡.</span>', 'ふたりの瞬間が<br><span class="gradient-text">重なっていく。</span>')}</h2>
+                <p class="section-desc">${t('손을 잡고 걸었던 비 내리는 밤, 서로를 챙겨준 주말의 낮잠. 달력 위의 작은 점들이 모여 둘만의 소중한 역사가 됩니다.', '手を繋いで歩いた雨の夜、お互いを気遣った週末の昼寝。カレンダーの小さな点が集まり、ふたりだけのかけがえのない歴史になります。')}</p>
+                <button class="btn-gradient rhythm-archive-btn" style="margin-top:0.8rem;">
+                  <span>${t('이 경험이 기대돼요 ↗', 'この体験が楽しみ ↗')}</span>
+                </button>
+              </div>
+
+              <div class="rhythm-archive-grid">
+                <!-- Left: Sunset Linked Hands Photo Card -->
+                <div class="rhythm-left-col">
+                  <div class="rhythm-photo-card">
+                    <img src="/assets/couple-sunset-hands.webp" alt="${t('노을 아래 손을 맞잡은 커플', '夕暮れの下、手を繋ぐカップル')}" class="rhythm-photo-img" style="object-position: center 54%;">
+                  </div>
+                </div>
+
+                <!-- Right: Interactive Calendar Card -->
+                <div class="calendar-card">
+                  <div class="calendar-head">
+                    <div>
+                      <span class="calendar-title-tag">${t('우리가 함께한 날들', 'ふたりが共にした日々')}</span>
+                      <div class="calendar-month">2026.09</div>
+                    </div>
+                    <span class="gradient-pill red" style="font-size:0.75rem; padding:0.35rem 0.8rem;">${t('9.12 (토)', '9.12 (土)')}</span>
+                  </div>
+
+                  <div class="cal-grid">
+                    <div class="cal-weekday">${t('일', '日')}</div>
+                    <div class="cal-weekday">${t('월', '月')}</div>
+                    <div class="cal-weekday">${t('화', '火')}</div>
+                    <div class="cal-weekday">${t('수', '水')}</div>
+                    <div class="cal-weekday">${t('목', '木')}</div>
+                    <div class="cal-weekday">${t('금', '金')}</div>
+                    <div class="cal-weekday">${t('토', '土')}</div>
+
+                    <!-- Row 1 -->
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day">1</div>
+                    <div class="cal-day">2</div>
+                    <div class="cal-day">3<span class="cal-dot"></span></div>
+                    <div class="cal-day">4</div>
+                    <div class="cal-day">5</div>
+                    <div class="cal-day">6</div>
+
+                    <!-- Row 2 -->
+                    <div class="cal-day">7</div>
+                    <div class="cal-day">8<span class="cal-dot"></span></div>
+                    <div class="cal-day">9</div>
+                    <div class="cal-day">10</div>
+                    <div class="cal-day">11</div>
+                    <div class="cal-day active" id="cal-day-12">12<span class="cal-dot" style="background:#fff;"></span></div>
+                    <div class="cal-day">13</div>
+
+                    <!-- Row 3 (14-17 cycle prediction) -->
+                    <div class="cal-day cycle">14</div>
+                    <div class="cal-day cycle">15</div>
+                    <div class="cal-day cycle">16</div>
+                    <div class="cal-day cycle">17</div>
+                    <div class="cal-day">18</div>
+                    <div class="cal-day">19<span class="cal-dot"></span></div>
+                    <div class="cal-day">20</div>
+
+                    <!-- Row 4 -->
+                    <div class="cal-day">21</div>
+                    <div class="cal-day">22</div>
+                    <div class="cal-day">23</div>
+                    <div class="cal-day">24</div>
+                    <div class="cal-day">25<span class="cal-dot"></span></div>
+                    <div class="cal-day">26</div>
+                    <div class="cal-day">27</div>
+
+                    <!-- Row 5 -->
+                    <div class="cal-day">28</div>
+                    <div class="cal-day">29</div>
+                    <div class="cal-day">30</div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                  </div>
+
+                  <div class="cal-note-card">
+                    <div class="cal-note-icon">♡</div>
+                    <div>
+                      <div class="cal-note-meta">${t('선택된 날짜의 기록', '選択された日の記録')}</div>
+                      <div class="cal-note-title">${t('지우와 함께 보낸 비 내리는 토요일', 'ジウと一緒に過ごした雨の土曜日')}</div>
+                      <div class="cal-note-desc">${t('수면 8h 10m · 심박 교환 12회', '睡眠 8h 10m · 心拍送信 12回')}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 05. SECTION: PRODUCT & MEMBERSHIP -->
+          <section class="section-wrap" id="product-pair">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">${t('05 / 둘만의 페어링', '05 / ふたりのペアリング')}</span>
+                <h2 class="section-title">${t('나를 위한 링 하나.<br>너를 위한 링 하나.<br><span class="gradient-text">우리 사이의 작은 세계.</span>', 'わたしのためのリングひとつ。<br>あなたのためのリングひとつ。<br><span class="gradient-text">ふたりのあいだの小さな世界。</span>')}</h2>
+                <p class="section-desc">${t('손끝에는 절제된 아름다움을, 일상에는 둘만의 연결을.', '指先には研ぎ澄まされた美しさを、日常にはふたりだけのつながりを。')}</p>
+              </div>
+
+              <div class="product-pills-row">
+                <span class="gradient-pill">☾ ${t('수면 요약 공유', '睡眠要約の共有')}</span>
+                <span class="gradient-pill red">♡ ${t('심박 보내기', '心拍の送信')}</span>
+                <span class="gradient-pill">⏱ ${t('둘만의 기록', 'ふたりの記録')}</span>
+              </div>
+
+              <div class="product-cards-grid">
+                <!-- Card 1: SAI RING PAIR (Undistorted 3D Master Render) -->
+                <div class="product-glass-card">
+                  <div class="product-card-head">
+                    <div class="product-card-num">${t('01 / SAI 스마트링 (커플 2개 세트)', '01 / SAI スマートリング (ペア)')}</div>
+                    <h3 class="product-card-title">${t('링 2개 세트', 'リング2個セット')}</h3>
+                    <p class="product-card-desc">${t('실버 티타늄과 샴페인 골드, 둘이 함께 맞추는 하나의 페어. 항공우주 등급 티타늄 바디와 정밀한 생체 센서 내장.', 'シルバーチタンとシャンパンゴールド、ふたりで揃えるひとつのペア。航空宇宙グレードのチタンボディと高精度生体センサー内蔵。')}</p>
+                  </div>
+                  <div class="product-card-media">
+                    <img src="/assets/product-rings-duo-clean.webp" alt="${t('SAI 커플 스마트링 듀오', 'SAIペアスマートリング')}" class="product-duo-ring-img">
+                  </div>
+                </div>
+
+                <!-- Card 2: SAI TOGETHER -->
+                <div class="product-glass-card">
+                  <div class="product-card-head">
+                    <div class="product-card-num">${t('02 / 둘만을 위한 멤버십', '02 / ふたりのためのメンバーシップ')}</div>
+                    <h3 class="product-card-title">${t('둘을 위한 월 멤버십', 'ふたりのための月額メンバーシップ')}</h3>
+                    <p class="product-card-desc">${t('수면 공유와 심박 보내기, 둘만의 기록까지. 두 사람의 리듬을 하나의 경험으로 엮는 전용 관계 알고리즘과 프라이빗 아카이브를 제공합니다.', '睡眠共有と心拍送信、ふたりだけの記録まで。ふたりの生体リズムをひとつの体験として編み込む専用リレーションアルゴリズムとプライベートアーカイブを提供します。')}</p>
+                  </div>
+                  <div class="product-card-media">
+                    <img src="/assets/heart-3d.webp" alt="${t('SAI TOGETHER 하트', 'SAI TOGETHER ハート')}" class="product-heart-img">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 06. SECTION: QUESTIONS (FAQ) -->
+          <section class="section-wrap" id="questions">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">${t('06 / 자주 묻는 질문', '06 / よくあるご質問')}</span>
+                <h2 class="section-title">${t('조금 더 궁금하다면', 'よくあるご質問')}</h2>
+              </div>
+
+              <div class="faq-accordion-list">
+                <!-- Q1 -->
+                <div class="faq-item">
+                  <button class="faq-question-btn" type="button">
+                    <span>${t('어떤 일상을 함께할 수 있나요?', 'どんな日常を一緒に過ごせますか？')}</span>
+                    <span class="faq-toggle-icon">+</span>
+                  </button>
+                  <div class="faq-answer">
+                    <p>${t('서로의 수면 상태와 심박수를 조용히 확인하고, 특별한 순간의 리듬을 기록으로 남길 수 있습니다. 연결되지만 부담스럽지 않은 둘만의 공간입니다.', 'お互いの睡眠状態や心拍数を静かに確認し、特別な瞬間のリズムを記録として残せます。つながっていながらも負担にならない、ふたりだけの空間です。')}</p>
+                  </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="faq-item">
+                  <button class="faq-question-btn" type="button">
+                    <span>${t('모든 데이터가 공유되나요?', 'すべてのデータが共有されますか？')}</span>
+                    <span class="faq-toggle-icon">+</span>
+                  </button>
+                  <div class="faq-answer">
+                    <p>${t('아닙니다. 공유하고 싶은 항목(수면 상태, 심박 등)과 공유 시간을 직접 설정할 수 있습니다. 완벽한 프라이버시가 보장됩니다.', 'いいえ。共有したい項目（睡眠状態、心拍など）や共有のタイミングは自由に設定できます。完全なプライバシーが保護されます。')}</p>
+                  </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="faq-item">
+                  <button class="faq-question-btn" type="button">
+                    <span>${t('출시 일정과 사전 신청 혜택은 무엇인가요?', '発売予定と事前登録特典は何ですか？')}</span>
+                    <span class="faq-toggle-icon">+</span>
+                  </button>
+                  <div class="faq-answer">
+                    <p>${t('2026년 하반기 출시 예정이며, 사전 신청 고객에게는 SAI TOGETHER 멤버십 3개월 무료 이용권과 페어 패키지 특별 할인 혜택을 제공합니다.', '2026年後半に発売予定です。事前登録いただいたお客様には、SAI TOGETHERメンバーシップ3ヶ月無料チケットとペアパッケージ特別割引特典をお届けします。')}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 07. SECTION: FINAL CONVERSION -->
+          <section class="section-wrap" id="cta">
+            <div class="container">
+              <div class="cta-banner-wrap">
+                <img class="cta-ring-img" src="/assets/product-rings-duo-clean.webp" alt="${t('SAI 커플 스마트링 듀오', 'SAIペアスマートリング')}">
+                <span class="gradient-pill red">${t('07 / 사전 예약 신청', '07 / 事前登録のご案内')}</span>
+                <h2 class="cta-title">${t('가장 가까운 거리,<br><span class="gradient-text">0cm의 사이.</span>', 'いちばん近い距離、<br><span class="gradient-text">0cmのふたり。</span>')}</h2>
+                <p class="cta-desc">${t('사전 신청을 완료하신 분들께 첫 번째 출시 혜택과 프라이빗 초대장을 가장 먼저 보내드립니다.', '事前登録いただいた方に、初回リリース特典と限定招待状をお届けします。')}</p>
+                <button class="btn-gradient btn-coral" id="bottom-signup-btn">
+                  <span>${t('사전 신청하고 초대장 받기 ↗', '事前登録して招待状を受け取る ↗')}</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="teaser-footer">
+          <div class="container footer-inner">
+            <div class="footer-brand">
+              <img src="/assets/sai-brand-logo.png?v=2" alt="SAI" class="footer-logo-img">
+              <span class="footer-brand-desc">— ${t('둘만을 위한 스마트링, 사이', 'ふたりのためのスマートリング、SAI')}</span>
+            </div>
+            <div class="footer-copyright">
+              &copy; 2026 SAI. All rights reserved.
+            </div>
+          </div>
+        </footer>
+      `;
+
+      initEvents();
+    }
+
+    function initEvents() {
+      // Language Toggle
+      $('#lang-btn').onclick = () => {
+        lang = lang === 'ko' ? 'ja' : 'ko';
+        try { sessionStorage.setItem('sai-lang', lang); } catch (_) {}
+        document.documentElement.lang = lang;
+        renderPage();
+      };
+
+      // Modal Triggers
+      $('#nav-signup-btn').onclick = openSignupModal;
+      const heroBtn = $('#hero-signup-btn');
+      if (heroBtn) heroBtn.onclick = openSignupModal;
+      $('#bottom-signup-btn').onclick = openSignupModal;
+
+      // Modal Triggers for sub sections
+      $$('.rhythm-archive-btn').forEach(btn => btn.onclick = openSignupModal);
+
+      // FAQ Accordion Interaction
+      $$('.faq-question-btn').forEach(btn => {
+        btn.onclick = () => {
+          const item = btn.closest('.faq-item');
+          const wasOpen = item.classList.contains('open');
+          $$('.faq-item').forEach(el => el.classList.remove('open'));
+          if (!wasOpen) item.classList.add('open');
+        };
+      });
+
+      // Calendar Day Selection Interaction
+      $$('.cal-day:not(.empty)').forEach(day => {
+        day.onclick = () => {
+          $$('.cal-day').forEach(d => d.classList.remove('active'));
+          day.classList.add('active');
+        };
+      });
+
+      // Heartbeat Send Interactive Demo
+      const beatBtn = $('#beat-btn');
+      const beatRipple = $('#beat-ripple');
+      const beatMsg = $('#beat-msg');
+      const step1 = $('#step-1');
+      const step2 = $('#step-2');
+      const step3 = $('#step-3');
+
+      let sending = false;
+      beatBtn.onclick = () => {
+        if (sending) return;
+        const tooltip = $('#beat-tooltip');
+        if (tooltip) tooltip.style.opacity = '0';
+        sending = true;
+        beatBtn.disabled = true;
+
+        // Stage 2: Sending
+        beatRipple.classList.add('active');
+        step1.classList.remove('active');
+        step2.classList.add('active');
+        beatBtn.innerHTML = `<span>${t('지우에게 전송 중... ♡', 'ジウへ送信中... ♡')}</span>`;
+        beatMsg.textContent = t('지우의 스마트링으로 심박을 보내고 있어요...', 'ジウのスマートリングへ心拍を届けています...');
+        beatMsg.classList.remove('sent');
+
+        setTimeout(() => {
+          // Stage 3: Received
+          step2.classList.remove('active');
+          step3.classList.add('active');
+          beatRipple.classList.remove('active');
+          beatMsg.textContent = t('지우가 느꼈어요! 작은 답장이 도착했습니다. ♡', 'ジウが感じました！小さな返事が届きました。♡');
+          beatMsg.classList.add('sent');
+          beatBtn.disabled = false;
+          beatBtn.innerHTML = `<span>${t('한 번 더 보내기 ↗', 'もう一度送る ↗')}</span>`;
+          sending = false;
+        }, 1800);
+      };
+
+      // Typing motion for sleep share
+      initTyping();
+    }
+
+    function initTyping() {
+      const el = $('#typing-text');
+      if (!el) return;
+      const targetText = t('잘 잤어?', 'よく眠れた？');
+      let idx = 0;
+      el.textContent = '';
+      function typeNext() {
+        if (idx <= targetText.length) {
+          el.textContent = targetText.slice(0, idx);
+          idx++;
+          setTimeout(typeNext, 120);
+        }
+      }
+      setTimeout(typeNext, 400);
+    }
+
+    // Initial render
+    renderPage();
+  </script>
+</body>
+</html>

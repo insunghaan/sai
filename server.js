@@ -468,7 +468,7 @@ const server = http.createServer((req, res) => {
   let targetFile;
   if (pathname === '/' || pathname === '/index.html') {
     targetFile = 'teaser-v9.html';
-  } else if (['/teaser2', '/teaser2/', '/teaser3', '/teaser3/', '/teaser-review', '/teaser-review/'].includes(pathname)) {
+  } else if (['/teaser2', '/teaser2/', '/teaser3', '/teaser3/', '/teaser4', '/teaser4/', '/teaser-review', '/teaser-review/'].includes(pathname)) {
     targetFile = pathname.replace(/^\/+|\/+$/g, '') + '.html';
   } else if (pathname === '/favicon.ico') {
     res.statusCode = 200;
