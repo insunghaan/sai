@@ -1034,11 +1034,14 @@
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      /* Left margin matches the standard container start line: */
+      /* Left and right margins match the standard container start line: */
       padding-left: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
-      padding-right: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
+      padding-right: 0;
+      scroll-padding-left: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
+      scroll-padding-right: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
       padding-top: 0.8rem;
       padding-bottom: 2.2rem;
+      box-sizing: border-box;
     }
     .story-slider-track::-webkit-scrollbar {
       display: none;
@@ -1062,6 +1065,10 @@
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
       cursor: grab;
       user-select: none;
+    }
+    .story-slide-card:last-child {
+      margin-right: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
+      scroll-snap-align: start end;
     }
     .story-slide-card:active {
       cursor: grabbing;
@@ -1476,8 +1483,15 @@
     }
 
     /* 05. SECTION: FINAL CONVERSION */
+    #questions.section-wrap {
+      padding-bottom: 2.0rem;
+    }
+    #cta.section-wrap {
+      padding-top: 1.0rem;
+      padding-bottom: 5.5rem;
+    }
     .cta-banner-wrap {
-      margin: 6.0rem 0 4.0rem;
+      margin: 1.0rem 0 4.0rem;
       position: relative;
       border-radius: 40px;
       background: linear-gradient(180deg, #ffffff 0%, #fff7f8 100%);
@@ -1773,18 +1787,38 @@
         grid-template-columns: minmax(0, 1fr);
         gap: 2.2rem;
       }
+      #experience .container {
+        padding: 0 1.5rem !important;
+      }
+      #experience .section-head {
+        text-align: left !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      #experience .section-title {
+        text-align: left !important;
+      }
+      #experience .section-desc {
+        text-align: left !important;
+      }
       .story-slider-track {
-        padding-left: 1.2rem !important;
-        padding-right: 1.2rem !important;
+        padding-left: 1.5rem !important;
+        padding-right: 0 !important;
+        scroll-padding-left: 1.5rem !important;
+        scroll-padding-right: 1.5rem !important;
         gap: 1.0rem !important;
         padding-bottom: 1.4rem !important;
       }
       .story-slide-card {
-        flex: 0 0 82vw !important;
-        width: 82vw !important;
+        flex: 0 0 80vw !important;
+        width: 80vw !important;
         height: 480px !important;
         border-radius: 24px !important;
         padding: 1.8rem 1.4rem !important;
+      }
+      .story-slide-card:last-child {
+        margin-right: 1.5rem !important;
+        scroll-snap-align: start end !important;
       }
       .story-card-title {
         font-size: 1.35rem !important;
@@ -1839,12 +1873,12 @@
         font-size: 0.78rem;
       }
 
-      /* Mobile First Screen Hero: Title, Sub, Buttons & Rings styled to match reference */
+      /* Mobile First Screen Hero: Title, Sub, Buttons & Rings calibrated to match reference ratios */
       .hero-section {
         min-height: calc(100dvh - 105px) !important;
         min-height: calc(100vh - 105px) !important;
-        padding-top: 4.8rem !important;
-        padding-bottom: 1.0rem !important;
+        padding-top: 4.0rem !important;
+        padding-bottom: 0.6rem !important;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1853,7 +1887,7 @@
         box-sizing: border-box;
       }
       .hero-content-container {
-        gap: 0.5rem;
+        gap: 0.35rem;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -1868,15 +1902,15 @@
       .hero-eyebrow {
         font-size: 0.84rem !important;
         color: #666666 !important;
-        margin-bottom: 0.45rem !important;
+        margin-bottom: 0.35rem !important;
         font-weight: 600 !important;
       }
       .hero-title {
         font-size: clamp(2.57rem, 8.5vw, 2.87rem) !important;
         font-weight: 900 !important;
-        line-height: 1.18 !important;
+        line-height: 1.16 !important;
         letter-spacing: -0.035em !important;
-        margin: 0 0 0.55rem 0 !important;
+        margin: 0 0 0.45rem 0 !important;
         text-align: center !important;
       }
       .hero-title .hero-accent {
@@ -1887,11 +1921,11 @@
         font-weight: 900 !important;
       }
       .hero-desc {
-        font-size: 0.88rem !important;
-        line-height: 1.52 !important;
-        margin-bottom: 1.15rem !important;
+        font-size: 0.86rem !important;
+        line-height: 1.48 !important;
+        margin-bottom: 0.95rem !important;
         color: #555555 !important;
-        max-width: 325px !important;
+        max-width: 320px !important;
         text-align: center !important;
       }
       .hero-cta-group {
@@ -1900,11 +1934,11 @@
         justify-content: center;
         gap: 0.65rem;
         width: 100%;
-        margin-bottom: 1.1rem;
+        margin-bottom: 0.5rem !important;
       }
       .hero-btn-primary, .hero-btn-secondary {
-        padding: 0.68rem 1.2rem !important;
-        font-size: 0.88rem !important;
+        padding: 0.65rem 1.15rem !important;
+        font-size: 0.86rem !important;
         font-weight: 650 !important;
         white-space: nowrap;
       }
@@ -1920,18 +1954,18 @@
         color: #18181b !important;
       }
       .hero-art {
-        max-width: 290px;
-        width: 100%;
-        margin: 0.2rem auto 0;
+        max-width: 340px !important;
+        width: 88% !important;
+        margin: 0.25rem auto 0 !important;
         display: flex;
         justify-content: center;
         align-items: center;
         flex: none;
       }
       .hero-art-img {
-        max-width: 265px;
-        width: 74%;
-        height: auto;
+        max-width: 340px !important;
+        width: 100% !important;
+        height: auto !important;
         aspect-ratio: 1 / 1 !important;
         object-fit: contain !important;
       }
@@ -2080,8 +2114,16 @@
         min-height: 36px;
         font-size: 0.85rem;
       }
+      #questions.section-wrap {
+        padding-bottom: 1.2rem !important;
+      }
+      #cta.section-wrap {
+        padding-top: 0.8rem !important;
+        padding-bottom: 4.0rem !important;
+      }
       .cta-banner-wrap {
-        padding: 3.5rem 1.2rem;
+        padding: 3.5rem 1.2rem !important;
+        margin: 0.8rem 0 3.0rem !important;
         border-radius: 28px;
       }
       .cta-ring-img {
