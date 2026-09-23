@@ -5,7 +5,7 @@
   window.__saiAnalyticsInstalled = true;
 
   var measurementId = 'G-SKG7ZN4LEH';
-  var production = window.location.hostname === '42sai.io';
+  var production = window.location.hostname === '42sai.io' && !window.location.pathname.startsWith('/archive');
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
 

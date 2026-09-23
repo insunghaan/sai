@@ -27,6 +27,7 @@ const MIME_TYPES = {
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.ttf': 'font/ttf',
+  '.xml': 'application/xml; charset=utf-8',
   '.txt': 'text/plain; charset=utf-8'
 };
 
@@ -464,12 +465,27 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Root mapping: public root '/' and '/index.html' serve teaser-v9.html
+  // Preserve old landing pages while making teaser5 the canonical home page.
+  const legacyMatch = pathname.match(/^\/teaser([1-4])(?:\.html|\/)?$/);
+  const oldRoot = ['/teaser.html', '/teaser', '/teaser-v9.html'];
+  let redirectTo;
+  if (['/index.html', '/teaser5', '/teaser5/', '/teaser5.html'].includes(pathname)) redirectTo = '/';
+  else if (legacyMatch) redirectTo = '/archive/teaser' + legacyMatch[1] + '.html';
+  else if (oldRoot.includes(pathname)) redirectTo = '/archive/index.html';
+  if (redirectTo) {
+    res.writeHead(301, { Location: redirectTo + new URL(req.url, 'http://localhost').search });
+    res.end();
+    return;
+  }
   let targetFile;
-  if (pathname === '/' || pathname === '/index.html') {
-    targetFile = 'teaser-v9.html';
-  } else if (['/teaser2', '/teaser2/', '/teaser3', '/teaser3/', '/teaser4', '/teaser4/', '/teaser-review', '/teaser-review/'].includes(pathname)) {
+  if (pathname === '/') {
+    targetFile = 'index.html';
+  } else if (pathname === '/archive' || pathname === '/archive/') {
+    targetFile = 'archive/index.html';
+  } else if (/^\/archive\/teaser[1-4]\/?$/.test(pathname)) {
     targetFile = pathname.replace(/^\/+|\/+$/g, '') + '.html';
+  } else if (['/teaser-review', '/teaser-review/'].includes(pathname)) {
+    targetFile = 'teaser-review.html';
   } else if (pathname === '/favicon.ico') {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'image/svg+xml');
@@ -526,6 +542,7 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Length', stats.size);
+    if (targetFile.startsWith('archive/')) res.setHeader('X-Robots-Tag', 'noindex, follow');
 
     if (ext === '.html') {
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');

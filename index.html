@@ -1,2 +1,4354 @@
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7f8f3"><title>사이 SAI — 너와 나의 오늘을 잇다</title><link rel="stylesheet" href="style.css"></head><body><div id="root"></div><div id="toast" role="status"></div><dialog id="modal"></dialog><script src="app.js"></script></body></html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>sai — 둘만을 위한 스마트링, 사이</title>
+  <meta name="description" content="수면 기록을 함께 보고, 심박으로 안부를 전하고, 데이트의 순간을 기록해요. 둘만을 위한 스마트링 sai. 사전 신청 혜택을 만나보세요.">
+  <meta property="og:title" content="SAI — 둘만을 위한 스마트링, 사이">
+  <meta property="og:description" content="둘만 아는 연결. 둘이 함께 쓰는 감성 커플 스마트링.">
+  <meta property="og:image" content="https://42sai.io/assets/teaser5/30a7543d0061b09c.webp">
+  <link rel="icon" type="image/png" href="/assets/teaser5/e1c12d7d066af35e.png">
+  <link rel="apple-touch-icon" href="/assets/teaser5/e1c12d7d066af35e.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Pure White Tone Palette */
+      --bg-page: #ffffff;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #ffffff;
+      --bg-dark: #ffffff;
+      --bg-deep: #fafafa;
+      --bg-glass: rgba(255, 255, 255, 0.95);
+      --border-subtle: rgba(0, 0, 0, 0.07);
+      --border-card: rgba(0, 0, 0, 0.08);
+      --border-glow-violet: rgba(124, 58, 237, 0.16);
+      --border-glow-red: rgba(229, 72, 87, 0.22);
+
+      /* Refined Emotional Accents (Soft Warm Rose & Sage) */
+      --red-primary: #e54857;
+      --red-light: #ea5b69;
+      --red-neon: #e54857;
+      --red-glow: rgba(229, 72, 87, 0.16);
+      --red-soft-bg: #fff1f3;
+
+      --violet-primary: #7c3aed;
+      --violet-light: #6d28d9;
+      --violet-neon: #7c3aed;
+      --violet-glow: rgba(124, 58, 237, 0.12);
+      --violet-soft-bg: #f5f3ff;
+
+      --gradient-electric: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+      --gradient-electric-hover: linear-gradient(135deg, #27272a 0%, #3f3f46 100%);
+      --gradient-coral: linear-gradient(135deg, #e54857 0%, #fa6b78 100%);
+      --gradient-coral-hover: linear-gradient(135deg, #d63d4c 0%, #f05967 100%);
+      --gradient-text: linear-gradient(135deg, #18181b 0%, #e54857 100%);
+
+      /* High Legibility Typography */
+      --text-white: #18181b;
+      --text-dark: #18181b;
+      --text-muted: #52525b;
+      --text-subtle: #71717a;
+      --text-violet-tint: #4c1d95;
+      --text-red-tint: #e54857;
+
+      /* Elegant Warm Shadows */
+      --shadow-electric: 0 10px 24px rgba(24, 24, 27, 0.15);
+      --shadow-coral: 0 10px 24px rgba(229, 72, 87, 0.22);
+      --shadow-card: 0 12px 36px rgba(25, 20, 15, 0.05), 0 2px 8px rgba(25, 20, 15, 0.03);
+      --shadow-float: 0 16px 40px rgba(25, 20, 15, 0.08);
+
+      --font-sans: 'Pretendard', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      width: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg-page);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+    }
+
+    /* Ambient atmospheric soft subtle glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -15vw;
+      left: 10vw;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(245, 245, 250, 0.4) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(80px);
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      top: 30vh;
+      right: -10vw;
+      width: 55vw;
+      height: 55vw;
+      background: radial-gradient(circle, rgba(254, 242, 242, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(90px);
+    }
+
+    h1, h2, h3, h4, p, span, blockquote {
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    :lang(ja) {
+      word-break: normal;
+      line-break: strict;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background: none;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container, .container-wide {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+    }
+
+    /* Text Accent */
+    .gradient-text {
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    .hero-accent {
+      background: linear-gradient(135deg, #4a1922 0%, #d84555 50%, #e54857 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Badges & Pills */
+    .gradient-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.42rem 1.15rem;
+      border-radius: 9999px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-dark);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      margin-bottom: 1.25rem;
+    }
+
+    .gradient-pill.red {
+      background: var(--red-soft-bg);
+      border-color: rgba(229, 72, 87, 0.25);
+      color: var(--red-primary);
+      box-shadow: 0 2px 8px rgba(229, 72, 87, 0.06);
+    }
+
+    /* Buttons */
+    .btn-gradient {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--gradient-electric);
+      color: #ffffff;
+      padding: 1.05rem 2.2rem;
+      border-radius: 9999px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      box-shadow: var(--shadow-electric);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, filter 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-gradient::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-electric-hover);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+    .btn-gradient span {
+      position: relative;
+      z-index: 1;
+    }
+    .btn-gradient:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 16px 36px rgba(24, 24, 27, 0.25);
+    }
+    .btn-gradient:hover::before {
+      opacity: 1;
+    }
+    .btn-gradient:active {
+      transform: translateY(0);
+    }
+
+    .btn-coral {
+      background: var(--gradient-coral) !important;
+      box-shadow: var(--shadow-coral) !important;
+    }
+    .btn-coral:hover {
+      box-shadow: 0 16px 36px rgba(229, 72, 87, 0.35) !important;
+    }
+
+    .btn-glass {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ffffff;
+      color: var(--text-dark);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      padding: 1.05rem 2.0rem;
+      border-radius: 9999px;
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-glass:hover {
+      background: #fdfdfd;
+      border-color: rgba(0, 0, 0, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* GNB Header */
+    .teaser-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(20, 16, 24, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.0rem 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .teaser-nav.nav-scrolled {
+      background: rgba(250, 249, 246, 0.94);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .teaser-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .brand-logo:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+    .brand-logo img, .brand-logo-img {
+      height: 34px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s ease;
+    }
+    .teaser-nav.nav-scrolled .brand-logo img,
+    .teaser-nav.nav-scrolled .brand-logo-img {
+      filter: none;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.75);
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover {
+      color: #ffffff;
+    }
+    .teaser-nav.nav-scrolled .nav-link {
+      color: var(--text-muted);
+    }
+    .teaser-nav.nav-scrolled .nav-link:hover {
+      color: var(--text-dark);
+    }
+    .lang-toggle {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.42rem 0.95rem;
+      border-radius: 9999px;
+      letter-spacing: 0.06em;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      transition: all 0.2s ease;
+    }
+    .lang-toggle:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.45);
+      transform: translateY(-1px);
+    }
+    .teaser-nav.nav-scrolled .lang-toggle {
+      color: var(--text-dark);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+    .teaser-nav.nav-scrolled .lang-toggle:hover {
+      border-color: rgba(0, 0, 0, 0.25);
+    }
+    .nav-btn-sm {
+      padding: 0.65rem 1.4rem;
+      font-size: 0.9rem;
+    }
+
+    /* 01. HERO SECTION */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: calc(72px + 1.2rem) 0 1.5rem;
+      overflow: hidden;
+      background-color: #1a141e;
+      background: radial-gradient(ellipse at 50% 50%, #29202a 0%, #1e1722 55%, #141018 100%);
+      box-sizing: border-box;
+    }
+
+    /* Centered Desktop Hero Stage */
+    .hero-content-container {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      flex: 1 1 auto;
+      max-width: 1300px;
+      padding: 0 2.0rem;
+      box-sizing: border-box;
+    }
+    .hero-header-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 0.8rem;
+      z-index: 4;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.16;
+      letter-spacing: -0.035em;
+      margin: 0 0 0.5rem 0;
+      color: #ffffff;
+      text-align: center;
+    }
+    .hero-title .hero-accent {
+      background: linear-gradient(135deg, #ff9ca8 0%, #ff526d 50%, #ff758c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      font-style: normal;
+      font-weight: 900;
+    }
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+      font-weight: 500;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.82);
+      letter-spacing: -0.015em;
+      margin: 0;
+      text-align: center;
+    }
+    .hero-cta-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 0.8rem;
+      z-index: 4;
+    }
+    .hero-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: #ffffff;
+      color: #17131b;
+      padding: 0.95rem 2.6rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 9999px;
+      border: 1px solid #ffffff;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 120, 140, 0.2);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .hero-btn-primary:hover {
+      background-color: #f7f5fa;
+      border-color: #f7f5fa;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.25), 0 0 35px rgba(255, 120, 140, 0.35);
+    }
+    .hero-btn-secondary {
+      display: none;
+    }
+
+    /* Hero Art Stage with Feathered Night Couple Illustration */
+    .hero-art {
+      position: relative;
+      width: 100%;
+      max-width: clamp(720px, 62vw, 1020px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      z-index: 2;
+    }
+    .hero-art-img {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: calc(100vh - 310px);
+      aspect-ratio: 1024 / 682 !important;
+      object-fit: contain !important;
+      border-radius: 0;
+      -webkit-mask-image: 
+        linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image: 
+        linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      mask-composite: intersect;
+      transition: transform 0.4s ease;
+    }
+    .hero-art .floating-note {
+      display: none;
+    }
+
+    /* Ritual Bar below Hero */
+    .teaser-ritual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1.15rem 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: #151119;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.72);
+    }
+    .teaser-ritual span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .teaser-ritual i {
+      font-style: normal;
+      opacity: 0.4;
+    }
+    .pill-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .pill-icon.violet {
+      background: var(--violet-soft-bg);
+      color: var(--violet-primary);
+    }
+    .pill-icon.red {
+      background: var(--red-soft-bg);
+      color: var(--red-primary);
+    }
+    .pill-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .pill-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .pill-sub {
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+    }
+
+    @keyframes floatSmooth {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-8px); }
+    }
+
+    /* 02. SECTION: SLEEP SHARE */
+    .section-wrap {
+      padding: 7.0rem 0 5.5rem;
+      position: relative;
+      scroll-margin-top: 75px;
+      background: #ffffff;
+    }
+    .section-head {
+      max-width: 680px;
+      padding-top: 1.2rem;
+      margin-bottom: 3.2rem;
+    }
+    .section-title {
+      font-size: clamp(2.42rem, 3.6vw, 3.12rem);
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      margin: 0 0 0.9rem 0;
+      color: var(--text-dark);
+    }
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Typing Message Bubble */
+    .typing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f3e8ff;
+      border: 1px solid #d8b4fe;
+      color: #6b21a8;
+      padding: 0.2rem 0.85rem;
+      border-radius: 9999px;
+      font-weight: 800;
+      font-size: 0.95em;
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.08);
+      vertical-align: baseline;
+    }
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.05em;
+      background-color: #7c3aed;
+      animation: blinkCursor 0.85s steps(1) infinite;
+      vertical-align: middle;
+    }
+    @keyframes blinkCursor {
+      50% { opacity: 0; }
+    }
+
+    /* Cinematic Sleep Share Container (Extra Large 16:9) */
+    .cinematic-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #11121b;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow-card);
+      min-height: 520px;
+      display: flex;
+      align-items: flex-end;
+    }
+    .cinematic-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.88);
+    }
+    .cinematic-overlay-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8, 8, 12, 0.1) 0%, rgba(8, 8, 12, 0.75) 100%);
+      pointer-events: none;
+    }
+
+    /* Glass Status Card inside Cinematic Frame */
+    .sleep-overlay-card {
+      position: relative;
+      z-index: 2;
+      margin: 2.5rem;
+      max-width: 440px;
+      background: rgba(14, 15, 24, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(124, 58, 237, 0.35);
+      border-radius: 28px;
+      padding: 1.8rem 2.0rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(124, 58, 237, 0.15);
+      color: #ffffff;
+    }
+    .sleep-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+    .sleep-card-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #ddd6fe;
+    }
+    .sleep-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #a855f7;
+      background: rgba(124, 58, 237, 0.2);
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(124, 58, 237, 0.4);
+    }
+    .sleep-card-hours {
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+    .sleep-card-status-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .sleep-card-status-row strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Privacy Banner */
+    .privacy-tag-box {
+      margin-top: 1.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.85rem 1.4rem;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      font-size: 0.90rem;
+      color: var(--text-muted);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+    .privacy-icon {
+      color: #7c3aed;
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+    .privacy-tag-box strong {
+      color: var(--text-dark);
+    }
+
+    /* 03. SECTION: SEND A BEAT */
+    .beat-studio-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: 3.5rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* Stacked Card Deck Outer */
+    /* Section 02: Moving Physical Card Deck Components */
+    #heartbeat-send {
+      overflow-x: clip;
+    }
+    .beat-studio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .beat-stage-container {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      min-height: 575px;
+      margin: 0 auto;
+    }
+
+    /* Moving Physical Card Decks */
+    .beat-card-deck {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding-top: 38px;
+      box-sizing: border-box;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(125%) rotate(4deg);
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
+      will-change: transform, opacity;
+      z-index: 2;
+    }
+    .beat-card-deck.active {
+      transform: translateX(0) rotate(0deg);
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 5;
+    }
+    .beat-card-deck.slide-out-left {
+      transform: translateX(-125%) rotate(-4deg);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .beat-card-deck.slide-out-right {
+      transform: translateX(125%) rotate(4deg);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .beat-card-deck.hidden-left {
+      transform: translateX(-125%) rotate(-4deg);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .beat-card-deck.hidden-right {
+      transform: translateX(125%) rotate(4deg);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Stacked Background Tabs on Top of Each Moving Deck */
+    .deck-tab {
+      position: absolute;
+      top: 0;
+      border-radius: 20px 20px 0 0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 9px;
+      box-sizing: border-box;
+      cursor: default;
+      user-select: none;
+      z-index: 1;
+      letter-spacing: -0.01em;
+    }
+    .deck-tab-left {
+      left: 20px;
+      top: 2px;
+      width: 175px;
+      height: 48px;
+      background: #e2d4f5;
+      color: #581c87;
+      transform: rotate(-3deg);
+      transform-origin: bottom left;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 -4px 14px rgba(88, 28, 135, 0.12);
+      z-index: 1;
+    }
+    .deck-tab-right {
+      left: 170px;
+      top: 6px;
+      width: 180px;
+      height: 45px;
+      background: #c8ede6;
+      color: #065f46;
+      transform: rotate(2deg);
+      transform-origin: bottom right;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 -4px 14px rgba(6, 95, 70, 0.12);
+      z-index: 2;
+    }
+    /* Mint Tab Overrides for Minseo's Deck */
+    .beat-card-deck.mint .deck-tab-left {
+      background: #c8ede6;
+      color: #065f46;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 -4px 14px rgba(6, 95, 70, 0.12);
+    }
+    .beat-card-deck.mint .deck-tab-right {
+      background: #d1fae5;
+      color: #047857;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 -4px 14px rgba(4, 120, 87, 0.12);
+    }
+
+    /* Card Wrap (Full Card Component with Shadow & Border) */
+    .beat-card-wrap {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      border-radius: 38px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      padding: 1.8rem 1.6rem 1.6rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(168deg, #fce8f1 0%, #fff0f3 32%, #fff7f2 68%, #fef5e8 100%);
+      box-shadow: 0 24px 50px -12px rgba(244, 114, 182, 0.22), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+    }
+    .beat-card-wrap.mint {
+      background: linear-gradient(168deg, #eff6ff 0%, #f0fdfa 35%, #ecfdf5 75%, #fdf2f8 100%);
+      box-shadow: 0 24px 50px -12px rgba(20, 184, 166, 0.22), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+    }
+    .beat-card-wrap.calmed {
+      background: linear-gradient(168deg, #f0fdf4 0%, #fff7ed 38%, #fff1f2 72%, #fce7f3 100%);
+      box-shadow: 0 24px 50px -12px rgba(34, 197, 94, 0.22), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Message First Reveal Motion */
+    .beat-card-wrap .minseo-incoming-badge,
+    .beat-card-wrap .calmed-incoming-badge {
+      transform: translateY(0) scale(1);
+      transition: transform 0.62s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.62s ease;
+      will-change: transform;
+    }
+    .beat-card-wrap.msg-first .minseo-incoming-badge,
+    .beat-card-wrap.msg-first .calmed-incoming-badge {
+      transform: translateY(85px) scale(1.08);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+      z-index: 10;
+    }
+
+    .beat-card-wrap .beat-metric-section,
+    .beat-card-wrap .heart-stage-wrap,
+    .beat-card-wrap .beat-msg-row,
+    .beat-card-wrap .beat-pair-box,
+    .beat-card-wrap .beat-btn-wrapper {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .beat-card-wrap.msg-first .beat-metric-section,
+    .beat-card-wrap.msg-first .heart-stage-wrap,
+    .beat-card-wrap.msg-first .beat-msg-row,
+    .beat-card-wrap.msg-first .beat-pair-box,
+    .beat-card-wrap.msg-first .beat-btn-wrapper {
+      opacity: 0;
+      transform: translateY(22px);
+      pointer-events: none;
+    }
+    .beat-card-wrap:not(.msg-first) .beat-metric-section {
+      transition-delay: 0.1s;
+    }
+    .beat-card-wrap:not(.msg-first) .heart-stage-wrap {
+      transition-delay: 0.2s;
+    }
+    .beat-card-wrap:not(.msg-first) .beat-msg-row,
+    .beat-card-wrap:not(.msg-first) .beat-pair-box,
+    .beat-card-wrap:not(.msg-first) .beat-btn-wrapper {
+      transition-delay: 0.3s;
+    }
+
+    /* Transmission Center Stage Overlay */
+    .beat-transmit-stage {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.92);
+      width: 100%;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 10;
+    }
+    .beat-transmit-stage.active {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+    .transmit-rings-box {
+      position: relative;
+      width: 160px;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.9rem;
+    }
+    .transmit-rings-img {
+      width: 95px;
+      height: 95px;
+      object-fit: contain;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 10px 20px rgba(244, 114, 182, 0.35));
+      animation: floatRings 2s ease-in-out infinite alternate;
+    }
+    @keyframes floatRings {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-5px) rotate(-1.5deg); }
+    }
+    .transmit-pulse-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(244, 114, 182, 0.6);
+      animation: transmitRadar 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+    }
+    .transmit-pulse-ring.ring-1 { width: 120px; height: 120px; }
+    .transmit-pulse-ring.ring-2 { width: 170px; height: 170px; animation-delay: 0.45s; }
+    @keyframes transmitRadar {
+      0% { transform: scale(0.6); opacity: 0.85; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+    .transmit-caption {
+      font-size: 0.90rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 0;
+      background: rgba(255, 255, 255, 0.94);
+      padding: 0.5rem 1.15rem;
+      border-radius: 999px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Top Bar: MY HEARTBEAT and Outline Heart */
+    .beat-card-topbar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      padding: 0 0.2rem;
+      box-sizing: border-box;
+    }
+    .beat-top-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #1f2937;
+    }
+    .beat-top-label.mint {
+      color: #0d9488;
+    }
+    .beat-top-heart {
+      width: 20px;
+      height: 19px;
+      color: #1f2937;
+    }
+    .beat-top-heart.mint {
+      color: #0d9488;
+    }
+
+    /* Top Metric Section */
+    .beat-metric-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+    .beat-metric-display {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 5px;
+      line-height: 1;
+    }
+    .beat-bpm-num {
+      font-size: 4.2rem;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      color: #e11d48;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+    .beat-bpm-num.calm {
+      color: #0f766e;
+    }
+    .beat-bpm-num.calmed {
+      color: #166534;
+    }
+    .beat-bpm-unit {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: 0.04em;
+    }
+    .beat-metric-sub {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #6b7280;
+      margin-top: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Heart Stage Wrap */
+    .heart-stage-wrap {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 135px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.1rem 0 0.4rem;
+    }
+    .heart-3d-visual {
+      position: relative;
+      z-index: 3;
+      width: 95px;
+      height: 95px;
+      object-fit: contain;
+      margin: 0 auto;
+      transform-origin: center;
+    }
+    .heart-fast-pulse {
+      animation: heartbeatFast 0.82s cubic-bezier(0.25, 0.1, 0.25, 1) infinite !important;
+    }
+    .heart-calm-pulse {
+      animation: heartbeatCalm 1.8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite !important;
+    }
+    .heart-steady-pulse {
+      animation: heartbeatSteady 1.45s cubic-bezier(0.25, 0.1, 0.25, 1) infinite !important;
+    }
+
+    @keyframes heartbeatFast {
+      0% { transform: scale(1); filter: drop-shadow(0 10px 20px rgba(229, 72, 87, 0.35)); }
+      14% { transform: scale(1.16); filter: drop-shadow(0 18px 36px rgba(229, 72, 87, 0.6)); }
+      28% { transform: scale(1); filter: drop-shadow(0 10px 20px rgba(229, 72, 87, 0.35)); }
+      42% { transform: scale(1.22); filter: drop-shadow(0 20px 42px rgba(229, 72, 87, 0.65)); }
+      70% { transform: scale(1); filter: drop-shadow(0 10px 20px rgba(229, 72, 87, 0.35)); }
+      100% { transform: scale(1); filter: drop-shadow(0 10px 20px rgba(229, 72, 87, 0.35)); }
+    }
+    @keyframes heartbeatCalm {
+      0% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(13, 148, 136, 0.25)); }
+      20% { transform: scale(1.08); filter: drop-shadow(0 14px 28px rgba(13, 148, 136, 0.38)); }
+      40% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(13, 148, 136, 0.25)); }
+      60% { transform: scale(1.10); filter: drop-shadow(0 15px 30px rgba(13, 148, 136, 0.40)); }
+      80% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(13, 148, 136, 0.25)); }
+      100% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(13, 148, 136, 0.25)); }
+    }
+    @keyframes heartbeatSteady {
+      0% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(229, 72, 87, 0.25)); }
+      16% { transform: scale(1.09); filter: drop-shadow(0 14px 28px rgba(229, 72, 87, 0.38)); }
+      32% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(229, 72, 87, 0.25)); }
+      48% { transform: scale(1.12); filter: drop-shadow(0 16px 30px rgba(229, 72, 87, 0.40)); }
+      70% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(229, 72, 87, 0.25)); }
+      100% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(229, 72, 87, 0.25)); }
+    }
+
+    /* Pulse Expanding Wave */
+    .beat-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 2;
+    }
+    .beat-ripple.active {
+      animation: rippleWave 1.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+    }
+    .beat-ripple.mint.active {
+      animation: rippleWaveMint 1.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+    }
+    @keyframes rippleWave {
+      0% {
+        width: 100px;
+        height: 100px;
+        opacity: 0.85;
+        border: 2px solid var(--red-primary);
+        box-shadow: 0 0 25px rgba(229, 72, 87, 0.4);
+      }
+      100% {
+        width: 480px;
+        height: 480px;
+        opacity: 0;
+        border: 1px solid rgba(229, 72, 87, 0.2);
+        box-shadow: 0 0 50px transparent;
+      }
+    }
+    @keyframes rippleWaveMint {
+      0% {
+        width: 100px;
+        height: 100px;
+        opacity: 0.85;
+        border: 2px solid #0d9488;
+        box-shadow: 0 0 25px rgba(13, 148, 136, 0.4);
+      }
+      100% {
+        width: 480px;
+        height: 480px;
+        opacity: 0;
+        border: 1px solid rgba(13, 148, 136, 0.2);
+        box-shadow: 0 0 50px transparent;
+      }
+    }
+
+    /* Clean Input Rows */
+    .beat-msg-row {
+      width: 100%;
+      margin: 0.35rem 0 0.85rem;
+    }
+    .beat-msg-input {
+      width: 100%;
+      padding: 0.68rem 1.0rem;
+      border-radius: 16px;
+      border: 1px solid rgba(244, 114, 182, 0.35);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #1f2937;
+      text-align: center;
+      box-sizing: border-box;
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(244, 114, 182, 0.08);
+      font-family: inherit;
+    }
+    .beat-msg-input:focus {
+      border-color: #f43f5e;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
+    }
+    .beat-msg-input.mint {
+      border-color: rgba(20, 184, 166, 0.35);
+      box-shadow: 0 2px 8px rgba(20, 184, 166, 0.08);
+    }
+    .beat-msg-input.mint:focus {
+      border-color: #0d9488;
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    /* Minseo incoming badge */
+    .minseo-incoming-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.32rem 0.8rem;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-radius: 999px;
+      margin-bottom: 0.45rem;
+      max-width: 95%;
+      box-shadow: 0 2px 8px rgba(244, 63, 94, 0.06);
+    }
+    .incoming-label-red {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #e11d48;
+      background: #ffe4e6;
+      padding: 1px 6px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .incoming-label-green {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #16a34a;
+      background: #dcfce7;
+      padding: 1px 7px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .calmed-incoming-badge {
+      border-color: rgba(34, 197, 94, 0.35);
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.08);
+      background: rgba(255, 255, 255, 0.95);
+    }
+    .incoming-text-msg {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #374151;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Calmed Reply Bubble in Jiwoo's returned card */
+    .calmed-reply-bubble {
+      width: 100%;
+      margin: 0.2rem 0 0.85rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      box-shadow: 0 2px 10px rgba(34, 197, 94, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      box-sizing: border-box;
+    }
+    .reply-tag-mint {
+      font-size: 0.70rem;
+      font-weight: 700;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .reply-text-quote {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* Sender & Receiver Row + Subtext */
+    .beat-pair-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0.9rem;
+      width: 100%;
+    }
+    .beat-pair-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.01em;
+    }
+    .pair-sender {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pair-dot-filled {
+      width: 9px;
+      height: 9px;
+      background: #ef4444;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+    }
+    .pair-dot-filled.mint {
+      background: #0d9488;
+      box-shadow: 0 0 8px rgba(13, 148, 136, 0.6);
+    }
+    .pair-dot-filled.green {
+      background: #16a34a;
+      box-shadow: 0 0 8px rgba(22, 163, 74, 0.6);
+    }
+    .pair-arrow {
+      font-size: 1.15rem;
+      color: #374151;
+      font-weight: 400;
+    }
+    .pair-arrow.mint {
+      color: #0d9488;
+    }
+    .pair-receiver {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pair-dot-hollow {
+      width: 9px;
+      height: 9px;
+      border: 1.8px solid #ef4444;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      transition: all 0.4s ease;
+    }
+    .pair-dot-hollow.mint {
+      border-color: #0d9488;
+    }
+    .beat-status-msg {
+      font-size: 0.86rem;
+      color: #6b7280;
+      margin-top: 0.40rem;
+      font-weight: 500;
+      min-height: 20px;
+      transition: color 0.3s ease;
+    }
+
+    /* Send Button Interactive & Floating Tooltip */
+    .beat-btn-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .beat-tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--red-primary);
+      color: #fff;
+      padding: 0.30rem 0.82rem;
+      border-radius: 9999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      box-shadow: 0 6px 18px rgba(229, 72, 87, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 10;
+      animation: tooltipFloat 2.2s ease-in-out infinite alternate;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .beat-tooltip .tooltip-badge {
+      font-size: 0.72rem;
+      line-height: 1;
+    }
+    .beat-tooltip .tooltip-text {
+      font-size: 0.74rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .beat-tooltip .tooltip-arrow {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid var(--red-primary);
+    }
+    @keyframes tooltipFloat {
+      0% { transform: translate(-50%, 0); }
+      100% { transform: translate(-50%, -3px); }
+    }
+
+    /* Solid Pill Buttons */
+    .btn-beat-send {
+      width: 100%;
+      padding: 1.0rem 1.4rem;
+      font-size: 0.98rem;
+      font-weight: 700;
+      border-radius: 9999px;
+      background: #18181b;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: none;
+      position: relative;
+      z-index: 5;
+    }
+    .btn-beat-send:hover {
+      background: #000000;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    }
+    .btn-beat-arrow {
+      font-size: 1.15rem;
+      font-weight: 600;
+      transition: transform 0.2s ease;
+    }
+    .btn-beat-send:hover .btn-beat-arrow {
+      transform: translateX(3px);
+    }
+    .btn-reply-mint:hover .btn-beat-arrow {
+      transform: translateX(-3px);
+    }
+    .btn-reply-mint {
+      background: linear-gradient(135deg, #0d9488 0%, #059669 100%) !important;
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.28) !important;
+    }
+    .btn-reply-mint:hover {
+      background: linear-gradient(135deg, #0f766e 0%, #047857 100%) !important;
+      box-shadow: 0 12px 28px rgba(13, 148, 136, 0.38) !important;
+    }
+    .btn-replay-dark {
+      background: #1f2937 !important;
+      box-shadow: 0 8px 24px rgba(31, 41, 55, 0.2) !important;
+    }
+    .btn-replay-dark:hover {
+      background: #111827 !important;
+    }
+
+    .beat-card-note {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-subtle);
+      margin-top: 0.95rem;
+      margin-bottom: 0;
+      letter-spacing: -0.01em;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    /* 03. SECTION: SLEEP GARDEN */
+    #sleep-garden.section-wrap {
+      background: linear-gradient(180deg, #fbfaff 0%, #f6f3fc 100%);
+      border-top: 1px solid rgba(124, 58, 237, 0.08);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.08);
+    }
+    .garden-studio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    .garden-media-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+    .garden-rings-img {
+      width: 100%;
+      max-width: 580px;
+      height: auto !important;
+      aspect-ratio: 3 / 2 !important;
+      object-fit: contain !important;
+      display: block;
+      filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.06));
+      transition: transform 0.4s ease;
+    }
+    .garden-rings-img:hover {
+      transform: translateY(-4px);
+    }
+
+    /* 04. SECTION: WIDE HORIZONTAL STORY SLIDER */
+    .story-slider-outer {
+      width: 100%;
+      position: relative;
+      overflow: visible;
+      margin-top: 1.5rem;
+    }
+    .story-slider-track {
+      display: flex;
+      gap: 1.8rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      /* Left and right margins match the standard container start line: */
+      padding-left: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
+      padding-right: 0;
+      scroll-padding-left: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
+      scroll-padding-right: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
+      padding-top: 0.8rem;
+      padding-bottom: 2.2rem;
+      box-sizing: border-box;
+    }
+    .story-slider-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .story-slide-card {
+      position: relative;
+      flex: 0 0 clamp(500px, 46vw, 620px);
+      width: clamp(500px, 46vw, 620px);
+      height: 520px;
+      scroll-snap-align: start;
+      border-radius: 32px;
+      overflow: hidden;
+      background: #111218;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.6rem 2.4rem;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      cursor: grab;
+      user-select: none;
+    }
+    .story-slide-card:last-child {
+      margin-right: max(2.5rem, calc((100vw - 1160px) / 2 + 2.5rem));
+      scroll-snap-align: start end;
+    }
+    .story-slide-card:active {
+      cursor: grabbing;
+    }
+    .story-slide-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.12);
+    }
+
+    .story-card-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 46%;
+      filter: brightness(0.88);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+      transform: scale(1.02);
+    }
+    .story-slide-card:nth-child(1) .story-card-bg {
+      object-position: center 46%;
+    }
+    .story-slide-card:nth-child(2) .story-card-bg {
+      object-position: center 48%;
+    }
+    .story-slide-card:nth-child(3) .story-card-bg {
+      object-position: center 48%;
+    }
+    .story-slide-card:hover .story-card-bg {
+      transform: scale(1.06);
+      filter: brightness(0.92);
+    }
+
+    .story-card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 32%, rgba(10, 10, 14, 0.55) 60%, rgba(10, 10, 14, 0.92) 100%);
+      pointer-events: none;
+    }
+
+    .story-card-content {
+      position: relative;
+      z-index: 2;
+    }
+    .story-tag {
+      font-size: 0.80rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ddd6fe;
+      margin-bottom: 0.75rem;
+    }
+    .story-tag.red {
+      color: #fecdd3;
+    }
+    .story-card-title {
+      font-size: 1.62rem;
+      font-weight: 900;
+      line-height: 1.32;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.7rem;
+      color: #ffffff;
+    }
+    .story-card-desc {
+      font-size: 0.98rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+    }
+
+    /* Slider Pagination Only */
+    .story-slider-pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 0.5rem;
+    }
+    .story-slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      background: rgba(0, 0, 0, 0.18);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .story-slider-dot:hover {
+      background: rgba(0, 0, 0, 0.35);
+    }
+    .story-slider-dot.active {
+      width: 32px;
+      background: #1a1a1a;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 04-A. OUR RHYTHM ARCHIVE */
+    .rhythm-archive-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: stretch;
+      margin-top: 3.0rem;
+    }
+    .rhythm-left-col {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      height: 100%;
+    }
+    .rhythm-photo-card {
+      position: relative;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow-card);
+      width: 100%;
+      height: 100%;
+      min-height: 480px;
+      flex: 1;
+      display: flex;
+    }
+    .rhythm-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .rhythm-photo-card:hover .rhythm-photo-img {
+      transform: scale(1.03);
+    }
+    .calendar-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 32px;
+      padding: 2.4rem 2.2rem;
+      box-shadow: var(--shadow-card);
+    }
+    .calendar-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.8rem;
+    }
+    .calendar-title-tag {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .calendar-month {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+    .cal-weekday {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-subtle);
+      padding-bottom: 0.6rem;
+    }
+    .cal-day {
+      min-height: 42px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      border-radius: 12px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .cal-day:hover {
+      background: #FAF9F6;
+    }
+    .cal-day.empty {
+      pointer-events: none;
+      opacity: 0;
+    }
+    .cal-day.active {
+      background: var(--red-primary);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(229, 72, 87, 0.35);
+    }
+    .cal-day.cycle {
+      border: 1px dashed rgba(229, 72, 87, 0.45);
+      background: var(--red-soft-bg);
+      color: var(--red-primary);
+    }
+    .cal-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--red-primary);
+      position: absolute;
+      bottom: 4px;
+    }
+    .cal-note-card {
+      background: #FAF9F6;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 20px;
+      padding: 1.2rem 1.4rem;
+      margin-top: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .cal-note-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--red-soft-bg);
+      color: var(--red-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .cal-note-meta {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-subtle);
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+    }
+    .cal-note-title {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+    .cal-note-desc {
+      font-size: 0.85rem;
+      color: var(--red-primary);
+      font-weight: 600;
+    }
+
+    /* 04-C. PRODUCT & MEMBERSHIP */
+    .product-pills-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.55rem 0.65rem;
+      margin: 1.8rem auto 3.0rem;
+    }
+    .product-pills-row .gradient-pill {
+      margin: 0 !important;
+      padding: 0.42rem 1.05rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #374151;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+    }
+    .product-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .product-glass-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 36px;
+      padding: 3.2rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    }
+    .product-card-head {
+      margin-bottom: 2.0rem;
+      text-align: left;
+    }
+    .product-card-num {
+      font-size: 0.80rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--red-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .product-card-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.02em;
+    }
+    .product-card-desc {
+      font-size: 0.96rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .product-card-media {
+      margin-top: auto;
+      padding-top: 2.0rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+    }
+    .product-duo-ring-img {
+      max-width: 290px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: contain !important;
+      filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.08));
+      animation: floatSmooth 5.5s ease-in-out infinite alternate;
+    }
+    .product-glass-card:nth-child(2) .product-card-media {
+      margin-top: 1.2rem;
+      padding-top: 1.0rem;
+      padding-bottom: 2.8rem;
+      min-height: 220px;
+    }
+    .product-heart-img {
+      max-width: 135px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 35px rgba(229, 72, 87, 0.25));
+      animation: heartbeatFast 0.8s ease-in-out infinite;
+      transform-origin: center center;
+    }
+
+    /* 04-D. QUESTIONS (FAQ) */
+    #questions .section-head {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .faq-accordion-list {
+      max-width: 820px;
+      margin: 3.0rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .faq-item:hover {
+      border-color: rgba(0, 0, 0, 0.18);
+    }
+    .faq-item.open {
+      border-color: rgba(229, 72, 87, 0.35);
+      background: #ffffff;
+      box-shadow: 0 8px 25px rgba(229, 72, 87, 0.08);
+    }
+    .faq-question-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 1.5rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: left;
+      gap: 1.2rem;
+    }
+    .faq-toggle-icon {
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--red-primary);
+      transition: transform 0.3s ease;
+      line-height: 1;
+    }
+    .faq-item.open .faq-toggle-icon {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 1.8rem;
+      font-size: 0.96rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      text-align: left;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 250px;
+      padding: 0 1.8rem 1.6rem;
+    }
+
+    /* 05. SECTION: FINAL CONVERSION */
+    #questions.section-wrap {
+      padding-bottom: 2.0rem;
+    }
+    #cta.section-wrap {
+      padding-top: 1.0rem;
+      padding-bottom: 5.5rem;
+    }
+    .cta-banner-wrap {
+      margin: 1.0rem 0 4.0rem;
+      position: relative;
+      border-radius: 40px;
+      background: linear-gradient(180deg, #ffffff 0%, #fff7f8 100%);
+      border: 1px solid rgba(229, 72, 87, 0.20);
+      padding: 5.0rem 2.0rem;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: var(--shadow-card), 0 20px 60px rgba(229, 72, 87, 0.06);
+    }
+    .cta-ring-img {
+      max-width: 290px;
+      margin: 0 auto 2.2rem;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: contain !important;
+      filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.08));
+      animation: floatSmooth 5s ease-in-out infinite alternate;
+    }
+    .cta-title {
+      font-size: clamp(2.82rem, 5.5vw, 4.22rem);
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      color: var(--text-dark);
+    }
+    .cta-desc {
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      line-height: 1.5;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 2.4rem;
+    }
+
+    /* Footer */
+    .teaser-footer {
+      padding: 3.5rem 0 5.0rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      font-size: 0.88rem;
+      color: var(--text-subtle);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-logo-img {
+      height: 24px;
+      width: auto;
+      display: block;
+      opacity: 0.9;
+      object-fit: contain;
+    }
+
+    /* Modal Styling */
+    dialog#modal,
+    dialog#modal * {
+      box-sizing: border-box;
+    }
+    dialog#modal {
+      border: none;
+      border-radius: 28px;
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 1.8rem 2.0rem 2.0rem;
+      max-width: 520px;
+      width: calc(100% - 2rem);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.16);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      z-index: 1000;
+    }
+    dialog#modal::backdrop {
+      background: rgba(15, 15, 20, 0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #FAF9F6;
+      color: var(--text-dark);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close-btn:hover {
+      background: #f0eee9;
+    }
+    .modal-head {
+      margin-bottom: 0.9rem;
+    }
+    .modal-head h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin: 0.35rem 0 0.2rem;
+      letter-spacing: -0.025em;
+      color: var(--text-dark);
+    }
+    .modal-head p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .form-group {
+      margin-bottom: 0.85rem;
+      text-align: left;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .form-sublabel {
+      display: block;
+      font-size: 0.70rem;
+      font-weight: 500;
+      color: var(--text-subtle);
+      margin-top: -0.2rem;
+      margin-bottom: 0.45rem;
+      letter-spacing: -0.01em;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.7rem 0.95rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #fafafa;
+      color: var(--text-dark);
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .form-input:focus {
+      border-color: var(--red-primary);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px var(--red-glow);
+    }
+
+    /* Unfolded Selection Chips & Cards */
+    .choice-pills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+    .choice-pill-item {
+      position: relative;
+      cursor: pointer;
+    }
+    .choice-pill-item input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .choice-pill-item span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0.45rem 0.85rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      background: #fafafa;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .choice-pill-item:hover span {
+      border-color: rgba(0, 0, 0, 0.25);
+      background: #ffffff;
+    }
+    .choice-pill-item input[type="radio"]:checked + span {
+      background: var(--text-dark);
+      color: #ffffff;
+      border-color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .choice-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 7px;
+    }
+    .choice-card-item {
+      position: relative;
+      cursor: pointer;
+    }
+    .choice-card-item input[type="radio"],
+    .choice-card-item input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .choice-card-item .card-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.6rem 0.75rem;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      background: #fafafa;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .choice-card-item:hover .card-inner {
+      border-color: rgba(0, 0, 0, 0.25);
+      background: #ffffff;
+      transform: translateY(-1px);
+    }
+    .choice-card-item input[type="radio"]:checked + .card-inner,
+    .choice-card-item input[type="checkbox"]:checked + .card-inner {
+      border-color: var(--red-primary);
+      background: var(--red-soft-bg);
+      box-shadow: 0 4px 14px rgba(229, 72, 87, 0.12);
+    }
+    .choice-card-item .card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.88rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+    }
+    .choice-card-item .card-texts {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .choice-card-item .card-texts strong {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.25;
+    }
+    .choice-card-item .card-texts small {
+      font-size: 0.70rem;
+      color: var(--text-subtle);
+      margin-top: 2px;
+    }
+
+    .form-checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      line-height: 1.35;
+    }
+    .form-checkbox-label input {
+      accent-color: var(--red-primary);
+      margin-top: 3px;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 960px) {
+      .hero-content-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2.0rem;
+      }
+      .hero-content-left {
+        width: 100%;
+        max-width: 600px;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-title, .hero-desc {
+        text-align: center;
+      }
+      .hero-desc {
+        max-width: 540px;
+      }
+      .hero-cta-group {
+        justify-content: center;
+      }
+      .teaser-ritual {
+        gap: 1.0rem;
+        font-size: 0.85rem;
+      }
+      .hero-art {
+        width: 100%;
+        max-width: 560px;
+        justify-content: center;
+        flex: none;
+      }
+      .beat-studio-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.2rem;
+      }
+      #experience .container {
+        padding: 0 1.5rem !important;
+      }
+      #experience .section-head {
+        text-align: left !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      #experience .section-title {
+        text-align: left !important;
+      }
+      #experience .section-desc {
+        text-align: left !important;
+      }
+      .story-slider-track {
+        padding-left: 1.5rem !important;
+        padding-right: 0 !important;
+        scroll-padding-left: 1.5rem !important;
+        scroll-padding-right: 1.5rem !important;
+        gap: 1.0rem !important;
+        padding-bottom: 1.4rem !important;
+      }
+      .story-slide-card {
+        flex: 0 0 clamp(285px, 80vw, 325px) !important;
+        width: clamp(285px, 80vw, 325px) !important;
+        aspect-ratio: 1 / 1 !important;
+        height: auto !important;
+        border-radius: 24px !important;
+        padding: 1.25rem 1.15rem !important;
+      }
+      .story-slide-card:last-child {
+        margin-right: 1.5rem !important;
+        scroll-snap-align: start end !important;
+      }
+      .story-slide-card .story-tag {
+        font-size: 0.70rem !important;
+        letter-spacing: 0.10em !important;
+        margin-bottom: 0.25rem !important;
+      }
+      .story-card-title {
+        font-size: 1.15rem !important;
+        font-weight: 900 !important;
+        line-height: 1.24 !important;
+        margin-bottom: 0.25rem !important;
+      }
+      .story-card-desc {
+        font-size: 0.80rem !important;
+        line-height: 1.34 !important;
+      }
+      .story-slide-card .story-card-gradient {
+        background: linear-gradient(180deg, transparent 20%, rgba(10, 10, 14, 0.45) 52%, rgba(10, 10, 14, 0.92) 100%) !important;
+      }
+      .story-slide-card .story-card-bg {
+        transform: scale(1.05) !important;
+      }
+      .story-slide-card:nth-child(1) .story-card-bg {
+        object-position: center 52% !important;
+      }
+      .story-slide-card:nth-child(2) .story-card-bg {
+        object-position: center 46% !important;
+      }
+      .story-slide-card:nth-child(3) .story-card-bg {
+        object-position: center 40% !important;
+      }
+      .rhythm-archive-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.0rem;
+      }
+      .rhythm-photo-card {
+        min-height: unset;
+        height: 300px;
+        flex: none;
+      }
+      .product-cards-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.0rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container, .container-wide {
+        padding: 0 1.25rem;
+      }
+      .nav-link {
+        display: none;
+      }
+      .nav-btn-sm {
+        display: none;
+      }
+      .teaser-nav-inner {
+        gap: 0.5rem;
+      }
+      .brand-logo img, .brand-logo-img {
+        height: 28px;
+        width: auto;
+      }
+      .lang-toggle {
+        padding: 0.38rem 0.8rem;
+        font-size: 0.78rem;
+      }
+
+      /* Mobile First Screen Hero: Title, Sub, Enlarged Hero Visual & Bottom CTA fitting in 1 Screen */
+      .hero-section {
+        min-height: calc(100dvh - 54px) !important;
+        min-height: calc(100vh - 54px) !important;
+        padding-top: 3.8rem !important;
+        padding-bottom: 0.8rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-evenly !important;
+        align-items: center !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+      }
+      .hero-content-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: space-evenly !important;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 0 0.8rem !important;
+        gap: 0 !important;
+      }
+      .hero-header-box {
+        margin: 0 auto 0.35rem auto !important;
+        text-align: center !important;
+      }
+      .hero-title {
+        font-size: clamp(1.9rem, 7.0vw, 2.35rem) !important;
+        font-weight: 900 !important;
+        line-height: 1.18 !important;
+        letter-spacing: -0.035em !important;
+        margin: 0 0 0.35rem 0 !important;
+        text-align: center !important;
+        color: #ffffff !important;
+      }
+      .hero-title .hero-accent {
+        background: linear-gradient(135deg, #ff9ca8 0%, #ff526d 50%, #ff3b56 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        display: inline-block !important;
+        font-weight: 900 !important;
+      }
+      .hero-subtitle {
+        font-size: clamp(0.95rem, 3.5vw, 1.08rem) !important;
+        font-weight: 500 !important;
+        color: rgba(255, 255, 255, 0.82) !important;
+        margin: 0 !important;
+        text-align: center !important;
+      }
+      .hero-art {
+        max-width: 420px !important;
+        width: 100% !important;
+        margin: 0.35rem auto 0.6rem auto !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex: 1 1 auto !important;
+        min-height: 0 !important;
+      }
+      .hero-art-img {
+        max-width: 100% !important;
+        width: 100% !important;
+        max-height: 44vh !important;
+        height: auto !important;
+        aspect-ratio: 1024 / 682 !important;
+        object-fit: contain !important;
+        border-radius: 0 !important;
+        -webkit-mask-image: 
+          linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+          linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%) !important;
+        -webkit-mask-composite: source-in !important;
+        mask-image: 
+          linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+          linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%) !important;
+        mask-composite: intersect !important;
+      }
+      .hero-art .floating-note {
+        display: none !important; /* Keep mobile clean and compact so all fits in 1 screen */
+      }
+      .hero-cta-group {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0.2rem auto 0.4rem auto !important;
+      }
+      .hero-btn-primary {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        background-color: #ffffff !important;
+        border-color: #ffffff !important;
+        color: #17131b !important;
+        padding: 0.82rem 2.0rem !important;
+        font-size: 0.96rem !important;
+        font-weight: 700 !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 20px rgba(255, 120, 140, 0.25) !important;
+      }
+      .hero-btn-secondary {
+        display: none !important;
+      }
+
+      /* Unified Section Mobile Padding, Head, Titles & Descs */
+      .section-wrap, #sleep-share.section-wrap, #heartbeat-send.section-wrap, #sleep-garden.section-wrap {
+        padding: 5.2rem 0 4.5rem !important;
+      }
+      .section-head, #sleep-share .section-head, #heartbeat-send .section-head, #sleep-garden .section-head {
+        padding-top: 1.0rem !important;
+        margin-bottom: 2.0rem !important;
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .gradient-pill {
+        margin-bottom: 1.0rem !important;
+      }
+      .section-title, #sleep-share .section-title, #heartbeat-send .section-title, #sleep-garden .section-title {
+        font-size: 2.17rem !important;
+        font-weight: 900 !important;
+        line-height: 1.28 !important;
+        margin: 0 0 0.75rem 0 !important;
+        text-align: center !important;
+      }
+      .section-desc, #sleep-share .section-desc, #heartbeat-send .section-desc, #sleep-garden .section-desc {
+        font-size: 0.92rem !important;
+        line-height: 1.55 !important;
+        text-align: center !important;
+      }
+
+      /* Section 01 Mobile Frame */
+      #sleep-share .privacy-tag-box {
+        margin-top: 0.8rem;
+        padding: 0.6rem 0.9rem;
+        font-size: 0.80rem;
+      }
+      .cinematic-frame {
+        min-height: 380px;
+        height: auto;
+        border-radius: 24px;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        background: #11121b;
+        padding-bottom: 0;
+      }
+      .cinematic-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .sleep-overlay-card {
+        position: relative;
+        left: unset;
+        bottom: unset;
+        transform: none;
+        margin: 1.0rem;
+        padding: 1.2rem;
+        border-radius: 20px;
+        width: calc(100% - 2.0rem);
+        max-width: 100%;
+        box-sizing: border-box;
+        text-align: left;
+      }
+      .sleep-card-hours {
+        font-size: 2.2rem;
+        margin-bottom: 0.4rem;
+      }
+      .sleep-card-status-row {
+        font-size: 0.84rem;
+        padding-top: 0.6rem;
+      }
+
+      /* Section 02 Mobile Beat Tooltip Protection & Spacing */
+      #heartbeat-send .section-head {
+        margin-bottom: 0 !important;
+      }
+      .beat-studio-grid {
+        gap: 1.6rem !important;
+      }
+      .mobile-break {
+        display: block;
+      }
+      .beat-stage-container {
+        min-height: 520px;
+        max-width: 340px;
+      }
+      .beat-card-deck {
+        max-width: 340px;
+        padding-top: 30px;
+      }
+      .deck-tab-left {
+        left: 14px;
+        top: 2px;
+        width: 145px;
+        height: 40px;
+        font-size: 0.74rem;
+        z-index: 1;
+      }
+      .deck-tab-right {
+        left: 125px;
+        right: auto;
+        top: 5px;
+        width: 140px;
+        height: 38px;
+        font-size: 0.74rem;
+        z-index: 2;
+      }
+      .beat-card-wrap {
+        position: relative;
+        z-index: 5;
+        padding: 1.3rem 1.1rem 1.2rem;
+        border-radius: 28px;
+      }
+      .beat-card-topbar {
+        margin-bottom: 0.5rem;
+      }
+      .beat-top-label {
+        font-size: 0.76rem;
+      }
+      .beat-bpm-num {
+        font-size: 3.4rem;
+      }
+      .beat-bpm-unit {
+        font-size: 1.0rem;
+      }
+      .beat-metric-sub {
+        font-size: 0.80rem;
+        margin-top: 0.2rem;
+      }
+      .heart-stage-wrap {
+        height: 110px;
+        margin: 0.05rem 0 0.2rem;
+      }
+      .heart-3d-visual {
+        width: 80px;
+        height: 80px;
+      }
+      .beat-pair-box {
+        margin-bottom: 0.75rem;
+      }
+      .beat-pair-indicator {
+        font-size: 0.94rem;
+        gap: 10px;
+      }
+      .beat-status-msg {
+        font-size: 0.78rem;
+        margin-top: 0.25rem;
+        min-height: 18px;
+      }
+      .btn-beat-send {
+        padding: 0.90rem 1.1rem;
+        font-size: 0.90rem;
+      }
+      .beat-card-note {
+        font-size: 0.76rem !important;
+        margin-top: 0.85rem !important;
+        color: var(--text-subtle) !important;
+      }
+
+      /* Section 03 Sleep Garden Mobile */
+      .garden-studio-grid {
+        grid-template-columns: 1fr;
+        gap: 0.6rem !important;
+        text-align: center;
+      }
+      .garden-media-stage {
+        margin-top: -0.4rem !important;
+      }
+      .garden-rings-img {
+        max-width: 320px;
+        margin: 0 auto;
+        aspect-ratio: 3 / 2 !important;
+        object-fit: contain !important;
+      }
+      .product-pills-row {
+        gap: 0.45rem 0.55rem !important;
+        margin: 1.2rem auto 2.2rem !important;
+        max-width: 320px !important;
+      }
+      .product-pills-row .gradient-pill {
+        margin: 0 !important;
+        padding: 0.38rem 0.88rem !important;
+        font-size: 0.78rem !important;
+      }
+      .product-glass-card {
+        padding: 2.2rem 1.5rem;
+        border-radius: 26px;
+      }
+      .product-card-title {
+        font-size: 1.5rem;
+      }
+      .product-duo-ring-img {
+        max-width: 220px;
+      }
+      .calendar-card {
+        padding: 1.6rem 1.2rem;
+      }
+      .cal-day {
+        min-height: 36px;
+        font-size: 0.85rem;
+      }
+      #questions.section-wrap {
+        padding-bottom: 1.2rem !important;
+      }
+      #cta.section-wrap {
+        padding-top: 0.6rem !important;
+        padding-bottom: 2.8rem !important;
+      }
+      .cta-banner-wrap {
+        padding: 2.0rem 1.2rem 1.8rem !important;
+        margin: 0.6rem 0 2.0rem !important;
+        border-radius: 26px;
+      }
+      .cta-ring-img {
+        max-width: 135px !important;
+        margin: 0 auto 0.8rem !important;
+      }
+      .cta-banner-wrap .gradient-pill {
+        margin-bottom: 0.65rem !important;
+        font-size: 0.74rem !important;
+        padding: 0.28rem 0.75rem !important;
+      }
+      .cta-title {
+        font-size: 1.82rem !important;
+        font-weight: 900 !important;
+        line-height: 1.22 !important;
+        margin-bottom: 0.65rem !important;
+      }
+      .cta-desc {
+        font-size: 0.86rem !important;
+        line-height: 1.4 !important;
+        max-width: 290px !important;
+        margin: 0 auto 1.35rem !important;
+      }
+      #bottom-signup-btn {
+        padding: 0.82rem 1.6rem !important;
+        font-size: 0.95rem !important;
+      }
+
+      /* Mobile Modal Polish */
+      dialog#modal {
+        padding: 1.4rem 1.1rem 1.6rem !important;
+        border-radius: 22px !important;
+        max-height: 88vh !important;
+        width: calc(100% - 1.5rem) !important;
+      }
+      .modal-head {
+        margin-bottom: 0.75rem !important;
+      }
+      .modal-head h2 {
+        font-size: 1.25rem !important;
+      }
+      .form-group {
+        margin-bottom: 0.75rem !important;
+      }
+      .choice-pills-grid {
+        gap: 6px !important;
+      }
+      .choice-pill-item span {
+        padding: 0.4rem 0.72rem !important;
+        font-size: 0.78rem !important;
+      }
+      .choice-cards-grid {
+        gap: 6px !important;
+      }
+      .choice-card-item .card-inner {
+        padding: 0.5rem 0.6rem !important;
+      }
+      .choice-card-item .card-texts strong {
+        font-size: 0.78rem !important;
+      }
+      .choice-card-item .card-texts small {
+        font-size: 0.68rem !important;
+      }
+    }
+  
+    /* Sleep intro: full container, consistent title and body columns. */
+    #sleep-share .section-head {
+      width: 100%; max-width: none;
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: clamp(2rem, 5vw, 4rem); row-gap: 1rem;
+      align-items: start;
+    }
+    #sleep-share .section-head > .gradient-pill { grid-column: 1 / -1; justify-self: start; }
+    #sleep-share .section-title { grid-column: 1; grid-row: 2 / 4; margin: 0; word-break: keep-all; }
+    #sleep-share .section-desc { grid-column: 2; margin: 0; max-width: none; word-break: keep-all; overflow-wrap: break-word; }
+    #sleep-share .privacy-tag-box { grid-column: 2; width: 100%; min-width: 0; margin: 0; align-items: flex-start; line-height: 1.65; word-break: keep-all; }
+    #sleep-share .privacy-icon { flex: 0 0 auto; }
+    #sleep-share .privacy-tag-box strong { display: block; }
+    #sleep-share .typing-badge { min-width: 5.2em; white-space: nowrap; justify-content: center; }
+    @media (max-width: 760px) {
+      #sleep-share .section-head { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+      #sleep-share .section-title { font-size: clamp(1.6rem, 6.3vw, 2.17rem) !important; width: 100%; }
+      #sleep-share .section-desc { width: 100%; max-width: 32rem; }
+      #sleep-share .privacy-tag-box { max-width: 32rem; text-align: left; }
+      #sleep-share .section-head > .gradient-pill { margin-bottom: 0 !important; }
+    }
+  
+    .shared-mornings { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px; }
+    .morning-scene { position:relative; min-width:0; border-radius:28px; overflow:hidden; background:#f5efe7; border:1px solid #e9e1d9; }
+    .morning-art { position:relative; width:100%; aspect-ratio:1; overflow:hidden; }
+    .morning-art img { display:block; position:absolute; width:200%; max-width:none; height:100%; object-fit:fill; transform:none; transition:none; }
+    .morning-scene-man .morning-art img { left:-100%; }
+    .morning-person { position:absolute; top:20px; left:20px; padding:7px 12px; border-radius:20px; background:rgba(255,255,255,.9); color:#473b36; font-size:.8rem; font-weight:700; }
+    .received-sleep { position:relative; margin:-105px 22px 22px; padding:22px; border-radius:20px; background:rgba(255,255,255,.96); border:1px solid rgba(255,255,255,.9); box-shadow:0 8px 30px #3e2a1710; }
+    .received-sleep-heading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; font-size:.95rem; }
+    .received-sleep-heading > span { font-size:.72rem; color:#735691; background:#f4edf9; border-radius:20px; padding:4px 8px; }
+    .received-sleep-duration { margin:12px 0; font-size:2.6rem; line-height:1.15; font-weight:800; letter-spacing:-.04em; color:#302936; }
+    .received-sleep-duration span { font-size:1.25rem; font-weight:500; margin-left:2px; color:#8d818b; }
+    .received-sleep-note { border-top:1px solid #ece7ed; padding-top:12px; }
+    .received-sleep-note > span { font-size:.72rem; color:#807585; }
+    .received-sleep-note p { font-size:.94rem; margin:5px 0 0; color:#514757; word-break:keep-all; }
+    .morning-example { text-align:right; font-size:.75rem; color:#89828c; margin:12px 0 0; }
+    @media(max-width:760px) {
+      .shared-mornings { grid-template-columns:minmax(0,1fr); gap:20px; }
+      .morning-scene { border-radius:22px; }
+      .received-sleep { margin:-45px 14px 14px; padding:18px; }
+      .morning-example { text-align:center; font-size:.68rem; }
+    }
+
+    .sleep-analysis-summary { display:flex; justify-content:space-between; gap:10px; color:#877b8d; font-size:.74rem; margin-top:-5px; }
+    .sleep-analysis-summary b { color:#53445e; font-weight:600; }
+    .sleep-stage-bar { display:flex; gap:3px; height:9px; overflow:hidden; border-radius:8px; margin:17px 0 12px; }
+    .stage-deep { background:#806398; }
+    .stage-light { background:#d6c5e1; }
+    .stage-rem { background:#b297c5; }
+    .sleep-stage-values { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; margin:0 0 16px; }
+    .sleep-stage-values dt { font-size:.69rem; color:#81718a; white-space:nowrap; }
+    .sleep-stage-values dt i { display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:4px; }
+    .sleep-stage-values dd { font-size:.9rem; font-weight:650; color:#54425e; margin:5px 0 0; }
+    @media(max-width:360px) { .sleep-stage-values dt { font-size:.62rem; } .sleep-stage-values dd { font-size:.8rem; } }
+
+    /* Consent note belongs to the fixed introduction, outside the animated deck. */
+    #heartbeat-send .section-head .beat-card-note {
+      position:static; inset:auto; transform:none; width:fit-content; max-width:100%;
+      margin:1.4rem 0 0; padding:.7rem 1rem;
+      border:1px solid #e8e2ec; border-radius:12px; background:#faf8fc;
+      color:#74667e; font-size:.82rem; line-height:1.6; text-align:left;
+      grid-column:auto; justify-self:auto;
+    }
+    @media(max-width:760px) {
+      #heartbeat-send .section-head .beat-card-note { margin:1.2rem auto 0; text-align:center; }
+    }
+    #heartbeat-send #deck-jiwoo .beat-btn-wrapper { margin-top: 32px; }
+#rhythm-archive { background:#faf8f5; }
+.archive-intro { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; margin-bottom:2.5rem; }
+.archive-intro .section-desc { word-break:keep-all; }
+.archive-guide { margin-top:16px; font-size:.85rem; color:#917c69; }
+.archive-workspace { display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:24px; align-items:stretch; }
+.archive-story { position:relative; border-radius:28px; overflow:hidden; background:#302b37; min-height:670px; }
+.archive-story>img { position:absolute; width:100%; height:100%; object-fit:cover; transition:none; }
+.archive-story:after { content:''; position:absolute; inset:35% 0 0; background:linear-gradient(transparent,rgba(22,18,28,.85)); pointer-events:none; }
+.archive-story-caption { position:absolute; bottom:32px; left:30px; right:30px; color:white; z-index:1; }
+.archive-story-caption>span { font-size:.8rem; opacity:.85; letter-spacing:.1em; }
+.archive-story-caption h3 { font-size:clamp(1.7rem,2.5vw,2.2rem); margin:12px 0; line-height:1.3; word-break:keep-all; }
+.archive-story-caption p { font-size:.92rem; line-height:1.7; color:#efe5dd; }
+.archive-console { min-width:0; background:#fff; border:1px solid #ece6e1; border-radius:28px; padding:26px; }
+.archive-month { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+.archive-month h3 { margin:4px 0 0; font-size:1.6rem; letter-spacing:-.05em; }
+.archive-month span { font-size:.75rem; color:#897b8e; }
+.archive-count { padding:6px 10px; background:#f5eff8; border-radius:20px; }
+.archive-calendar { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:3px; }
+.archive-weekday { font-size:.68rem; color:#a39aa6; text-align:center; padding:5px; }
+.archive-day { position:relative; border:0; border-radius:10px; background:transparent; height:35px; font:inherit; font-size:.8rem; color:#bbb4bf; }
+.archive-day[data-record] { color:#594166; cursor:pointer; font-weight:700; background:#faf7fc; }
+.archive-day[data-record]:after { content:''; position:absolute; width:4px; height:4px; border-radius:50%; background:#b598c4; bottom:3px; left:calc(50% - 2px); }
+.archive-day[aria-pressed=true] { color:white; background:#8d6ba5; }
+.archive-day[aria-pressed=true]:after { background:white; }
+.archive-day:focus-visible,.archive-moments button:focus-visible,#archive-demo-btn:focus-visible { outline:2px solid #805a9b; outline-offset:3px; }
+.archive-calendar-key { display:flex; align-items:center; gap:6px; font-size:.67rem; color:#a090aa; margin:9px 0 18px; }
+.archive-calendar-key i { width:4px; height:4px; border-radius:50%; background:#b598c4; }
+.archive-record { border-top:1px solid #eee8f0; padding-top:18px; }
+.archive-record-head { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.archive-record-head strong { font-size:.87rem; }
+.archive-record-head>span { color:#96899c; font-size:.65rem; }
+.archive-chart svg { display:block; width:100%; height:auto; margin:12px 0 4px; overflow:visible; }
+.archive-legend { display:flex; gap:12px; align-items:center; font-size:.65rem; color:#807087; }
+.archive-legend>span { display:flex; gap:4px; align-items:center; }
+.archive-legend i { width:12px; height:3px; border-radius:4px; background:#b97180; }
+.archive-legend>span:nth-child(2) i { background:#8570af; }
+.archive-legend small { margin-left:auto; font-size:.62rem; }
+.archive-moments { display:flex; gap:6px; margin:14px 0 10px; }
+.archive-moments button { flex:1; min-width:0; border:1px solid #e8e0ec; border-radius:10px; padding:8px 4px; background:white; color:#82728b; cursor:pointer; font:inherit; font-size:.72rem; }
+.archive-moments button[aria-pressed=true] { background:#f5edf8; border-color:#cbb5d9; color:#6b4b7d; }
+.archive-moment-detail { padding:13px; background:#faf7f3; border-radius:12px; font-size:.81rem; line-height:1.65; min-height:88px; }
+.archive-moment-detail p { margin:4px 0 0; color:#968379; font-size:.74rem; }
+.archive-demo { border-top:1px solid #eee8f0; margin-top:18px; padding-top:16px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.archive-demo>span { font-size:.65rem; color:#93859b; }
+#archive-demo-btn { border:0; border-radius:20px; padding:10px 14px; background:#302733; color:white; font:inherit; font-size:.73rem; cursor:pointer; }
+#archive-demo-btn:disabled { opacity:.55; cursor:wait; }
+@media(max-width:960px) { .archive-intro { gap:2rem; } .archive-workspace { grid-template-columns:1fr; } .archive-story { min-height:390px; } .archive-story>img { object-position:center 45%; } }
+@media(max-width:600px) { .archive-intro { grid-template-columns:1fr; gap:12px; text-align:center; } .archive-intro .section-title { font-size:2rem!important; } .archive-story { min-height:360px; border-radius:22px; } .archive-console { padding:18px; border-radius:22px; } .archive-story-caption { left:22px; right:22px; bottom:22px; } .archive-demo { flex-wrap:wrap; } .archive-record-head { flex-wrap:wrap; } .archive-legend { gap:9px; } }
+
+
+    #cta .cta-banner-wrap { border:0; border-radius:0; box-shadow:none; background:transparent; margin:0; padding:4rem 1rem; }
+    #cta .cta-title { font-size:clamp(1.8rem,3.3vw,2.8rem); word-break:keep-all; }
+    #cta .cta-desc { line-height:1.8; word-break:keep-all; }
+    @media(max-width:600px) { #cta .cta-desc br { display:none; } #cta .cta-desc { line-height:1.8!important; max-width:360px!important; } }
+
+    #nav-signup-btn[hidden] { display:none !important; }
+    #nav-signup-btn:not([hidden]) { display:inline-flex; }
+    @media(max-width:760px) {
+      .hero-section { min-height:100svh!important; padding:90px 0 30px!important; }
+      .hero-content-container { height:auto!important; flex:1; justify-content:center!important; gap:22px!important; padding:0!important; }
+      .hero-header-box { padding:0 18px; }
+      .hero-art { width:130vw!important; max-width:680px!important; flex:0 0 auto!important; margin:0!important; }
+      .hero-art-img { width:100%!important; max-width:none!important; height:auto!important; max-height:none!important; }
+      .hero-cta-group { margin:0!important; }
+      #nav-signup-btn:not([hidden]) { display:inline-flex!important; padding:.5rem .8rem; font-size:.76rem; }
+      .nav-actions { gap:.5rem; }
+    }
+
+    /* Hero copy sits between the couple, as in the approved composition. */
+    .hero-section { padding-top:72px; padding-bottom:0; min-height:100svh; }
+    .hero-content-container { padding:0; justify-content:center; min-height:calc(100svh - 72px); }
+    .hero-art { width:100%; max-width:1300px; margin:0; }
+    .hero-art-img { width:100%; max-height:none; }
+    .hero-header-box { position:absolute; top:29%; left:0; right:0; margin:0; padding:0 18px; z-index:4; }
+    .hero-title { text-shadow:0 2px 18px rgba(15,10,20,.45); }
+    .hero-subtitle { text-shadow:0 2px 12px #17111b; }
+    .hero-cta-group { position:absolute; bottom:6%; left:0; margin:0; }
+    @media(max-width:760px) {
+      .hero-section { padding:60px 0 0!important; }
+      .hero-content-container { min-height:calc(100svh - 60px); gap:0!important; }
+      .hero-header-box { top:38%; }
+      .hero-title { font-size:clamp(1.6rem,6.5vw,2.35rem)!important; }
+      .hero-cta-group { bottom:8%; }
+    }
+
+    @media(max-width:760px) {
+      .teaser-nav-inner { position:relative; padding-bottom:42px!important; }
+      .nav-actions { gap:.5rem; }
+      .nav-link { display:block!important; position:absolute; bottom:10px; font-size:.78rem; white-space:nowrap; }
+      .nav-link[href="#sleep-share"] { left:20px; }
+      .nav-link[href="#heartbeat-send"] { left:calc(50% - 38px); }
+      .nav-link[href="#rhythm-archive"] { right:20px; }
+      .hero-section { min-height:0!important; padding:106px 0 26px!important; }
+      .hero-content-container { min-height:0!important; flex:none!important; height:auto!important; justify-content:flex-start!important; gap:0!important; }
+      .hero-art { flex:none!important; width:130vw!important; margin:0!important; }
+      .hero-header-box { top:28%; }
+      .hero-cta-group { position:relative; bottom:auto; left:auto; margin:12px 0 0!important; }
+    }
+@media(max-width:760px) { .section-wrap { scroll-margin-top:118px; } }
+
+    html[lang="ja"] .hero-title { font-size:clamp(2rem,3.1vw,3rem); line-height:1.3; }
+    html[lang="ja"] .hero-title .hero-accent { display:block!important; }
+    html[lang="ja"] .hero-subtitle { margin-top:.45rem; }
+    @media(max-width:760px) {
+      .hero-section { min-height:100svh!important; padding:106px 0 30px!important; }
+      .hero-content-container { min-height:calc(100svh - 136px)!important; justify-content:center!important; }
+      .hero-header-box { top:calc(50% - 95px); }
+      html[lang="ja"] .hero-header-box { top:calc(50% - 110px); }
+      html[lang="ja"] .hero-title { font-size:clamp(1.15rem,5vw,1.5rem)!important; line-height:1.35!important; }
+      html[lang="ja"] .hero-subtitle { font-size:.78rem!important; }
+    }
+</style>
+<link rel="canonical" href="https://42sai.io/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://42sai.io/">
+  <meta property="og:site_name" content="sai">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"sai","alternateName":"사이","url":"https://42sai.io/","inLanguage":["ko","ja"]}</script>
+  <script defer src="/sai-analytics.js"></script>
+</head>
+<body>
+  <div id="root">
+        <!-- Navigation -->
+        <header class="teaser-nav">
+          <div class="container teaser-nav-inner">
+            <a class="brand-logo" href="/teaser5" aria-label="SAI">
+              <img src="/assets/teaser5/0aa36f0694031674.png" alt="SAI" class="brand-logo-img">
+            </a>
+            <div class="nav-actions">
+              <a class="nav-link" href="#sleep-share">수면 공유</a>
+              <a class="nav-link" href="#heartbeat-send">심박 보내기</a>
+              <a class="nav-link" href="#rhythm-archive">리듬 아카이브</a>
+              <button class="lang-toggle" id="lang-btn">KR / JP</button>
+              <button class="btn-gradient nav-btn-sm" id="nav-signup-btn" hidden="">
+                <span>먼저 만나기</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <!-- 01. HERO SECTION -->
+          <section class="hero-section">
+            <div class="container hero-content-container">
+              <!-- Centered Minimal Hero Header -->
+              <div class="hero-header-box">
+                <h1 class="hero-title">내 하루에, <span class="hero-accent">네가 쏙.</span></h1>
+                <p class="hero-subtitle">둘만을 위한 스마트링</p>
+              </div>
+
+              <!-- Hero Stage (Couple Night Illustration - Enlarged Showcase) -->
+              <div class="hero-art">
+                <img src="/assets/teaser5/8fb6a0376719d279.png" alt="약지에 낀 스마트링과 작은 편지로 이어지는 두 사람의 밤" class="hero-art-img" width="1024" height="682" fetchpriority="high">
+              </div>
+
+              <!-- Bottom CTA Button -->
+              <div class="hero-cta-group">
+                <button class="hero-btn-primary" id="hero-signup-btn">
+                  <span>사이 먼저 만나기 ↗</span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+
+
+          <!-- 02. SECTION: SLEEP SHARE (수면 공유) -->
+          <section class="section-wrap" id="sleep-share">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">01 / 수면 공유</span>
+                <h2 class="section-title">
+                  <span class="typing-badge"><span id="typing-text">잘 잤어?</span><span class="typing-cursor"></span></span>
+                  <br>오늘의 안부는,<br>어젯밤부터.
+                </h2>
+                <p class="section-desc">얼마나 오래, 얼마나 깊이 잤는지 함께 알아요.<br>수면 분석에 오늘의 컨디션을 더해, 아침의 안부를 나눠요.</p>
+                <div class="privacy-tag-box">
+                  <span class="privacy-icon">✓</span>
+                  <span><strong>공유할 항목은 내가 선택해요.</strong> 선택하지 않은 정보는 상대에게 보이지 않아요.</span>
+                </div>
+              </div>
+
+              <!-- Separate mornings, received sleep records -->
+              <div class="shared-mornings">
+                <article class="morning-scene morning-scene-woman">
+                  <div class="morning-art"><img src="/assets/teaser5/57d165807334a3f6.png" alt="파자마와 머리띠 차림으로 반지를 끼고 기지개를 켜며 화장실로 향하는 지우의 뒷모습"></div>
+                  <span class="morning-person">지우의 아침</span>
+                  <div class="received-sleep">
+                    <div class="received-sleep-heading"><strong>민준의 수면 분석</strong><span>공유받음</span></div>
+                    <div class="received-sleep-duration">6<span>h</span> 58<span>m</span></div><div class="sleep-analysis-summary"><span>총 수면</span><span>중간에 깸 <b>2회</b></span></div>
+                    <div class="sleep-stage-bar" aria-hidden="true"><i class="stage-deep" style="flex:17.46"></i><i class="stage-light" style="flex:59.81"></i><i class="stage-rem" style="flex:22.73"></i></div>
+                    <dl class="sleep-stage-values"><div><dt><i class="stage-deep"></i>깊은 수면</dt><dd>1h 13m</dd></div><div><dt><i class="stage-light"></i>얕은 수면</dt><dd>4h 10m</dd></div><div><dt><i class="stage-rem"></i>렘 수면</dt><dd>1h 35m</dd></div></dl>
+                    <div class="received-sleep-note"><span>직접 남긴 컨디션</span><p>“조금 졸리지만, 잘 잤어.”</p></div>
+                  </div>
+                </article>
+                <article class="morning-scene morning-scene-man">
+                  <div class="morning-art"><img src="/assets/teaser5/57d165807334a3f6.png" alt="반지를 낀 손을 올려 기지개를 켜며 침대에서 일어나는 부스스한 민준"></div>
+                  <span class="morning-person">민준의 아침</span>
+                  <div class="received-sleep">
+                    <div class="received-sleep-heading"><strong>지우의 수면 분석</strong><span>공유받음</span></div>
+                    <div class="received-sleep-duration">7<span>h</span> 42<span>m</span></div><div class="sleep-analysis-summary"><span>총 수면</span><span>중간에 깸 <b>1회</b></span></div>
+                    <div class="sleep-stage-bar" aria-hidden="true"><i class="stage-deep" style="flex:20.78"></i><i class="stage-light" style="flex:55.84"></i><i class="stage-rem" style="flex:23.38"></i></div>
+                    <dl class="sleep-stage-values"><div><dt><i class="stage-deep"></i>깊은 수면</dt><dd>1h 36m</dd></div><div><dt><i class="stage-light"></i>얕은 수면</dt><dd>4h 18m</dd></div><div><dt><i class="stage-rem"></i>렘 수면</dt><dd>1h 48m</dd></div></dl>
+                    <div class="received-sleep-note"><span>직접 남긴 컨디션</span><p>“푹 잤어. 오늘은 개운해.”</p></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <!-- 03. SECTION: SEND A BEAT (심박 보내기) -->
+          <section class="section-wrap" id="heartbeat-send">
+            <div class="container">
+              <div class="beat-studio-grid">
+                <div class="section-head" style="margin-bottom:0;">
+                  <span class="gradient-pill red">02 / 심박 보내기</span>
+                  <h2 class="section-title">말 대신,<br><span class="gradient-text">심박 하나.</span></h2>
+                  <p class="section-desc">심박을 보내면 대화가 시작돼요.<br>서로의 지금을 나누는 작은 계기.</p>
+                </div>
+
+                <!-- Physical Moving Card Deck Architecture (Section 02) -->
+                <div class="beat-stage-container" id="beat-stage-container">
+
+                  <!-- 1. Jiwoo Deck (Initial Active) -->
+                  <div class="beat-card-deck active" id="deck-jiwoo">
+                    <div class="deck-tab deck-tab-left">
+                      <span>지우 108 BPM</span>
+                    </div>
+                    <div class="deck-tab deck-tab-right">
+                      <span>민서 대기중</span>
+                    </div>
+
+                    <div class="beat-card-wrap" id="card-wrap-jiwoo">
+                      <div class="beat-ripple" id="beat-ripple-jiwoo"></div>
+
+                      <div class="beat-card-topbar">
+                        <span class="beat-top-label" id="jiwoo-top-label">MY HEARTBEAT</span>
+                        <svg class="beat-top-heart" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                      </div>
+
+                      <!-- Calmed incoming reply badge (visible only on return) -->
+                      <div class="minseo-incoming-badge calmed-incoming-badge" id="jiwoo-calmed-bubble" style="display: none;">
+                        <span class="incoming-label-green">답장 도착 🌿</span>
+                        <span class="incoming-text-msg" id="jiwoo-calmed-reply-text">“긴장 풀고 심호흡해. 응원단 총출동했어 💪”</span>
+                      </div>
+
+                      <div class="beat-metric-section">
+                        <div class="beat-metric-display">
+                          <span class="beat-bpm-num" id="jiwoo-bpm-val">108</span>
+                          <span class="beat-bpm-unit">BPM</span>
+                        </div>
+                      </div>
+
+                      <div class="heart-stage-wrap">
+                        <img class="heart-3d-visual heart-fast-pulse" id="jiwoo-heart-img" src="/assets/teaser5/cf3059c1645a41bd.webp" alt="3D 펄스 하트">
+                      </div>
+
+                      <!-- Short clean text input -->
+                      <div class="beat-msg-row" id="jiwoo-input-row">
+                        <input type="text" class="beat-msg-input" id="jiwoo-msg-input" maxlength="32" value="지금 발표 앞두고 초긴장중... 💦">
+                      </div>
+
+                      <div class="beat-btn-wrapper">
+                        <div class="beat-tooltip" id="beat-tooltip">
+                          <span class="tooltip-badge">✨</span>
+                          <span class="tooltip-text">여기를 눌러보세요</span>
+                          <span class="tooltip-arrow"></span>
+                        </div>
+                        <button class="btn-beat-send" id="btn-jiwoo-send" type="button">
+                          <span class="btn-beat-text">민서에게 심박 보내기</span>
+                          <span class="btn-beat-arrow">→</span>
+                        </button>
+                        <button class="btn-beat-send btn-replay-dark" id="btn-jiwoo-replay" type="button" style="display: none;">
+                          <span class="btn-beat-text">처음부터 다시 체험하기 ↺</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Transmission Graphic Overlay (Center floating between physical cards) -->
+                  <div class="beat-transmit-stage" id="deck-transmit">
+                    <div class="transmit-rings-box">
+                      <div class="transmit-pulse-ring ring-1"></div>
+                      <div class="transmit-pulse-ring ring-2"></div>
+                      <img class="transmit-rings-img" src="/assets/teaser5/e3880e185e3ad26c.webp" alt="스마트링 햅틱 전송">
+                    </div>
+                    <p class="transmit-caption" id="transmit-caption">지우의 심박이 민서에게 전송 중...</p>
+                  </div>
+
+                  <!-- 3. Minseo Deck (Physical card entering from right) -->
+                  <div class="beat-card-deck mint hidden-right" id="deck-minseo">
+                    <div class="deck-tab deck-tab-left">
+                      <span>지우 도착 완료</span>
+                    </div>
+                    <div class="deck-tab deck-tab-right">
+                      <span>민서 68 BPM</span>
+                    </div>
+
+                    <div class="beat-card-wrap mint" id="card-wrap-minseo">
+                      <div class="beat-ripple mint" id="beat-ripple-minseo"></div>
+
+                      <div class="beat-card-topbar">
+                        <span class="beat-top-label mint">MINSEO'S HEARTBEAT</span>
+                        <svg class="beat-top-heart mint" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                      </div>
+
+                      <div class="minseo-incoming-badge">
+                        <span class="incoming-label-red">도착</span>
+                        <span class="incoming-text-msg" id="minseo-received-text">지금 발표 앞두고 초긴장중... 💦</span>
+                      </div>
+
+                      <div class="beat-metric-section">
+                        <div class="beat-metric-display">
+                          <span class="beat-bpm-num calm" id="minseo-bpm-val">68</span>
+                          <span class="beat-bpm-unit">BPM</span>
+                        </div>
+                      </div>
+
+                      <div class="heart-stage-wrap" style="height: 120px;">
+                        <img class="heart-3d-visual heart-calm-pulse" src="/assets/teaser5/cf3059c1645a41bd.webp" alt="차분한 3D 펄스 하트">
+                      </div>
+
+                      <!-- Short clean reply input -->
+                      <div class="beat-msg-row">
+                        <input type="text" class="beat-msg-input mint" id="minseo-reply-input" maxlength="32" value="긴장 풀고 심호흡해. 응원단 총출동했어 💪">
+                      </div>
+
+                      <div class="beat-btn-wrapper">
+                        <button class="btn-beat-send btn-reply-mint" id="btn-minseo-reply" type="button">
+                          <span class="btn-beat-arrow">←</span>
+                          <span class="btn-beat-text">지우에게 위로의 심박 답장하기 ♡</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div> <!-- end .beat-stage-container -->
+
+
+                
+              </div>
+            </div>
+          </section>
+
+          <section class="section-wrap" id="rhythm-archive">
+            <div class="container">
+              <div class="archive-intro">
+                <div><span class="gradient-pill">03 / 둘만의 리듬 아카이브</span>
+                <h2 class="section-title">그날의 우리,<br>심박까지 기억해요.</h2></div>
+                <div><p class="section-desc">반지를 끼고 데이트를 시작하면, 심박이 올라간 순간이 기록돼요.<br>그 순간에 짧은 메모를 더하고, 달력에서 다시 꺼내보세요.</p>
+                <p class="archive-guide">날짜를 누르면 그날의 기록이 펼쳐져요.</p></div>
+              </div>
+              <div class="archive-workspace">
+                <div class="archive-story">
+                  <img id="archive-scene" alt="비가 와서, 조금 더 가까이." width="768" height="800" src="/assets/teaser5/7c77a1482362ab61.webp">
+                  <div class="archive-story-caption"><span id="archive-date-label">2026.09.12</span><h3 id="archive-story-title">비가 와서, 조금 더 가까이.</h3><p id="archive-story-detail">같은 우산 아래 걷던 토요일.</p></div>
+                </div>
+                <div class="archive-console">
+                  <div class="archive-month"><div><span>둘의 리듬 달력</span><h3>2026.09</h3></div><span class="archive-count" id="archive-count">2번의 데이트</span></div>
+                  <div class="archive-calendar" id="archive-calendar" aria-label="2026년 9월 데이트 기록"><span class="archive-weekday">일</span><span class="archive-weekday">월</span><span class="archive-weekday">화</span><span class="archive-weekday">수</span><span class="archive-weekday">목</span><span class="archive-weekday">금</span><span class="archive-weekday">토</span><span></span><span></span><button type="button" class="archive-day" disabled="" aria-label="9/1">1</button><button type="button" class="archive-day" disabled="" aria-label="9/2">2</button><button type="button" class="archive-day" disabled="" aria-label="9/3">3</button><button type="button" class="archive-day" disabled="" aria-label="9/4">4</button><button type="button" class="archive-day" disabled="" aria-label="9/5">5</button><button type="button" class="archive-day" disabled="" aria-label="9/6">6</button><button type="button" class="archive-day" disabled="" aria-label="9/7">7</button><button type="button" class="archive-day" disabled="" aria-label="9/8">8</button><button type="button" class="archive-day" disabled="" aria-label="9/9">9</button><button type="button" class="archive-day" disabled="" aria-label="9/10">10</button><button type="button" class="archive-day" disabled="" aria-label="9/11">11</button><button type="button" class="archive-day" data-record="12" aria-pressed="true" aria-label="9/12 데이트 기록">12</button><button type="button" class="archive-day" disabled="" aria-label="9/13">13</button><button type="button" class="archive-day" disabled="" aria-label="9/14">14</button><button type="button" class="archive-day" disabled="" aria-label="9/15">15</button><button type="button" class="archive-day" disabled="" aria-label="9/16">16</button><button type="button" class="archive-day" disabled="" aria-label="9/17">17</button><button type="button" class="archive-day" disabled="" aria-label="9/18">18</button><button type="button" class="archive-day" data-record="19" aria-pressed="false" aria-label="9/19 데이트 기록">19</button><button type="button" class="archive-day" disabled="" aria-label="9/20">20</button><button type="button" class="archive-day" disabled="" aria-label="9/21">21</button><button type="button" class="archive-day" disabled="" aria-label="9/22">22</button><button type="button" class="archive-day" disabled="" aria-label="9/23">23</button><button type="button" class="archive-day" disabled="" aria-label="9/24">24</button><button type="button" class="archive-day" disabled="" aria-label="9/25">25</button><button type="button" class="archive-day" disabled="" aria-label="9/26">26</button><button type="button" class="archive-day" disabled="" aria-label="9/27">27</button><button type="button" class="archive-day" disabled="" aria-label="9/28">28</button><button type="button" class="archive-day" disabled="" aria-label="9/29">29</button><button type="button" class="archive-day" disabled="" aria-label="9/30">30</button></div>
+                  <p class="archive-calendar-key"><i></i>데이트 기록이 있는 날</p>
+                  <div class="archive-record" aria-live="polite">
+                    <div class="archive-record-head"><strong id="archive-record-title">9.12 · 기록된 순간 3개</strong><span>심박 변화 · BPM</span></div>
+                    <div class="archive-chart" id="archive-chart"><svg viewBox="0 0 400 110" role="img" aria-label="데이트 중 두 사람의 심박 변화"><path d="M24 18H374 M24 55H374 M24 93H374" stroke="#eee7f0" fill="none"></path><text x="0" y="20" fill="#ab9eb0" font-size="8">120</text><text x="5" y="95" fill="#ab9eb0" font-size="8">60</text><line x1="199" x2="199" y1="10" y2="99" stroke="#d5c3df" stroke-dasharray="3 3"></line><polyline points="24,73 49,70.5 74,66.75 99,44.25 124,61.75 149,68 174,65.5 199,35.5 224,55.5 249,64.25 274,59.25 299,28 324,54.25 349,64.25 374,69.25" fill="none" stroke="#b97180" stroke-width="2.5" stroke-linejoin="round"></polyline><polyline points="24,78 49,74.25 74,69.25 99,53 124,65.5 149,71.75 174,68 199,46.75 224,61.75 249,68 274,60.5 299,38 324,59.25 349,69.25 374,74.25" fill="none" stroke="#8570af" stroke-width="2.5" stroke-linejoin="round"></polyline><circle cx="199" cy="35.5" r="4" fill="#b97180" stroke="white" stroke-width="2"></circle><circle cx="199" cy="46.75" r="4" fill="#8570af" stroke="white" stroke-width="2"></circle></svg></div>
+                    <div class="archive-legend"><span><i></i>지우</span><span><i></i>민서</span><small>기록된 순간을 눌러보세요</small></div>
+                    <div class="archive-moments" id="archive-moments"><button type="button" aria-pressed="false" data-moment="0">18:12</button><button type="button" aria-pressed="true" data-moment="1">18:46</button><button type="button" aria-pressed="false" data-moment="2">19:08</button></div>
+                    <div class="archive-moment-detail" id="archive-moment-detail"><strong>횡단보도 앞에서 손을 잡았어.</strong><p>지우 106 BPM · 민서 97 BPM</p></div>
+                  </div>
+                  <div class="archive-demo"><span id="archive-demo-status">데이트 기록 미리보기</span><button type="button" id="archive-demo-btn">데이트 기록 체험하기 ↗</button></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 05. SECTION: PRODUCT & MEMBERSHIP -->
+          <section class="section-wrap" id="product-pair">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">04 / 둘만의 페어링</span>
+                <h2 class="section-title">나를 위한 링 하나.<br>너를 위한 링 하나.<br><span class="gradient-text">우리 사이의 작은 세계.</span></h2>
+                <p class="section-desc">손끝에는 절제된 아름다움을, 일상에는 둘만의 연결을.</p>
+              </div>
+
+              <div class="product-pills-row">
+                <span class="gradient-pill">☾ 수면 요약 공유</span>
+                <span class="gradient-pill">♡ 심박 보내기</span>
+                <span class="gradient-pill">⏱ 둘만의 기록</span>
+              </div>
+
+              <div class="product-cards-grid">
+                <!-- Card 1: SAI RING PAIR (Undistorted 3D Master Render) -->
+                <div class="product-glass-card">
+                  <div class="product-card-head">
+                    <div class="product-card-num">01 / SAI 스마트링 (커플 2개 세트)</div>
+                    <h3 class="product-card-title">링 2개 세트</h3>
+                    <p class="product-card-desc">실버 티타늄과 샴페인 골드, 둘이 함께 맞추는 하나의 페어. 항공우주 등급 티타늄 바디와 정밀한 생체 센서 내장.</p>
+                  </div>
+                  <div class="product-card-media">
+                    <img src="/assets/teaser5/30a7543d0061b09c.webp" alt="SAI 커플 스마트링 듀오" class="product-duo-ring-img">
+                  </div>
+                </div>
+
+                <!-- Card 2: SAI TOGETHER -->
+                <div class="product-glass-card">
+                  <div class="product-card-head">
+                    <div class="product-card-num">02 / 둘만을 위한 멤버십</div>
+                    <h3 class="product-card-title">둘을 위한 월 멤버십</h3>
+                    <p class="product-card-desc">수면 공유와 심박 보내기, 둘만의 기록까지. 두 사람의 리듬을 하나의 경험으로 엮는 전용 관계 알고리즘과 프라이빗 아카이브를 제공합니다.</p>
+                  </div>
+                  <div class="product-card-media">
+                    <img src="/assets/teaser5/cf3059c1645a41bd.webp" alt="SAI TOGETHER 하트" class="product-heart-img heart-fast-pulse">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 06. SECTION: QUESTIONS (FAQ) -->
+          <section class="section-wrap" id="questions">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">05 / 자주 묻는 질문</span>
+                <h2 class="section-title">조금 더 궁금하다면</h2>
+              </div>
+
+              <div class="faq-accordion-list">
+                <!-- Q1 -->
+                <div class="faq-item">
+                  <button class="faq-question-btn" type="button">
+                    <span>어떤 일상을 함께할 수 있나요?</span>
+                    <span class="faq-toggle-icon">+</span>
+                  </button>
+                  <div class="faq-answer">
+                    <p>서로의 수면 상태와 심박수를 조용히 확인하고, 특별한 순간의 리듬을 기록으로 남길 수 있습니다. 연결되지만 부담스럽지 않은 둘만의 공간입니다.</p>
+                  </div>
+                </div>
+
+                <div class="faq-item">
+                  <button class="faq-question-btn" type="button">
+                    <span>분석되는 데이터 종류는 무엇인가요?</span>
+                    <span class="faq-toggle-icon">+</span>
+                  </button>
+                  <div class="faq-answer">
+                    <p>수면 시간과 수면 단계 등 수면 분석, 심박 분석, 온도 측정을 지원합니다. 여성의 경우 생리 주기 분석도 지원해 일상의 몸 상태와 리듬을 살펴볼 수 있습니다.</p>
+                  </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="faq-item">
+                  <button class="faq-question-btn" type="button">
+                    <span>모든 데이터가 공유되나요?</span>
+                    <span class="faq-toggle-icon">+</span>
+                  </button>
+                  <div class="faq-answer">
+                    <p>아닙니다. 공유하고 싶은 항목(수면 상태, 심박 등)과 공유 시간을 직접 설정할 수 있습니다. 완벽한 프라이버시가 보장됩니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 07. SECTION: FINAL CONVERSION -->
+          <section class="section-wrap" id="cta">
+            <div class="container">
+              <div class="cta-banner-wrap">
+                <h2 class="cta-title">sai를 가장 먼저 만나보세요.</h2>
+                <p class="cta-desc">2026년 하반기 출시 예정.<br>사전 신청하고 sai together 멤버십 평생 무료 이용과<br>페어 패키지 특별 할인 혜택을 받아보세요.</p>
+                <button class="btn-gradient btn-coral" id="bottom-signup-btn">
+                  <span>사전 신청하기 ↗</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="teaser-footer">
+          <div class="container footer-inner">
+            <div class="footer-brand">
+              <img src="/assets/teaser5/0aa36f0694031674.png" alt="SAI" class="footer-logo-img">
+              <span class="footer-brand-desc">— 둘만을 위한 스마트링, 사이</span>
+            </div>
+            <div class="footer-copyright">
+              © 2026 sai. All rights reserved.
+            </div>
+          </div>
+        </footer>
+      </div>
+
+  <dialog id="modal"></dialog>
+
+  <script>
+    let lang = 'ko';
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      if (urlLang === 'ja' || urlLang === 'ko') {
+        lang = urlLang;
+      } else {
+        const saved = sessionStorage.getItem('sai-lang');
+        if (saved) lang = saved;
+      }
+    } catch (_) {}
+
+    function t(ko, ja) {
+      return lang === 'ja' ? ja : ko;
+    }
+
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => document.querySelectorAll(s);
+
+    function modal(content) {
+      const m = $('#modal');
+      m.innerHTML = `
+        <button class="modal-close-btn" id="modal-close-x" aria-label="${t('닫기', '閉じる')}">✕</button>
+        ${content}
+      `;
+      m.showModal();
+      $('#modal-close-x').onclick = () => m.close();
+      m.onclick = (e) => {
+        if (e.target === m) m.close();
+      };
+    }
+
+    function openSignupModal() {
+      modal(`
+        <div class="modal-head">
+          <img src="/assets/teaser5/0aa36f0694031674.png" alt="SAI" class="modal-logo-img" style="height:28px; width:auto; margin-bottom:1.0rem; display:block;">
+          <span class="gradient-pill red">${t('사전 예약 신청', '事前登録のご案内')}</span>
+          <h2 style="margin-top:0.8rem;">${t('둘만의 작은 세계,<br>가장 먼저 초대받으세요.', 'ふたりだけの小さな世界、<br>いち早くご招待します。')}</h2>
+          <p>${t('출시 알림과 함께 사전 예약 고객 전용 혜택을 보내드립니다.', 'リリース通知と共に事前登録限定の特別特典をお届けします。')}</p>
+        </div>
+        <form id="signup-form">
+          <div class="form-group">
+            <label class="form-label">${t('이메일 주소', 'メールアドレス')}</label>
+            <input class="form-input" type="email" name="email" required placeholder="${t('name@example.com', 'name@example.com')}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">${t('거주 지역', '居住地域')}</label>
+            <div class="choice-pills-grid">
+              <label class="choice-pill-item">
+                <input type="radio" name="country" value="KR" data-label="대한민국 (KR)" ${lang === 'ko' ? 'checked' : ''}>
+                <span>🇰🇷 ${t('대한민국 (KR)', '韓国 (KR)')}</span>
+              </label>
+              <label class="choice-pill-item">
+                <input type="radio" name="country" value="JP" data-label="일본 (JP)" ${lang === 'ja' ? 'checked' : ''}>
+                <span>🇯🇵 ${t('일본 (JP)', '日本 (JP)')}</span>
+              </label>
+              <label class="choice-pill-item">
+                <input type="radio" name="country" value="GLOBAL" data-label="기타 국가 (Global)">
+                <span>🌐 ${t('기타 국가 (Global)', 'その他 (Global)')}</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="margin-bottom: 0.2rem;">${t('가장 기대되는 대표 기능', '最も楽しみにしている代表機能')}</label>
+            <span class="form-sublabel">${t('(복수 선택 가능)', '(複数選択可)')}</span>
+            <div class="choice-cards-grid">
+              <label class="choice-card-item">
+                <input type="checkbox" name="feature" value="sleep_share" data-label="수면 공유" checked>
+                <div class="card-inner">
+                  <div class="card-icon">☾</div>
+                  <div class="card-texts">
+                    <strong>${t('수면 공유', '睡眠共有')}</strong>
+                    <small>${t('아침 첫 안부', '朝の最初の挨拶')}</small>
+                  </div>
+                </div>
+              </label>
+              <label class="choice-card-item">
+                <input type="checkbox" name="feature" value="heartbeat_send" data-label="심박 보내기">
+                <div class="card-inner">
+                  <div class="card-icon red">♡</div>
+                  <div class="card-texts">
+                    <strong>${t('심박 보내기', '心拍送信')}</strong>
+                    <small>${t('원터치 박동 전송', 'ワンタッチ鼓動')}</small>
+                  </div>
+                </div>
+              </label>
+              <label class="choice-card-item">
+                <input type="checkbox" name="feature" value="sleep_garden" data-label="수면 정원">
+                <div class="card-inner">
+                  <div class="card-icon green">🌸</div>
+                  <div class="card-texts">
+                    <strong>${t('수면 정원', '睡眠の庭')}</strong>
+                    <small>${t('둘만의 작은 꽃', 'ふたりの小さな花')}</small>
+                  </div>
+                </div>
+              </label>
+              <label class="choice-card-item">
+                <input type="checkbox" name="feature" value="timeline_archive" data-label="둘만의 기록">
+                <div class="card-inner">
+                  <div class="card-icon">⏱</div>
+                  <div class="card-texts">
+                    <strong>${t('둘만의 기록', 'ふたりの記録')}</strong>
+                    <small>${t('캘린더 & 아카이브', 'カレンダー＆記録')}</small>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">${t('예상 구매 희망 예산 (커플 세트)', '想定購入予算（ペアセット）')}</label>
+            <div class="choice-pills-grid">
+              <label class="choice-pill-item">
+                <input type="radio" name="budget" value="20-30" data-label="20만원 ~ 30만원대" checked>
+                <span>${t('20만원 ~ 30만원대', '2万円〜3万円台')}</span>
+              </label>
+              <label class="choice-pill-item">
+                <input type="radio" name="budget" value="30-40" data-label="30만원 ~ 40만원대">
+                <span>${t('30만원 ~ 40만원대', '3万円〜4万円台')}</span>
+              </label>
+              <label class="choice-pill-item">
+                <input type="radio" name="budget" value="40+" data-label="40만원 이상">
+                <span>${t('40만원 이상 (프리미엄)', '4万円以上（プレミアム）')}</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-checkbox-label">
+              <input type="checkbox" name="consent" required checked>
+              <span>${t('SAI 신제품 출시 및 사전 예약 알림 수신에 동의합니다.', 'SAIの新製品リリースおよび事前登録案内の受信に同意します。')}</span>
+            </label>
+          </div>
+          <button class="btn-gradient btn-coral" type="submit" style="width:100%; margin-top:0.8rem;">
+            <span>${t('사전 신청 완료하기 ↗', '事前登録を完了する ↗')}</span>
+          </button>
+        </form>
+      `);
+
+      $('#signup-form').onsubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const btn = form.querySelector('button[type="submit"]');
+        const prevText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<span>${t('등록 중...', '登録中...')}</span>`;
+
+        const fd = new FormData(form);
+        const email = (fd.get('email') || '').trim().toLowerCase();
+        const countryRadio = form.querySelector('input[name="country"]:checked');
+        const featureCheckboxes = Array.from(form.querySelectorAll('input[name="feature"]:checked'));
+        const budgetRadio = form.querySelector('input[name="budget"]:checked');
+
+        if (featureCheckboxes.length === 0) {
+          alert(t('기대되는 대표 기능을 최소 1개 이상 선택해주세요.', '最も楽しみにしている代表機能を1つ以上選択してください。'));
+          btn.disabled = false;
+          btn.innerHTML = prevText;
+          return;
+        }
+
+        const country = countryRadio?.value || (lang === 'ja' ? 'JP' : 'KR');
+        const country_label = countryRadio?.getAttribute('data-label') || country;
+        const features = featureCheckboxes.map(cb => cb.value);
+        const feature_labels = featureCheckboxes.map(cb => cb.getAttribute('data-label') || cb.value);
+        const feature = features.join(', ');
+        const feature_label = feature_labels.join(', ');
+        const budget = budgetRadio?.value || '20-30';
+        const budget_label = budgetRadio?.getAttribute('data-label') || budget;
+        const client_timezone = Intl?.DateTimeFormat?.()?.resolvedOptions?.()?.timeZone || '';
+        const page_source = 'teaser5';
+
+        const payload = {
+          email,
+          market: lang === 'ja' ? 'JP' : 'KR',
+          language: lang === 'ja' ? 'ja' : 'ko',
+          country,
+          country_label,
+          feature,
+          feature_label,
+          features,
+          feature_labels,
+          budget,
+          budget_label,
+          lang,
+          client_timezone,
+          client_language: navigator?.language || (lang === 'ja' ? 'ja-JP' : 'ko-KR'),
+          source: 'sai_teaser5',
+          consent: true,
+          consent_version: '2026-09-17',
+          page_source,
+          submitted_at: new Date().toISOString()
+        };
+
+        if (location.protocol === 'file:') {
+          alert(t('로컬 미리보기입니다. 신청 정보는 전송되지 않습니다.', 'ローカルプレビューです。登録情報は送信されません。'));
+          btn.disabled = false;
+          btn.innerHTML = prevText;
+          return;
+        }
+        try {
+          const res = await fetch('/api/waitlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.error || res.statusText);
+          }
+          $('#modal').close();
+          modal(`
+            <div class="modal-head" style="text-align:center;">
+              <img src="/assets/teaser5/0aa36f0694031674.png" alt="SAI" class="modal-logo-img" style="height:28px; width:auto; margin:0 auto 1.0rem; display:block;">
+              <span class="gradient-pill red">${t('신청 완료', '登録完了')}</span>
+              <h2 style="margin-top:1.0rem;">${t('사이의 가장 따뜻한 순간,<br>전달받았어요.', 'SAIの特別な瞬間、<br>受け取りました。')}</h2>
+              <p>${t('사전 신청이 완료되었습니다.<br>가장 먼저 소식을 전해드릴게요.', '事前登録が完了しました。<br>いち早く特別な案内をお届けします。')}</p>
+            </div>
+            <button class="btn-gradient" id="modal-ok-btn" style="width:100%; margin-top:1.5rem;">
+              <span>${t('확인', '確認')}</span>
+            </button>
+          `);
+          $('#modal-ok-btn').onclick = () => $('#modal').close();
+        } catch (err) {
+          alert(t('등록 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'エラーが発生しました。しばらくしてからもう一度お試しください。'));
+          btn.disabled = false;
+          btn.innerHTML = prevText;
+        }
+      };
+    }
+
+    function renderPage() {
+      $('#root').innerHTML = `
+        <!-- Navigation -->
+        <header class="teaser-nav">
+          <div class="container teaser-nav-inner">
+            <a class="brand-logo" href="/teaser5" aria-label="SAI">
+              <img src="/assets/teaser5/0aa36f0694031674.png" alt="SAI" class="brand-logo-img">
+            </a>
+            <div class="nav-actions">
+              <a class="nav-link" href="#sleep-share">${t('수면 공유', '睡眠共有')}</a>
+              <a class="nav-link" href="#heartbeat-send">${t('심박 보내기', '心拍送信')}</a>
+              <a class="nav-link" href="#rhythm-archive">${t('리듬 아카이브', 'リズムアーカイブ')}</a>
+              <button class="lang-toggle" id="lang-btn">${lang === 'ko' ? 'KR / JP' : 'JP / KR'}</button>
+              <button class="btn-gradient nav-btn-sm" id="nav-signup-btn" hidden>
+                <span>${t('먼저 만나기', '事前登録')}</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <!-- 01. HERO SECTION -->
+          <section class="hero-section">
+            <div class="container hero-content-container">
+              <!-- Centered Minimal Hero Header -->
+              <div class="hero-header-box">
+                <h1 class="hero-title">${t('내 하루에, <span class="hero-accent">네가 쏙.</span>', 'わたしの毎日に、<span class="hero-accent">きみがいる。</span>')}</h1>
+                <p class="hero-subtitle">${t('둘만을 위한 스마트링', 'ふたりだけのためのスマートリング')}</p>
+              </div>
+
+              <!-- Hero Stage (Couple Night Illustration - Enlarged Showcase) -->
+              <div class="hero-art">
+                <img src="/assets/teaser5/8fb6a0376719d279.png" alt="${t('약지에 낀 스마트링과 작은 편지로 이어지는 두 사람의 밤', '夜空の下、スマートリングでつながるふたりの日常')}" class="hero-art-img" width="1024" height="682" fetchpriority="high">
+              </div>
+
+              <!-- Bottom CTA Button -->
+              <div class="hero-cta-group">
+                <button class="hero-btn-primary" id="hero-signup-btn">
+                  <span>${t('사이 먼저 만나기 ↗', 'SAIといち早く出会う ↗')}</span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+
+
+          <!-- 02. SECTION: SLEEP SHARE (수면 공유) -->
+          <section class="section-wrap" id="sleep-share">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">${t('01 / 수면 공유', '01 / 睡眠共有')}</span>
+                <h2 class="section-title">
+                  <span class="typing-badge"><span id="typing-text">${t('잘 잤어?', 'よく眠れた？')}</span><span class="typing-cursor"></span></span>
+                  ${t('<br>오늘의 안부는,<br>어젯밤부터.', '<br>今日の気遣いは、<br>昨夜の眠りから。')}
+                </h2>
+                <p class="section-desc">${t('얼마나 오래, 얼마나 깊이 잤는지 함께 알아요.<br>수면 분석에 오늘의 컨디션을 더해, 아침의 안부를 나눠요.', 'どれくらい長く、深く眠れたかを共有。<br>睡眠分析に今日の調子を添えて、朝の挨拶を交わそう。')}</p>
+                <div class="privacy-tag-box">
+                  <span class="privacy-icon">✓</span>
+                  <span><strong>${t('공유할 항목은 내가 선택해요.', '共有する項目は、自分で選べます。')}</strong> ${t('선택하지 않은 정보는 상대에게 보이지 않아요.', '選んでいない情報は、相手には表示されません。')}</span>
+                </div>
+              </div>
+
+              <!-- Separate mornings, received sleep records -->
+              <div class="shared-mornings">
+                <article class="morning-scene morning-scene-woman">
+                  <div class="morning-art"><img src="/assets/teaser5/57d165807334a3f6.png" alt="${t('파자마와 머리띠 차림으로 반지를 끼고 기지개를 켜며 화장실로 향하는 지우의 뒷모습', 'パジャマとヘアバンド姿で指輪をつけ、伸びをしながら洗面所へ向かうジウの後ろ姿')}"></div>
+                  <span class="morning-person">${t('지우의 아침', 'ジウの朝')}</span>
+                  <div class="received-sleep">
+                    <div class="received-sleep-heading"><strong>${t('민준의 수면 분석', 'ミンジュンの睡眠分析')}</strong><span>${t('공유받음', '共有されました')}</span></div>
+                    <div class="received-sleep-duration">6<span>h</span> 58<span>m</span></div><div class="sleep-analysis-summary"><span>${t('총 수면', '合計睡眠')}</span><span>${t('중간에 깸', '途中で目覚めた回数')} <b>2${t('회', '回')}</b></span></div>
+                    <div class="sleep-stage-bar" aria-hidden="true"><i class="stage-deep" style="flex:17.46"></i><i class="stage-light" style="flex:59.81"></i><i class="stage-rem" style="flex:22.73"></i></div>
+                    <dl class="sleep-stage-values"><div><dt><i class="stage-deep"></i>${t('깊은 수면', '深い睡眠')}</dt><dd>1h 13m</dd></div><div><dt><i class="stage-light"></i>${t('얕은 수면', '浅い睡眠')}</dt><dd>4h 10m</dd></div><div><dt><i class="stage-rem"></i>${t('렘 수면', 'レム睡眠')}</dt><dd>1h 35m</dd></div></dl>
+                    <div class="received-sleep-note"><span>${t('직접 남긴 컨디션', '本人からのひと言')}</span><p>${t('“조금 졸리지만, 잘 잤어.”', '「少し眠いけど、よく眠れたよ。」')}</p></div>
+                  </div>
+                </article>
+                <article class="morning-scene morning-scene-man">
+                  <div class="morning-art"><img src="/assets/teaser5/57d165807334a3f6.png" alt="${t('반지를 낀 손을 올려 기지개를 켜며 침대에서 일어나는 부스스한 민준', '指輪をつけ、寝ぐせのままベッドで伸びをするミンジュン')}"></div>
+                  <span class="morning-person">${t('민준의 아침', 'ミンジュンの朝')}</span>
+                  <div class="received-sleep">
+                    <div class="received-sleep-heading"><strong>${t('지우의 수면 분석', 'ジウの睡眠分析')}</strong><span>${t('공유받음', '共有されました')}</span></div>
+                    <div class="received-sleep-duration">7<span>h</span> 42<span>m</span></div><div class="sleep-analysis-summary"><span>${t('총 수면', '合計睡眠')}</span><span>${t('중간에 깸', '途中で目覚めた回数')} <b>1${t('회', '回')}</b></span></div>
+                    <div class="sleep-stage-bar" aria-hidden="true"><i class="stage-deep" style="flex:20.78"></i><i class="stage-light" style="flex:55.84"></i><i class="stage-rem" style="flex:23.38"></i></div>
+                    <dl class="sleep-stage-values"><div><dt><i class="stage-deep"></i>${t('깊은 수면', '深い睡眠')}</dt><dd>1h 36m</dd></div><div><dt><i class="stage-light"></i>${t('얕은 수면', '浅い睡眠')}</dt><dd>4h 18m</dd></div><div><dt><i class="stage-rem"></i>${t('렘 수면', 'レム睡眠')}</dt><dd>1h 48m</dd></div></dl>
+                    <div class="received-sleep-note"><span>${t('직접 남긴 컨디션', '本人からのひと言')}</span><p>${t('“푹 잤어. 오늘은 개운해.”', '「ぐっすり眠って、今日はすっきり。」')}</p></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <!-- 03. SECTION: SEND A BEAT (심박 보내기) -->
+          <section class="section-wrap" id="heartbeat-send">
+            <div class="container">
+              <div class="beat-studio-grid">
+                <div class="section-head" style="margin-bottom:0;">
+                  <span class="gradient-pill red">${t('02 / 심박 보내기', '02 / 心拍送信')}</span>
+                  <h2 class="section-title">${t('말 대신,<br><span class="gradient-text">심박 하나.</span>', '言葉の代わりに、<br><span class="gradient-text">心拍をひとつ。</span>')}</h2>
+                  <p class="section-desc">${t('심박을 보내면 대화가 시작돼요.<br>서로의 지금을 나누는 작은 계기.', '心拍を送ると、会話がはじまる。<br>お互いの今を分かち合う、小さなきっかけ。')}</p>
+                </div>
+
+                <!-- Physical Moving Card Deck Architecture (Section 02) -->
+                <div class="beat-stage-container" id="beat-stage-container">
+
+                  <!-- 1. Jiwoo Deck (Initial Active) -->
+                  <div class="beat-card-deck active" id="deck-jiwoo">
+                    <div class="deck-tab deck-tab-left">
+                      <span>${t('지우 108 BPM', 'ジウ 108 BPM')}</span>
+                    </div>
+                    <div class="deck-tab deck-tab-right">
+                      <span>${t('민서 대기중', 'ミンソ 待機中')}</span>
+                    </div>
+
+                    <div class="beat-card-wrap" id="card-wrap-jiwoo">
+                      <div class="beat-ripple" id="beat-ripple-jiwoo"></div>
+
+                      <div class="beat-card-topbar">
+                        <span class="beat-top-label" id="jiwoo-top-label">MY HEARTBEAT</span>
+                        <svg class="beat-top-heart" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                      </div>
+
+                      <!-- Calmed incoming reply badge (visible only on return) -->
+                      <div class="minseo-incoming-badge calmed-incoming-badge" id="jiwoo-calmed-bubble" style="display: none;">
+                        <span class="incoming-label-green">${t('답장 도착 🌿', '返信到着 🌿')}</span>
+                        <span class="incoming-text-msg" id="jiwoo-calmed-reply-text">“${t('긴장 풀고 심호흡해. 응원단 총출동했어 💪', 'リラックスして深呼吸。応援団、全員集合だよ 💪')}”</span>
+                      </div>
+
+                      <div class="beat-metric-section">
+                        <div class="beat-metric-display">
+                          <span class="beat-bpm-num" id="jiwoo-bpm-val">108</span>
+                          <span class="beat-bpm-unit">BPM</span>
+                        </div>
+                      </div>
+
+                      <div class="heart-stage-wrap">
+                        <img class="heart-3d-visual heart-fast-pulse" id="jiwoo-heart-img" src="/assets/teaser5/cf3059c1645a41bd.webp" alt="${t('3D 펄스 하트', '3D鼓動ハート')}">
+                      </div>
+
+                      <!-- Short clean text input -->
+                      <div class="beat-msg-row" id="jiwoo-input-row">
+                        <input type="text" class="beat-msg-input" id="jiwoo-msg-input" maxlength="32" value="${t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦')}">
+                      </div>
+
+                      <div class="beat-btn-wrapper">
+                        <div class="beat-tooltip" id="beat-tooltip">
+                          <span class="tooltip-badge">✨</span>
+                          <span class="tooltip-text">${t('여기를 눌러보세요', 'ここを押してみてください')}</span>
+                          <span class="tooltip-arrow"></span>
+                        </div>
+                        <button class="btn-beat-send" id="btn-jiwoo-send" type="button">
+                          <span class="btn-beat-text">${t('민서에게 심박 보내기', 'ミンソへ心拍を送る')}</span>
+                          <span class="btn-beat-arrow">→</span>
+                        </button>
+                        <button class="btn-beat-send btn-replay-dark" id="btn-jiwoo-replay" type="button" style="display: none;">
+                          <span class="btn-beat-text">${t('처음부터 다시 체험하기 ↺', '最初からもう一度体験する ↺')}</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Transmission Graphic Overlay (Center floating between physical cards) -->
+                  <div class="beat-transmit-stage" id="deck-transmit">
+                    <div class="transmit-rings-box">
+                      <div class="transmit-pulse-ring ring-1"></div>
+                      <div class="transmit-pulse-ring ring-2"></div>
+                      <img class="transmit-rings-img" src="/assets/teaser5/e3880e185e3ad26c.webp" alt="${t('스마트링 햅틱 전송', 'スマートリング ハプティック送信')}">
+                    </div>
+                    <p class="transmit-caption" id="transmit-caption">${t('지우의 심박이 민서에게 전송 중...', 'ジウの心拍がミンソへ送信中…')}</p>
+                  </div>
+
+                  <!-- 3. Minseo Deck (Physical card entering from right) -->
+                  <div class="beat-card-deck mint hidden-right" id="deck-minseo">
+                    <div class="deck-tab deck-tab-left">
+                      <span>${t('지우 도착 완료', 'ジウ 到着完了')}</span>
+                    </div>
+                    <div class="deck-tab deck-tab-right">
+                      <span>${t('민서 68 BPM', 'ミンソ 68 BPM')}</span>
+                    </div>
+
+                    <div class="beat-card-wrap mint" id="card-wrap-minseo">
+                      <div class="beat-ripple mint" id="beat-ripple-minseo"></div>
+
+                      <div class="beat-card-topbar">
+                        <span class="beat-top-label mint">MINSEO'S HEARTBEAT</span>
+                        <svg class="beat-top-heart mint" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                      </div>
+
+                      <div class="minseo-incoming-badge">
+                        <span class="incoming-label-red">${t('도착', '到着')}</span>
+                        <span class="incoming-text-msg" id="minseo-received-text">${t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦')}</span>
+                      </div>
+
+                      <div class="beat-metric-section">
+                        <div class="beat-metric-display">
+                          <span class="beat-bpm-num calm" id="minseo-bpm-val">68</span>
+                          <span class="beat-bpm-unit">BPM</span>
+                        </div>
+                      </div>
+
+                      <div class="heart-stage-wrap" style="height: 120px;">
+                        <img class="heart-3d-visual heart-calm-pulse" src="/assets/teaser5/cf3059c1645a41bd.webp" alt="${t('차분한 3D 펄스 하트', '落ち着いた3D鼓動ハート')}">
+                      </div>
+
+                      <!-- Short clean reply input -->
+                      <div class="beat-msg-row">
+                        <input type="text" class="beat-msg-input mint" id="minseo-reply-input" maxlength="32" value="${t('긴장 풀고 심호흡해. 응원단 총출동했어 💪', 'リラックスして深呼吸。応援団、全員集合だよ 💪')}">
+                      </div>
+
+                      <div class="beat-btn-wrapper">
+                        <button class="btn-beat-send btn-reply-mint" id="btn-minseo-reply" type="button">
+                          <span class="btn-beat-arrow">←</span>
+                          <span class="btn-beat-text">${t('지우에게 위로의 심박 답장하기 ♡', 'ジウへ励ましの心拍を返信する ♡')}</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div> <!-- end .beat-stage-container -->
+
+
+                
+              </div>
+            </div>
+          </section>
+
+          <section class="section-wrap" id="rhythm-archive">
+            <div class="container">
+              <div class="archive-intro">
+                <div><span class="gradient-pill">${t('03 / 둘만의 리듬 아카이브','03 / ふたりのリズムアーカイブ')}</span>
+                <h2 class="section-title">${t('그날의 우리,<br>심박까지 기억해요.','あの日のふたりを、<br>鼓動まで覚えておく。')}</h2></div>
+                <div><p class="section-desc">${t('반지를 끼고 데이트를 시작하면, 심박이 올라간 순간이 기록돼요.<br>그 순간에 짧은 메모를 더하고, 달력에서 다시 꺼내보세요.','指輪をつけてデートを始めると、心拍が上がった瞬間を記録。<br>ひと言を添えて、カレンダーから振り返ろう。')}</p>
+                <p class="archive-guide">${t('날짜를 누르면 그날의 기록이 펼쳐져요.','日付を押すと、その日の記録が開きます。')}</p></div>
+              </div>
+              <div class="archive-workspace">
+                <div class="archive-story">
+                  <img id="archive-scene" alt="" width="768" height="800">
+                  <div class="archive-story-caption"><span id="archive-date-label"></span><h3 id="archive-story-title"></h3><p id="archive-story-detail"></p></div>
+                </div>
+                <div class="archive-console">
+                  <div class="archive-month"><div><span>${t('둘의 리듬 달력','ふたりのリズムカレンダー')}</span><h3>2026.09</h3></div><span class="archive-count" id="archive-count"></span></div>
+                  <div class="archive-calendar" id="archive-calendar" aria-label="${t('2026년 9월 데이트 기록','2026年9月のデート記録')}"></div>
+                  <p class="archive-calendar-key"><i></i>${t('데이트 기록이 있는 날','デート記録のある日')}</p>
+                  <div class="archive-record" aria-live="polite">
+                    <div class="archive-record-head"><strong id="archive-record-title"></strong><span>${t('심박 변화 · BPM','心拍の変化 · BPM')}</span></div>
+                    <div class="archive-chart" id="archive-chart"></div>
+                    <div class="archive-legend"><span><i></i>${t('지우','ジウ')}</span><span><i></i>${t('민서','ミンソ')}</span><small>${t('기록된 순간을 눌러보세요','記録された瞬間を押してみて')}</small></div>
+                    <div class="archive-moments" id="archive-moments"></div>
+                    <div class="archive-moment-detail" id="archive-moment-detail"></div>
+                  </div>
+                  <div class="archive-demo"><span id="archive-demo-status">${t('데이트 기록 미리보기','デート記録のプレビュー')}</span><button type="button" id="archive-demo-btn">${t('데이트 기록 체험하기','デート記録を体験する')} ↗</button></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 05. SECTION: PRODUCT & MEMBERSHIP -->
+          <section class="section-wrap" id="product-pair">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">${t('04 / 둘만의 페어링', '04 / ふたりのペアリング')}</span>
+                <h2 class="section-title">${t('나를 위한 링 하나.<br>너를 위한 링 하나.<br><span class="gradient-text">우리 사이의 작은 세계.</span>', 'わたしのためのリングひとつ。<br>あなたのためのリングひとつ。<br><span class="gradient-text">ふたりのあいだの小さな世界。</span>')}</h2>
+                <p class="section-desc">${t('손끝에는 절제된 아름다움을, 일상에는 둘만의 연결을.', '指先には研ぎ澄まされた美しさを、日常にはふたりだけのつながりを。')}</p>
+              </div>
+
+              <div class="product-pills-row">
+                <span class="gradient-pill">☾ ${t('수면 요약 공유', '睡眠要約の共有')}</span>
+                <span class="gradient-pill">♡ ${t('심박 보내기', '心拍の送信')}</span>
+                <span class="gradient-pill">⏱ ${t('둘만의 기록', 'ふたりの記録')}</span>
+              </div>
+
+              <div class="product-cards-grid">
+                <!-- Card 1: SAI RING PAIR (Undistorted 3D Master Render) -->
+                <div class="product-glass-card">
+                  <div class="product-card-head">
+                    <div class="product-card-num">${t('01 / SAI 스마트링 (커플 2개 세트)', '01 / SAI スマートリング (ペア)')}</div>
+                    <h3 class="product-card-title">${t('링 2개 세트', 'リング2個セット')}</h3>
+                    <p class="product-card-desc">${t('실버 티타늄과 샴페인 골드, 둘이 함께 맞추는 하나의 페어. 항공우주 등급 티타늄 바디와 정밀한 생체 센서 내장.', 'シルバーチタンとシャンパンゴールド、ふたりで揃えるひとつのペア。航空宇宙グレードのチタンボディと高精度生体センサー内蔵。')}</p>
+                  </div>
+                  <div class="product-card-media">
+                    <img src="/assets/teaser5/30a7543d0061b09c.webp" alt="${t('SAI 커플 스마트링 듀오', 'SAIペアスマートリング')}" class="product-duo-ring-img">
+                  </div>
+                </div>
+
+                <!-- Card 2: SAI TOGETHER -->
+                <div class="product-glass-card">
+                  <div class="product-card-head">
+                    <div class="product-card-num">${t('02 / 둘만을 위한 멤버십', '02 / ふたりのためのメンバーシップ')}</div>
+                    <h3 class="product-card-title">${t('둘을 위한 월 멤버십', 'ふたりのための月額メンバーシップ')}</h3>
+                    <p class="product-card-desc">${t('수면 공유와 심박 보내기, 둘만의 기록까지. 두 사람의 리듬을 하나의 경험으로 엮는 전용 관계 알고리즘과 프라이빗 아카이브를 제공합니다.', '睡眠共有と心拍送信、ふたりだけの記録まで。ふたりの生体リズムをひとつの体験として編み込む専用リレーションアルゴリズムとプライベートアーカイブを提供します。')}</p>
+                  </div>
+                  <div class="product-card-media">
+                    <img src="/assets/teaser5/cf3059c1645a41bd.webp" alt="${t('SAI TOGETHER 하트', 'SAI TOGETHER ハート')}" class="product-heart-img heart-fast-pulse">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 06. SECTION: QUESTIONS (FAQ) -->
+          <section class="section-wrap" id="questions">
+            <div class="container">
+              <div class="section-head">
+                <span class="gradient-pill">${t('05 / 자주 묻는 질문', '05 / よくあるご質問')}</span>
+                <h2 class="section-title">${t('조금 더 궁금하다면', 'よくあるご質問')}</h2>
+              </div>
+
+              <div class="faq-accordion-list">
+                <!-- Q1 -->
+                <div class="faq-item">
+                  <button class="faq-question-btn" type="button">
+                    <span>${t('어떤 일상을 함께할 수 있나요?', 'どんな日常を一緒に過ごせますか？')}</span>
+                    <span class="faq-toggle-icon">+</span>
+                  </button>
+                  <div class="faq-answer">
+                    <p>${t('서로의 수면 상태와 심박수를 조용히 확인하고, 특별한 순간의 리듬을 기록으로 남길 수 있습니다. 연결되지만 부담스럽지 않은 둘만의 공간입니다.', 'お互いの睡眠状態や心拍数を静かに確認し、特別な瞬間のリズムを記録として残せます。つながっていながらも負担にならない、ふたりだけの空間です。')}</p>
+                  </div>
+                </div>
+
+                <div class="faq-item">
+                  <button class="faq-question-btn" type="button">
+                    <span>${t('분석되는 데이터 종류는 무엇인가요?', 'どのようなデータを分析できますか？')}</span>
+                    <span class="faq-toggle-icon">+</span>
+                  </button>
+                  <div class="faq-answer">
+                    <p>${t('수면 시간과 수면 단계 등 수면 분석, 심박 분석, 온도 측정을 지원합니다. 여성의 경우 생리 주기 분석도 지원해 일상의 몸 상태와 리듬을 살펴볼 수 있습니다.', '睡眠時間や睡眠段階などの睡眠分析、心拍分析、温度測定に対応しています。女性の場合は月経周期の分析にも対応し、日々の体調やリズムを確認できます。')}</p>
+                  </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="faq-item">
+                  <button class="faq-question-btn" type="button">
+                    <span>${t('모든 데이터가 공유되나요?', 'すべてのデータが共有されますか？')}</span>
+                    <span class="faq-toggle-icon">+</span>
+                  </button>
+                  <div class="faq-answer">
+                    <p>${t('아닙니다. 공유하고 싶은 항목(수면 상태, 심박 등)과 공유 시간을 직접 설정할 수 있습니다. 완벽한 프라이버시가 보장됩니다.', 'いいえ。共有したい項目（睡眠状態、心拍など）や共有のタイミングは自由に設定できます。完全なプライバシーが保護されます。')}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 07. SECTION: FINAL CONVERSION -->
+          <section class="section-wrap" id="cta">
+            <div class="container">
+              <div class="cta-banner-wrap">
+                <h2 class="cta-title">${t('sai를 가장 먼저 만나보세요.', 'saiに、いち早く出会おう。')}</h2>
+                <p class="cta-desc">${t('2026년 하반기 출시 예정.<br>사전 신청하고 sai together 멤버십 평생 무료 이용과<br>페어 패키지 특별 할인 혜택을 받아보세요.', '2026年後半に発売予定。<br>事前登録でsai togetherメンバーシップの生涯無料利用と<br>ペアパッケージの特別割引特典を。')}</p>
+                <button class="btn-gradient btn-coral" id="bottom-signup-btn">
+                  <span>${t('사전 신청하기 ↗', '事前登録する ↗')}</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="teaser-footer">
+          <div class="container footer-inner">
+            <div class="footer-brand">
+              <img src="/assets/teaser5/0aa36f0694031674.png" alt="SAI" class="footer-logo-img">
+              <span class="footer-brand-desc">— ${t('둘만을 위한 스마트링, 사이', 'ふたりのためのスマートリング、SAI')}</span>
+            </div>
+            <div class="footer-copyright">
+              &copy; 2026 sai. All rights reserved.
+            </div>
+          </div>
+        </footer>
+      `;
+
+      initEvents();
+    }
+
+    function initEvents() {
+      // Language Toggle
+      $('#lang-btn').onclick = () => {
+        lang = lang === 'ko' ? 'ja' : 'ko';
+        try { sessionStorage.setItem('sai-lang', lang); } catch (_) {}
+        document.documentElement.lang = lang;
+        renderPage();
+      };
+
+      // Modal Triggers
+      $('#nav-signup-btn').onclick = openSignupModal;
+      const heroBtn = $('#hero-signup-btn');
+      if (heroBtn) heroBtn.onclick = openSignupModal;
+      $('#bottom-signup-btn').onclick = openSignupModal;
+
+      // Modal Triggers for sub sections
+      $$('.rhythm-archive-btn').forEach(btn => btn.onclick = openSignupModal);
+
+      // FAQ Accordion Interaction
+      $$('.faq-question-btn').forEach(btn => {
+        btn.onclick = () => {
+          const item = btn.closest('.faq-item');
+          const wasOpen = item.classList.contains('open');
+          $$('.faq-item').forEach(el => el.classList.remove('open'));
+          if (!wasOpen) item.classList.add('open');
+        };
+      });
+
+      initDateArchive();
+
+      // Calendar Day Selection Interaction
+      $$('.cal-day:not(.empty)').forEach(day => {
+        day.onclick = () => {
+          $$('.cal-day').forEach(d => d.classList.remove('active'));
+          day.classList.add('active');
+        };
+      });
+
+      // Two-Way Physical Component Motion Controller (Section 02)
+      const deckJiwoo = $('#deck-jiwoo');
+      const deckTransmit = $('#deck-transmit');
+      const deckMinseo = $('#deck-minseo');
+
+      const btnJiwooSend = $('#btn-jiwoo-send');
+      const btnMinseoReply = $('#btn-minseo-reply');
+      const btnJiwooReplay = $('#btn-jiwoo-replay');
+
+      let isBeatTransitioning = false;
+
+      // 1. Jiwoo Send Action (Jiwoo exits LEFT, Minseo enters from RIGHT)
+      if (btnJiwooSend) {
+        btnJiwooSend.onclick = () => {
+          if (isBeatTransitioning) return;
+          isBeatTransitioning = true;
+
+          const tooltip = $('#beat-tooltip');
+          if (tooltip) tooltip.style.opacity = '0';
+
+          const rippleJiwoo = $('#beat-ripple-jiwoo');
+          if (rippleJiwoo) rippleJiwoo.classList.add('active');
+
+          const jiwooMsg = ($('#jiwoo-msg-input')?.value || '').trim() || t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦');
+          const recvText = $('#minseo-received-text');
+          if (recvText) recvText.textContent = jiwooMsg;
+
+          // Jiwoo physical card exits to LEFT
+          deckJiwoo.classList.remove('active');
+          deckJiwoo.classList.add('slide-out-left');
+
+          // Central transmit pulse (prolonged to 2.0s so user can clearly see transmission)
+          const cap = $('#transmit-caption');
+          if (cap) cap.textContent = t('지우의 심박이 민서에게 전송 중...', 'ジウの心拍がミンソへ送信中…');
+          deckTransmit.classList.add('active');
+
+          // Pre-set Minseo card in msg-first state before entering
+          const cardWrapMinseo = $('#card-wrap-minseo');
+          if (cardWrapMinseo) cardWrapMinseo.classList.add('msg-first');
+
+          setTimeout(() => {
+            deckTransmit.classList.remove('active');
+            if (rippleJiwoo) rippleJiwoo.classList.remove('active');
+
+            // Minseo physical card enters from RIGHT
+            deckMinseo.classList.remove('hidden-right', 'slide-out-right');
+            deckMinseo.classList.add('active');
+
+            // After Minseo card slides in, animate message floating up and revealing BPM
+            setTimeout(() => {
+              if (cardWrapMinseo) cardWrapMinseo.classList.remove('msg-first');
+            }, 600);
+
+            setTimeout(() => {
+              isBeatTransitioning = false;
+            }, 1400);
+          }, 2000);
+        };
+      }
+
+      // 2. Minseo Reply Action (Minseo exits to RIGHT, Jiwoo returns from LEFT)
+      if (btnMinseoReply) {
+        btnMinseoReply.onclick = () => {
+          if (isBeatTransitioning) return;
+          isBeatTransitioning = true;
+
+          const rippleMinseo = $('#beat-ripple-minseo');
+          if (rippleMinseo) rippleMinseo.classList.add('active');
+
+          const replyMsg = ($('#minseo-reply-input')?.value || '').trim() || t('긴장 풀고 심호흡해. 응원단 총출동했어 💪', 'リラックスして深呼吸。応援団、全員集合だよ 💪');
+          const quoteText = $('#jiwoo-calmed-reply-text');
+          if (quoteText) quoteText.textContent = `“${replyMsg}”`;
+
+          // Minseo physical card exits to RIGHT back towards Jiwoo
+          deckMinseo.classList.remove('active');
+          deckMinseo.classList.add('slide-out-right');
+
+          // Central transmit pulse (prolonged to 2.0s so user can clearly see transmission)
+          const cap = $('#transmit-caption');
+          if (cap) cap.textContent = t('민서의 따뜻한 답장이 지우에게 전송 중...', 'ミンソの温かい返信がジウへ送信中…');
+          deckTransmit.classList.add('active');
+
+          // Transform Jiwoo deck into calmed + msg-first state while off-screen
+          const cardWrapJiwoo = $('#card-wrap-jiwoo');
+          if (cardWrapJiwoo) {
+            cardWrapJiwoo.classList.add('calmed');
+            cardWrapJiwoo.classList.add('msg-first');
+          }
+
+          const topLabel = $('#jiwoo-top-label');
+          if (topLabel) {
+            topLabel.textContent = "JIWOO'S HEARTBEAT";
+            topLabel.style.color = '#16a34a';
+          }
+
+          const bpmVal = $('#jiwoo-bpm-val');
+          if (bpmVal) {
+            bpmVal.textContent = '74';
+            bpmVal.className = 'beat-bpm-num calmed';
+          }
+
+          const metricSub = $('#jiwoo-metric-sub');
+          if (metricSub) metricSub.textContent = t('108 BPM ➔ 74 BPM 차분하게 안정되었어요 ✨', '108 BPM ➔ 74 BPM 穏やかに落ち着きました ✨');
+
+          const heartImg = $('#jiwoo-heart-img');
+          if (heartImg) heartImg.className = 'heart-3d-visual heart-steady-pulse';
+
+          const inputRow = $('#jiwoo-input-row');
+          if (inputRow) inputRow.style.display = 'none';
+
+          const calmedBubble = $('#jiwoo-calmed-bubble');
+          if (calmedBubble) calmedBubble.style.display = 'inline-flex';
+
+          const dotLeft = $('#jiwoo-dot-left');
+          if (dotLeft) dotLeft.className = 'pair-dot-filled green';
+
+          const pairArrow = $('#jiwoo-pair-arrow');
+          if (pairArrow) {
+            pairArrow.textContent = '♡';
+            pairArrow.style.color = '#16a34a';
+          }
+
+          const dotRight = $('#jiwoo-dot-right');
+          if (dotRight) dotRight.className = 'pair-dot-filled green';
+
+          const statusMsg = $('#jiwoo-status-msg');
+          if (statusMsg) statusMsg.textContent = t('말보다 깊은 체온과 심박이 서로에게 닿았습니다', '言葉よりも深い温もりと心拍が互いに届きました');
+
+          if (btnJiwooSend) btnJiwooSend.style.display = 'none';
+          if (btnJiwooReplay) btnJiwooReplay.style.display = 'flex';
+
+          setTimeout(() => {
+            deckTransmit.classList.remove('active');
+            if (rippleMinseo) rippleMinseo.classList.remove('active');
+
+            // Jiwoo physical card returns from LEFT
+            deckJiwoo.classList.remove('slide-out-left');
+            deckJiwoo.classList.add('active');
+
+            // After Jiwoo card slides back in, animate reply message floating up and revealing 74 BPM
+            setTimeout(() => {
+              if (cardWrapJiwoo) cardWrapJiwoo.classList.remove('msg-first');
+            }, 600);
+
+            setTimeout(() => {
+              isBeatTransitioning = false;
+            }, 1400);
+          }, 2000);
+        };
+      }
+
+      // 3. Replay Action (Reset Jiwoo back to initial 108 BPM state)
+      if (btnJiwooReplay) {
+        btnJiwooReplay.onclick = () => {
+          if (isBeatTransitioning) return;
+          isBeatTransitioning = true;
+
+          const cardWrapJiwoo = $('#card-wrap-jiwoo');
+          if (cardWrapJiwoo) cardWrapJiwoo.classList.remove('calmed', 'msg-first');
+
+          const cardWrapMinseo = $('#card-wrap-minseo');
+          if (cardWrapMinseo) cardWrapMinseo.classList.remove('msg-first');
+
+          const topLabel = $('#jiwoo-top-label');
+          if (topLabel) {
+            topLabel.textContent = 'MY HEARTBEAT';
+            topLabel.style.color = '';
+          }
+
+          const bpmVal = $('#jiwoo-bpm-val');
+          if (bpmVal) {
+            bpmVal.textContent = '108';
+            bpmVal.className = 'beat-bpm-num';
+          }
+
+          const metricSub = $('#jiwoo-metric-sub');
+          if (metricSub) metricSub.textContent = t('발표를 앞둔 지우의 심박', '発表を控えたジウの心拍');
+
+          const heartImg = $('#jiwoo-heart-img');
+          if (heartImg) heartImg.className = 'heart-3d-visual heart-fast-pulse';
+
+          const jInput = $('#jiwoo-msg-input');
+          if (jInput) jInput.value = t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦');
+
+          const mInput = $('#minseo-reply-input');
+          if (mInput) mInput.value = t('긴장 풀고 심호흡해. 응원단 총출동했어 💪', 'リラックスして深呼吸。応援団、全員集合だよ 💪');
+
+          const inputRow = $('#jiwoo-input-row');
+          if (inputRow) inputRow.style.display = 'block';
+
+          const calmedBubble = $('#jiwoo-calmed-bubble');
+          if (calmedBubble) calmedBubble.style.display = 'none';
+
+          const dotLeft = $('#jiwoo-dot-left');
+          if (dotLeft) dotLeft.className = 'pair-dot-filled';
+
+          const pairArrow = $('#jiwoo-pair-arrow');
+          if (pairArrow) {
+            pairArrow.textContent = '⟶';
+            pairArrow.style.color = '';
+          }
+
+          const dotRight = $('#jiwoo-dot-right');
+          if (dotRight) dotRight.className = 'pair-dot-hollow';
+
+          const statusMsg = $('#jiwoo-status-msg');
+          if (statusMsg) statusMsg.textContent = t('손끝으로 전하는 나의 지금', '指先から伝える私のいま');
+
+          if (btnJiwooSend) btnJiwooSend.style.display = 'flex';
+          if (btnJiwooReplay) btnJiwooReplay.style.display = 'none';
+
+          const tooltip = $('#beat-tooltip');
+          if (tooltip) tooltip.style.opacity = '1';
+
+          // Reset minseo deck to off-screen right
+          deckMinseo.classList.remove('active', 'slide-out-right');
+          deckMinseo.classList.add('hidden-right');
+
+          setTimeout(() => {
+            isBeatTransitioning = false;
+          }, 400);
+        };
+      }
+
+      // Typing motion for sleep share
+      initTyping();
+
+      // Horizontal wide story slider
+      initStorySlider();
+
+      // One observer per render; show header CTA only after the hero leaves the viewport.
+      if (window.saiHeroObserver) window.saiHeroObserver.disconnect();
+      const navEl = $('.teaser-nav'), heroEl = $('.hero-section'), navSignup = $('#nav-signup-btn');
+      if (navEl && heroEl && navSignup) {
+        const updateNav = () => {
+          const passed = heroEl.getBoundingClientRect().bottom <= navEl.getBoundingClientRect().height;
+          navSignup.hidden = !passed;
+          navEl.classList.toggle('nav-scrolled', passed);
+        };
+        window.saiHeroObserver = new IntersectionObserver(updateNav, { rootMargin: '-' + Math.round(navEl.getBoundingClientRect().height) + 'px 0px 0px 0px', threshold: 0 });
+        window.saiHeroObserver.observe(heroEl);
+        updateNav();
+      }
+
+    }
+
+    function initStorySlider() {
+      const track = $('#storySliderTrack');
+      const dots = $$('#storySliderDots .story-slider-dot');
+      if (!track || dots.length === 0) return;
+
+      const cards = $$('.story-slide-card');
+
+      // Click dot to scroll to corresponding card
+      dots.forEach((dot, index) => {
+        dot.onclick = () => {
+          if (cards[index]) {
+            const cardLeft = cards[index].offsetLeft;
+            const trackPaddingLeft = parseFloat(window.getComputedStyle(track).paddingLeft) || 0;
+            track.scrollTo({
+              left: cardLeft - trackPaddingLeft,
+              behavior: 'smooth'
+            });
+          }
+        };
+      });
+
+      // Update active dot on scroll
+      let scrollTimer = null;
+      track.addEventListener('scroll', () => {
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          const scrollPos = track.scrollLeft;
+          const trackPaddingLeft = parseFloat(window.getComputedStyle(track).paddingLeft) || 0;
+          let closestIndex = 0;
+          let minDiff = Infinity;
+
+          cards.forEach((card, index) => {
+            const cardLeft = card.offsetLeft - trackPaddingLeft;
+            const diff = Math.abs(scrollPos - cardLeft);
+            if (diff < minDiff) {
+              minDiff = diff;
+              closestIndex = index;
+            }
+          });
+
+          dots.forEach((dot, idx) => {
+            if (idx === closestIndex) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        }, 50);
+      }, { passive: true });
+    }
+
+    function initTyping() {
+      const el = $('#typing-text');
+      if (!el) return;
+      const targetText = t('잘 잤어?', 'よく眠れた？');
+      let idx = 0;
+      el.textContent = '';
+      function typeNext() {
+        if (idx <= targetText.length) {
+          el.textContent = targetText.slice(0, idx);
+          idx++;
+          setTimeout(typeNext, 120);
+        }
+      }
+      setTimeout(typeNext, 400);
+    }
+
+    function initDateArchive() {
+      const host = document.getElementById('archive-calendar');
+      if (!host) return;
+      const assets = {"rain": "/assets/teaser5/7c77a1482362ab61.webp", "sunset": "/assets/teaser5/3884da4af64be4c0.webp"};
+      const records = {
+        12: { image:assets.rain, title:t('비가 와서, 조금 더 가까이.','雨だから、少し近くに。'), detail:t('같은 우산 아래 걷던 토요일.','ひとつの傘で歩いた土曜日。'), times:['18:12','18:46','19:08'], notes:[t('우산을 함께 쓰기 시작한 순간','同じ傘に入った瞬間'),t('횡단보도 앞에서 손을 잡았어.','横断歩道で手をつないだ。'),t('비를 피해 카페까지 뛰어간 길','雨を避けてカフェまで走った道')], a:[76,78,81,99,85,80,82,106,90,83,87,112,91,83,79], b:[72,75,79,92,82,77,80,97,85,80,86,104,87,79,75] },
+        19: { image:assets.sunset, title:t('노을이 질 때까지, 우리.','夕日が沈むまで、ふたり。'), detail:t('강변을 따라 천천히 걸었던 저녁.','川沿いをゆっくり歩いた夕方。'), times:['17:28','18:02','18:35'], notes:[t('멀리서 서로를 발견했을 때','遠くにお互いを見つけたとき'),t('나란히 앉아 오래 웃었던 순간','隣に座って笑い続けた瞬間'),t('집에 가기 전, 한 번 더 손을 잡고','帰る前に、もう一度手をつないで')], a:[73,76,82,104,84,78,80,98,85,79,82,109,89,82,76], b:[70,72,78,96,80,75,76,91,82,75,78,101,84,76,73] }
+      };
+      let selected=12, moment=1, phase='ready';
+      const ids=['archive-date-label','archive-story-title','archive-story-detail','archive-record-title','archive-count'];
+      function drawCalendar(){
+        host.innerHTML=['일','월','화','수','목','금','토'].map((d,i)=>'<span class="archive-weekday">'+t(d,['日','月','火','水','木','金','土'][i])+'</span>').join('')+'<span></span><span></span>'+Array.from({length:30},(_,i)=>{
+          const day=i+1;return '<button type="button" class="archive-day" '+(records[day]?'data-record="'+day+'" aria-pressed="'+(selected===day)+'"':'disabled')+' aria-label="9/'+day+(records[day]?t(' 데이트 기록',' デート記録'):'')+'">'+day+'</button>';
+        }).join('');
+        host.querySelectorAll('[data-record]').forEach(btn=>btn.onclick=()=>{selected=Number(btn.dataset.record);moment=1;render();});
+      }
+      function render(){
+        const r=records[selected];drawCalendar();
+        const img=document.getElementById('archive-scene');img.src=r.image;img.alt=r.title;
+        const vals=['2026.09.'+selected,r.title,r.detail,'9.'+selected+' · '+t('기록된 순간 3개','記録された3つの瞬間'),Object.keys(records).length+t('번의 데이트','回のデート')];ids.forEach((id,i)=>document.getElementById(id).textContent=vals[i]);
+        const points=v=>v.map((n,i)=>(24+i*25)+','+(93-(n-60)*1.25)).join(' ');
+        const peak=[3,7,11][moment], x=24+peak*25;
+        document.getElementById('archive-chart').innerHTML='<svg viewBox="0 0 400 110" role="img" aria-label="'+t('데이트 중 두 사람의 심박 변화','デート中のふたりの心拍変化')+'"><path d="M24 18H374 M24 55H374 M24 93H374" stroke="#eee7f0" fill="none"/><text x="0" y="20" fill="#ab9eb0" font-size="8">120</text><text x="5" y="95" fill="#ab9eb0" font-size="8">60</text><line x1="'+x+'" x2="'+x+'" y1="10" y2="99" stroke="#d5c3df" stroke-dasharray="3 3"/><polyline points="'+points(r.a)+'" fill="none" stroke="#b97180" stroke-width="2.5" stroke-linejoin="round"/><polyline points="'+points(r.b)+'" fill="none" stroke="#8570af" stroke-width="2.5" stroke-linejoin="round"/>'+[r.a,r.b].map((v,i)=>'<circle cx="'+x+'" cy="'+(93-(v[peak]-60)*1.25)+'" r="4" fill="'+['#b97180','#8570af'][i]+'" stroke="white" stroke-width="2"/>').join('')+'</svg>';
+        const choices=document.getElementById('archive-moments');choices.innerHTML=r.times.map((time,i)=>'<button type="button" aria-pressed="'+(moment===i)+'" data-moment="'+i+'">'+time+'</button>').join('');choices.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{moment=Number(btn.dataset.moment);render();});
+        const detail=document.getElementById('archive-moment-detail');detail.replaceChildren();const strong=document.createElement('strong');strong.textContent=r.notes[moment];const p=document.createElement('p');p.textContent=t('지우','ジウ')+' '+r.a[peak]+' BPM · '+t('민서','ミンソ')+' '+r.b[peak]+' BPM';detail.append(strong,p);
+      }
+      const btn=document.getElementById('archive-demo-btn'), status=document.getElementById('archive-demo-status');
+      btn.onclick=()=>{
+        if(phase==='ready'){
+          phase='capturing';btn.disabled=true;btn.textContent=t('기록 중…','記録中…');status.textContent=t('반지로 두 사람의 심박을 기록해요.','指輪でふたりの心拍を記録。');
+          setTimeout(()=>{if(!btn.isConnected)return;phase='captured';btn.disabled=false;btn.textContent=t('달력에 남기기','カレンダーに残す');status.textContent=t('심박 상승 순간 3개를 포착했어요.','心拍上昇の瞬間を3つ記録。');},1400);
+        } else if(phase==='captured'){
+          records[23]={...records[19],title:t('오늘도, 기억하고 싶은 순간.','今日も、覚えておきたい瞬間。'),detail:t('데이트 중 포착한 심박 변화가 달력에 남았어요.','デート中の心拍変化がカレンダーに。')};selected=23;moment=1;phase='saved';render();status.textContent=t('9월 23일에 기록을 남겼어요.','9月23日に記録しました。');btn.textContent=t('다시 체험하기','もう一度体験する');
+        } else {delete records[23];selected=12;moment=1;phase='ready';render();status.textContent=t('데이트 기록 미리보기','デート記録のプレビュー');btn.textContent=t('데이트 기록 체험하기','デート記録を体験する')+' ↗';}
+      };
+      render();
+    }
+
+    // Initial render
+    renderPage();
+  </script>
+</body>
+</html>
