@@ -2967,7 +2967,25 @@
       html[lang="ja"] .hero-title { font-size:clamp(1.15rem,5vw,1.5rem)!important; line-height:1.35!important; }
       html[lang="ja"] .hero-subtitle { font-size:.78rem!important; }
     }
-</style>
+    /* Keep the document within the viewport, including iOS horizontal bounce. */
+    html, body { max-width:100%; overflow-x:hidden; overscroll-behavior-x:none; }
+    @supports (overflow:clip) {
+      html, body { overflow-x:clip; }
+    }
+    #root { width:100%; min-width:0; }
+    /* Japanese must wrap between characters, including the more specific
+       section rules that otherwise inherit Korean keep-all behavior. */
+    html[lang="ja"] :is(h1,h2,h3,h4,p,span,blockquote),
+    html[lang="ja"] #sleep-share :is(.section-title,.section-desc,.privacy-tag-box),
+    html[lang="ja"] #cta :is(.cta-title,.cta-desc) {
+      word-break:normal;
+      overflow-wrap:anywhere;
+      line-break:strict;
+    }
+    #sleep-share .section-head > *, .archive-intro > *,
+    .beat-studio-grid > *, .product-grid > * { min-width:0; max-width:100%; }
+
+  </style>
 <link rel="canonical" href="https://42sai.io/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="og:type" content="website">
