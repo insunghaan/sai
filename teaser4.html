@@ -1131,6 +1131,16 @@
     .btn-beat-send:hover .btn-beat-arrow {
       transform: translateX(3px);
     }
+    .beat-card-note {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-subtle);
+      margin-top: 0.95rem;
+      margin-bottom: 0;
+      letter-spacing: -0.01em;
+      line-height: 1.4;
+      font-weight: 500;
+    }
 
     /* 03. SECTION: SLEEP GARDEN */
     #sleep-garden.section-wrap {
@@ -2217,7 +2227,13 @@
         padding-top: 0.6rem;
       }
 
-      /* Section 02 Mobile Beat Tooltip Protection */
+      /* Section 02 Mobile Beat Tooltip Protection & Spacing */
+      #heartbeat-send .section-head {
+        margin-bottom: 0 !important;
+      }
+      .beat-studio-grid {
+        gap: 1.6rem !important;
+      }
       .mobile-break {
         display: block;
       }
@@ -2286,6 +2302,11 @@
       .btn-beat-send {
         padding: 0.95rem 1.2rem;
         font-size: 0.94rem;
+      }
+      .beat-card-note {
+        font-size: 0.76rem !important;
+        margin-top: 0.85rem !important;
+        color: var(--text-subtle) !important;
       }
 
       /* Section 03 Sleep Garden Mobile */
@@ -2734,10 +2755,6 @@
                   <span class="gradient-pill red">${t('02 / 심박 보내기', '02 / 心拍送信')}</span>
                   <h2 class="section-title">${t('말 대신,<br><span class="gradient-text">심박 하나.</span>', '言葉の代わりに、<br><span class="gradient-text">心拍をひとつ。</span>')}</h2>
                   <p class="section-desc">${t('보고 싶은 순간, 지금의 심박을 보내요. 네가 느꼈다면 작은 답장이 돌아옵니다.', '会いたい瞬間、いまの心拍を送る。あなたが感じたら、小さな返事が届きます。')}</p>
-                  <div class="privacy-tag-box" style="margin-top:1.6rem; border-color:rgba(229,72,87,0.25); background:var(--red-soft-bg);">
-                    <span class="ritual-dot-red"></span>
-                    <span><strong>${t('보내고 싶은 순간에만.', '送りたい瞬間だけ。')}</strong><br class="mobile-break">${t('심박 공유는 기본 OFF입니다.', '心拍の共有はデフォルトでOFFです。')}</span>
-                  </div>
                 </div>
 
                 <!-- Heartbeat Studio Card Deck (Image 1, 2, 3 Reference) -->
@@ -2801,6 +2818,7 @@
                       </button>
                     </div>
                   </div>
+                  <p class="beat-card-note">${t('심박 공유는 기본 OFF입니다.', '心拍の共有はデフォルトでOFFです。')}</p>
                 </div>
               </div>
             </div>
