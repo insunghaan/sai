@@ -783,34 +783,36 @@
       letter-spacing: -0.01em;
     }
     .deck-tab-left {
-      left: 20px;
+      left: 32px;
       top: 4px;
-      width: 130px;
+      width: 185px;
       height: 48px;
       background: #e2d4f5;
       color: #581c87;
-      transform: rotate(-3.5deg);
+      transform: rotate(-3deg);
       transform-origin: bottom left;
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      box-shadow: 0 -3px 12px rgba(88, 28, 135, 0.08);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 -4px 14px rgba(88, 28, 135, 0.12);
+      z-index: 1;
     }
     .deck-tab-right {
-      right: 28px;
-      top: 8px;
-      width: 110px;
-      height: 44px;
+      left: 172px;
+      top: 7px;
+      width: 180px;
+      height: 45px;
       background: #c8ede6;
       color: #065f46;
       transform: rotate(2deg);
       transform-origin: bottom right;
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      box-shadow: 0 -3px 12px rgba(6, 95, 70, 0.08);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 -4px 14px rgba(6, 95, 70, 0.12);
+      z-index: 2;
     }
 
     /* Main Card Visual (Image 3) */
     .beat-card-wrap {
       position: relative;
-      z-index: 2;
+      z-index: 4;
       width: 100%;
       border-radius: 38px;
       background: linear-gradient(168deg, #fce8f1 0%, #fff0f3 32%, #fff7f2 68%, #fef5e8 100%);
@@ -892,41 +894,6 @@
       justify-content: center;
       align-items: center;
       margin: 0.1rem 0 0.7rem;
-    }
-
-    /* Concentric Heart Outline Decorative Layers (Image 3) */
-    .concentric-hearts-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 180px;
-      height: 160px;
-      pointer-events: none;
-      z-index: 1;
-    }
-    .concentric-heart {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-    .concentric-heart.outer {
-      width: 168px;
-      height: 150px;
-      opacity: 0.55;
-    }
-    .concentric-heart.middle {
-      width: 130px;
-      height: 116px;
-      opacity: 0.75;
-    }
-    .concentric-heart.inner {
-      width: 98px;
-      height: 88px;
-      opacity: 0.95;
     }
 
     /* Existing 3D Heart Visual (Preserved as required!) */
@@ -1166,10 +1133,15 @@
     }
 
     /* 03. SECTION: SLEEP GARDEN */
+    #sleep-garden.section-wrap {
+      background: linear-gradient(180deg, #fbfaff 0%, #f6f3fc 100%);
+      border-top: 1px solid rgba(124, 58, 237, 0.08);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.08);
+    }
     .garden-studio-grid {
       display: grid;
       grid-template-columns: 1fr 1.15fr;
-      gap: 3.5rem;
+      gap: 2.2rem;
       align-items: center;
     }
     .garden-media-stage {
@@ -1984,31 +1956,46 @@
         padding-bottom: 1.4rem !important;
       }
       .story-slide-card {
-        flex: 0 0 80vw !important;
-        width: 80vw !important;
-        height: 480px !important;
+        flex: 0 0 clamp(285px, 80vw, 325px) !important;
+        width: clamp(285px, 80vw, 325px) !important;
+        aspect-ratio: 1 / 1 !important;
+        height: auto !important;
         border-radius: 24px !important;
-        padding: 1.8rem 1.4rem !important;
+        padding: 1.25rem 1.15rem !important;
       }
       .story-slide-card:last-child {
         margin-right: 1.5rem !important;
         scroll-snap-align: start end !important;
       }
+      .story-slide-card .story-tag {
+        font-size: 0.70rem !important;
+        letter-spacing: 0.10em !important;
+        margin-bottom: 0.25rem !important;
+      }
       .story-card-title {
-        font-size: 1.35rem !important;
+        font-size: 1.15rem !important;
         font-weight: 900 !important;
+        line-height: 1.24 !important;
+        margin-bottom: 0.25rem !important;
       }
       .story-card-desc {
-        font-size: 0.88rem !important;
+        font-size: 0.80rem !important;
+        line-height: 1.34 !important;
+      }
+      .story-slide-card .story-card-gradient {
+        background: linear-gradient(180deg, transparent 20%, rgba(10, 10, 14, 0.45) 52%, rgba(10, 10, 14, 0.92) 100%) !important;
+      }
+      .story-slide-card .story-card-bg {
+        transform: scale(1.05) !important;
       }
       .story-slide-card:nth-child(1) .story-card-bg {
-        object-position: center 46% !important;
+        object-position: center 52% !important;
       }
       .story-slide-card:nth-child(2) .story-card-bg {
         object-position: center 46% !important;
       }
       .story-slide-card:nth-child(3) .story-card-bg {
-        object-position: center 48% !important;
+        object-position: center 40% !important;
       }
       .rhythm-archive-grid {
         grid-template-columns: minmax(0, 1fr);
@@ -2228,18 +2215,21 @@
         padding-top: 32px;
       }
       .deck-tab-left {
-        left: 14px;
+        left: 20px;
         top: 4px;
-        width: 114px;
-        height: 42px;
-        font-size: 0.76rem;
+        width: 155px;
+        height: 44px;
+        font-size: 0.78rem;
+        z-index: 1;
       }
       .deck-tab-right {
-        right: 18px;
+        left: 135px;
+        right: auto;
         top: 6px;
-        width: 95px;
-        height: 38px;
-        font-size: 0.76rem;
+        width: 150px;
+        height: 40px;
+        font-size: 0.78rem;
+        z-index: 2;
       }
       .beat-card-wrap {
         padding: 1.8rem 1.3rem 1.6rem;
@@ -2270,22 +2260,6 @@
         width: 105px;
         height: 105px;
       }
-      .concentric-hearts-container {
-        width: 150px;
-        height: 135px;
-      }
-      .concentric-heart.outer {
-        width: 145px;
-        height: 130px;
-      }
-      .concentric-heart.middle {
-        width: 115px;
-        height: 102px;
-      }
-      .concentric-heart.inner {
-        width: 88px;
-        height: 78px;
-      }
       .beat-pair-box {
         margin-bottom: 3.1rem;
       }
@@ -2306,11 +2280,14 @@
       /* Section 03 Sleep Garden Mobile */
       .garden-studio-grid {
         grid-template-columns: 1fr;
-        gap: 2.0rem;
+        gap: 0.6rem !important;
         text-align: center;
       }
+      .garden-media-stage {
+        margin-top: -0.4rem !important;
+      }
       .garden-rings-img {
-        max-width: 330px;
+        max-width: 320px;
         margin: 0 auto;
         aspect-ratio: 3 / 2 !important;
         object-fit: contain !important;
@@ -2336,20 +2313,38 @@
         padding-bottom: 1.2rem !important;
       }
       #cta.section-wrap {
-        padding-top: 0.8rem !important;
-        padding-bottom: 4.0rem !important;
+        padding-top: 0.6rem !important;
+        padding-bottom: 2.8rem !important;
       }
       .cta-banner-wrap {
-        padding: 3.5rem 1.2rem !important;
-        margin: 0.8rem 0 3.0rem !important;
-        border-radius: 28px;
+        padding: 2.0rem 1.2rem 1.8rem !important;
+        margin: 0.6rem 0 2.0rem !important;
+        border-radius: 26px;
       }
       .cta-ring-img {
-        max-width: 220px;
+        max-width: 135px !important;
+        margin: 0 auto 0.8rem !important;
+      }
+      .cta-banner-wrap .gradient-pill {
+        margin-bottom: 0.65rem !important;
+        font-size: 0.74rem !important;
+        padding: 0.28rem 0.75rem !important;
       }
       .cta-title {
-        font-size: 2.42rem !important;
+        font-size: 1.82rem !important;
         font-weight: 900 !important;
+        line-height: 1.22 !important;
+        margin-bottom: 0.65rem !important;
+      }
+      .cta-desc {
+        font-size: 0.86rem !important;
+        line-height: 1.4 !important;
+        max-width: 290px !important;
+        margin: 0 auto 1.35rem !important;
+      }
+      #bottom-signup-btn {
+        padding: 0.82rem 1.6rem !important;
+        font-size: 0.95rem !important;
       }
 
       /* Mobile Modal Polish */
@@ -2756,19 +2751,8 @@
                       <div class="beat-metric-sub">${t('방금 측정한 내 심박', '先ほど測定した私の心拍')}</div>
                     </div>
 
-                    <!-- Center Heart Stage: Concentric Ripple Outlines & Existing 3D Heart -->
+                    <!-- Center Heart Stage: Existing 3D Heart -->
                     <div class="heart-stage-wrap">
-                      <div class="concentric-hearts-container">
-                        <svg class="concentric-heart outer" viewBox="0 0 100 90">
-                          <path d="M50 85 C20 60 5 45 5 25 C5 10 20 5 35 5 C43 5 48 10 50 14 C52 10 57 5 65 5 C80 5 95 10 95 25 C95 45 80 60 50 85 Z" fill="none" stroke="rgba(244, 63, 94, 0.18)" stroke-width="1.6"/>
-                        </svg>
-                        <svg class="concentric-heart middle" viewBox="0 0 100 90">
-                          <path d="M50 85 C20 60 5 45 5 25 C5 10 20 5 35 5 C43 5 48 10 50 14 C52 10 57 5 65 5 C80 5 95 10 95 25 C95 45 80 60 50 85 Z" fill="none" stroke="rgba(244, 63, 94, 0.32)" stroke-width="1.8"/>
-                        </svg>
-                        <svg class="concentric-heart inner" viewBox="0 0 100 90">
-                          <path d="M50 85 C20 60 5 45 5 25 C5 10 20 5 35 5 C43 5 48 10 50 14 C52 10 57 5 65 5 C80 5 95 10 95 25 C95 45 80 60 50 85 Z" fill="none" stroke="rgba(244, 63, 94, 0.5)" stroke-width="2.2"/>
-                        </svg>
-                      </div>
                       <!-- Existing 3D Heart Visual Preserved as instructed -->
                       <img class="heart-3d-visual" src="/assets/heart-3d.webp" alt="${t('3D 펄스 하트', '3D鼓動ハート')}">
                     </div>
@@ -2809,7 +2793,7 @@
                   <span class="gradient-pill" style="border-color:rgba(124, 58, 237, 0.22); color:#6d28d9; background:#f5f3ff;">🌸 ${t('03 / 수면 정원', '03 / 睡眠の庭')}</span>
                   <h2 class="section-title">${t('각자 시작해도,<br><span class="gradient-text">아침 인사는 같이.</span>', '別々に目覚めても、<br><span class="gradient-text">朝の挨拶はいっしょに。</span>')}</h2>
                   <p class="section-desc">${t('둘 다 푹 쉰 날에는 우리 둘만의 정원에 작은 꽃 한 송이가 피어납니다. 함께 건강해지는 가장 사랑스러운 동기부여.', 'ふたりともぐっすり休んだ日には、ふたりだけの庭に小さな花が一輪咲きます。一緒に健やかになる、いちばん愛おしいきっかけ。')}</p>
-                  <div class="privacy-tag-box" style="margin-top:1.6rem; border-color:rgba(124, 58, 237, 0.18); background:#ffffff;">
+                  <div class="privacy-tag-box" style="margin-top:1.1rem; border-color:rgba(124, 58, 237, 0.18); background:#ffffff;">
                     <span style="color:#7c3aed; font-weight:800;">🌸</span>
                     <span><strong>${t('둘만의 정원에 피어나는 꽃.', 'ふたりの庭に咲く花。')}</strong><br class="mobile-break">${t('서로의 컨디션이 조용히 연결됩니다.', 'お互いのコンディションがそっと重なります。')}</span>
                   </div>
