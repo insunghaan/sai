@@ -271,12 +271,16 @@
       left: 0;
       right: 0;
       z-index: 100;
-      background: rgba(250, 249, 246, 0.92);
+      background: rgba(20, 16, 24, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding: 1.0rem 0;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .teaser-nav.nav-scrolled {
+      background: rgba(250, 249, 246, 0.94);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
     .teaser-nav-inner {
       display: flex;
@@ -298,6 +302,12 @@
       width: auto;
       display: block;
       object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s ease;
+    }
+    .teaser-nav.nav-scrolled .brand-logo img,
+    .teaser-nav.nav-scrolled .brand-logo-img {
+      filter: none;
     }
     .nav-actions {
       display: flex;
@@ -307,27 +317,43 @@
     .nav-link {
       font-size: 0.95rem;
       font-weight: 600;
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.75);
       transition: color 0.2s ease;
     }
     .nav-link:hover {
+      color: #ffffff;
+    }
+    .teaser-nav.nav-scrolled .nav-link {
+      color: var(--text-muted);
+    }
+    .teaser-nav.nav-scrolled .nav-link:hover {
       color: var(--text-dark);
     }
     .lang-toggle {
       font-size: 0.82rem;
       font-weight: 700;
-      color: var(--text-dark);
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      background: #ffffff;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
       padding: 0.42rem 0.95rem;
       border-radius: 9999px;
       letter-spacing: 0.06em;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
       transition: all 0.2s ease;
     }
     .lang-toggle:hover {
-      border-color: rgba(0, 0, 0, 0.25);
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.45);
       transform: translateY(-1px);
+    }
+    .teaser-nav.nav-scrolled .lang-toggle {
+      color: var(--text-dark);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+    .teaser-nav.nav-scrolled .lang-toggle:hover {
+      border-color: rgba(0, 0, 0, 0.25);
     }
     .nav-btn-sm {
       padding: 0.65rem 1.4rem;
@@ -337,12 +363,13 @@
     /* 01. HERO SECTION */
     .hero-section {
       position: relative;
-      min-height: clamp(660px, 90vh, 850px);
+      min-height: clamp(660px, 90vh, 880px);
       display: flex;
       align-items: center;
-      padding: 6.0rem 0 3.5rem;
+      padding: 6.5rem 0 3.8rem;
       overflow: hidden;
-      background: var(--bg-page);
+      background-color: #1a141e;
+      background: radial-gradient(ellipse at 72% 50%, #29202a 0%, #1e1722 52%, #141018 100%);
     }
 
     /* Desktop Hero Stage */
@@ -353,34 +380,38 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      gap: 3.5rem;
+      max-width: 1220px;
+      gap: 3.0rem;
     }
     .hero-content-left {
-      max-width: 520px;
+      flex: 0 0 auto;
+      width: 480px;
+      max-width: 480px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
+      z-index: 4;
     }
     .hero-eyebrow {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      color: #666666;
+      color: rgba(255, 255, 255, 0.72);
       letter-spacing: -0.01em;
       margin-bottom: 0.9rem;
       display: inline-block;
     }
     .hero-title {
-      font-size: clamp(3.42rem, 5.7vw, 4.82rem);
+      font-size: clamp(3.2rem, 5.2vw, 4.5rem);
       font-weight: 900;
-      line-height: 1.15;
+      line-height: 1.16;
       letter-spacing: -0.035em;
       margin: 0 0 1.2rem 0;
-      color: #1a1a1a;
+      color: #ffffff;
       text-align: left;
     }
     .hero-title .hero-accent {
-      background: linear-gradient(135deg, #4a1922 0%, #d84555 50%, #e54857 100%);
+      background: linear-gradient(135deg, #ff9ca8 0%, #ff526d 50%, #ff758c 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
@@ -388,11 +419,11 @@
       font-weight: 900;
     }
     .hero-desc {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       line-height: 1.68;
-      color: #4a4a4a;
+      color: rgba(255, 255, 255, 0.82);
       margin-bottom: 2.2rem;
-      max-width: 490px;
+      max-width: 460px;
       text-align: left;
     }
     .hero-cta-group {
@@ -407,45 +438,47 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      background-color: #18181b;
-      color: #ffffff;
+      background-color: #ffffff;
+      color: #17131b;
       padding: 0.88rem 1.85rem;
       font-size: 0.98rem;
-      font-weight: 600;
+      font-weight: 650;
       border-radius: 9999px;
-      border: 1px solid #18181b;
+      border: 1px solid #ffffff;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
       transition: all 0.25s ease;
       text-decoration: none;
     }
     .hero-btn-primary:hover {
-      background-color: #27272a;
-      border-color: #27272a;
+      background-color: #f3f0f7;
+      border-color: #f3f0f7;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.25);
     }
     .hero-btn-secondary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background-color: #ffffff;
-      color: #18181b;
-      border: 1px solid rgba(0, 0, 0, 0.15);
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       padding: 0.88rem 1.85rem;
       font-size: 0.98rem;
       font-weight: 500;
       border-radius: 9999px;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       transition: all 0.25s ease;
       text-decoration: none;
     }
     .hero-btn-secondary:hover {
-      background-color: #f4f4f5;
-      border-color: rgba(0, 0, 0, 0.28);
+      background-color: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.45);
       transform: translateY(-2px);
-      color: #000000;
+      color: #ffffff;
     }
 
     /* Ritual Bar below Hero */
@@ -455,12 +488,12 @@
       justify-content: center;
       gap: 1.5rem;
       padding: 1.15rem 1rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.45);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: #151119;
       font-size: 0.92rem;
       font-weight: 600;
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.72);
     }
     .teaser-ritual span {
       display: inline-flex;
@@ -472,74 +505,36 @@
       opacity: 0.4;
     }
 
-    /* Right Art Stage with Live Ring Illustration & Motion */
+    /* Right Art Stage with Feathered Night Couple Illustration */
     .hero-art {
       position: relative;
-      flex: 1;
-      max-width: 520px;
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: 680px;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
+      z-index: 2;
     }
     .hero-art-img {
       width: 100%;
-      max-width: 480px;
-      aspect-ratio: 1 / 1 !important;
+      max-width: 660px;
+      height: auto;
+      aspect-ratio: 1024 / 682 !important;
       object-fit: contain !important;
-      filter: drop-shadow(0 24px 44px rgba(35, 45, 30, 0.08));
-      animation: heroRingFloat 7s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+      border-radius: 0;
+      -webkit-mask-image: 
+        linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image: 
+        linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+      mask-composite: intersect;
+      transition: transform 0.4s ease;
     }
-    @keyframes heroRingFloat {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-9px) scale(1.008); }
-    }
-
-    /* Floating notes: Glassmorphism + 20px rounded + distinct gentle micro-motion */
     .hero-art .floating-note {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 0.85rem 1.35rem;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      box-shadow: 0 12px 32px rgba(35, 45, 30, 0.07);
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      z-index: 3;
-      transition: transform 0.3s ease;
-    }
-    .hero-art .floating-note:hover {
-      transform: scale(1.03);
-    }
-    .hero-art .floating-note.top {
-      top: 5%;
-      left: -15px;
-      border-color: rgba(124, 58, 237, 0.2);
-      animation: floatTopNote 6s ease-in-out infinite alternate;
-    }
-    .hero-art .floating-note.bottom {
-      bottom: 7%;
-      right: -10px;
-      border-color: rgba(229, 72, 87, 0.22);
-      animation: floatBottomNote 6.5s ease-in-out infinite alternate;
-    }
-    .hero-art .floating-note small {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-soft);
-    }
-    @keyframes floatTopNote {
-      0% { transform: translateY(0px) rotate(0deg); }
-      100% { transform: translateY(-8px) rotate(0.4deg); }
-    }
-    @keyframes floatBottomNote {
-      0% { transform: translateY(0px) rotate(0deg); }
-      100% { transform: translateY(8px) rotate(-0.4deg); }
+      display: none;
     }
     .pill-icon {
       width: 36px;
@@ -2293,12 +2288,16 @@
         gap: 2.0rem;
       }
       .hero-content-left {
-        max-width: 100%;
+        width: 100%;
+        max-width: 600px;
         align-items: center;
         text-align: center;
       }
       .hero-title, .hero-desc {
         text-align: center;
+      }
+      .hero-desc {
+        max-width: 540px;
       }
       .hero-cta-group {
         justify-content: center;
@@ -2309,7 +2308,8 @@
       }
       .hero-art {
         width: 100%;
-        max-width: 440px;
+        max-width: 560px;
+        justify-content: center;
         flex: none;
       }
       .beat-studio-grid {
@@ -2445,20 +2445,21 @@
       }
       .hero-eyebrow {
         font-size: 0.84rem !important;
-        color: #666666 !important;
+        color: rgba(255, 255, 255, 0.72) !important;
         margin-bottom: 0.35rem !important;
         font-weight: 600 !important;
       }
       .hero-title {
-        font-size: clamp(2.57rem, 8.5vw, 2.87rem) !important;
+        font-size: clamp(2.25rem, 7.8vw, 2.75rem) !important;
         font-weight: 900 !important;
-        line-height: 1.16 !important;
+        line-height: 1.18 !important;
         letter-spacing: -0.035em !important;
         margin: 0 0 0.45rem 0 !important;
         text-align: center !important;
+        color: #ffffff !important;
       }
       .hero-title .hero-accent {
-        background: linear-gradient(135deg, #4a1922 0%, #d84555 50%, #e54857 100%) !important;
+        background: linear-gradient(135deg, #ff9ca8 0%, #ff526d 50%, #ff3b56 100%) !important;
         -webkit-background-clip: text !important;
         -webkit-text-fill-color: transparent !important;
         display: inline-block !important;
@@ -2468,7 +2469,7 @@
         font-size: 0.86rem !important;
         line-height: 1.48 !important;
         margin-bottom: 0.95rem !important;
-        color: #555555 !important;
+        color: rgba(255, 255, 255, 0.8) !important;
         max-width: 320px !important;
         text-align: center !important;
       }
@@ -2487,31 +2488,40 @@
         white-space: nowrap;
       }
       .hero-btn-primary {
-        background-color: #18181b !important;
-        border-color: #18181b !important;
-        color: #ffffff !important;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18) !important;
+        background-color: #ffffff !important;
+        border-color: #ffffff !important;
+        color: #17131b !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28) !important;
       }
       .hero-btn-secondary {
-        background-color: #ffffff !important;
-        border: 1px solid rgba(0, 0, 0, 0.16) !important;
-        color: #18181b !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
       }
       .hero-art {
-        max-width: 340px !important;
-        width: 88% !important;
-        margin: 0.25rem auto 0 !important;
+        max-width: 380px !important;
+        width: 95% !important;
+        margin: 0.35rem auto 0 !important;
         display: flex;
         justify-content: center;
         align-items: center;
         flex: none;
       }
       .hero-art-img {
-        max-width: 340px !important;
+        max-width: 100% !important;
         width: 100% !important;
         height: auto !important;
-        aspect-ratio: 1 / 1 !important;
-        object-fit: contain !important;
+        aspect-ratio: 1024 / 682 !important;
+        object-fit: cover !important;
+        border-radius: 0 !important;
+        -webkit-mask-image: 
+          linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%),
+          linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%) !important;
+        -webkit-mask-composite: source-in !important;
+        mask-image: 
+          linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%),
+          linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%) !important;
+        mask-composite: intersect !important;
       }
       .hero-art .floating-note {
         display: none !important; /* Keep mobile clean and compact so all fits in 1 screen */
@@ -3050,21 +3060,9 @@
                 </div>
               </div>
 
-              <!-- Rings Stage (Live Ring Illustration & Motion) -->
+              <!-- Hero Stage (Couple Night Illustration) -->
               <div class="hero-art">
-                <img src="/assets/hero-ring-v3-transparent.webp?v=20260917_v3" alt="${t('실버와 샴페인 골드 커플 스마트링', 'シルバーとシャンパンゴールドのペアスマートリング')}" class="hero-art-img" width="1254" height="1254" fetchpriority="high">
-                
-                <!-- Floating Sleep Note -->
-                <div class="floating-note top">
-                  <span>☾ ${t('수면 요약이 공유됐어요.', '睡眠のまとめを共有しました。')}</span>
-                  <small>7h 42m · ${t('내가 고른 요약만', '選んだまとめだけ')}</small>
-                </div>
-
-                <!-- Floating Heartbeat Note -->
-                <div class="floating-note bottom">
-                  <span>♡ ${t('심박을 보냈어요.', '心拍を送りました。')}</span>
-                  <small>78 bpm · ${t('지우가 느꼈어요', 'ジウが受け取りました')}</small>
-                </div>
+                <img src="/assets/hero-night-couple.webp" alt="${t('밤하늘 아래 스마트링으로 연결된 둘만의 일상', '夜空の下、スマートリングでつながるふたりの日常')}" class="hero-art-img" width="1024" height="682" fetchpriority="high">
               </div>
             </div>
           </section>
@@ -3834,6 +3832,20 @@
 
       // Horizontal wide story slider
       initStorySlider();
+
+      // GNB scroll styling transition (from dark hero to light body)
+      const navEl = $('.teaser-nav');
+      if (navEl) {
+        const handleScroll = () => {
+          if (window.scrollY > 280) {
+            navEl.classList.add('nav-scrolled');
+          } else {
+            navEl.classList.remove('nav-scrolled');
+          }
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+      }
     }
 
     function initStorySlider() {
