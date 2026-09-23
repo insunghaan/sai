@@ -881,6 +881,7 @@
     /* Card Wrap (Full Card Component with Shadow & Border) */
     .beat-card-wrap {
       position: relative;
+      z-index: 5;
       width: 100%;
       border-radius: 38px;
       border: 1.5px solid rgba(255, 255, 255, 0.95);
@@ -901,6 +902,51 @@
     .beat-card-wrap.calmed {
       background: linear-gradient(168deg, #f0fdf4 0%, #fff7ed 38%, #fff1f2 72%, #fce7f3 100%);
       box-shadow: 0 24px 50px -12px rgba(34, 197, 94, 0.22), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Message First Reveal Motion */
+    .beat-card-wrap .minseo-incoming-badge,
+    .beat-card-wrap .calmed-incoming-badge {
+      transform: translateY(0) scale(1);
+      transition: transform 0.62s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.62s ease;
+      will-change: transform;
+    }
+    .beat-card-wrap.msg-first .minseo-incoming-badge,
+    .beat-card-wrap.msg-first .calmed-incoming-badge {
+      transform: translateY(85px) scale(1.08);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+      z-index: 10;
+    }
+
+    .beat-card-wrap .beat-metric-section,
+    .beat-card-wrap .heart-stage-wrap,
+    .beat-card-wrap .beat-msg-row,
+    .beat-card-wrap .beat-pair-box,
+    .beat-card-wrap .beat-btn-wrapper {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .beat-card-wrap.msg-first .beat-metric-section,
+    .beat-card-wrap.msg-first .heart-stage-wrap,
+    .beat-card-wrap.msg-first .beat-msg-row,
+    .beat-card-wrap.msg-first .beat-pair-box,
+    .beat-card-wrap.msg-first .beat-btn-wrapper {
+      opacity: 0;
+      transform: translateY(22px);
+      pointer-events: none;
+    }
+    .beat-card-wrap:not(.msg-first) .beat-metric-section {
+      transition-delay: 0.1s;
+    }
+    .beat-card-wrap:not(.msg-first) .heart-stage-wrap {
+      transition-delay: 0.2s;
+    }
+    .beat-card-wrap:not(.msg-first) .beat-msg-row,
+    .beat-card-wrap:not(.msg-first) .beat-pair-box,
+    .beat-card-wrap:not(.msg-first) .beat-btn-wrapper {
+      transition-delay: 0.3s;
     }
 
     /* Transmission Center Stage Overlay */
@@ -1210,6 +1256,20 @@
       border-radius: 999px;
       white-space: nowrap;
     }
+    .incoming-label-green {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #16a34a;
+      background: #dcfce7;
+      padding: 1px 7px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .calmed-incoming-badge {
+      border-color: rgba(34, 197, 94, 0.35);
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.08);
+      background: rgba(255, 255, 255, 0.95);
+    }
     .incoming-text-msg {
       font-size: 0.78rem;
       font-weight: 600;
@@ -1413,6 +1473,9 @@
     }
     .btn-beat-send:hover .btn-beat-arrow {
       transform: translateX(3px);
+    }
+    .btn-reply-mint:hover .btn-beat-arrow {
+      transform: translateX(-3px);
     }
     .btn-reply-mint {
       background: linear-gradient(135deg, #0d9488 0%, #059669 100%) !important;
@@ -2562,6 +2625,8 @@
         z-index: 2;
       }
       .beat-card-wrap {
+        position: relative;
+        z-index: 5;
         padding: 1.3rem 1.1rem 1.2rem;
         border-radius: 28px;
       }
@@ -3081,6 +3146,12 @@
                         </svg>
                       </div>
 
+                      <!-- Calmed incoming reply badge (visible only on return) -->
+                      <div class="minseo-incoming-badge calmed-incoming-badge" id="jiwoo-calmed-bubble" style="display: none;">
+                        <span class="incoming-label-green">${t('답장 도착 🌿', '返信到着 🌿')}</span>
+                        <span class="incoming-text-msg" id="jiwoo-calmed-reply-text">“${t('긴장 풀고 심호흡해, 내가 곁에서 응원할게 ♡', '深呼吸してリラックス、そばで応援してるよ ♡')}”</span>
+                      </div>
+
                       <div class="beat-metric-section">
                         <div class="beat-metric-display">
                           <span class="beat-bpm-num" id="jiwoo-bpm-val">108</span>
@@ -3096,12 +3167,6 @@
                       <!-- Short clean text input -->
                       <div class="beat-msg-row" id="jiwoo-input-row">
                         <input type="text" class="beat-msg-input" id="jiwoo-msg-input" maxlength="32" value="${t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦')}">
-                      </div>
-
-                      <!-- Calmed reply quote bubble (visible only on return) -->
-                      <div class="calmed-reply-bubble" id="jiwoo-calmed-bubble" style="display: none;">
-                        <span class="reply-tag-mint">${t('민서의 따뜻한 답장 도착 🌿', 'ミンソの温かい返信が到着 🌿')}</span>
-                        <p class="reply-text-quote" id="jiwoo-calmed-reply-text">“${t('긴장 풀고 심호흡해, 내가 곁에서 응원할게 ♡', '深呼吸してリラックス、そばで応援してるよ ♡')}”</p>
                       </div>
 
                       <div class="beat-pair-box">
@@ -3149,7 +3214,7 @@
                       <span>${t('민서 68 BPM', 'ミンソ 68 BPM')}</span>
                     </div>
 
-                    <div class="beat-card-wrap mint">
+                    <div class="beat-card-wrap mint" id="card-wrap-minseo">
                       <div class="beat-ripple mint" id="beat-ripple-minseo"></div>
 
                       <div class="beat-card-topbar">
@@ -3183,17 +3248,17 @@
 
                       <div class="beat-pair-box">
                         <div class="beat-pair-indicator">
+                          <span class="pair-receiver"><span class="pair-dot-hollow mint"></span> ${t('지우', 'ジウ')}</span>
+                          <span class="pair-arrow mint">⟵</span>
                           <span class="pair-sender"><span class="pair-dot-filled mint"></span> ${t('민서', 'ミンソ')}</span>
-                          <span class="pair-arrow mint">⟶</span>
-                          <span class="pair-receiver">${t('지우', 'ジウ')} <span class="pair-dot-hollow mint"></span></span>
                         </div>
                         <div class="beat-status-msg" id="minseo-status-msg">${t('온도를 담아 지우에게 전하는 안심의 진동', '温もりを込めてジウへ届ける安心の振動')}</div>
                       </div>
 
                       <div class="beat-btn-wrapper">
                         <button class="btn-beat-send btn-reply-mint" id="btn-minseo-reply" type="button">
+                          <span class="btn-beat-arrow">←</span>
                           <span class="btn-beat-text">${t('지우에게 위로의 심박 답장하기 ♡', 'ジウへ励ましの心拍を返信する ♡')}</span>
-                          <span class="btn-beat-arrow">→</span>
                         </button>
                       </div>
                     </div>
@@ -3571,10 +3636,14 @@
           deckJiwoo.classList.remove('active');
           deckJiwoo.classList.add('slide-out-left');
 
-          // Central transmit pulse
+          // Central transmit pulse (prolonged to 2.0s so user can clearly see transmission)
           const cap = $('#transmit-caption');
           if (cap) cap.textContent = t('지우의 심박이 민서에게 전송 중...', 'ジウの心拍がミンソへ送信中…');
           deckTransmit.classList.add('active');
+
+          // Pre-set Minseo card in msg-first state before entering
+          const cardWrapMinseo = $('#card-wrap-minseo');
+          if (cardWrapMinseo) cardWrapMinseo.classList.add('msg-first');
 
           setTimeout(() => {
             deckTransmit.classList.remove('active');
@@ -3584,10 +3653,15 @@
             deckMinseo.classList.remove('hidden-right', 'slide-out-right');
             deckMinseo.classList.add('active');
 
+            // After Minseo card slides in, animate message floating up and revealing BPM
+            setTimeout(() => {
+              if (cardWrapMinseo) cardWrapMinseo.classList.remove('msg-first');
+            }, 600);
+
             setTimeout(() => {
               isBeatTransitioning = false;
-            }, 550);
-          }, 700);
+            }, 1400);
+          }, 2000);
         };
       }
 
@@ -3608,14 +3682,17 @@
           deckMinseo.classList.remove('active');
           deckMinseo.classList.add('slide-out-right');
 
-          // Central transmit pulse
+          // Central transmit pulse (prolonged to 2.0s so user can clearly see transmission)
           const cap = $('#transmit-caption');
           if (cap) cap.textContent = t('민서의 따뜻한 답장이 지우에게 전송 중...', 'ミンソの温かい返信がジウへ送信中…');
           deckTransmit.classList.add('active');
 
-          // Transform Jiwoo deck into calmed state while off-screen
-          const cardWrap = $('#card-wrap-jiwoo');
-          if (cardWrap) cardWrap.classList.add('calmed');
+          // Transform Jiwoo deck into calmed + msg-first state while off-screen
+          const cardWrapJiwoo = $('#card-wrap-jiwoo');
+          if (cardWrapJiwoo) {
+            cardWrapJiwoo.classList.add('calmed');
+            cardWrapJiwoo.classList.add('msg-first');
+          }
 
           const topLabel = $('#jiwoo-top-label');
           if (topLabel) {
@@ -3639,7 +3716,7 @@
           if (inputRow) inputRow.style.display = 'none';
 
           const calmedBubble = $('#jiwoo-calmed-bubble');
-          if (calmedBubble) calmedBubble.style.display = 'flex';
+          if (calmedBubble) calmedBubble.style.display = 'inline-flex';
 
           const dotLeft = $('#jiwoo-dot-left');
           if (dotLeft) dotLeft.className = 'pair-dot-filled green';
@@ -3667,10 +3744,15 @@
             deckJiwoo.classList.remove('slide-out-left');
             deckJiwoo.classList.add('active');
 
+            // After Jiwoo card slides back in, animate reply message floating up and revealing 74 BPM
+            setTimeout(() => {
+              if (cardWrapJiwoo) cardWrapJiwoo.classList.remove('msg-first');
+            }, 600);
+
             setTimeout(() => {
               isBeatTransitioning = false;
-            }, 550);
-          }, 700);
+            }, 1400);
+          }, 2000);
         };
       }
 
@@ -3680,8 +3762,11 @@
           if (isBeatTransitioning) return;
           isBeatTransitioning = true;
 
-          const cardWrap = $('#card-wrap-jiwoo');
-          if (cardWrap) cardWrap.classList.remove('calmed');
+          const cardWrapJiwoo = $('#card-wrap-jiwoo');
+          if (cardWrapJiwoo) cardWrapJiwoo.classList.remove('calmed', 'msg-first');
+
+          const cardWrapMinseo = $('#card-wrap-minseo');
+          if (cardWrapMinseo) cardWrapMinseo.classList.remove('msg-first');
 
           const topLabel = $('#jiwoo-top-label');
           if (topLabel) {
@@ -3740,7 +3825,7 @@
 
           setTimeout(() => {
             isBeatTransitioning = false;
-          }, 300);
+          }, 400);
         };
       }
 
