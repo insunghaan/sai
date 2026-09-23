@@ -1474,9 +1474,20 @@
     .product-pills-row {
       display: flex;
       justify-content: center;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 1.0rem;
-      margin: 2.0rem 0 3.5rem;
+      gap: 0.55rem 0.65rem;
+      margin: 1.8rem auto 3.0rem;
+    }
+    .product-pills-row .gradient-pill {
+      margin: 0 !important;
+      padding: 0.42rem 1.05rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #374151;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
     }
     .product-cards-grid {
       display: grid;
@@ -2291,6 +2302,16 @@
         margin: 0 auto;
         aspect-ratio: 3 / 2 !important;
         object-fit: contain !important;
+      }
+      .product-pills-row {
+        gap: 0.45rem 0.55rem !important;
+        margin: 1.2rem auto 2.2rem !important;
+        max-width: 320px !important;
+      }
+      .product-pills-row .gradient-pill {
+        margin: 0 !important;
+        padding: 0.38rem 0.88rem !important;
+        font-size: 0.78rem !important;
       }
       .product-glass-card {
         padding: 2.2rem 1.5rem;
