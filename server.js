@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Firestore } = require('@google-cloud/firestore');
 const welcome = require('./server/welcome');
+const { parseSurvey } = require('./server/survey');
 
 const PORT = parseInt(process.env.PORT, 10) || 8080;
 const HOST = '0.0.0.0';
@@ -219,7 +220,7 @@ const COUNTRY_LABELS = {
 };
 
 async function saveWaitlistEntry(collection, email, data) {
-  const country = data.country || (data.market === 'JP' ? 'JP' : 'KR');
+  const country = data.country || null;
   const feature = data.feature || '';
   const budget = data.budget || '';
   const countryLabel = data.country_label || COUNTRY_LABELS[data.language]?.[country] || country;
@@ -228,7 +229,7 @@ async function saveWaitlistEntry(collection, email, data) {
   return welcome.saveSignup(db, collection, email, {
     ...data, country, feature, budget,
     country_label: countryLabel, feature_label: featureLabel, budget_label: budgetLabel,
-    dropdown_selections: { country: countryLabel, feature: featureLabel, budget: budgetLabel }
+    dropdown_selections: { country: countryLabel, feature: featureLabel, budget: budgetLabel, age_group: data.age_group || null, subscription_plan: data.subscription_plan || null }
   });
 }
 
@@ -256,9 +257,9 @@ async function sendSlackWaitlistNotification(params) {
   const details = [
     `• *이메일:* \`${params.email}\` ${statusBadge}`,
     `• *마켓 / 언어:* ${flag} (${params.language || 'ko'})`,
-    `• *거주 국가:* ${params.country_label || params.country || '미선택'}`,
+    ...(params.age_group ? [`• *연령:* ${params.age_group}`, `• *선호 구독 상품:* ${params.subscription_plan === 'premium' ? '프리미엄' : '베이직'}`] : [`• *거주 국가:* ${params.country_label || params.country || '미선택'}`]),
     `• *기대 기능:* ${params.feature_label || params.feature || '미선택'}`,
-    `• *구독 희망 예산:* ${params.budget_label || params.budget || '미선택'}`,
+    ...(!params.age_group ? [`• *구독 희망 예산:* ${params.budget_label || params.budget || '미선택'}`] : []),
     `• *접속 위치:* ${locationStr}`,
     `• *타임존:* ${tzStr}`,
     params.utm_source ? `• *유입 경로 (UTM):* ${params.utm_source}${params.utm_campaign ? ` / ${params.utm_campaign}` : ''}` : null,
@@ -387,8 +388,15 @@ const server = http.createServer((req, res) => {
         const market = language === 'ja' ? 'JP' : 'KR';
         const targetCollection = language === 'ja' ? 'sai_waitlist_jp' : 'sai_waitlist_kr';
 
-        // Residence country from form answer
-        const country = typeof data.country === 'string' ? data.country.trim().toUpperCase() : (market === 'JP' ? 'JP' : 'KR');
+        let survey;
+        try { survey = parseSurvey(data); }
+        catch (error) {
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({ error: error.message }));
+          return;
+        }
+        // Residence is only stored when explicitly provided by legacy forms.
+        const country = typeof data.country === 'string' ? data.country.trim().toUpperCase() : null;
         const feature = typeof data.feature === 'string' ? data.feature.trim() : '';
         const budget = typeof data.budget === 'string' ? data.budget.trim() : '';
 
@@ -398,6 +406,7 @@ const server = http.createServer((req, res) => {
         });
 
         const docData = {
+          ...survey,
           market,
           language,
           country,
@@ -430,6 +439,8 @@ const server = http.createServer((req, res) => {
           email,
           market,
           language,
+          age_group: docData.age_group,
+          subscription_plan: docData.subscription_plan,
           country: docData.country,
           country_label: COUNTRY_LABELS[language]?.[docData.country] || docData.country,
           feature: docData.feature,
@@ -469,17 +480,27 @@ const server = http.createServer((req, res) => {
   const legacyMatch = pathname.match(/^\/teaser([1-4])(?:\.html|\/)?$/);
   const oldRoot = ['/teaser.html', '/teaser', '/teaser-v9.html'];
   let redirectTo;
-  if (['/index.html', '/teaser5', '/teaser5/', '/teaser5.html'].includes(pathname)) redirectTo = '/';
-  else if (legacyMatch) redirectTo = '/archive/teaser' + legacyMatch[1] + '.html';
+  const pageUrl = new URL(req.url, 'http://localhost');
+  const languagePages = ['/', '/index.html', '/teaser5', '/teaser5/', '/teaser5.html', '/ja', '/ja/', '/ja/index.html', '/ko', '/ko/', '/kr', '/kr/'];
+  if (languagePages.includes(pathname)) {
+    const requestedLanguage = pageUrl.searchParams.get('lang');
+    const canonicalPath = requestedLanguage === 'ja' ? '/ja/' : requestedLanguage === 'ko' ? '/' : pathname.startsWith('/ja') ? '/ja/' : '/';
+    if (pathname !== canonicalPath || requestedLanguage === 'ja' || requestedLanguage === 'ko') {
+      redirectTo = canonicalPath;
+      pageUrl.searchParams.delete('lang');
+    }
+  } else if (legacyMatch) redirectTo = '/archive/teaser' + legacyMatch[1] + '.html';
   else if (oldRoot.includes(pathname)) redirectTo = '/archive/index.html';
   if (redirectTo) {
-    res.writeHead(301, { Location: redirectTo + new URL(req.url, 'http://localhost').search });
+    res.writeHead(301, { Location: redirectTo + pageUrl.search });
     res.end();
     return;
   }
   let targetFile;
   if (pathname === '/') {
     targetFile = 'index.html';
+  } else if (pathname === '/ja/') {
+    targetFile = 'ja/index.html';
   } else if (pathname === '/archive' || pathname === '/archive/') {
     targetFile = 'archive/index.html';
   } else if (/^\/archive\/teaser[1-4]\/?$/.test(pathname)) {
