@@ -755,69 +755,189 @@
       align-items: center;
       width: 100%;
     }
-    .beat-card-wrap {
+
+    /* Stacked Card Deck Outer */
+    .beat-card-deck {
       position: relative;
-      background: radial-gradient(circle at 50% 30%, rgba(229, 72, 87, 0.05) 0%, #ffffff 80%);
-      border: 1px solid rgba(229, 72, 87, 0.20);
-      border-radius: 36px;
-      padding: 2.8rem 2.4rem;
-      box-shadow: var(--shadow-card), 0 0 35px rgba(229, 72, 87, 0.06);
-      text-align: center;
-      overflow: hidden;
-      min-height: 500px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
       width: 100%;
-      max-width: 100%;
+      max-width: 410px;
+      margin: 0 auto;
+      padding-top: 36px;
       box-sizing: border-box;
     }
 
-    /* Pulse Expanding Wave on Beat Send */
-    .beat-ripple {
+    /* Stacked Back Tabs (Image 1, 2, 3 Card Deck Effect) */
+    .deck-tab {
       position: absolute;
-      top: 42%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0;
+      border-radius: 20px 20px 0 0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 9px;
+      box-sizing: border-box;
+      cursor: default;
+      user-select: none;
       z-index: 1;
+      letter-spacing: -0.01em;
     }
-    .beat-ripple.active {
-      animation: rippleWave 1.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+    .deck-tab-left {
+      left: 20px;
+      top: 4px;
+      width: 130px;
+      height: 48px;
+      background: #e2d4f5;
+      color: #581c87;
+      transform: rotate(-3.5deg);
+      transform-origin: bottom left;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 -3px 12px rgba(88, 28, 135, 0.08);
     }
-    @keyframes rippleWave {
-      0% {
-        width: 120px;
-        height: 120px;
-        opacity: 0.85;
-        border: 2px solid var(--red-primary);
-        box-shadow: 0 0 25px rgba(229, 72, 87, 0.4);
-      }
-      100% {
-        width: 550px;
-        height: 550px;
-        opacity: 0;
-        border: 1px solid rgba(229, 72, 87, 0.2);
-        box-shadow: 0 0 50px transparent;
-      }
+    .deck-tab-right {
+      right: 28px;
+      top: 8px;
+      width: 110px;
+      height: 44px;
+      background: #c8ede6;
+      color: #065f46;
+      transform: rotate(2deg);
+      transform-origin: bottom right;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 -3px 12px rgba(6, 95, 70, 0.08);
     }
 
+    /* Main Card Visual (Image 3) */
+    .beat-card-wrap {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      border-radius: 38px;
+      background: linear-gradient(168deg, #fce8f1 0%, #fff0f3 32%, #fff7f2 68%, #fef5e8 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 24px 50px -12px rgba(244, 114, 182, 0.22), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+      padding: 2.2rem 2.0rem 2.0rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Top Bar: MY HEARTBEAT and Outline Heart */
+    .beat-card-topbar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.1rem;
+      padding: 0 0.2rem;
+      box-sizing: border-box;
+    }
+    .beat-top-label {
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #1f2937;
+    }
+    .beat-top-heart {
+      width: 22px;
+      height: 20px;
+      color: #1f2937;
+    }
+
+    /* Top Metric Section (72 BPM placed above heart) */
+    .beat-metric-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0.6rem;
+    }
+    .beat-metric-display {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 6px;
+      line-height: 1;
+    }
+    .beat-bpm-num {
+      font-size: 4.6rem;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      color: #111827;
+      line-height: 1;
+    }
+    .beat-bpm-unit {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: 0.04em;
+    }
+    .beat-metric-sub {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #6b7280;
+      margin-top: 0.45rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Heart Stage Wrap */
     .heart-stage-wrap {
       position: relative;
       z-index: 2;
-      margin: 1.2rem 0;
+      width: 100%;
+      height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.1rem 0 0.7rem;
     }
-    .heart-3d-visual {
+
+    /* Concentric Heart Outline Decorative Layers (Image 3) */
+    .concentric-hearts-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      height: 160px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .concentric-heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .concentric-heart.outer {
+      width: 168px;
+      height: 150px;
+      opacity: 0.55;
+    }
+    .concentric-heart.middle {
       width: 130px;
-      height: 130px;
+      height: 116px;
+      opacity: 0.75;
+    }
+    .concentric-heart.inner {
+      width: 98px;
+      height: 88px;
+      opacity: 0.95;
+    }
+
+    /* Existing 3D Heart Visual (Preserved as required!) */
+    .heart-3d-visual {
+      position: relative;
+      z-index: 3;
+      width: 115px;
+      height: 115px;
       object-fit: contain;
       margin: 0 auto;
-      filter: drop-shadow(0 15px 30px rgba(229, 72, 87, 0.3));
+      filter: drop-shadow(0 14px 28px rgba(229, 72, 87, 0.35));
       animation: heartbeatPulse 1.6s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
       transform-origin: center;
     }
@@ -848,63 +968,128 @@
       }
     }
 
-    .bpm-display {
-      font-size: 3.4rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      color: var(--text-dark);
-      margin: 1.0rem 0 0.4rem;
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: 8px;
+    /* Pulse Expanding Wave on Beat Send */
+    .beat-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 2;
     }
-    .bpm-unit {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--red-primary);
-      letter-spacing: 0.05em;
+    .beat-ripple.active {
+      animation: rippleWave 1.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+    }
+    @keyframes rippleWave {
+      0% {
+        width: 100px;
+        height: 100px;
+        opacity: 0.85;
+        border: 2px solid var(--red-primary);
+        box-shadow: 0 0 25px rgba(229, 72, 87, 0.4);
+      }
+      100% {
+        width: 480px;
+        height: 480px;
+        opacity: 0;
+        border: 1px solid rgba(229, 72, 87, 0.2);
+        box-shadow: 0 0 50px transparent;
+      }
     }
 
+    /* Sender & Receiver Row + Subtext (Image 3) */
+    .beat-pair-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 3.3rem;
+      width: 100%;
+    }
+    .beat-pair-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.01em;
+    }
+    .pair-sender {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pair-dot-filled {
+      width: 9px;
+      height: 9px;
+      background: #ef4444;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+    }
+    .pair-arrow {
+      font-size: 1.15rem;
+      color: #374151;
+      font-weight: 400;
+    }
+    .pair-receiver {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pair-dot-hollow {
+      width: 9px;
+      height: 9px;
+      border: 1.8px solid #ef4444;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      transition: all 0.4s ease;
+    }
+    .pair-dot-hollow.active {
+      background: #ef4444;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+    }
     .beat-status-msg {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      min-height: 26px;
-      margin-bottom: 3.4rem;
-      position: relative;
-      z-index: 12;
+      font-size: 0.88rem;
+      color: #6b7280;
+      margin-top: 0.45rem;
+      font-weight: 500;
+      min-height: 22px;
       transition: color 0.3s ease;
     }
     .beat-status-msg.sent {
-      color: var(--red-primary);
-      font-weight: 700;
+      color: #dc2626;
+      font-weight: 650;
     }
 
-    /* Send Button Interactive & Tooltip */
+    /* Send Button Interactive & Floating Tooltip (Preserved!) */
     .beat-btn-wrapper {
       position: relative;
       width: 100%;
-      max-width: 320px;
-      margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .beat-tooltip {
       position: absolute;
-      bottom: calc(100% + 4px);
+      bottom: calc(100% + 8px);
       left: 50%;
       transform: translateX(-50%);
       background: var(--red-primary);
       color: #fff;
-      padding: 0.26rem 0.72rem;
+      padding: 0.30rem 0.82rem;
       border-radius: 9999px;
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       font-weight: 700;
       letter-spacing: -0.01em;
-      box-shadow: 0 6px 16px rgba(229, 72, 87, 0.32);
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 6px 18px rgba(229, 72, 87, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       display: inline-flex;
@@ -921,7 +1106,7 @@
       line-height: 1;
     }
     .beat-tooltip .tooltip-text {
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       font-weight: 700;
       line-height: 1;
     }
@@ -938,57 +1123,46 @@
     }
     @keyframes tooltipFloat {
       0% { transform: translate(-50%, 0); }
-      100% { transform: translate(-50%, -2px); }
+      100% { transform: translate(-50%, -3px); }
     }
+
+    /* Solid Dark Pill Button (Image 1, 2, 3 Reference) */
     .btn-beat-send {
       width: 100%;
-      max-width: 320px;
-      padding: 1.1rem;
-      font-size: 1.05rem;
-      font-weight: 800;
+      padding: 1.05rem 1.4rem;
+      font-size: 0.98rem;
+      font-weight: 700;
       border-radius: 9999px;
-      background: var(--red-primary);
-      color: #fff;
-      box-shadow: 0 10px 25px rgba(229, 72, 87, 0.35);
+      background: #18181b;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
       transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: none;
       position: relative;
       z-index: 5;
     }
     .btn-beat-send:hover {
-      background: #d63d4c;
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 16px 35px rgba(229, 72, 87, 0.45);
+      background: #000000;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
     }
     .btn-beat-send:disabled {
-      opacity: 0.7;
+      opacity: 0.85;
       cursor: not-allowed;
       transform: none;
     }
-
-    /* 3-Step Flow Pills */
-    .beat-steps-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      width: 100%;
-      margin-top: 1.8rem;
-      z-index: 2;
+    .btn-beat-arrow {
+      font-size: 1.15rem;
+      font-weight: 600;
+      transition: transform 0.2s ease;
     }
-    .beat-step-pill {
-      background: #FAF9F6;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 14px;
-      padding: 0.65rem 0.5rem;
-      font-size: 0.78rem;
-      color: var(--text-subtle);
-      transition: all 0.25s ease;
-    }
-    .beat-step-pill.active {
-      background: var(--red-soft-bg);
-      border-color: rgba(229, 72, 87, 0.35);
-      color: var(--red-primary);
-      font-weight: 700;
-      box-shadow: 0 2px 10px rgba(229, 72, 87, 0.1);
+    .btn-beat-send:hover .btn-beat-arrow {
+      transform: translateX(3px);
     }
 
     /* 03. SECTION: SLEEP GARDEN */
@@ -2049,40 +2223,84 @@
       .mobile-break {
         display: block;
       }
+      .beat-card-deck {
+        max-width: 350px;
+        padding-top: 32px;
+      }
+      .deck-tab-left {
+        left: 14px;
+        top: 4px;
+        width: 114px;
+        height: 42px;
+        font-size: 0.76rem;
+      }
+      .deck-tab-right {
+        right: 18px;
+        top: 6px;
+        width: 95px;
+        height: 38px;
+        font-size: 0.76rem;
+      }
       .beat-card-wrap {
-        padding: 1.5rem 1.2rem;
+        padding: 1.8rem 1.3rem 1.6rem;
+        border-radius: 30px;
         min-height: unset;
-        border-radius: 24px;
+      }
+      .beat-card-topbar {
+        margin-bottom: 0.8rem;
+      }
+      .beat-top-label {
+        font-size: 0.80rem;
+      }
+      .beat-bpm-num {
+        font-size: 3.8rem;
+      }
+      .beat-bpm-unit {
+        font-size: 1.1rem;
+      }
+      .beat-metric-sub {
+        font-size: 0.84rem;
+        margin-top: 0.35rem;
       }
       .heart-stage-wrap {
-        margin: 0.8rem 0;
+        height: 155px;
+        margin: 0.1rem 0 0.5rem;
       }
       .heart-3d-visual {
         width: 105px;
         height: 105px;
       }
-      .bpm-display {
-        font-size: 2.6rem;
-        margin: 0.6rem 0 0.2rem;
+      .concentric-hearts-container {
+        width: 150px;
+        height: 135px;
+      }
+      .concentric-heart.outer {
+        width: 145px;
+        height: 130px;
+      }
+      .concentric-heart.middle {
+        width: 115px;
+        height: 102px;
+      }
+      .concentric-heart.inner {
+        width: 88px;
+        height: 78px;
+      }
+      .beat-pair-box {
+        margin-bottom: 3.1rem;
+      }
+      .beat-pair-indicator {
+        font-size: 0.98rem;
+        gap: 12px;
       }
       .beat-status-msg {
-        font-size: 0.88rem;
-        margin-bottom: 3.4rem !important;
-        position: relative;
-        z-index: 12;
+        font-size: 0.82rem;
+        margin-top: 0.35rem;
         min-height: 20px;
       }
       .btn-beat-send {
-        padding: 0.9rem;
-        font-size: 0.96rem;
-      }
-      .beat-steps-row {
-        margin-top: 1.2rem;
-        gap: 6px;
-      }
-      .beat-step-pill {
-        padding: 0.5rem 0.3rem;
-        font-size: 0.72rem;
+        padding: 0.95rem 1.2rem;
+        font-size: 0.94rem;
       }
 
       /* Section 03 Sleep Garden Mobile */
@@ -2506,25 +2724,66 @@
                   </div>
                 </div>
 
-                <!-- Heartbeat Studio Card -->
-                <div class="beat-card-wrap">
-                  <div class="beat-ripple" id="beat-ripple"></div>
-
-                  <div style="width:100%; display:flex; justify-content:space-between; align-items:center; z-index:2; flex-wrap:wrap; gap:8px;">
-                    <span class="beat-sender-label" style="font-size:0.75rem; font-weight:800; letter-spacing:0.04em; color:var(--red-primary);">${t('심박 보내기 · 수민 → 지우', '心拍送信 · スミン → ジウ')}</span>
-                    <span class="gradient-pill red" style="padding:0.2rem 0.6rem; font-size:0.7rem; white-space:nowrap; flex-shrink:0;">${t('실시간 데모', 'リアルタイム体験')}</span>
+                <!-- Heartbeat Studio Card Deck (Image 1, 2, 3 Reference) -->
+                <div class="beat-card-deck">
+                  <!-- Stacked Background Tabs (Image 3) -->
+                  <div class="deck-tab deck-tab-left">
+                    <span>${t('우리의 밤', 'ふたりの夜')}</span>
+                  </div>
+                  <div class="deck-tab deck-tab-right">
+                    <span>${t('오늘', '今日')}</span>
                   </div>
 
-                  <div class="heart-stage-wrap">
-                    <img class="heart-3d-visual" src="/assets/heart-3d.webp" alt="${t('3D 펄스 하트', '3D鼓動ハート')}">
-                    <div class="bpm-display">
-                      <span id="bpm-val">78</span>
-                      <span class="bpm-unit">bpm</span>
+                  <!-- Main Interactive Card -->
+                  <div class="beat-card-wrap">
+                    <!-- Ripple wave on active send -->
+                    <div class="beat-ripple" id="beat-ripple"></div>
+
+                    <!-- Top Bar: MY HEARTBEAT and Line Heart Icon -->
+                    <div class="beat-card-topbar">
+                      <span class="beat-top-label">MY HEARTBEAT</span>
+                      <svg class="beat-top-heart" width="22" height="20" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                      </svg>
                     </div>
-                  </div>
 
-                  <div style="width:100%; z-index:2;">
-                    <div class="beat-status-msg" id="beat-msg">${t('지금의 심박을 보낼 준비가 되었습니다.', 'いまの心拍を送る準備ができました。')}</div>
+                    <!-- Top Metric Section: 72 BPM + Subtitle (Image 3) -->
+                    <div class="beat-metric-section">
+                      <div class="beat-metric-display">
+                        <span class="beat-bpm-num" id="bpm-val">72</span>
+                        <span class="beat-bpm-unit">BPM</span>
+                      </div>
+                      <div class="beat-metric-sub">${t('방금 측정한 내 심박', '先ほど測定した私の心拍')}</div>
+                    </div>
+
+                    <!-- Center Heart Stage: Concentric Ripple Outlines & Existing 3D Heart -->
+                    <div class="heart-stage-wrap">
+                      <div class="concentric-hearts-container">
+                        <svg class="concentric-heart outer" viewBox="0 0 100 90">
+                          <path d="M50 85 C20 60 5 45 5 25 C5 10 20 5 35 5 C43 5 48 10 50 14 C52 10 57 5 65 5 C80 5 95 10 95 25 C95 45 80 60 50 85 Z" fill="none" stroke="rgba(244, 63, 94, 0.18)" stroke-width="1.6"/>
+                        </svg>
+                        <svg class="concentric-heart middle" viewBox="0 0 100 90">
+                          <path d="M50 85 C20 60 5 45 5 25 C5 10 20 5 35 5 C43 5 48 10 50 14 C52 10 57 5 65 5 C80 5 95 10 95 25 C95 45 80 60 50 85 Z" fill="none" stroke="rgba(244, 63, 94, 0.32)" stroke-width="1.8"/>
+                        </svg>
+                        <svg class="concentric-heart inner" viewBox="0 0 100 90">
+                          <path d="M50 85 C20 60 5 45 5 25 C5 10 20 5 35 5 C43 5 48 10 50 14 C52 10 57 5 65 5 C80 5 95 10 95 25 C95 45 80 60 50 85 Z" fill="none" stroke="rgba(244, 63, 94, 0.5)" stroke-width="2.2"/>
+                        </svg>
+                      </div>
+                      <!-- Existing 3D Heart Visual Preserved as instructed -->
+                      <img class="heart-3d-visual" src="/assets/heart-3d.webp" alt="${t('3D 펄스 하트', '3D鼓動ハート')}">
+                    </div>
+
+                    <!-- Couple Status & Emotional Text (Image 3) -->
+                    <div class="beat-pair-box">
+                      <div class="beat-pair-indicator">
+                        <span class="pair-sender"><span class="pair-dot-filled"></span> ${t('지우', 'ジウ')}</span>
+                        <span class="pair-arrow">⟶</span>
+                        <span class="pair-receiver">${t('민서', 'ミンソ')} <span class="pair-dot-hollow" id="receiver-dot"></span></span>
+                      </div>
+                      <div class="beat-status-msg" id="beat-msg">${t('나의 지금을, 너에게.', '私のいまを、あなたへ。')}</div>
+                    </div>
+
+                    <!-- Action Button & Preserved Floating Tooltip -->
                     <div class="beat-btn-wrapper">
                       <div class="beat-tooltip" id="beat-tooltip">
                         <span class="tooltip-badge">✨</span>
@@ -2532,14 +2791,9 @@
                         <span class="tooltip-arrow"></span>
                       </div>
                       <button class="btn-beat-send" id="beat-btn" type="button">
-                        <span>${t('심박 보내보기 ↗', '心拍を送ってみる ↗')}</span>
+                        <span class="btn-beat-text">${t('민서에게 심박 보내기', 'ミンソへ心拍を送る')}</span>
+                        <span class="btn-beat-arrow">→</span>
                       </button>
-                    </div>
-
-                    <div class="beat-steps-row">
-                      <div class="beat-step-pill active" id="step-1">${t('1. 심박 선택', '1. 心拍選択')}</div>
-                      <div class="beat-step-pill" id="step-2">${t('2. 지우에게 전송', '2. 送信中')}</div>
-                      <div class="beat-step-pill" id="step-3">${t('3. 느꼈어 ♡', '3. 届いた ♡')}</div>
                     </div>
                   </div>
                 </div>
@@ -2880,42 +3134,47 @@
         };
       });
 
-      // Heartbeat Send Interactive Demo
+      // Heartbeat Send Interactive Demo (Image 3 Redesign)
       const beatBtn = $('#beat-btn');
       const beatRipple = $('#beat-ripple');
       const beatMsg = $('#beat-msg');
-      const step1 = $('#step-1');
-      const step2 = $('#step-2');
-      const step3 = $('#step-3');
+      const receiverDot = $('#receiver-dot');
+      const heartVisual = $('.heart-3d-visual');
 
       let sending = false;
-      beatBtn.onclick = () => {
-        if (sending) return;
-        const tooltip = $('#beat-tooltip');
-        if (tooltip) tooltip.style.opacity = '0';
-        sending = true;
-        beatBtn.disabled = true;
+      if (beatBtn) {
+        beatBtn.onclick = () => {
+          if (sending) return;
+          const tooltip = $('#beat-tooltip');
+          if (tooltip) tooltip.style.opacity = '0';
+          sending = true;
+          beatBtn.disabled = true;
 
-        // Stage 2: Sending
-        beatRipple.classList.add('active');
-        step1.classList.remove('active');
-        step2.classList.add('active');
-        beatBtn.innerHTML = `<span>${t('지우에게 전송 중... ♡', 'ジウへ送信中... ♡')}</span>`;
-        beatMsg.textContent = t('지우의 스마트링으로 심박을 보내고 있어요...', 'ジウのスマートリングへ心拍を届けています...');
-        beatMsg.classList.remove('sent');
+          // Stage: Sending - faster heart pulse & ripple
+          if (beatRipple) beatRipple.classList.add('active');
+          if (heartVisual) heartVisual.style.animationDuration = '0.7s';
+          if (receiverDot) receiverDot.classList.remove('active');
+          beatBtn.innerHTML = `<span class="btn-beat-text">${t('민서에게 전송 중... ♡', 'ミンソへ送信中... ♡')}</span>`;
+          if (beatMsg) {
+            beatMsg.textContent = t('민서의 스마트링으로 심박을 보내고 있어요...', 'ミンソのスマートリングへ心拍を届けています...');
+            beatMsg.classList.remove('sent');
+          }
 
-        setTimeout(() => {
-          // Stage 3: Received
-          step2.classList.remove('active');
-          step3.classList.add('active');
-          beatRipple.classList.remove('active');
-          beatMsg.textContent = t('지우가 느꼈어요! 작은 답장이 도착했습니다. ♡', 'ジウが感じました！小さな返事が届きました。♡');
-          beatMsg.classList.add('sent');
-          beatBtn.disabled = false;
-          beatBtn.innerHTML = `<span>${t('한 번 더 보내기 ↗', 'もう一度送る ↗')}</span>`;
-          sending = false;
-        }, 1800);
-      };
+          setTimeout(() => {
+            // Stage: Received - partner felt it
+            if (beatRipple) beatRipple.classList.remove('active');
+            if (heartVisual) heartVisual.style.animationDuration = '1.6s';
+            if (receiverDot) receiverDot.classList.add('active');
+            if (beatMsg) {
+              beatMsg.textContent = t('민서가 느꼈어요! 작은 답장이 도착했습니다. ♡', 'ミンソが受け取りました！小さな返事が届きました。♡');
+              beatMsg.classList.add('sent');
+            }
+            beatBtn.disabled = false;
+            beatBtn.innerHTML = `<span class="btn-beat-text">${t('한 번 더 보내기', 'もう一度送る')}</span><span class="btn-beat-arrow">→</span>`;
+            sending = false;
+          }, 1800);
+        };
+      }
 
       // Typing motion for sleep share
       initTyping();
