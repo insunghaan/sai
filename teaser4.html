@@ -2148,6 +2148,15 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
+    .form-sublabel {
+      display: block;
+      font-size: 0.70rem;
+      font-weight: 500;
+      color: var(--text-subtle);
+      margin-top: -0.2rem;
+      margin-bottom: 0.45rem;
+      letter-spacing: -0.01em;
+    }
     .form-input {
       width: 100%;
       padding: 0.7rem 0.95rem;
@@ -2158,17 +2167,18 @@
       font-size: 0.92rem;
       font-family: inherit;
       outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.2s ease;
     }
     .form-input:focus {
       border-color: var(--red-primary);
-      box-shadow: 0 0 12px rgba(229, 72, 87, 0.2);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px var(--red-glow);
     }
 
     /* Unfolded Selection Chips & Cards */
     .choice-pills-grid {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 7px;
     }
     .choice-pill-item {
@@ -2181,26 +2191,29 @@
       pointer-events: none;
     }
     .choice-pill-item span {
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      gap: 6px;
       padding: 0.45rem 0.85rem;
       border-radius: 9999px;
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.10);
       background: #fafafa;
-      color: var(--text-dark);
+      color: var(--text-muted);
       font-size: 0.82rem;
       font-weight: 600;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .choice-pill-item:hover span {
+      border-color: rgba(0, 0, 0, 0.25);
+      background: #ffffff;
     }
     .choice-pill-item input[type="radio"]:checked + span {
       background: var(--text-dark);
       color: #ffffff;
       border-color: var(--text-dark);
-      box-shadow: 0 4px 12px rgba(24, 24, 27, 0.15);
-    }
-    .choice-pill-item:hover span {
-      border-color: rgba(0, 0, 0, 0.3);
-      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
     .choice-cards-grid {
@@ -2212,7 +2225,8 @@
       position: relative;
       cursor: pointer;
     }
-    .choice-card-item input[type="radio"] {
+    .choice-card-item input[type="radio"],
+    .choice-card-item input[type="checkbox"] {
       position: absolute;
       opacity: 0;
       pointer-events: none;
@@ -2232,7 +2246,8 @@
       background: #ffffff;
       transform: translateY(-1px);
     }
-    .choice-card-item input[type="radio"]:checked + .card-inner {
+    .choice-card-item input[type="radio"]:checked + .card-inner,
+    .choice-card-item input[type="checkbox"]:checked + .card-inner {
       border-color: var(--red-primary);
       background: var(--red-soft-bg);
       box-shadow: 0 4px 14px rgba(229, 72, 87, 0.12);
@@ -2874,10 +2889,11 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">${t('가장 기대되는 대표 기능', '最も楽しみにしている代表機能')}</label>
+            <label class="form-label" style="margin-bottom: 0.2rem;">${t('가장 기대되는 대표 기능', '最も楽しみにしている代表機能')}</label>
+            <span class="form-sublabel">${t('(복수 선택 가능)', '(複数選択可)')}</span>
             <div class="choice-cards-grid">
               <label class="choice-card-item">
-                <input type="radio" name="feature" value="sleep_share" data-label="수면 공유" checked>
+                <input type="checkbox" name="feature" value="sleep_share" data-label="수면 공유" checked>
                 <div class="card-inner">
                   <div class="card-icon">☾</div>
                   <div class="card-texts">
@@ -2887,7 +2903,7 @@
                 </div>
               </label>
               <label class="choice-card-item">
-                <input type="radio" name="feature" value="heartbeat_send" data-label="심박 보내기">
+                <input type="checkbox" name="feature" value="heartbeat_send" data-label="심박 보내기">
                 <div class="card-inner">
                   <div class="card-icon red">♡</div>
                   <div class="card-texts">
@@ -2897,7 +2913,7 @@
                 </div>
               </label>
               <label class="choice-card-item">
-                <input type="radio" name="feature" value="sleep_garden" data-label="수면 정원">
+                <input type="checkbox" name="feature" value="sleep_garden" data-label="수면 정원">
                 <div class="card-inner">
                   <div class="card-icon green">🌸</div>
                   <div class="card-texts">
@@ -2907,7 +2923,7 @@
                 </div>
               </label>
               <label class="choice-card-item">
-                <input type="radio" name="feature" value="timeline_archive" data-label="둘만의 기록">
+                <input type="checkbox" name="feature" value="timeline_archive" data-label="둘만의 기록">
                 <div class="card-inner">
                   <div class="card-icon">⏱</div>
                   <div class="card-texts">
@@ -2958,13 +2974,22 @@
         const fd = new FormData(form);
         const email = (fd.get('email') || '').trim().toLowerCase();
         const countryRadio = form.querySelector('input[name="country"]:checked');
-        const featureRadio = form.querySelector('input[name="feature"]:checked');
+        const featureCheckboxes = Array.from(form.querySelectorAll('input[name="feature"]:checked'));
         const budgetRadio = form.querySelector('input[name="budget"]:checked');
+
+        if (featureCheckboxes.length === 0) {
+          alert(t('기대되는 대표 기능을 최소 1개 이상 선택해주세요.', '最も楽しみにしている代表機能を1つ以上選択してください。'));
+          btn.disabled = false;
+          btn.innerHTML = prevText;
+          return;
+        }
 
         const country = countryRadio?.value || (lang === 'ja' ? 'JP' : 'KR');
         const country_label = countryRadio?.getAttribute('data-label') || country;
-        const feature = featureRadio?.value || 'sleep_share';
-        const feature_label = featureRadio?.getAttribute('data-label') || feature;
+        const features = featureCheckboxes.map(cb => cb.value);
+        const feature_labels = featureCheckboxes.map(cb => cb.getAttribute('data-label') || cb.value);
+        const feature = features.join(', ');
+        const feature_label = feature_labels.join(', ');
         const budget = budgetRadio?.value || '20-30';
         const budget_label = budgetRadio?.getAttribute('data-label') || budget;
         const client_timezone = Intl?.DateTimeFormat?.()?.resolvedOptions?.()?.timeZone || '';
@@ -2978,6 +3003,8 @@
           country_label,
           feature,
           feature_label,
+          features,
+          feature_labels,
           budget,
           budget_label,
           lang,
@@ -2985,7 +3012,7 @@
           client_language: navigator?.language || (lang === 'ja' ? 'ja-JP' : 'ko-KR'),
           source: 'sai_teaser4',
           consent: true,
-          consent_version: '2026-09-22',
+          consent_version: '2026-09-17',
           page_source,
           submitted_at: new Date().toISOString()
         };
