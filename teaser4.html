@@ -809,22 +809,96 @@
       z-index: 2;
     }
 
-    /* Main Card Visual (Image 3) */
-    .beat-card-wrap {
+    /* Heartbeat Stage Viewport: Keeps background tabs and bottom footnote anchored */
+    .beat-stage-viewport {
       position: relative;
       z-index: 4;
       width: 100%;
+      min-height: 560px;
       border-radius: 38px;
-      background: linear-gradient(168deg, #fce8f1 0%, #fff0f3 32%, #fff7f2 68%, #fef5e8 100%);
-      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      overflow: hidden;
       box-shadow: 0 24px 50px -12px rgba(244, 114, 182, 0.22), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
-      padding: 2.2rem 2.0rem 2.0rem;
+      background: transparent;
+    }
+
+    /* Multi-Stage Interactive Cards */
+    .beat-card-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 560px;
+      height: 100%;
+      border-radius: 38px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      padding: 1.8rem 1.6rem 1.6rem;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
-      overflow: hidden;
       text-align: center;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(105%);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+      background: linear-gradient(168deg, #fce8f1 0%, #fff0f3 32%, #fff7f2 68%, #fef5e8 100%);
+    }
+    .beat-card-wrap.active {
+      position: relative;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+      z-index: 5;
+    }
+    .beat-card-wrap.slide-out-left {
+      position: absolute;
+      transform: translateX(-105%) scale(0.96);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .beat-card-wrap.slide-out-right {
+      position: absolute;
+      transform: translateX(105%) scale(0.96);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .beat-card-wrap.slide-in-right {
+      position: relative;
+      animation: slideInRight 0.52s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      z-index: 5;
+    }
+    .beat-card-wrap.slide-in-left {
+      position: relative;
+      animation: slideInLeft 0.52s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      z-index: 5;
+    }
+    @keyframes slideInRight {
+      0% { transform: translateX(105%) scale(0.96); opacity: 0; }
+      100% { transform: translateX(0) scale(1); opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      0% { transform: translateX(-105%) scale(0.96); opacity: 0; }
+      100% { transform: translateX(0) scale(1); opacity: 1; }
+    }
+
+    /* Individual Stage Themes */
+    #stage-jiwoo {
+      background: linear-gradient(168deg, #fce8f1 0%, #fff0f3 32%, #fff7f2 68%, #fef5e8 100%);
+    }
+    #stage-transmitting {
+      background: linear-gradient(168deg, #fff0f3 0%, #fef2f2 35%, #fdf4ff 75%, #fce7f3 100%);
+      justify-content: center;
+    }
+    #stage-minseo {
+      background: linear-gradient(168deg, #eff6ff 0%, #f0fdfa 35%, #fff1f2 75%, #fdf2f8 100%);
+    }
+    #stage-replying {
+      background: linear-gradient(168deg, #f0fdf4 0%, #ecfdf5 40%, #eff6ff 80%, #f5f3ff 100%);
+      justify-content: center;
+    }
+    #stage-calmed {
+      background: linear-gradient(168deg, #f0fdf4 0%, #fff7ed 38%, #fff1f2 72%, #fce7f3 100%);
     }
 
     /* Top Bar: MY HEARTBEAT and Outline Heart */
@@ -833,54 +907,75 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.1rem;
+      margin-bottom: 0.8rem;
       padding: 0 0.2rem;
       box-sizing: border-box;
     }
     .beat-top-label {
-      font-size: 0.86rem;
+      font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       color: #1f2937;
     }
+    .beat-top-label.mint {
+      color: #0d9488;
+    }
+    .beat-top-label.green {
+      color: #15803d;
+    }
     .beat-top-heart {
-      width: 22px;
-      height: 20px;
+      width: 20px;
+      height: 19px;
       color: #1f2937;
     }
+    .beat-top-heart.mint {
+      color: #0d9488;
+    }
+    .beat-top-heart.green {
+      color: #15803d;
+    }
 
-    /* Top Metric Section (72 BPM placed above heart) */
+    /* Top Metric Section */
     .beat-metric-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.35rem;
     }
     .beat-metric-display {
       display: flex;
       align-items: baseline;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
       line-height: 1;
     }
     .beat-bpm-num {
-      font-size: 4.6rem;
+      font-size: 4.2rem;
       font-weight: 850;
       letter-spacing: -0.04em;
       color: #111827;
       line-height: 1;
     }
+    .beat-bpm-num.nervous {
+      color: #e11d48;
+    }
+    .beat-bpm-num.calm {
+      color: #0f766e;
+    }
+    .beat-bpm-num.calmed {
+      color: #166534;
+    }
     .beat-bpm-unit {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #111827;
       letter-spacing: 0.04em;
     }
     .beat-metric-sub {
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 500;
       color: #6b7280;
-      margin-top: 0.45rem;
+      margin-top: 0.35rem;
       letter-spacing: -0.01em;
     }
 
@@ -889,53 +984,59 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      height: 180px;
+      height: 135px;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0.1rem 0 0.7rem;
+      margin: 0.1rem 0 0.4rem;
     }
 
-    /* Existing 3D Heart Visual (Preserved as required!) */
+    /* Existing 3D Heart Visual with Context-Specific Rhythms */
     .heart-3d-visual {
       position: relative;
       z-index: 3;
-      width: 115px;
-      height: 115px;
+      width: 95px;
+      height: 95px;
       object-fit: contain;
       margin: 0 auto;
-      filter: drop-shadow(0 14px 28px rgba(229, 72, 87, 0.35));
-      animation: heartbeatPulse 1.6s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
       transform-origin: center;
     }
-    @keyframes heartbeatPulse {
-      0% {
-        transform: scale(1);
-        filter: drop-shadow(0 12px 25px rgba(229, 72, 87, 0.25));
-      }
-      12% {
-        transform: scale(1.10);
-        filter: drop-shadow(0 18px 35px rgba(229, 72, 87, 0.45));
-      }
-      24% {
-        transform: scale(1);
-        filter: drop-shadow(0 12px 25px rgba(229, 72, 87, 0.25));
-      }
-      36% {
-        transform: scale(1.15);
-        filter: drop-shadow(0 20px 40px rgba(229, 72, 87, 0.5));
-      }
-      65% {
-        transform: scale(1);
-        filter: drop-shadow(0 12px 25px rgba(229, 72, 87, 0.25));
-      }
-      100% {
-        transform: scale(1);
-        filter: drop-shadow(0 12px 25px rgba(229, 72, 87, 0.25));
-      }
+    .heart-fast-pulse {
+      animation: heartbeatFast 0.82s cubic-bezier(0.25, 0.1, 0.25, 1) infinite !important;
+    }
+    .heart-calm-pulse {
+      animation: heartbeatCalm 1.8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite !important;
+    }
+    .heart-steady-pulse {
+      animation: heartbeatSteady 1.45s cubic-bezier(0.25, 0.1, 0.25, 1) infinite !important;
     }
 
-    /* Pulse Expanding Wave on Beat Send */
+    @keyframes heartbeatFast {
+      0% { transform: scale(1); filter: drop-shadow(0 10px 20px rgba(229, 72, 87, 0.35)); }
+      14% { transform: scale(1.16); filter: drop-shadow(0 18px 36px rgba(229, 72, 87, 0.6)); }
+      28% { transform: scale(1); filter: drop-shadow(0 10px 20px rgba(229, 72, 87, 0.35)); }
+      42% { transform: scale(1.22); filter: drop-shadow(0 20px 42px rgba(229, 72, 87, 0.65)); }
+      70% { transform: scale(1); filter: drop-shadow(0 10px 20px rgba(229, 72, 87, 0.35)); }
+      100% { transform: scale(1); filter: drop-shadow(0 10px 20px rgba(229, 72, 87, 0.35)); }
+    }
+    @keyframes heartbeatCalm {
+      0% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(13, 148, 136, 0.25)); }
+      20% { transform: scale(1.08); filter: drop-shadow(0 14px 28px rgba(13, 148, 136, 0.38)); }
+      40% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(13, 148, 136, 0.25)); }
+      60% { transform: scale(1.10); filter: drop-shadow(0 15px 30px rgba(13, 148, 136, 0.40)); }
+      80% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(13, 148, 136, 0.25)); }
+      100% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(13, 148, 136, 0.25)); }
+    }
+    @keyframes heartbeatSteady {
+      0% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(229, 72, 87, 0.25)); }
+      16% { transform: scale(1.09); filter: drop-shadow(0 14px 28px rgba(229, 72, 87, 0.38)); }
+      32% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(229, 72, 87, 0.25)); }
+      48% { transform: scale(1.12); filter: drop-shadow(0 16px 30px rgba(229, 72, 87, 0.40)); }
+      70% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(229, 72, 87, 0.25)); }
+      100% { transform: scale(1); filter: drop-shadow(0 8px 18px rgba(229, 72, 87, 0.25)); }
+    }
+
+    /* Pulse Expanding Wave */
     .beat-ripple {
       position: absolute;
       top: 50%;
@@ -968,20 +1069,314 @@
       }
     }
 
-    /* Sender & Receiver Row + Subtext (Image 3) */
+    /* Message Input Box & Quick Chips */
+    .beat-input-box {
+      width: 100%;
+      margin: 0.1rem 0 0.65rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 5;
+    }
+    .beat-input-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 0.2rem;
+      margin-bottom: 0.35rem;
+    }
+    .input-header-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #6b7280;
+      letter-spacing: -0.01em;
+    }
+    .beat-msg-input-wrap {
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1.5px solid rgba(229, 72, 87, 0.25);
+      border-radius: 9999px;
+      padding: 0.44rem 0.85rem;
+      box-sizing: border-box;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+    }
+    .beat-msg-input-wrap:focus-within {
+      border-color: var(--red-primary);
+      box-shadow: 0 0 0 3px rgba(229, 72, 87, 0.15);
+      background: #ffffff;
+    }
+    .beat-msg-input-wrap.mint {
+      border-color: rgba(13, 148, 136, 0.25);
+    }
+    .beat-msg-input-wrap.mint:focus-within {
+      border-color: #0d9488;
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+      background: #ffffff;
+    }
+    .beat-msg-input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1f2937;
+      text-align: center;
+      font-family: inherit;
+    }
+    .beat-msg-input::placeholder {
+      color: #9ca3af;
+      font-weight: 400;
+    }
+    .beat-mood-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 0.42rem;
+      width: 100%;
+    }
+    .beat-chip {
+      padding: 0.20rem 0.60rem;
+      font-size: 0.70rem;
+      font-weight: 600;
+      color: #4b5563;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(209, 213, 219, 0.8);
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+    .beat-chip:hover {
+      background: #ffffff;
+      border-color: var(--red-primary);
+      color: var(--red-primary);
+    }
+    .beat-chip.active {
+      background: var(--red-primary);
+      border-color: var(--red-primary);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(229, 72, 87, 0.25);
+    }
+    .beat-chip.mint:hover {
+      border-color: #0d9488;
+      color: #0d9488;
+    }
+    .beat-chip.mint.active {
+      background: #0d9488;
+      border-color: #0d9488;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(13, 148, 136, 0.25);
+    }
+
+    /* Received Message Bubble */
+    .beat-received-card {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(229, 72, 87, 0.22);
+      border-radius: 18px;
+      padding: 0.65rem 0.9rem;
+      box-sizing: border-box;
+      margin-bottom: 0.55rem;
+      box-shadow: 0 4px 14px rgba(229, 72, 87, 0.08);
+      text-align: left;
+    }
+    .beat-received-card.calmed-border {
+      border-color: rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.08);
+    }
+    .received-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+    .received-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.14rem 0.52rem;
+      border-radius: 9999px;
+      letter-spacing: -0.01em;
+    }
+    .received-pill.red {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    .received-pill.green {
+      background: #dcfce7;
+      color: #15803d;
+    }
+    .received-bpm-badge {
+      font-size: 0.70rem;
+      font-weight: 800;
+      color: #ef4444;
+      background: #fff;
+      padding: 0.10rem 0.48rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+    .received-bpm-badge.green {
+      color: #059669;
+      border-color: rgba(5, 150, 105, 0.25);
+    }
+    .received-message-bubble {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      background: rgba(254, 242, 242, 0.6);
+      border-radius: 11px;
+      padding: 0.40rem 0.60rem;
+    }
+    .beat-received-card.calmed-border .received-message-bubble {
+      background: rgba(240, 253, 244, 0.6);
+    }
+    .bubble-quote {
+      font-size: 1.05rem;
+      line-height: 1;
+      color: #9ca3af;
+      font-family: Georgia, serif;
+    }
+    .bubble-text {
+      font-size: 0.80rem;
+      font-weight: 600;
+      color: #1f2937;
+      line-height: 1.35;
+      margin: 0;
+      word-break: break-all;
+    }
+
+    /* Transmitting Motion Graphic Stage */
+    .stage-transmitting {
+      padding: 2.0rem 1.6rem;
+    }
+    .transmitting-visual-wrap {
+      position: relative;
+      width: 100%;
+      height: 190px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.8rem 0 1.0rem;
+    }
+    .transmitting-rings-img {
+      width: 135px;
+      height: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 3;
+      filter: drop-shadow(0 10px 25px rgba(229, 72, 87, 0.35));
+      animation: floatRings 2.4s ease-in-out infinite alternate;
+    }
+    .transmitting-rings-img.mint {
+      filter: drop-shadow(0 10px 25px rgba(13, 148, 136, 0.35));
+    }
+    @keyframes floatRings {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-6px) rotate(-1.5deg); }
+    }
+    .transmitting-radar-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 2px solid rgba(229, 72, 87, 0.5);
+      pointer-events: none;
+      animation: radarPing 1.8s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    .transmitting-radar-circle.mint {
+      border-color: rgba(13, 148, 136, 0.5);
+    }
+    .transmitting-radar-circle:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+    .transmitting-radar-circle:nth-child(3) {
+      animation-delay: 1.2s;
+    }
+    @keyframes radarPing {
+      0% { width: 50px; height: 50px; opacity: 0.9; }
+      100% { width: 310px; height: 310px; opacity: 0; border-width: 1px; }
+    }
+    .transmitting-particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .heart-particle {
+      position: absolute;
+      font-size: 1.15rem;
+      opacity: 0;
+      animation: flyParticle 1.4s ease-in-out infinite;
+    }
+    .heart-particle:nth-child(1) { top: 25%; left: 20%; animation-delay: 0s; }
+    .heart-particle:nth-child(2) { top: 58%; left: 45%; animation-delay: 0.4s; font-size: 1.4rem; }
+    .heart-particle:nth-child(3) { top: 22%; left: 65%; animation-delay: 0.8s; font-size: 1.05rem; }
+    .heart-particle:nth-child(4) { top: 68%; left: 30%; animation-delay: 1.1s; }
+    @keyframes flyParticle {
+      0% { transform: translate(-20px, 15px) scale(0.6); opacity: 0; }
+      40% { opacity: 0.95; }
+      80% { opacity: 0.75; }
+      100% { transform: translate(40px, -25px) scale(1.1); opacity: 0; }
+    }
+    .transmitting-network-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(229, 72, 87, 0.25);
+      padding: 0.32rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 0.85rem;
+    }
+    .transmitting-network-status.mint {
+      border-color: rgba(13, 148, 136, 0.3);
+    }
+    .transmitting-heading {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #111827;
+      margin: 0 0 0.35rem;
+      letter-spacing: -0.02em;
+    }
+    .transmitting-desc {
+      font-size: 0.84rem;
+      color: #4b5563;
+      margin: 0;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    /* Sender & Receiver Row + Subtext */
     .beat-pair-box {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 3.3rem;
+      margin-bottom: 0.9rem;
       width: 100%;
+    }
+    #stage-jiwoo .beat-pair-box {
+      margin-bottom: 3.0rem;
     }
     .beat-pair-indicator {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 14px;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: #111827;
       letter-spacing: -0.01em;
@@ -998,6 +1393,14 @@
       border-radius: 50%;
       display: inline-block;
       box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+    }
+    .pair-dot-filled.mint {
+      background: #0d9488;
+      box-shadow: 0 0 8px rgba(13, 148, 136, 0.6);
+    }
+    .pair-dot-filled.green {
+      background: #16a34a;
+      box-shadow: 0 0 8px rgba(22, 163, 74, 0.6);
     }
     .pair-arrow {
       font-size: 1.15rem;
@@ -1018,24 +1421,23 @@
       box-sizing: border-box;
       transition: all 0.4s ease;
     }
-    .pair-dot-hollow.active {
-      background: #ef4444;
-      box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+    .pair-dot-hollow.mint {
+      border-color: #0d9488;
     }
     .beat-status-msg {
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       color: #6b7280;
-      margin-top: 0.45rem;
+      margin-top: 0.40rem;
       font-weight: 500;
-      min-height: 22px;
+      min-height: 20px;
       transition: color 0.3s ease;
     }
     .beat-status-msg.sent {
-      color: #dc2626;
+      color: #15803d;
       font-weight: 650;
     }
 
-    /* Send Button Interactive & Floating Tooltip (Preserved!) */
+    /* Send Button Interactive & Floating Tooltip */
     .beat-btn-wrapper {
       position: relative;
       width: 100%;
@@ -1093,7 +1495,7 @@
       100% { transform: translate(-50%, -3px); }
     }
 
-    /* Solid Dark Pill Button (Image 1, 2, 3 Reference) */
+    /* Solid Pill Buttons */
     .btn-beat-send {
       width: 100%;
       padding: 1.05rem 1.4rem;
@@ -1131,6 +1533,22 @@
     .btn-beat-send:hover .btn-beat-arrow {
       transform: translateX(3px);
     }
+    .btn-reply-mint {
+      background: linear-gradient(135deg, #0d9488 0%, #059669 100%) !important;
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.28) !important;
+    }
+    .btn-reply-mint:hover {
+      background: linear-gradient(135deg, #0f766e 0%, #047857 100%) !important;
+      box-shadow: 0 12px 28px rgba(13, 148, 136, 0.38) !important;
+    }
+    .btn-replay-dark {
+      background: #1f2937 !important;
+      box-shadow: 0 8px 24px rgba(31, 41, 55, 0.2) !important;
+    }
+    .btn-replay-dark:hover {
+      background: #111827 !important;
+    }
+
     .beat-card-note {
       text-align: center;
       font-size: 0.82rem;
@@ -2258,50 +2676,92 @@
         font-size: 0.78rem;
         z-index: 2;
       }
+      .beat-stage-viewport {
+        border-radius: 28px;
+        min-height: 480px;
+      }
       .beat-card-wrap {
-        padding: 1.8rem 1.3rem 1.6rem;
-        border-radius: 30px;
-        min-height: unset;
+        padding: 1.25rem 1.05rem 1.15rem;
+        border-radius: 28px;
+        min-height: 480px;
       }
       .beat-card-topbar {
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.5rem;
       }
       .beat-top-label {
-        font-size: 0.80rem;
+        font-size: 0.76rem;
       }
       .beat-bpm-num {
-        font-size: 3.8rem;
+        font-size: 3.2rem;
+      }
+      #stage-minseo .beat-bpm-num,
+      #stage-calmed .beat-bpm-num {
+        font-size: 2.85rem;
       }
       .beat-bpm-unit {
-        font-size: 1.1rem;
+        font-size: 1.0rem;
       }
       .beat-metric-sub {
-        font-size: 0.84rem;
-        margin-top: 0.35rem;
+        font-size: 0.80rem;
+        margin-top: 0.2rem;
       }
       .heart-stage-wrap {
-        height: 155px;
-        margin: 0.1rem 0 0.5rem;
+        height: 105px;
+        margin: 0.05rem 0 0.2rem;
       }
       .heart-3d-visual {
-        width: 105px;
-        height: 105px;
+        width: 80px;
+        height: 80px;
+      }
+      #stage-minseo .heart-stage-wrap,
+      #stage-calmed .heart-stage-wrap {
+        height: 72px !important;
+        margin: 0 0 0.15rem !important;
+      }
+      #stage-minseo .heart-3d-visual,
+      #stage-calmed .heart-3d-visual {
+        width: 65px !important;
+        height: 65px !important;
+      }
+      #stage-minseo .beat-received-card,
+      #stage-calmed .beat-received-card {
+        padding: 0.45rem 0.70rem;
+        margin-bottom: 0.35rem;
+      }
+      #stage-minseo .beat-input-box {
+        margin: 0.05rem 0 0.35rem;
+      }
+      .transmitting-visual-wrap {
+        height: 155px;
+        margin: 0.5rem 0 0.8rem;
+      }
+      .transmitting-rings-img {
+        width: 110px;
+      }
+      .transmitting-heading {
+        font-size: 1.05rem;
+      }
+      .transmitting-desc {
+        font-size: 0.78rem;
       }
       .beat-pair-box {
-        margin-bottom: 3.1rem;
+        margin-bottom: 0.65rem;
+      }
+      #stage-jiwoo .beat-pair-box {
+        margin-bottom: 2.5rem;
       }
       .beat-pair-indicator {
-        font-size: 0.98rem;
-        gap: 12px;
+        font-size: 0.94rem;
+        gap: 10px;
       }
       .beat-status-msg {
-        font-size: 0.82rem;
-        margin-top: 0.35rem;
-        min-height: 20px;
+        font-size: 0.78rem;
+        margin-top: 0.25rem;
+        min-height: 18px;
       }
       .btn-beat-send {
-        padding: 0.95rem 1.2rem;
-        font-size: 0.94rem;
+        padding: 0.90rem 1.1rem;
+        font-size: 0.88rem;
       }
       .beat-card-note {
         font-size: 0.76rem !important;
@@ -2767,57 +3227,215 @@
                     <span>${t('오늘', '今日')}</span>
                   </div>
 
-                  <!-- Main Interactive Card -->
-                  <div class="beat-card-wrap">
-                    <!-- Ripple wave on active send -->
-                    <div class="beat-ripple" id="beat-ripple"></div>
+                  <!-- Viewport Container for Stage Transitions -->
+                  <div class="beat-stage-viewport" id="beat-viewport">
 
-                    <!-- Top Bar: MY HEARTBEAT and Line Heart Icon -->
-                    <div class="beat-card-topbar">
-                      <span class="beat-top-label">MY HEARTBEAT</span>
-                      <svg class="beat-top-heart" width="22" height="20" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                      </svg>
-                    </div>
-
-                    <!-- Top Metric Section: 72 BPM + Subtitle (Image 3) -->
-                    <div class="beat-metric-section">
-                      <div class="beat-metric-display">
-                        <span class="beat-bpm-num" id="bpm-val">72</span>
-                        <span class="beat-bpm-unit">BPM</span>
+                    <!-- STAGE 1: Jiwoo Nervous Pulse (108 BPM) & Send Card -->
+                    <div class="beat-card-wrap active" id="stage-jiwoo">
+                      <div class="beat-ripple" id="beat-ripple-jiwoo"></div>
+                      <div class="beat-card-topbar">
+                        <span class="beat-top-label">MY HEARTBEAT</span>
+                        <svg class="beat-top-heart" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
                       </div>
-                      <div class="beat-metric-sub">${t('방금 측정한 내 심박', '先ほど測定した私の心拍')}</div>
-                    </div>
 
-                    <!-- Center Heart Stage: Existing 3D Heart -->
-                    <div class="heart-stage-wrap">
-                      <!-- Existing 3D Heart Visual Preserved as instructed -->
-                      <img class="heart-3d-visual" src="/assets/heart-3d.webp" alt="${t('3D 펄스 하트', '3D鼓動ハート')}">
-                    </div>
-
-                    <!-- Couple Status & Emotional Text (Image 3) -->
-                    <div class="beat-pair-box">
-                      <div class="beat-pair-indicator">
-                        <span class="pair-sender"><span class="pair-dot-filled"></span> ${t('지우', 'ジウ')}</span>
-                        <span class="pair-arrow">⟶</span>
-                        <span class="pair-receiver">${t('민서', 'ミンソ')} <span class="pair-dot-hollow" id="receiver-dot"></span></span>
+                      <div class="beat-metric-section">
+                        <div class="beat-metric-display">
+                          <span class="beat-bpm-num nervous" id="jiwoo-bpm-val">108</span>
+                          <span class="beat-bpm-unit">BPM</span>
+                        </div>
+                        <div class="beat-metric-sub">${t('발표를 앞둔 지우의 심박', '発表を控えたジウの心拍')}</div>
                       </div>
-                      <div class="beat-status-msg" id="beat-msg">${t('나의 지금을, 너에게.', '私のいまを、あなたへ。')}</div>
+
+                      <div class="heart-stage-wrap">
+                        <img class="heart-3d-visual heart-fast-pulse" src="/assets/heart-3d.webp" alt="${t('긴장된 3D 펄스 하트', '緊張した3D鼓動ハート')}">
+                      </div>
+
+                      <!-- Short text input + quick mood chips -->
+                      <div class="beat-input-box">
+                        <div class="beat-input-header">
+                          <span class="input-header-label">${t('함께 보낼 메시지', '一緒に送るメッセージ')}</span>
+                        </div>
+                        <div class="beat-msg-input-wrap">
+                          <input type="text" class="beat-msg-input" id="jiwoo-msg-input" maxlength="32" value="${t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦')}">
+                        </div>
+                        <div class="beat-mood-chips" id="jiwoo-chips">
+                          <button type="button" class="beat-chip active" data-msg="${t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦')}">${t('초긴장중 💦', '超緊張中 💦')}</button>
+                          <button type="button" class="beat-chip" data-msg="${t('빨리 끝나고 보고 싶어 🥺', '早く終わって会いたい 🥺')}">${t('보고싶어 🥺', '会いたい 🥺')}</button>
+                          <button type="button" class="beat-chip" data-msg="${t('손에 땀나고 심장이 쿵쾅거려!', '手に汗握って心臓バクバク！')}">${t('쿵쾅거려 💓', 'バクバク 💓')}</button>
+                        </div>
+                      </div>
+
+                      <div class="beat-pair-box">
+                        <div class="beat-pair-indicator">
+                          <span class="pair-sender"><span class="pair-dot-filled"></span> ${t('지우', 'ジウ')}</span>
+                          <span class="pair-arrow">⟶</span>
+                          <span class="pair-receiver">${t('민서', 'ミンソ')} <span class="pair-dot-hollow" id="jiwoo-receiver-dot"></span></span>
+                        </div>
+                        <div class="beat-status-msg" id="jiwoo-status-msg">${t('손끝으로 전하는 나의 지금', '指先から伝える私のいま')}</div>
+                      </div>
+
+                      <div class="beat-btn-wrapper">
+                        <div class="beat-tooltip" id="beat-tooltip">
+                          <span class="tooltip-badge">✨</span>
+                          <span class="tooltip-text">${t('여기를 눌러보세요', 'ここを押してみてください')}</span>
+                          <span class="tooltip-arrow"></span>
+                        </div>
+                        <button class="btn-beat-send" id="btn-send-jiwoo" type="button">
+                          <span class="btn-beat-text">${t('민서에게 심박 보내기', 'ミンソへ心拍を送る')}</span>
+                          <span class="btn-beat-arrow">→</span>
+                        </button>
+                      </div>
                     </div>
 
-                    <!-- Action Button & Preserved Floating Tooltip -->
-                    <div class="beat-btn-wrapper">
-                      <div class="beat-tooltip" id="beat-tooltip">
-                        <span class="tooltip-badge">✨</span>
-                        <span class="tooltip-text">${t('여기를 눌러보세요', 'ここを押してみてください')}</span>
-                        <span class="tooltip-arrow"></span>
+                    <!-- STAGE 2: Transmitting Motion Graphic Illustration Stage -->
+                    <div class="beat-card-wrap stage-transmitting" id="stage-transmitting">
+                      <div class="transmitting-network-status">
+                        <span class="pair-dot-filled"></span>
+                        <span>${t('SAI WAVE CONNECTION', 'SAI WAVE CONNECTION')}</span>
                       </div>
-                      <button class="btn-beat-send" id="beat-btn" type="button">
-                        <span class="btn-beat-text">${t('민서에게 심박 보내기', 'ミンソへ心拍を送る')}</span>
-                        <span class="btn-beat-arrow">→</span>
-                      </button>
+                      <h3 class="transmitting-heading" id="transmitting-title">${t('지우의 심박과 메시지가 전송 중...', 'ジウの心拍とメッセージを送信中…')}</h3>
+                      <p class="transmitting-desc" id="transmitting-subtitle">${t('두 스마트링 사이의 햅틱 파동이 이어집니다', 'ふたつのスマートリング間でハプティック波動が繋がります')}</p>
+
+                      <div class="transmitting-visual-wrap">
+                        <div class="transmitting-radar-circle"></div>
+                        <div class="transmitting-radar-circle"></div>
+                        <div class="transmitting-radar-circle"></div>
+                        <img class="transmitting-rings-img" src="/assets/sai-rings-duo-tight.png" alt="${t('스마트링 햅틱 전송', 'スマートリング ハプティック送信')}">
+                        <div class="transmitting-particles">
+                          <span class="heart-particle">💓</span>
+                          <span class="heart-particle">✨</span>
+                          <span class="heart-particle">💓</span>
+                          <span class="heart-particle">💫</span>
+                        </div>
+                      </div>
+
+                      <div class="beat-pair-box" style="margin-bottom:0;">
+                        <div class="beat-pair-indicator">
+                          <span class="pair-sender"><span class="pair-dot-filled"></span> ${t('실시간 암호화 전송', 'リアルタイム暗号化送信')}</span>
+                        </div>
+                        <div class="beat-status-msg sent">${t('민서의 스마트링으로 진동이 전달되고 있어요', 'ミンソのスマートリングへ振動が伝わっています')}</div>
+                      </div>
                     </div>
-                  </div>
+
+                    <!-- STAGE 3: Minseo Received Stage & Reply (68 BPM) -->
+                    <div class="beat-card-wrap" id="stage-minseo">
+                      <div class="beat-ripple" id="beat-ripple-minseo"></div>
+                      <div class="beat-card-topbar">
+                        <span class="beat-top-label mint">MINSEO'S HEARTBEAT</span>
+                        <svg class="beat-top-heart mint" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                      </div>
+
+                      <!-- Received Notice Bubble with Jiwoo's Message -->
+                      <div class="beat-received-card">
+                        <div class="received-badge-row">
+                          <span class="received-pill red">${t('지우에게 도착한 심박', 'ジウから届いた心拍')}</span>
+                          <span class="received-bpm-badge">108 BPM 💦</span>
+                        </div>
+                        <div class="received-message-bubble">
+                          <span class="bubble-quote">“</span>
+                          <p class="bubble-text" id="minseo-received-text">${t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦')}</p>
+                        </div>
+                      </div>
+
+                      <div class="beat-metric-section">
+                        <div class="beat-metric-display">
+                          <span class="beat-bpm-num calm" id="minseo-bpm-val">68</span>
+                          <span class="beat-bpm-unit">BPM</span>
+                        </div>
+                        <div class="beat-metric-sub">${t('곁에서 지켜보는 민서의 차분한 심박', 'そばで見守るミンソの落ち着いた心拍')}</div>
+                      </div>
+
+                      <div class="heart-stage-wrap" style="height: 105px;">
+                        <img class="heart-3d-visual heart-calm-pulse" src="/assets/heart-3d.webp" alt="${t('차분한 3D 펄스 하트', '落ち着いた3D鼓動ハート')}">
+                      </div>
+
+                      <!-- Minseo Reply message input & chips -->
+                      <div class="beat-input-box">
+                        <div class="beat-input-header">
+                          <span class="input-header-label">${t('위로의 답장과 내 심박 보내기', '励ましの返信と私の心拍を送る')}</span>
+                        </div>
+                        <div class="beat-msg-input-wrap mint">
+                          <input type="text" class="beat-msg-input" id="minseo-reply-input" maxlength="32" value="${t('긴장 풀고 심호흡해, 내가 곁에서 응원할게 ♡', '深呼吸してリラックス、そばで応援してるよ ♡')}">
+                        </div>
+                        <div class="beat-mood-chips" id="minseo-chips">
+                          <button type="button" class="beat-chip mint active" data-msg="${t('긴장 풀고 심호흡해, 내가 곁에서 응원할게 ♡', '深呼吸してリラックス、そばで応援してるよ ♡')}">${t('곁에서 응원할게 ♡', 'そばで応援してるよ ♡')}</button>
+                          <button type="button" class="beat-chip mint" data-msg="${t('충분히 잘 준비했으니 넌 잘할 수 있어!', 'しっかり準備したから君なら大丈夫！')}">${t('넌 잘할 수 있어 ✨', '君なら大丈夫 ✨')}</button>
+                          <button type="button" class="beat-chip mint" data-msg="${t('내 차분한 심박 느껴봐, 사랑해 ♡', '私の落ち着いた心拍感じてみて、愛してる ♡')}">${t('내 심박 느껴봐 🌿', '私の心拍感じて 🌿')}</button>
+                        </div>
+                      </div>
+
+                      <div class="beat-pair-box">
+                        <div class="beat-pair-indicator">
+                          <span class="pair-sender"><span class="pair-dot-filled mint"></span> ${t('민서', 'ミンソ')}</span>
+                          <span class="pair-arrow">⟶</span>
+                          <span class="pair-receiver">${t('지우', 'ジウ')} <span class="pair-dot-hollow mint" id="minseo-receiver-dot"></span></span>
+                        </div>
+                        <div class="beat-status-msg" id="minseo-status-msg">${t('온도를 담아 지우에게 전하는 안심의 진동', '温もりを込めてジウへ届ける安心の振動')}</div>
+                      </div>
+
+                      <div class="beat-btn-wrapper">
+                        <button class="btn-beat-send btn-reply-mint" id="btn-send-minseo" type="button">
+                          <span class="btn-beat-text">${t('지우에게 위로의 심박 답장하기 ♡', 'ジウへ励ましの心拍を返信する ♡')}</span>
+                          <span class="btn-beat-arrow">→</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- STAGE 4: Calmed Down Stage (Jiwoo BPM settles to 74 BPM) -->
+                    <div class="beat-card-wrap" id="stage-calmed">
+                      <div class="beat-card-topbar">
+                        <span class="beat-top-label green">JIWOO'S HEARTBEAT</span>
+                        <svg class="beat-top-heart green" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                      </div>
+
+                      <!-- Received Reply from Minseo -->
+                      <div class="beat-received-card calmed-border">
+                        <div class="received-badge-row">
+                          <span class="received-pill green">${t('민서의 따뜻한 답장 도착', 'ミンソの温かい返信が到着')}</span>
+                          <span class="received-bpm-badge green">68 BPM 🌿</span>
+                        </div>
+                        <div class="received-message-bubble">
+                          <span class="bubble-quote">“</span>
+                          <p class="bubble-text" id="jiwoo-received-reply-text">${t('긴장 풀고 심호흡해, 내가 곁에서 응원할게 ♡', '深呼吸してリラックス、そばで応援してるよ ♡')}</p>
+                        </div>
+                      </div>
+
+                      <div class="beat-metric-section">
+                        <div class="beat-metric-display">
+                          <span class="beat-bpm-num calmed" id="settled-bpm-val">74</span>
+                          <span class="beat-bpm-unit">BPM</span>
+                        </div>
+                        <div class="beat-metric-sub">${t('108 BPM ➔ 74 BPM 차분하게 안정되었어요 ✨', '108 BPM ➔ 74 BPM 穏やかに落ち着きました ✨')}</div>
+                      </div>
+
+                      <div class="heart-stage-wrap" style="height: 110px;">
+                        <img class="heart-3d-visual heart-steady-pulse" src="/assets/heart-3d.webp" alt="${t('안정된 3D 펄스 하트', '安定した3D鼓動ハート')}">
+                      </div>
+
+                      <div class="beat-pair-box">
+                        <div class="beat-pair-indicator">
+                          <span class="pair-sender"><span class="pair-dot-filled green"></span> ${t('지우', 'ジウ')}</span>
+                          <span class="pair-arrow">♡</span>
+                          <span class="pair-receiver">${t('민서', 'ミンソ')} <span class="pair-dot-filled green"></span></span>
+                        </div>
+                        <div class="beat-status-msg sent">${t('말보다 깊은 체온과 심박이 서로에게 닿았습니다', '言葉よりも深い温もりと心拍が互いに届きました')}</div>
+                      </div>
+
+                      <div class="beat-btn-wrapper">
+                        <button class="btn-beat-send btn-replay-dark" id="btn-replay-all" type="button">
+                          <span class="btn-beat-text">${t('처음부터 다시 체험하기 ↺', '最初からもう一度体験する ↺')}</span>
+                        </button>
+                      </div>
+                    </div>
+
+                  </div> <!-- end .beat-stage-viewport -->
+
                   <p class="beat-card-note">${t('심박 공유는 기본 OFF입니다.', '心拍の共有はデフォルトでOFFです。')}</p>
                 </div>
               </div>
@@ -3157,45 +3775,183 @@
         };
       });
 
-      // Heartbeat Send Interactive Demo (Image 3 Redesign)
-      const beatBtn = $('#beat-btn');
-      const beatRipple = $('#beat-ripple');
-      const beatMsg = $('#beat-msg');
-      const receiverDot = $('#receiver-dot');
-      const heartVisual = $('.heart-3d-visual');
+      // Multi-Stage Heartbeat Story Controller (Section 02)
+      const stageJiwoo = $('#stage-jiwoo');
+      const stageTransmitting = $('#stage-transmitting');
+      const stageMinseo = $('#stage-minseo');
+      const stageCalmed = $('#stage-calmed');
 
-      let sending = false;
-      if (beatBtn) {
-        beatBtn.onclick = () => {
-          if (sending) return;
+      const btnSendJiwoo = $('#btn-send-jiwoo');
+      const btnSendMinseo = $('#btn-send-minseo');
+      const btnReplayAll = $('#btn-replay-all');
+
+      let isBeatTransitioning = false;
+
+      function transitionBeatStage(fromEl, toEl, direction = 'next') {
+        if (!fromEl || !toEl || fromEl === toEl) return;
+        const outClass = direction === 'next' ? 'slide-out-left' : 'slide-out-right';
+        const inClass = direction === 'next' ? 'slide-in-right' : 'slide-in-left';
+
+        fromEl.classList.remove('active', 'slide-in-right', 'slide-in-left');
+        fromEl.classList.add(outClass);
+
+        toEl.classList.remove('slide-out-left', 'slide-out-right');
+        toEl.classList.add('active', inClass);
+
+        setTimeout(() => {
+          fromEl.classList.remove(outClass);
+          toEl.classList.remove(inClass);
+        }, 550);
+      }
+
+      // 1. Jiwoo Mood Chips & Custom Input
+      $$('#jiwoo-chips .beat-chip').forEach(chip => {
+        chip.onclick = () => {
+          $$('#jiwoo-chips .beat-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const msg = chip.getAttribute('data-msg');
+          const input = $('#jiwoo-msg-input');
+          if (input && msg) input.value = msg;
+        };
+      });
+
+      const jiwooInput = $('#jiwoo-msg-input');
+      if (jiwooInput) {
+        jiwooInput.oninput = () => {
+          const val = jiwooInput.value.trim();
+          $$('#jiwoo-chips .beat-chip').forEach(c => {
+            if (c.getAttribute('data-msg') === val) {
+              c.classList.add('active');
+            } else {
+              c.classList.remove('active');
+            }
+          });
+        };
+      }
+
+      // 2. Jiwoo Send Button Action
+      if (btnSendJiwoo) {
+        btnSendJiwoo.onclick = () => {
+          if (isBeatTransitioning) return;
+          isBeatTransitioning = true;
+
           const tooltip = $('#beat-tooltip');
           if (tooltip) tooltip.style.opacity = '0';
-          sending = true;
-          beatBtn.disabled = true;
 
-          // Stage: Sending - faster heart pulse & ripple
-          if (beatRipple) beatRipple.classList.add('active');
-          if (heartVisual) heartVisual.style.animationDuration = '0.7s';
-          if (receiverDot) receiverDot.classList.remove('active');
-          beatBtn.innerHTML = `<span class="btn-beat-text">${t('민서에게 전송 중... ♡', 'ミンソへ送信中... ♡')}</span>`;
-          if (beatMsg) {
-            beatMsg.textContent = t('민서의 스마트링으로 심박을 보내고 있어요...', 'ミンソのスマートリングへ心拍を届けています...');
-            beatMsg.classList.remove('sent');
-          }
+          const rippleJiwoo = $('#beat-ripple-jiwoo');
+          if (rippleJiwoo) rippleJiwoo.classList.add('active');
 
+          const jiwooMsg = ($('#jiwoo-msg-input')?.value || '').trim() || t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦');
+          const minseoReceivedText = $('#minseo-received-text');
+          if (minseoReceivedText) minseoReceivedText.textContent = jiwooMsg;
+
+          const transTitle = $('#transmitting-title');
+          const transSub = $('#transmitting-subtitle');
+          if (transTitle) transTitle.textContent = t('지우의 심박과 메시지가 전송 중...', 'ジウの心拍とメッセージを送信中…');
+          if (transSub) transSub.textContent = t('두 스마트링 사이의 햅틱 파동이 이어집니다', 'ふたつのスマートリング間でハプティック波動が繋がります');
+
+          // Transition to Transmission motion stage
+          transitionBeatStage(stageJiwoo, stageTransmitting, 'next');
+
+          // After transmission animation (1200ms), slide Minseo's card in
           setTimeout(() => {
-            // Stage: Received - partner felt it
-            if (beatRipple) beatRipple.classList.remove('active');
-            if (heartVisual) heartVisual.style.animationDuration = '1.6s';
-            if (receiverDot) receiverDot.classList.add('active');
-            if (beatMsg) {
-              beatMsg.textContent = t('민서가 느꼈어요! 작은 답장이 도착했습니다. ♡', 'ミンソが受け取りました！小さな返事が届きました。♡');
-              beatMsg.classList.add('sent');
+            if (rippleJiwoo) rippleJiwoo.classList.remove('active');
+            transitionBeatStage(stageTransmitting, stageMinseo, 'next');
+            setTimeout(() => {
+              isBeatTransitioning = false;
+            }, 550);
+          }, 1250);
+        };
+      }
+
+      // 3. Minseo Reply Chips & Custom Input
+      $$('#minseo-chips .beat-chip').forEach(chip => {
+        chip.onclick = () => {
+          $$('#minseo-chips .beat-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const msg = chip.getAttribute('data-msg');
+          const input = $('#minseo-reply-input');
+          if (input && msg) input.value = msg;
+        };
+      });
+
+      const minseoInput = $('#minseo-reply-input');
+      if (minseoInput) {
+        minseoInput.oninput = () => {
+          const val = minseoInput.value.trim();
+          $$('#minseo-chips .beat-chip').forEach(c => {
+            if (c.getAttribute('data-msg') === val) {
+              c.classList.add('active');
+            } else {
+              c.classList.remove('active');
             }
-            beatBtn.disabled = false;
-            beatBtn.innerHTML = `<span class="btn-beat-text">${t('한 번 더 보내기', 'もう一度送る')}</span><span class="btn-beat-arrow">→</span>`;
-            sending = false;
-          }, 1800);
+          });
+        };
+      }
+
+      // 4. Minseo Reply Send Button Action
+      if (btnSendMinseo) {
+        btnSendMinseo.onclick = () => {
+          if (isBeatTransitioning) return;
+          isBeatTransitioning = true;
+
+          const rippleMinseo = $('#beat-ripple-minseo');
+          if (rippleMinseo) rippleMinseo.classList.add('active');
+
+          const minseoReply = ($('#minseo-reply-input')?.value || '').trim() || t('긴장 풀고 심호흡해, 내가 곁에서 응원할게 ♡', '深呼吸してリラックス、そばで応援してるよ ♡');
+          const jiwooReplyText = $('#jiwoo-received-reply-text');
+          if (jiwooReplyText) jiwooReplyText.textContent = minseoReply;
+
+          const transTitle = $('#transmitting-title');
+          const transSub = $('#transmitting-subtitle');
+          if (transTitle) transTitle.textContent = t('민서의 따뜻한 답장이 전송 중...', 'ミンソの温かい返信を送信中…');
+          if (transSub) transSub.textContent = t('차분한 심박과 위로의 메시지가 지우에게 닿습니다', '落ち着いた心拍と慰めのメッセージがジウへ届きます');
+
+          // Transition to Transmission motion stage
+          transitionBeatStage(stageMinseo, stageTransmitting, 'next');
+
+          // After transmission animation (1200ms), slide Jiwoo Calmed card in
+          setTimeout(() => {
+            if (rippleMinseo) rippleMinseo.classList.remove('active');
+            transitionBeatStage(stageTransmitting, stageCalmed, 'next');
+            setTimeout(() => {
+              isBeatTransitioning = false;
+            }, 550);
+          }, 1250);
+        };
+      }
+
+      // 5. Replay All Button Action
+      if (btnReplayAll) {
+        btnReplayAll.onclick = () => {
+          if (isBeatTransitioning) return;
+          isBeatTransitioning = true;
+
+          // Reset inputs and chips to defaults
+          const jInput = $('#jiwoo-msg-input');
+          if (jInput) jInput.value = t('지금 발표 앞두고 초긴장중... 💦', '今発表を控えて超緊張中… 💦');
+          const mInput = $('#minseo-reply-input');
+          if (mInput) mInput.value = t('긴장 풀고 심호흡해, 내가 곁에서 응원할게 ♡', '深呼吸してリラックス、そばで応援してるよ ♡');
+
+          const jChips = $$('#jiwoo-chips .beat-chip');
+          jChips.forEach((c, idx) => {
+            if (idx === 0) c.classList.add('active');
+            else c.classList.remove('active');
+          });
+
+          const mChips = $$('#minseo-chips .beat-chip');
+          mChips.forEach((c, idx) => {
+            if (idx === 0) c.classList.add('active');
+            else c.classList.remove('active');
+          });
+
+          const tooltip = $('#beat-tooltip');
+          if (tooltip) tooltip.style.opacity = '1';
+
+          transitionBeatStage(stageCalmed, stageJiwoo, 'prev');
+          setTimeout(() => {
+            isBeatTransitioning = false;
+          }, 550);
         };
       }
 
