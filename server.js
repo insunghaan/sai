@@ -5,6 +5,7 @@ const path = require('node:path');
 const { Firestore } = require('@google-cloud/firestore');
 const welcome = require('./server/welcome');
 const { parseSurvey } = require('./server/survey');
+const { defaultLanguage } = require('./server/locale');
 
 const PORT = parseInt(process.env.PORT, 10) || 8080;
 const HOST = '0.0.0.0';
@@ -132,7 +133,7 @@ async function resolveGeoLocation(req, clientHint = {}) {
 
   try {
     const res = await fetch(`https://ipwho.is/${encodeURIComponent(clientIp)}`, {
-      signal: AbortSignal.timeout(1500),
+      signal: AbortSignal.timeout(clientHint.timeoutMs || 1500),
       headers: {
         'Accept': 'application/json',
         'User-Agent': 'SAI-Waitlist-Geo/1.0',
@@ -158,6 +159,19 @@ async function resolveGeoLocation(req, clientHint = {}) {
   }
 
   return fallbackGeo;
+}
+
+// Country-only cache; no IP addresses are written to logs or persistent storage.
+const localeCountryCache = new Map();
+async function lookupLocaleCountry(req) {
+  const ip = extractClientIp(req);
+  if (!ip || isPrivateIp(ip)) return null;
+  const cached = localeCountryCache.get(ip);
+  if (cached && cached.expires > Date.now()) return cached.country;
+  const geo = await resolveGeoLocation(req, { timeoutMs: 800 });
+  if (localeCountryCache.size >= 2000) localeCountryCache.delete(localeCountryCache.keys().next().value);
+  localeCountryCache.set(ip, { country: geo.country_code, expires: Date.now() + (geo.country_code ? 900000 : 30000) });
+  return geo.country_code;
 }
 
 const FEATURE_LABELS = {
@@ -306,7 +320,7 @@ async function sendSlackWaitlistNotification(params) {
   }
 }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   let pathname;
   try {
     const parsed = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
@@ -434,8 +448,8 @@ const server = http.createServer((req, res) => {
           catch { console.error('SAI welcome dispatch failed; inspect outbox'); }
         }
 
-        // Non-blocking Slack notification
-        sendSlackWaitlistNotification({
+        // Finish the bounded webhook request before Cloud Run can suspend CPU.
+        const slackDelivered = await sendSlackWaitlistNotification({
           email,
           market,
           language,
@@ -444,7 +458,7 @@ const server = http.createServer((req, res) => {
           country: docData.country,
           country_label: COUNTRY_LABELS[language]?.[docData.country] || docData.country,
           feature: docData.feature,
-          feature_label: FEATURE_LABELS[language]?.[docData.feature] || docData.feature,
+          feature_label: docData.feature_label || FEATURE_LABELS[language]?.[docData.feature] || docData.feature,
           budget: docData.budget,
           budget_label: BUDGET_LABELS[language]?.[docData.budget] || docData.budget,
           geo_location: geoLocation,
@@ -454,7 +468,9 @@ const server = http.createServer((req, res) => {
           createdAt: saveResult.createdAt
         }).catch(err => {
           console.warn('[SAI Slack Notification] Unhandled error:', err.message);
+          return false;
         });
+        console.info(JSON.stringify({ event: 'sai_signup_integrations', language, welcome_queued: saveResult.queued, slack_delivered: slackDelivered, survey_version: docData.survey_version || 'legacy' }));
 
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -476,6 +492,17 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // Only choose a regional default at the entry URL. Explicit /ja/ links remain stable.
+  if (pathname === '/' && !new URL(req.url, 'http://localhost').searchParams.has('lang')) {
+    res.setHeader('Vary', 'Cookie');
+    res.setHeader('Cache-Control', 'private, no-store');
+    if (await defaultLanguage(req, lookupLocaleCountry) === 'ja') {
+      res.writeHead(302, { Location: '/ja/' + new URL(req.url, 'http://localhost').search });
+      res.end();
+      return;
+    }
+  }
+
   // Preserve old landing pages while making teaser5 the canonical home page.
   const legacyMatch = pathname.match(/^\/teaser([1-4])(?:\.html|\/)?$/);
   const oldRoot = ['/teaser.html', '/teaser', '/teaser-v9.html'];
@@ -488,6 +515,10 @@ const server = http.createServer((req, res) => {
     if (pathname !== canonicalPath || requestedLanguage === 'ja' || requestedLanguage === 'ko') {
       redirectTo = canonicalPath;
       pageUrl.searchParams.delete('lang');
+      if (requestedLanguage === 'ja' || requestedLanguage === 'ko') {
+        res.setHeader('Set-Cookie', `sai_language=${requestedLanguage}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`);
+        res.setHeader('Cache-Control', 'private, no-store');
+      }
     }
   } else if (legacyMatch) redirectTo = '/archive/teaser' + legacyMatch[1] + '.html';
   else if (oldRoot.includes(pathname)) redirectTo = '/archive/index.html';

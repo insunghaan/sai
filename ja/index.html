@@ -3946,6 +3946,7 @@
           renderPage();
           return;
         }
+        document.cookie = `sai_language=${lang === 'ko' ? 'ja' : 'ko'}; Path=/; Max-Age=31536000; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
         const destination = new URL(event.currentTarget.href);
         const query = new URLSearchParams(location.search);
         query.delete('lang');
