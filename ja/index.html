@@ -3030,7 +3030,6 @@
               <a class="nav-link" href="#sleep-share">睡眠共有</a>
               <a class="nav-link" href="#heartbeat-send">心拍送信</a>
               <a class="nav-link" href="#rhythm-archive">リズムアーカイブ</a>
-              <a class="lang-toggle" id="lang-btn" href="/" hreflang="ko">JP / KR</a>
               <button class="btn-gradient nav-btn-sm" id="nav-signup-btn" hidden="">
                 <span>事前登録</span>
               </button>
@@ -3438,7 +3437,7 @@
           <fieldset class="form-group survey-fieldset">
             <legend class="form-label">${t('연령', '年齢')}</legend>
             <div class="choice-pills-grid survey-ages">
-              ${[['under20','20대 미만','20歳未満'],['20-25','20–25','20〜25歳'],['25-30','25–30','25〜30歳'],['30-35','30–35','30〜35歳'],['35+','35+','35歳以上']].map(([value,ko,ja]) => `
+              ${[['under20','20대 미만','20歳未満'],['20-24','20-24','20〜24歳'],['25-30','25-30','25〜30歳'],['31-34','31-34','31〜34歳'],['35+','35+','35歳以上']].map(([value,ko,ja]) => `
                 <label class="choice-pill-item"><input type="radio" name="age_group" value="${value}" required><span>${t(ko,ja)}</span></label>
               `).join('')}
             </div>
@@ -3456,8 +3455,8 @@
             <legend class="form-label">${t('이런 구독 상품이 있다면, 무엇을 선택하시겠어요?', 'この2つのプランなら、どちらを選びますか？')}</legend>
             <p class="survey-free-note">${t('지금 신청하면 구독료는 평생 무료입니다.', '今登録すると、サブスク料金は永久無料です。')}</p>
             <div class="survey-plans">
-              <label class="survey-plan"><input type="radio" name="subscription_plan" value="basic" required><span><strong>${t('베이직', 'ベーシック')}</strong><span class="survey-plan-price">${t('5,000원(500엔) / 월', '500円（5,000ウォン）/ 月')}</span><small>${t('수면 분석 · 심박 분석', '睡眠分析・心拍分析')}</small></span></label>
-              <label class="survey-plan"><input type="radio" name="subscription_plan" value="premium" required><span><strong>${t('프리미엄', 'プレミアム')}</strong><span class="survey-plan-price">${t('8,000원(800엔) / 월', '800円（8,000ウォン）/ 月')}</span><small>${t('베이직 + 생리주기 분석', 'ベーシック + 生理周期分析')}</small></span></label>
+              <label class="survey-plan"><input type="radio" name="subscription_plan" value="basic" required><span><strong>${t('베이직', 'ベーシック')}</strong><span class="survey-plan-price">${t('5,000원 / 월', '600円 / 月')}</span><small>${t('수면 분석 · 심박 분석', '睡眠分析・心拍分析')}</small></span></label>
+              <label class="survey-plan"><input type="radio" name="subscription_plan" value="premium" required><span><strong>${t('프리미엄', 'プレミアム')}</strong><span class="survey-plan-price">${t('8,000원 / 월', '900円 / 月')}</span><small>${t('베이직 + 생리주기 분석', 'ベーシック + 生理周期分析')}</small></span></label>
             </div>
           </fieldset>
           <div class="form-group">
@@ -3507,7 +3506,7 @@
           language: lang === 'ja' ? 'ja' : 'ko',
           age_group,
           subscription_plan,
-          survey_version: '2026-09-24',
+          survey_version: '2026-09-24-v2',
           feature,
           feature_label,
           features,
@@ -3572,7 +3571,6 @@
               <a class="nav-link" href="#sleep-share">${t('수면 공유', '睡眠共有')}</a>
               <a class="nav-link" href="#heartbeat-send">${t('심박 보내기', '心拍送信')}</a>
               <a class="nav-link" href="#rhythm-archive">${t('리듬 아카이브', 'リズムアーカイブ')}</a>
-              <a class="lang-toggle" id="lang-btn" href="${lang === 'ko' ? '/ja/' : '/'}" hreflang="${lang === 'ko' ? 'ja' : 'ko'}">${lang === 'ko' ? 'KR / JP' : 'JP / KR'}</a>
               <button class="btn-gradient nav-btn-sm" id="nav-signup-btn" hidden>
                 <span>${t('먼저 만나기', '事前登録')}</span>
               </button>
@@ -3937,24 +3935,6 @@
     }
 
     function initEvents() {
-      // Language Toggle
-      $('#lang-btn').onclick = (event) => {
-        if (location.protocol === 'file:') {
-          event.preventDefault();
-          lang = lang === 'ko' ? 'ja' : 'ko';
-          document.documentElement.lang = lang;
-          renderPage();
-          return;
-        }
-        document.cookie = `sai_language=${lang === 'ko' ? 'ja' : 'ko'}; Path=/; Max-Age=31536000; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
-        const destination = new URL(event.currentTarget.href);
-        const query = new URLSearchParams(location.search);
-        query.delete('lang');
-        destination.search = query.toString();
-        destination.hash = location.hash;
-        event.currentTarget.href = destination.href;
-      };
-
       // Modal Triggers
       $('#nav-signup-btn').onclick = openSignupModal;
       const heroBtn = $('#hero-signup-btn');
