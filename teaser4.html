@@ -363,13 +363,13 @@
     /* 01. HERO SECTION */
     .hero-section {
       position: relative;
-      min-height: clamp(660px, 90vh, 880px);
+      min-height: clamp(680px, 92vh, 900px);
       display: flex;
       align-items: center;
-      padding: 6.5rem 0 3.8rem;
+      padding: 6.8rem 0 3.8rem;
       overflow: hidden;
       background-color: #1a141e;
-      background: radial-gradient(ellipse at 72% 50%, #29202a 0%, #1e1722 52%, #141018 100%);
+      background: radial-gradient(ellipse at 70% 50%, #29202a 0%, #1e1722 55%, #141018 100%);
     }
 
     /* Desktop Hero Stage */
@@ -380,13 +380,14 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      max-width: 1220px;
-      gap: 3.0rem;
+      max-width: 1380px;
+      padding: 0 2.5rem;
+      gap: clamp(2.5rem, 4vw, 4.0rem);
     }
     .hero-content-left {
       flex: 0 0 auto;
-      width: 480px;
-      max-width: 480px;
+      width: clamp(420px, 32vw, 460px);
+      max-width: 460px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -510,7 +511,7 @@
       position: relative;
       flex: 1 1 0;
       min-width: 0;
-      max-width: 680px;
+      max-width: 920px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -518,18 +519,18 @@
     }
     .hero-art-img {
       width: 100%;
-      max-width: 660px;
+      max-width: 920px;
       height: auto;
       aspect-ratio: 1024 / 682 !important;
       object-fit: contain !important;
       border-radius: 0;
       -webkit-mask-image: 
-        linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+        linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
       -webkit-mask-composite: source-in;
       mask-image: 
-        linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+        linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
       mask-composite: intersect;
       transition: transform 0.4s ease;
     }
