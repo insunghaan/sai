@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;700;800&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
       /* Pure White Tone Palette */
@@ -378,30 +378,35 @@
     /* Common Editorial Typography */
     .hero-editorial-tag,
     .hero-mobile-tag {
-      font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Noto Sans JP', sans-serif;
+      font-family: var(--font-sans);
       font-size: 0.92rem;
       font-weight: 700;
       color: #111111;
       letter-spacing: 0.02em;
       text-align: center;
       margin-bottom: 0.6rem;
+      width: 100%;
     }
 
     .hero-editorial-title,
     .hero-mobile-title {
-      font-family: 'Nanum Myeongjo', 'Shippori Mincho', 'Batang', serif;
+      font-family: var(--font-sans);
+      font-feature-settings: "palt" 1;
       font-weight: 700;
       color: #111111;
       text-align: center;
       line-height: 1.25;
       margin: 0 0 0.5rem 0;
       letter-spacing: -0.02em;
+      width: 100%;
     }
     html[lang="ja"] .hero-editorial-title,
     html[lang="ja"] .hero-mobile-title {
-      font-family: 'Shippori Mincho', 'Yu Mincho', serif;
+      font-family: 'Noto Sans JP', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
       font-weight: 700;
+      font-feature-settings: "palt" 1;
       letter-spacing: -0.01em;
+      text-align: center;
     }
 
     /* Desktop Editorial Hero Stage - Full Size */
@@ -436,18 +441,23 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      width: max-content;
-      max-width: 90%;
-      margin: auto 0;
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
     }
     .hero-desktop-center .hero-editorial-tag {
       font-size: clamp(0.85rem, 1.1vw, 0.98rem);
       margin-bottom: 0.55rem;
+      text-align: center;
+      width: 100%;
     }
     .hero-desktop-center .hero-editorial-title {
       font-size: clamp(2.4rem, 3.4vw, 3.4rem);
       margin-bottom: 0.45rem;
+      text-align: center;
+      width: 100%;
     }
     .hero-editorial-logo {
       width: clamp(110px, 13vw, 145px);
@@ -523,15 +533,20 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         text-align: center;
       }
       .hero-mobile-tag {
         font-size: 0.82rem;
         margin-bottom: 0.35rem;
+        text-align: center;
+        width: 100%;
       }
       .hero-mobile-title {
         font-size: clamp(1.95rem, 7.2vw, 2.35rem);
         margin-bottom: 0.25rem;
+        text-align: center;
+        width: 100%;
       }
       .hero-mobile-logo {
         width: 86px;
@@ -547,6 +562,7 @@
         font-weight: 500;
         text-align: center;
         letter-spacing: -0.01em;
+        width: 100%;
       }
       .hero-mobile-visual {
         position: relative;
