@@ -3,3 +3,4 @@
 .github
 *.log
 node_modules
+sai_sns/

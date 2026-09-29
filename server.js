@@ -508,7 +508,7 @@ const server = http.createServer(async (req, res) => {
   const oldRoot = ['/teaser.html', '/teaser', '/teaser-v9.html'];
   let redirectTo;
   const pageUrl = new URL(req.url, 'http://localhost');
-  const languagePages = ['/', '/index.html', '/teaser5', '/teaser5/', '/teaser5.html', '/ja', '/ja/', '/ja/index.html', '/ko', '/ko/', '/kr', '/kr/'];
+  const languagePages = ['/', '/index.html', '/ja', '/ja/', '/ja/index.html', '/ko', '/ko/', '/kr', '/kr/'];
   if (languagePages.includes(pathname)) {
     const requestedLanguage = pageUrl.searchParams.get('lang');
     const canonicalPath = requestedLanguage === 'ja' ? '/ja/' : requestedLanguage === 'ko' ? '/' : pathname.startsWith('/ja') ? '/ja/' : '/';
@@ -532,6 +532,10 @@ const server = http.createServer(async (req, res) => {
     targetFile = 'index.html';
   } else if (pathname === '/ja/') {
     targetFile = 'ja/index.html';
+  } else if (['/teaser10', '/teaser10/', '/teaser10.html'].includes(pathname)) {
+    targetFile = 'teaser10.html';
+  } else if (['/teaser5', '/teaser5/', '/teaser5.html'].includes(pathname)) {
+    targetFile = 'teaser5.html';
   } else if (pathname === '/archive' || pathname === '/archive/') {
     targetFile = 'archive/index.html';
   } else if (/^\/archive\/teaser[1-4]\/?$/.test(pathname)) {
