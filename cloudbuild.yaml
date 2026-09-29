@@ -33,6 +33,7 @@ steps:
       - '--allow-unauthenticated'
       - '--min-instances=0'
       - '--port=8080'
+      - '--to-latest'
       - '--quiet'
 
 substitutions:
