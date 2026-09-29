@@ -588,11 +588,11 @@
 
     .compare-grid {
       display: grid;
-      grid-template-columns: 1.2fr 1fr 1.3fr;
+      grid-template-columns: 160px 1fr 1.35fr;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 680px) {
       .compare-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -603,15 +603,17 @@
     }
 
     .compare-cell {
-      padding: 20px 24px;
+      padding: 22px 26px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      word-break: keep-all;
+      line-height: 1.6;
     }
 
     .header-row {
       background: rgba(255, 255, 255, 0.03);
-      padding: 24px;
+      padding: 22px 26px;
       font-weight: 700;
     }
 
@@ -619,12 +621,14 @@
       color: var(--text-tertiary);
       font-size: 0.9rem;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     .col-legacy {
       color: var(--text-secondary);
       font-size: 0.95rem;
       background: rgba(255, 255, 255, 0.01);
+      word-break: keep-all;
     }
 
     .col-legacy strong {
@@ -637,14 +641,17 @@
       border-left: 1px solid rgba(255, 77, 109, 0.2);
       border-right: 1px solid rgba(255, 77, 109, 0.2);
       position: relative;
+      word-break: keep-all;
     }
 
     .col-sai strong {
       color: #ffffff;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 6px;
+      word-break: keep-all;
+      line-height: 1.5;
     }
 
     .sai-highlight-badge {
@@ -662,11 +669,14 @@
       color: var(--accent-rose);
       font-weight: 900;
       margin-right: 6px;
+      flex-shrink: 0;
+      margin-top: 1px;
     }
 
     .cross-icon {
       color: var(--text-tertiary);
       margin-right: 6px;
+      flex-shrink: 0;
     }
 
     /* Compare Callout Banner */
@@ -675,7 +685,7 @@
       background: radial-gradient(circle at 50% 50%, rgba(255, 77, 109, 0.15) 0%, rgba(0, 0, 0, 0) 70%), var(--bg-card);
       border: 1px solid rgba(255, 77, 109, 0.3);
       border-radius: 20px;
-      padding: 28px 32px;
+      padding: 30px 32px;
       text-align: center;
     }
 
@@ -683,14 +693,17 @@
       font-size: 1.35rem;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      word-break: keep-all;
     }
 
     .compare-callout p {
       color: var(--text-secondary);
-      font-size: 0.95rem;
-      max-width: 600px;
+      font-size: 0.98rem;
+      max-width: 760px;
       margin: 0 auto;
+      word-break: keep-all;
+      line-height: 1.65;
     }
 
     /* ========================================================
@@ -750,6 +763,76 @@
     .bento-card:hover .bento-card-bg-img {
       transform: scale(1.05) rotate(-3deg);
       opacity: 0.7;
+    }
+
+    /* Bento 4 Sensor Card: Absolute non-overlapping layout */
+    .bento-card-sensor {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      position: relative;
+      overflow: hidden;
+      padding: 36px 40px;
+    }
+
+    .bento-sensor-content {
+      flex: 1 1 360px;
+      max-width: 440px;
+      z-index: 2;
+    }
+
+    .bento-sensor-content h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 12px 0 8px;
+    }
+
+    .bento-sensor-content p {
+      font-size: 0.96rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    .bento-sensor-visual {
+      flex: 0 0 240px;
+      max-width: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .sensor-ring-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.9));
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-card-sensor:hover .sensor-ring-img {
+      transform: scale(1.08) rotate(-4deg);
+    }
+
+    @media (max-width: 820px) {
+      .bento-card-sensor {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px;
+        gap: 20px;
+      }
+      .bento-sensor-content {
+        max-width: 100%;
+      }
+      .bento-sensor-visual {
+        align-self: center;
+        width: 200px;
+        max-width: 200px;
+      }
     }
 
     .bento-header .stat-num {
@@ -888,16 +971,74 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       padding: 24px;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
     }
 
-    /* Demo 1: Morning Condition Sync */
+    /* Demo 1: Morning Condition Sync with Flying Motion */
     .demo-couple-sync {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
       gap: 14px;
+      position: relative;
+      padding-top: 36px;
+    }
+
+    /* Flying Care Flight Packet Animation */
+    .sync-transfer-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 15;
+    }
+
+    .care-flight-packet {
+      display: none;
+      position: absolute;
+      top: 54%;
+      left: 20%;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff4d6d, #e63946);
+      box-shadow: 0 0 22px #ff4d6d, 0 0 45px rgba(255, 77, 109, 0.7);
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      z-index: 25;
+    }
+
+    .care-flight-packet.flying {
+      display: flex;
+      animation: flyCarePacket 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes flyCarePacket {
+      0% {
+        opacity: 0;
+        left: 20%;
+        transform: translateY(0) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+        transform: translateY(-30px) scale(1.3) rotate(15deg);
+      }
+      50% {
+        left: 50%;
+        transform: translateY(-8px) scale(1.2) rotate(-10deg);
+      }
+      80% {
+        transform: translateY(-24px) scale(1.1) rotate(10deg);
+      }
+      100% {
+        opacity: 0;
+        left: 80%;
+        transform: translateY(0) scale(0.6);
+      }
     }
 
     .partner-card {
@@ -907,11 +1048,62 @@
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .partner-card.active-partner {
-      border-color: var(--accent-rose);
-      box-shadow: 0 0 20px rgba(255, 77, 109, 0.2);
+      border-color: rgba(255, 77, 109, 0.4);
+      box-shadow: 0 0 20px rgba(255, 77, 109, 0.15);
+    }
+
+    .partner-card.received-bounce {
+      animation: partnerReceivedBounce 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-color: var(--accent-rose) !important;
+      box-shadow: 0 0 35px rgba(255, 77, 109, 0.6), inset 0 0 20px rgba(255, 77, 109, 0.25) !important;
+    }
+
+    @keyframes partnerReceivedBounce {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.1) translateY(-6px); }
+      70% { transform: scale(0.96) translateY(2px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+
+    /* Partner Reaction Speech Bubble */
+    .reaction-bubble {
+      position: absolute;
+      top: -34px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      transform-origin: bottom center;
+      background: linear-gradient(135deg, #ff4d6d, #e63946);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(255, 77, 109, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 30;
+    }
+
+    .reaction-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px 5px 0;
+      border-style: solid;
+      border-color: #e63946 transparent transparent;
+    }
+
+    .reaction-bubble.visible {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
     }
 
     .partner-avatar {
@@ -938,12 +1130,14 @@
       font-size: 1.25rem;
       font-weight: 800;
       color: #ffffff;
+      transition: all 0.3s ease;
     }
 
     .partner-subtext {
       font-size: 0.72rem;
       color: var(--text-tertiary);
       margin-top: 2px;
+      transition: color 0.3s ease;
     }
 
     .sync-bridge {
@@ -951,6 +1145,7 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
+      position: relative;
     }
 
     .sync-pulse-line {
@@ -958,6 +1153,12 @@
       height: 40px;
       background: linear-gradient(180deg, var(--accent-rose), var(--accent-violet));
       position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .sync-pulse-line.active-beam {
+      box-shadow: 0 0 15px #ff4d6d, 0 0 30px #ff4d6d;
+      background: #ffffff;
     }
 
     .sync-badge-icon {
@@ -972,6 +1173,12 @@
       font-size: 0.85rem;
       box-shadow: 0 0 16px var(--accent-rose);
       animation: heartPulse 1.8s infinite ease-in-out;
+      transition: transform 0.3s ease;
+    }
+
+    .sync-badge-icon.glow-surge {
+      transform: scale(1.35);
+      box-shadow: 0 0 25px #ff4d6d, 0 0 50px rgba(255, 77, 109, 0.8);
     }
 
     @keyframes heartPulse {
@@ -1669,7 +1876,7 @@
           </div>
           <div class="compare-cell col-sai">
             <span class="check-icon">✓</span>
-            <strong id="row1-sai">24시간 서로의 건강·수면·심박을 챙겨주는 케어링</strong>
+            <strong id="row1-sai">24시간 서로의 건강·수면·심박을 돌보는 케어링</strong>
           </div>
         </div>
 
@@ -1704,11 +1911,11 @@
           <div class="compare-cell col-feature" id="row4-feature">데이트 추억 기록</div>
           <div class="compare-cell col-legacy">
             <span class="cross-icon">✕</span>
-            <span id="row4-legacy">기록 기능 없음 (사진에만 의존)</span>
+            <span id="row4-legacy">기록 불가 (사진에만 의존)</span>
           </div>
           <div class="compare-cell col-sai">
             <span class="check-icon">✓</span>
-            <strong id="row4-sai">손잡았을 때 둘의 심박수가 뛴 순간을 캘린더에 아카이브</strong>
+            <strong id="row4-sai">두 손 잡은 설렘의 순간, 심박수 그래프 자동 기록</strong>
           </div>
         </div>
 
@@ -1721,7 +1928,7 @@
           </div>
           <div class="compare-cell col-sai">
             <span class="check-icon">✓</span>
-            <strong id="row5-sai">합리적인 가격 + 20% 사전예약 할인 + 평생 구독료 0원</strong>
+            <strong id="row5-sai">합리적 가격 + 20% 사전할인 + 평생 구독료 0원</strong>
           </div>
         </div>
       </div>
@@ -1729,7 +1936,7 @@
       <div class="compare-callout">
         <h3 id="callout-title">"이제 예쁜 것만으로는 부족합니다."</h3>
         <p id="callout-desc">
-          2030 스마트 커플들이 SAI를 선택하는 이유: 매일 끼는 반지 하나로 서로의 안녕을 살피고 둘만의 유대감을 깊게 만듭니다.
+          2030 스마트 커플들이 SAI를 선택하는 이유: 매일 착용하는 반지 하나로 서로의 건강을 살피고 둘만의 유대감을 더욱 깊게 만듭니다.
         </p>
       </div>
     </div>
@@ -1779,15 +1986,17 @@
           <p id="bento3-desc">단 한 번의 무선 충전으로 최대 7일간 끊김 없이 둘의 생체 리듬을 동기화합니다.</p>
         </div>
 
-        <!-- Bento 4: Biosensors (Wide) -->
-        <div class="bento-card bento-col-8">
-          <img src="/assets/product-rings-duo-clean.webp" alt="Sensors" class="bento-card-bg-img">
-          <div>
+        <!-- Bento 4: Biosensors (Wide - Non-overlapping layout) -->
+        <div class="bento-card bento-col-8 bento-card-sensor">
+          <div class="bento-sensor-content">
             <span class="sai-highlight-badge">MEDICAL-GRADE ACCURACY</span>
             <h3 id="bento4-title">3채널 초정밀 생체 센서</h3>
-            <p id="bento4-desc" style="max-width: 480px;">
+            <p id="bento4-desc">
               초당 100회 미세 혈류를 측정하는 광학 PPG 심박 센서, 고감도 피부 온도 센서, 3축 가속도계가 결합되어 오차 없이 심박·수면·스트레스를 분석합니다.
             </p>
+          </div>
+          <div class="bento-sensor-visual">
+            <img src="/assets/product-rings-duo-clean.webp" alt="Sensors" class="sensor-ring-img">
           </div>
         </div>
 
@@ -1841,22 +2050,35 @@
         </div>
         <div class="interaction-demo">
           <div class="interaction-demo-box">
-            <div class="demo-couple-sync">
-              <div class="partner-card">
+            <div class="demo-couple-sync" id="demo-sync-container">
+              <!-- Flying Transfer Beam Track -->
+              <div class="sync-transfer-track" id="sync-transfer-track">
+                <div class="care-flight-packet" id="care-flight-packet">☕️</div>
+              </div>
+
+              <!-- Jiwoo Card -->
+              <div class="partner-card" id="card-jiwoo">
                 <div class="partner-avatar">👩🏻</div>
                 <div class="partner-name" id="demo1-user1">지우 (나)</div>
-                <div class="partner-metric">89<small style="font-size:0.7rem;">점</small></div>
+                <div class="partner-metric" id="metric-jiwoo">89<small style="font-size:0.7rem;">점</small></div>
                 <div class="partner-subtext" id="demo1-status1">충분한 숙면 · 개운함</div>
               </div>
-              <div class="sync-bridge">
-                <div class="sync-pulse-line"></div>
-                <div class="sync-badge-icon">♥</div>
-                <div class="sync-pulse-line"></div>
+
+              <!-- Center Sync Bridge -->
+              <div class="sync-bridge" id="sync-bridge">
+                <div class="sync-pulse-line" id="sync-line-top"></div>
+                <div class="sync-badge-icon" id="sync-heart-icon">♥</div>
+                <div class="sync-pulse-line" id="sync-line-bottom"></div>
               </div>
-              <div class="partner-card active-partner">
+
+              <!-- Minseo Card with Reaction Speech Bubble -->
+              <div class="partner-card active-partner" id="card-minseo">
+                <div class="reaction-bubble" id="minseo-reaction-bubble">
+                  ☕️ "고마워! 차 마시고 힘낼게 🥰"
+                </div>
                 <div class="partner-avatar">👦🏻</div>
                 <div class="partner-name" id="demo1-user2">민서</div>
-                <div class="partner-metric" style="color:var(--accent-coral)">68<small style="font-size:0.7rem;">점</small></div>
+                <div class="partner-metric" id="metric-minseo" style="color:var(--accent-coral)">68<small style="font-size:0.7rem;">점</small></div>
                 <div class="partner-subtext" id="demo1-status2">수면 부족 · 피로 높음</div>
               </div>
             </div>
@@ -2245,7 +2467,7 @@
         thSai: 'SAI 스마트 커플링',
         row1Feature: '일상의 역할',
         row1Legacy: '손가락에 끼우는 단순 장식품',
-        row1Sai: '24시간 서로의 건강·수면·심박을 챙겨주는 케어링',
+        row1Sai: '24시간 서로의 건강·수면·심박을 돌보는 케어링',
         row2Feature: '떨어져 있을 때의 연결',
         row2Legacy: '연결 없음 (몸이 멀어지면 단절)',
         row2Sai: '터치 한 번으로 실시간 심박(BPM) 햅틱 전송',
@@ -2253,13 +2475,13 @@
         row3Legacy: '직접 묻기 전까지는 알 수 없음',
         row3Sai: '기상 시 수면 점수 및 피로도 자동 공유',
         row4Feature: '데이트 추억 기록',
-        row4Legacy: '기록 기능 없음 (사진에만 의존)',
-        row4Sai: '손잡았을 때 둘의 심박수가 뛴 순간을 캘린더에 아카이브',
+        row4Legacy: '기록 불가 (사진에만 의존)',
+        row4Sai: '두 손 잡은 설렘의 순간, 심박수 그래프 자동 기록',
         row5Feature: '가격 대비 가치',
         row5Legacy: '브랜드 거품 (100만~300만 원대)',
-        row5Sai: '합리적인 가격 + 20% 사전예약 할인 + 평생 구독료 0원',
+        row5Sai: '합리적 가격 + 20% 사전할인 + 평생 구독료 0원',
         calloutTitle: '"이제 예쁜 것만으로는 부족합니다."',
-        calloutDesc: '2030 스마트 커플들이 SAI를 선택하는 이유: 매일 끼는 반지 하나로 서로의 안녕을 살피고 둘만의 유대감을 깊게 만듭니다.',
+        calloutDesc: '2030 스마트 커플들이 SAI를 선택하는 이유: 매일 착용하는 반지 하나로 서로의 건강을 살피고 둘만의 유대감을 더욱 깊게 만듭니다.',
 
         // Hardware Bento
         hwTag: 'PRECISION ENGINEERING',
@@ -2383,13 +2605,13 @@
         row3Legacy: '直接聞くまでわからない',
         row3Sai: '起床時に睡眠スコアと疲労度を自動共有',
         row4Feature: 'デートの思い出記録',
-        row4Legacy: '記録機能なし（写真だけに依存）',
-        row4Sai: '手をつないだ時にふたりの心拍が高鳴った瞬間をカレンダーに保存',
+        row4Legacy: '記録不可（写真だけに依存）',
+        row4Sai: '手をつないだ時の高鳴る心拍グラフを自動保存',
         row5Feature: 'コストパフォーマンス',
         row5Legacy: 'ブランドの上乗せ（10万〜30万円台）',
         row5Sai: '納得の価格 ＋ 20%事前登録割引 ＋ 生涯サブスク0円',
         calloutTitle: '「もう、見た目がおしゃれなだけでは物足りない。」',
-        calloutDesc: '日本の20〜30代カップルがSAIを選ぶ理由：毎日つける指輪ひとつで互いを気遣い、ふたりの絆をより深くします。',
+        calloutDesc: '日本の20〜30代カップルがSAIを選ぶ理由：毎日つける指輪ひとつで互いの健康を見守り、ふたりの絆をより深くします。',
 
         // Hardware Bento
         hwTag: 'PRECISION ENGINEERING',
@@ -2688,26 +2910,74 @@
       }, 180);
     }
 
-    // Interactive Demo 1: Send Care Tea
+    // Interactive Demo 1: Send Care Tea with Flying Packet & Reaction Motion
+    let careResetTimer = null;
     function sendCareHug() {
       const btn = document.getElementById('demo-care-btn');
+      const cardMinseo = document.getElementById('card-minseo');
+      const packet = document.getElementById('care-flight-packet');
+      const heartIcon = document.getElementById('sync-heart-icon');
+      const bubble = document.getElementById('minseo-reaction-bubble');
       const status2 = document.getElementById('demo1-status2');
+      const metricMinseo = document.getElementById('metric-minseo');
       const originalText = btn.innerHTML;
+
+      if (careResetTimer) clearTimeout(careResetTimer);
 
       btn.disabled = true;
       btn.style.background = 'var(--accent-rose)';
-      btn.innerHTML = currentLang === 'ja' ? '<span>💌 心温まるメッセージを送信中…</span>' : '<span>💌 따뜻한 응원을 전송하는 중…</span>';
+      btn.innerHTML = currentLang === 'ja' ? '<span>☕️ 温かいお茶をパートナーへ送信中…</span>' : '<span>☕️ 따뜻한 차를 민서에게 전송하는 중…</span>';
 
+      // 1. Trigger Flying Care Packet Motion
+      packet.classList.remove('flying');
+      void packet.offsetWidth; // force reflow
+      packet.classList.add('flying');
+
+      // Surge central heart bridge
       setTimeout(() => {
-        status2.textContent = currentLang === 'ja' ? '💖 気持ちを受け取りました' : '💖 응원을 전달받았어요';
+        heartIcon.classList.add('glow-surge');
+      }, 350);
+
+      // 2. Arrival at Partner Card (750ms)
+      setTimeout(() => {
+        heartIcon.classList.remove('glow-surge');
+        cardMinseo.classList.add('received-bounce');
+
+        // Set speech bubble text according to language
+        bubble.textContent = currentLang === 'ja' ? '☕️「ありがとう！温まるね🥰」' : '☕️ "고마워! 차 마시고 힘낼게 🥰"';
+        bubble.classList.add('visible');
+
+        // Condition score recovers from 68 to 78 with animation
+        if (metricMinseo) {
+          metricMinseo.innerHTML = '78<small style="font-size:0.7rem;">점</small>';
+          metricMinseo.style.color = 'var(--accent-rose)';
+        }
+
+        status2.textContent = currentLang === 'ja' ? '💖 お茶で体調回復中（+10点）' : '💖 따뜻한 차로 회복 중 (+10점)';
         status2.style.color = 'var(--accent-rose)';
-        btn.innerHTML = currentLang === 'ja' ? '<span>✨ パートナーに届きました！</span>' : '<span>✨ 민서님의 반지에 응원이 닿았어요!</span>';
+        btn.innerHTML = currentLang === 'ja' ? '<span>✨ パートナーの指先に届きました！</span>' : '<span>✨ 민서님의 반지에 실시간으로 닿았어요!</span>';
+
+        if (navigator.vibrate) {
+          navigator.vibrate([60, 40, 80]);
+        }
+      }, 750);
+
+      // 3. Smooth Reset after 3.8s so user can test again
+      careResetTimer = setTimeout(() => {
+        bubble.classList.remove('visible');
+        cardMinseo.classList.remove('received-bounce');
         setTimeout(() => {
           btn.disabled = false;
           btn.innerHTML = originalText;
           btn.style.background = '';
-        }, 3000);
-      }, 1000);
+          if (metricMinseo) {
+            metricMinseo.innerHTML = '68<small style="font-size:0.7rem;">점</small>';
+            metricMinseo.style.color = 'var(--accent-coral)';
+          }
+          status2.textContent = currentLang === 'ja' ? '睡眠不足 · 疲労高め' : '수면 부족 · 피로 높음';
+          status2.style.color = '';
+        }, 500);
+      }, 3800);
     }
 
     // Interactive Demo 2: Trigger Heartbeat
