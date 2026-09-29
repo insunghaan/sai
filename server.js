@@ -534,6 +534,8 @@ const server = http.createServer(async (req, res) => {
     targetFile = 'ja/index.html';
   } else if (['/teaser10', '/teaser10/', '/teaser10.html'].includes(pathname)) {
     targetFile = 'teaser10.html';
+  } else if (['/teaser6', '/teaser6/', '/teaser6.html', '/ja/teaser6', '/ja/teaser6/'].includes(pathname)) {
+    targetFile = 'teaser6.html';
   } else if (['/teaser5', '/teaser5/', '/teaser5.html'].includes(pathname)) {
     targetFile = 'teaser5.html';
   } else if (pathname === '/archive' || pathname === '/archive/') {
