@@ -434,6 +434,7 @@
       pointer-events: none;
       user-select: none;
       z-index: 1;
+      image-rendering: -webkit-optimize-contrast;
     }
     .hero-desktop-center {
       position: relative;
@@ -577,6 +578,7 @@
         width: 100%;
         height: auto;
         display: block;
+        image-rendering: -webkit-optimize-contrast;
       }
       .hero-mobile-btn-wrap {
         position: absolute;
@@ -3017,7 +3019,13 @@
           <section class="hero-section">
             <!-- Desktop Stage -->
             <div class="hero-desktop-stage">
-              <img src="/assets/hero-hands-pair.webp" alt="SAIスマートリングをつけたふたりの手" class="hero-desktop-bg" width="1024" height="651" fetchpriority="high">
+              <img src="/assets/teaser10/hero-hands-pair.webp"
+                   srcset="/assets/teaser10/hero-hands-pair.webp 1x, /assets/teaser10/hero-hands-pair@2x.webp 2x"
+                   alt="SAIスマートリングをつけたふたりの手"
+                   class="hero-desktop-bg"
+                   width="2048"
+                   height="1302"
+                   fetchpriority="high">
               <div class="hero-desktop-center">
                 <div class="hero-editorial-tag">SAI・ふたりのためのスマートリング</div>
                 <h1 class="hero-editorial-title">ふたりの間に、</h1>
@@ -3042,7 +3050,13 @@
                 </p>
               </div>
               <div class="hero-mobile-visual">
-                <img src="/assets/hero-hands-mobile.webp" alt="SAIスマートリングをつけたふたりの手" class="hero-mobile-img" width="525" height="650" fetchpriority="high">
+                <img src="/assets/teaser10/hero-hands-mobile.webp"
+                     srcset="/assets/teaser10/hero-hands-mobile.webp 1x, /assets/teaser10/hero-hands-mobile@2x.webp 2x"
+                     alt="SAIスマートリングをつけたふたりの手"
+                     class="hero-mobile-img"
+                     width="1050"
+                     height="1300"
+                     fetchpriority="high">
                 <div class="hero-mobile-btn-wrap">
                   <button class="hero-mobile-btn hero-signup-trigger" id="hero-signup-btn-mobile">
                     <span>ふたりではじめる →</span>
@@ -3571,7 +3585,13 @@
           <section class="hero-section">
             <!-- Desktop Stage -->
             <div class="hero-desktop-stage">
-              <img src="/assets/hero-hands-pair.webp" alt="${t('SAI 스마트링을 착용한 두 사람의 손', 'SAIスマートリングをつけたふたりの手')}" class="hero-desktop-bg" width="1024" height="651" fetchpriority="high">
+              <img src="/assets/teaser10/hero-hands-pair.webp"
+                   srcset="/assets/teaser10/hero-hands-pair.webp 1x, /assets/teaser10/hero-hands-pair@2x.webp 2x"
+                   alt="${t('SAI 스마트링을 착용한 두 사람의 손', 'SAIスマートリングをつけたふたりの手')}"
+                   class="hero-desktop-bg"
+                   width="2048"
+                   height="1302"
+                   fetchpriority="high">
               <div class="hero-desktop-center">
                 <div class="hero-editorial-tag">${t('SAI · 둘만을 위한 스마트링', 'SAI・ふたりのためのスマートリング')}</div>
                 <h1 class="hero-editorial-title">${t('둘 사이에,', 'ふたりの間に、')}</h1>
@@ -3596,7 +3616,13 @@
                 </p>
               </div>
               <div class="hero-mobile-visual">
-                <img src="/assets/hero-hands-mobile.webp" alt="${t('SAI 스마트링을 착용한 두 사람의 손', 'SAIスマートリングをつけたふたりの手')}" class="hero-mobile-img" width="525" height="650" fetchpriority="high">
+                <img src="/assets/teaser10/hero-hands-mobile.webp"
+                     srcset="/assets/teaser10/hero-hands-mobile.webp 1x, /assets/teaser10/hero-hands-mobile@2x.webp 2x"
+                     alt="${t('SAI 스마트링을 착용한 두 사람의 손', 'SAIスマートリングをつけたふたりの手')}"
+                     class="hero-mobile-img"
+                     width="1050"
+                     height="1300"
+                     fetchpriority="high">
                 <div class="hero-mobile-btn-wrap">
                   <button class="hero-mobile-btn hero-signup-trigger" id="hero-signup-btn-mobile">
                     <span>${t('둘이서 시작하기 →', 'ふたりではじめる →')}</span>
