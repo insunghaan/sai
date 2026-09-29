@@ -1209,48 +1209,142 @@
       border-color: var(--accent-rose);
     }
 
-    /* Demo 2: Real-time Touch Heartbeat Ring */
+    /* Demo 2: Real-time Touch Heartbeat Ring & Rear Gradient Light */
     .ring-pulse-stage {
       text-align: center;
-      padding: 20px 0;
+      padding: 24px 0 16px;
       position: relative;
     }
 
     .ring-touch-target {
       position: relative;
-      width: 160px;
-      height: 160px;
+      width: 176px;
+      height: 176px;
       margin: 0 auto;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .ring-pulse-wave {
+    /* Rear Ambient Light Glow behind the ring */
+    .ring-rear-glow {
       position: absolute;
-      inset: 0;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-      border: 2px solid var(--accent-rose);
+      background: radial-gradient(circle, rgba(255, 77, 109, 0.42) 0%, rgba(255, 107, 107, 0.22) 42%, rgba(255, 77, 109, 0) 72%);
+      opacity: 0.3;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(14px);
+    }
+
+    /* Expanding Rear Gradient Light Waves (Aurora Glow) */
+    .ring-pulse-light {
+      position: absolute;
+      inset: -16px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 77, 109, 0.55) 0%, rgba(230, 57, 70, 0.26) 40%, rgba(255, 77, 109, 0) 72%);
       opacity: 0;
       pointer-events: none;
+      z-index: 1;
+      filter: blur(18px);
+    }
+
+    /* Expanding Pulse Lines */
+    .ring-pulse-wave {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 77, 109, 0.88);
+      box-shadow: 0 0 18px rgba(255, 77, 109, 0.65), inset 0 0 12px rgba(255, 77, 109, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Pulsing Animation Active States */
+    .ring-touch-target.pulsing .ring-rear-glow {
+      opacity: 0.95;
+      animation: rearGlowBreathe 1.6s infinite ease-in-out;
+    }
+
+    .ring-touch-target.pulsing .ring-pulse-light {
+      animation: lightWaveExpand 1.6s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     .ring-touch-target.pulsing .ring-pulse-wave {
-      animation: waveExpand 1.6s infinite ease-out;
+      animation: waveExpand 1.6s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @keyframes rearGlowBreathe {
+      0%, 100% {
+        opacity: 0.75;
+        transform: scale(1.04);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.24);
+      }
+    }
+
+    @keyframes lightWaveExpand {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.9;
+      }
+      50% {
+        opacity: 0.65;
+      }
+      100% {
+        transform: scale(1.72);
+        opacity: 0;
+      }
     }
 
     @keyframes waveExpand {
-      0% { transform: scale(0.7); opacity: 0.9; }
-      100% { transform: scale(1.6); opacity: 0; }
+      0% {
+        transform: scale(0.65);
+        opacity: 0.95;
+        border-color: rgba(255, 120, 150, 0.95);
+      }
+      60% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(1.68);
+        opacity: 0;
+        border-color: rgba(255, 77, 109, 0.15);
+      }
     }
 
     .ring-center-img {
-      width: 120px;
-      height: 120px;
+      width: 126px;
+      height: 126px;
       object-fit: contain;
-      z-index: 2;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+      z-index: 3;
+      filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.95)) saturate(0.92);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .ring-touch-target:hover .ring-center-img {
+      transform: scale(1.04);
+    }
+
+    .ring-touch-target.pulsing .ring-center-img {
+      animation: ringHeartbeatThrob 0.8s infinite ease-in-out;
+    }
+
+    @keyframes ringHeartbeatThrob {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.05); }
+      50% { transform: scale(0.98); }
+      75% { transform: scale(1.03); }
     }
 
     .touch-hint {
@@ -2112,6 +2206,11 @@
           <div class="interaction-demo-box">
             <div class="ring-pulse-stage">
               <div class="ring-touch-target" id="touch-ring-target" onclick="triggerHeartbeat()">
+                <!-- Rear Gradient Light Glow & Waves -->
+                <div class="ring-rear-glow"></div>
+                <div class="ring-pulse-light"></div>
+                <div class="ring-pulse-light" style="animation-delay: 0.6s;"></div>
+                <!-- Expanding Pulse Lines -->
                 <div class="ring-pulse-wave"></div>
                 <div class="ring-pulse-wave" style="animation-delay: 0.6s;"></div>
                 <img src="/assets/sai-ring-gold-clean.png" alt="Touch Ring" class="ring-center-img">
@@ -2985,6 +3084,8 @@
     function triggerHeartbeat() {
       const ringTarget = document.getElementById('touch-ring-target');
       const hapticMsg = document.getElementById('haptic-msg');
+      ringTarget.classList.remove('pulsing');
+      void ringTarget.offsetWidth; // force reflow for immediate restart
       ringTarget.classList.add('pulsing');
       
       const bpm = Math.floor(Math.random() * 8) + 72;
