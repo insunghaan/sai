@@ -2913,13 +2913,52 @@
       column-gap: clamp(2rem, 5vw, 4rem); row-gap: 1rem;
       align-items: start;
     }
-    #sleep-share .section-head > .gradient-pill { grid-column: 1 / -1; justify-self: start; }
-    #sleep-share .section-title { grid-column: 1; grid-row: 2 / 4; margin: 0; word-break: keep-all; }
-    #sleep-share .section-desc { grid-column: 2; margin: 0; max-width: none; word-break: keep-all; overflow-wrap: break-word; }
-    #sleep-share .privacy-tag-box { grid-column: 2; width: 100%; min-width: 0; margin: 0; align-items: flex-start; line-height: 1.65; word-break: keep-all; }
-    #sleep-share .privacy-icon { flex: 0 0 auto; }
-    #sleep-share .privacy-tag-box strong { display: block; }
-    #sleep-share .typing-badge { min-width: 5.2em; white-space: nowrap; justify-content: center; }
+    #sleep-share .section-head > .gradient-pill {
+      grid-column: 1 / -1; justify-self: start;
+      background: #000000 !important;
+      color: #ffffff !important;
+      background-image: none !important;
+      border-radius: 9999px !important;
+      padding: 0.35rem 0.95rem !important;
+      font-size: 0.78rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.04em !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+    }
+    #sleep-share .section-title {
+      grid-column: 1; grid-row: 2 / 4; margin: 0;
+      word-break: keep-all;
+      font-family: var(--font-sans) !important;
+      letter-spacing: -0.03em !important;
+      color: #000000 !important;
+    }
+    #sleep-share .section-desc {
+      grid-column: 2; margin: 0; max-width: none;
+      word-break: keep-all; overflow-wrap: break-word;
+      font-family: var(--font-sans) !important;
+      color: #555555 !important;
+      line-height: 1.65 !important;
+    }
+    #sleep-share .privacy-tag-box {
+      grid-column: 2; width: 100%; min-width: 0; margin: 0;
+      align-items: flex-start; line-height: 1.65; word-break: keep-all;
+      background: #f7f6f1 !important;
+      border: 1px solid #e7e5de !important;
+      border-radius: 16px !important;
+      color: #555555 !important;
+    }
+    #sleep-share .privacy-icon { flex: 0 0 auto; color: #000000 !important; }
+    #sleep-share .privacy-tag-box strong { display: block; color: #000000 !important; }
+    #sleep-share .typing-badge {
+      min-width: 5.2em; white-space: nowrap; justify-content: center;
+      background: #f7f6f1 !important;
+      border: 1px solid #e7e5de !important;
+      color: #000000 !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+      font-family: var(--font-sans) !important;
+      font-weight: 700 !important;
+    }
+    #sleep-share .typing-cursor { background-color: #000000 !important; }
     @media (max-width: 760px) {
       #sleep-share .section-head { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
       #sleep-share .section-title { font-size: clamp(1.6rem, 6.3vw, 2.17rem) !important; width: 100%; }
@@ -2928,41 +2967,198 @@
       #sleep-share .section-head > .gradient-pill { margin-bottom: 0 !important; }
     }
   
-    .shared-mornings { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:26px; }
-    .morning-scene { position:relative; min-width:0; border-radius:28px; overflow:hidden; background:#fcfaf7; border:1px solid #eee5dc; box-shadow:0 10px 32px rgba(45,30,55,0.05); display:flex; flex-direction:column; }
-    .morning-art { position:relative; width:100%; aspect-ratio:16/10; overflow:hidden; background:#ebe4dc; }
-    .morning-art img { display:block; position:static; width:100%; height:100%; object-fit:cover; object-position:center; transform:none; transition:transform .4s ease; }
-    .morning-scene-woman .morning-art img { object-position:center 35%; }
-    .morning-scene-man .morning-art img { object-position:center 45%; }
-    .morning-scene:hover .morning-art img { transform:scale(1.02); }
-    .morning-person { position:absolute; top:18px; left:18px; padding:6px 14px; border-radius:20px; background:rgba(255,255,255,.88); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.95); color:#433630; font-size:.8rem; font-weight:700; box-shadow:0 4px 12px rgba(0,0,0,.08); z-index:3; }
-    .received-sleep { position:relative; margin:-46px 18px 18px; padding:22px; border-radius:22px; background:rgba(255,255,255,.95); backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.95); box-shadow:0 12px 34px rgba(45,30,55,.08); z-index:2; }
-    .received-sleep-heading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; font-size:.95rem; }
-    .received-sleep-heading > span { font-size:.72rem; color:#735691; background:#f4edf9; border-radius:20px; padding:4px 8px; }
-    .received-sleep-duration { margin:12px 0; font-size:2.6rem; line-height:1.15; font-weight:800; letter-spacing:-.04em; color:#302936; }
-    .received-sleep-duration span { font-size:1.25rem; font-weight:500; margin-left:2px; color:#8d818b; }
-    .received-sleep-note { border-top:1px solid #ece7ed; padding-top:12px; }
-    .received-sleep-note > span { font-size:.72rem; color:#807585; }
-    .received-sleep-note p { font-size:.94rem; margin:5px 0 0; color:#514757; word-break:keep-all; }
+    .shared-mornings { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; }
+    .morning-scene {
+      position: relative;
+      min-width: 0;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #fbfaf7;
+      border: 1px solid #e7e4dc;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .morning-scene:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.10);
+    }
+    .morning-art {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #f2eee8;
+    }
+    .morning-art img {
+      display: block;
+      position: static;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: none;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .morning-scene-woman .morning-art img { object-position: center 30%; }
+    .morning-scene-man .morning-art img { object-position: center 40%; }
+    .morning-scene:hover .morning-art img { transform: scale(1.03); }
+    .morning-person {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(18, 18, 18, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+      z-index: 3;
+      font-family: var(--font-sans);
+    }
+    .received-sleep {
+      position: relative;
+      margin: -50px 18px 18px;
+      padding: 24px 26px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.07);
+      z-index: 2;
+      font-family: var(--font-sans);
+    }
+    .received-sleep-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.95rem;
+    }
+    .received-sleep-heading strong {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: #000000;
+      letter-spacing: -0.015em;
+    }
+    .received-sleep-heading > span {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #222222;
+      background: #f4f2ec;
+      border: 1px solid #e5e2d7;
+      border-radius: 9999px;
+      padding: 4px 10px;
+      letter-spacing: 0.02em;
+    }
+    .received-sleep-duration {
+      margin: 12px 0 6px;
+      font-size: 2.75rem;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      color: #000000;
+      font-family: var(--font-sans);
+    }
+    .received-sleep-duration span {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-left: 2px;
+      margin-right: 4px;
+      color: #777777;
+    }
+    .sleep-analysis-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: #777777;
+      font-size: 0.76rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .sleep-analysis-summary b {
+      color: #000000;
+      font-weight: 700;
+    }
+    .sleep-stage-bar {
+      display: flex;
+      gap: 3px;
+      height: 8px;
+      overflow: hidden;
+      border-radius: 9999px;
+      margin: 14px 0 12px;
+      background: #eeebe3;
+    }
+    .stage-deep { background: #111111; }
+    .stage-light { background: #dcd7cc; }
+    .stage-rem { background: #c5a880; }
+    .sleep-stage-values {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin: 0 0 16px;
+    }
+    .sleep-stage-values dt {
+      font-size: 0.70rem;
+      font-weight: 600;
+      color: #666666;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+    .sleep-stage-values dt i {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 5px;
+      flex-shrink: 0;
+    }
+    .sleep-stage-values dt i.stage-deep { background: #111111; }
+    .sleep-stage-values dt i.stage-light { background: #dcd7cc; }
+    .sleep-stage-values dt i.stage-rem { background: #c5a880; }
+    .sleep-stage-values dd {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: #000000;
+      margin: 4px 0 0;
+    }
+    .received-sleep-note {
+      border-top: 1px solid #ebe8e1;
+      padding-top: 12px;
+    }
+    .received-sleep-note > span {
+      font-size: 0.70rem;
+      font-weight: 700;
+      color: #888888;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .received-sleep-note p {
+      font-size: 0.94rem;
+      font-weight: 600;
+      margin: 5px 0 0;
+      color: #222222;
+      line-height: 1.5;
+      word-break: keep-all;
+    }
     .morning-example { text-align:right; font-size:.75rem; color:#89828c; margin:12px 0 0; }
     @media(max-width:760px) {
       .shared-mornings { grid-template-columns:minmax(0,1fr); gap:22px; }
       .morning-scene { border-radius:24px; }
       .morning-art { aspect-ratio:16/10; }
-      .received-sleep { margin:-38px 14px 14px; padding:18px; border-radius:18px; }
+      .received-sleep { margin:-42px 14px 14px; padding:20px; border-radius:18px; }
       .morning-example { text-align:center; font-size:.68rem; }
     }
-
-    .sleep-analysis-summary { display:flex; justify-content:space-between; gap:10px; color:#877b8d; font-size:.74rem; margin-top:-5px; }
-    .sleep-analysis-summary b { color:#53445e; font-weight:600; }
-    .sleep-stage-bar { display:flex; gap:3px; height:9px; overflow:hidden; border-radius:8px; margin:17px 0 12px; }
-    .stage-deep { background:#806398; }
-    .stage-light { background:#d6c5e1; }
-    .stage-rem { background:#b297c5; }
-    .sleep-stage-values { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; margin:0 0 16px; }
-    .sleep-stage-values dt { font-size:.69rem; color:#81718a; white-space:nowrap; }
-    .sleep-stage-values dt i { display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:4px; }
-    .sleep-stage-values dd { font-size:.9rem; font-weight:650; color:#54425e; margin:5px 0 0; }
     @media(max-width:360px) { .sleep-stage-values dt { font-size:.62rem; } .sleep-stage-values dd { font-size:.8rem; } }
 
     /* Consent note belongs to the fixed introduction, outside the animated deck. */
@@ -3381,24 +3577,48 @@
               <!-- Separate mornings, received sleep records -->
               <div class="shared-mornings">
                 <article class="morning-scene morning-scene-woman">
-                  <div class="morning-art"><img src="/assets/couple-morning-real.webp" alt="朝の光が差し込むソファで、温かいコーヒーを飲むふたり" width="1024" height="576"></div>
+                  <div class="morning-art">
+                    <img src="/assets/teaser10/sleep-morning-jiwoo.webp"
+                         srcset="/assets/teaser10/sleep-morning-jiwoo.webp 1x, /assets/teaser10/sleep-morning-jiwoo@2x.webp 2x"
+                         alt="朝の光が差し込む部屋で、温かいコーヒーを飲むふたり"
+                         width="800"
+                         height="500"
+                         loading="lazy">
+                  </div>
                   <span class="morning-person">ジウの朝</span>
                   <div class="received-sleep">
                     <div class="received-sleep-heading"><strong>ミンジュンの睡眠分析</strong><span>共有されました</span></div>
-                    <div class="received-sleep-duration">6<span>h</span> 58<span>m</span></div><div class="sleep-analysis-summary"><span>合計睡眠</span><span>途中で目覚めた回数 <b>2回</b></span></div>
+                    <div class="received-sleep-duration">6<span>h</span> 58<span>m</span></div>
+                    <div class="sleep-analysis-summary"><span>合計睡眠</span><span>途中で目覚めた回数 <b>2回</b></span></div>
                     <div class="sleep-stage-bar" aria-hidden="true"><i class="stage-deep" style="flex:17.46"></i><i class="stage-light" style="flex:59.81"></i><i class="stage-rem" style="flex:22.73"></i></div>
-                    <dl class="sleep-stage-values"><div><dt><i class="stage-deep"></i>深い睡眠</dt><dd>1h 13m</dd></div><div><dt><i class="stage-light"></i>浅い睡眠</dt><dd>4h 10m</dd></div><div><dt><i class="stage-rem"></i>レム睡眠</dt><dd>1h 35m</dd></div></dl>
+                    <dl class="sleep-stage-values">
+                      <div><dt><i class="stage-deep"></i>深い睡眠</dt><dd>1h 13m</dd></div>
+                      <div><dt><i class="stage-light"></i>浅い睡眠</dt><dd>4h 10m</dd></div>
+                      <div><dt><i class="stage-rem"></i>レム睡眠</dt><dd>1h 35m</dd></div>
+                    </dl>
                     <div class="received-sleep-note"><span>本人からのひと言</span><p>「少し眠いけど、よく眠れたよ。」</p></div>
                   </div>
                 </article>
                 <article class="morning-scene morning-scene-man">
-                  <div class="morning-art"><img src="/assets/ring-hands-closeup-v6.webp" alt="朝のベッドの上で寄り添う手元と、輝くスマートリング" width="1024" height="576"></div>
+                  <div class="morning-art">
+                    <img src="/assets/teaser10/sleep-morning-minjun.webp"
+                         srcset="/assets/teaser10/sleep-morning-minjun.webp 1x, /assets/teaser10/sleep-morning-minjun@2x.webp 2x"
+                         alt="朝のベッドの上で寄り添う手元と、輝くスマートリング"
+                         width="800"
+                         height="500"
+                         loading="lazy">
+                  </div>
                   <span class="morning-person">ミンジュンの朝</span>
                   <div class="received-sleep">
                     <div class="received-sleep-heading"><strong>ジウの睡眠分析</strong><span>共有されました</span></div>
-                    <div class="received-sleep-duration">7<span>h</span> 42<span>m</span></div><div class="sleep-analysis-summary"><span>合計睡眠</span><span>途中で目覚めた回数 <b>1回</b></span></div>
+                    <div class="received-sleep-duration">7<span>h</span> 42<span>m</span></div>
+                    <div class="sleep-analysis-summary"><span>合計睡眠</span><span>途中で目覚めた回数 <b>1回</b></span></div>
                     <div class="sleep-stage-bar" aria-hidden="true"><i class="stage-deep" style="flex:20.78"></i><i class="stage-light" style="flex:55.84"></i><i class="stage-rem" style="flex:23.38"></i></div>
-                    <dl class="sleep-stage-values"><div><dt><i class="stage-deep"></i>深い睡眠</dt><dd>1h 36m</dd></div><div><dt><i class="stage-light"></i>浅い睡眠</dt><dd>4h 18m</dd></div><div><dt><i class="stage-rem"></i>レム睡眠</dt><dd>1h 48m</dd></div></dl>
+                    <dl class="sleep-stage-values">
+                      <div><dt><i class="stage-deep"></i>深い睡眠</dt><dd>1h 36m</dd></div>
+                      <div><dt><i class="stage-light"></i>浅い睡眠</dt><dd>4h 18m</dd></div>
+                      <div><dt><i class="stage-rem"></i>レム睡眠</dt><dd>1h 48m</dd></div>
+                    </dl>
                     <div class="received-sleep-note"><span>本人からのひと言</span><p>「ぐっすり眠って、今日はすっきり。」</p></div>
                   </div>
                 </article>
@@ -3980,24 +4200,48 @@
               <!-- Separate mornings, received sleep records -->
               <div class="shared-mornings">
                 <article class="morning-scene morning-scene-woman">
-                  <div class="morning-art"><img src="/assets/couple-morning-real.webp" alt="${t('아침 햇살 속 따뜻한 니트 담요 아래 커피를 마시는 커플', '朝の光が差し込むソファで、温かいコーヒーを飲むふたり')}" width="1024" height="576"></div>
+                  <div class="morning-art">
+                    <img src="/assets/teaser10/sleep-morning-jiwoo.webp"
+                         srcset="/assets/teaser10/sleep-morning-jiwoo.webp 1x, /assets/teaser10/sleep-morning-jiwoo@2x.webp 2x"
+                         alt="${t('아침 햇살 속 따뜻한 니트 담요 아래 커피를 마시는 커플', '朝の光が差し込む部屋で、温かいコーヒーを飲むふたり')}"
+                         width="800"
+                         height="500"
+                         loading="lazy">
+                  </div>
                   <span class="morning-person">${t('지우의 아침', 'ジウの朝')}</span>
                   <div class="received-sleep">
                     <div class="received-sleep-heading"><strong>${t('민준의 수면 분석', 'ミンジュンの睡眠分析')}</strong><span>${t('공유받음', '共有されました')}</span></div>
-                    <div class="received-sleep-duration">6<span>h</span> 58<span>m</span></div><div class="sleep-analysis-summary"><span>${t('총 수면', '合計睡眠')}</span><span>${t('중간에 깸', '途中で目覚めた回数')} <b>2${t('회', '回')}</b></span></div>
+                    <div class="received-sleep-duration">6<span>h</span> 58<span>m</span></div>
+                    <div class="sleep-analysis-summary"><span>${t('총 수면', '合計睡眠')}</span><span>${t('중간에 깸', '途中で目覚めた回数')} <b>2${t('회', '回')}</b></span></div>
                     <div class="sleep-stage-bar" aria-hidden="true"><i class="stage-deep" style="flex:17.46"></i><i class="stage-light" style="flex:59.81"></i><i class="stage-rem" style="flex:22.73"></i></div>
-                    <dl class="sleep-stage-values"><div><dt><i class="stage-deep"></i>${t('깊은 수면', '深い睡眠')}</dt><dd>1h 13m</dd></div><div><dt><i class="stage-light"></i>${t('얕은 수면', '浅い睡眠')}</dt><dd>4h 10m</dd></div><div><dt><i class="stage-rem"></i>${t('렘 수면', 'レム睡眠')}</dt><dd>1h 35m</dd></div></dl>
+                    <dl class="sleep-stage-values">
+                      <div><dt><i class="stage-deep"></i>${t('깊은 수면', '深い睡眠')}</dt><dd>1h 13m</dd></div>
+                      <div><dt><i class="stage-light"></i>${t('얕은 수면', '浅い睡眠')}</dt><dd>4h 10m</dd></div>
+                      <div><dt><i class="stage-rem"></i>${t('렘 수면', 'レム睡眠')}</dt><dd>1h 35m</dd></div>
+                    </dl>
                     <div class="received-sleep-note"><span>${t('직접 남긴 컨디션', '本人からのひと言')}</span><p>${t('“조금 졸리지만, 잘 잤어.”', '「少し眠いけど、よく眠れたよ。」')}</p></div>
                   </div>
                 </article>
                 <article class="morning-scene morning-scene-man">
-                  <div class="morning-art"><img src="/assets/ring-hands-closeup-v6.webp" alt="${t('아침 침대 시트 위로 맞잡은 두 사람의 손과 빛나는 스마트링', '朝のベッドの上で寄り添う手元と、輝くスマートリング')}" width="1024" height="576"></div>
+                  <div class="morning-art">
+                    <img src="/assets/teaser10/sleep-morning-minjun.webp"
+                         srcset="/assets/teaser10/sleep-morning-minjun.webp 1x, /assets/teaser10/sleep-morning-minjun@2x.webp 2x"
+                         alt="${t('아침 침대 시트 위로 맞잡은 두 사람의 손과 빛나는 스마트링', '朝のベッドの上で寄り添う手元と、輝くスマートリング')}"
+                         width="800"
+                         height="500"
+                         loading="lazy">
+                  </div>
                   <span class="morning-person">${t('민준의 아침', 'ミンジュンの朝')}</span>
                   <div class="received-sleep">
                     <div class="received-sleep-heading"><strong>${t('지우의 수면 분석', 'ジウの睡眠分析')}</strong><span>${t('공유받음', '共有されました')}</span></div>
-                    <div class="received-sleep-duration">7<span>h</span> 42<span>m</span></div><div class="sleep-analysis-summary"><span>${t('총 수면', '合計睡眠')}</span><span>${t('중간에 깸', '途中で目覚めた回数')} <b>1${t('회', '回')}</b></span></div>
+                    <div class="received-sleep-duration">7<span>h</span> 42<span>m</span></div>
+                    <div class="sleep-analysis-summary"><span>${t('총 수면', '合計睡眠')}</span><span>${t('중간에 깸', '途中で目覚めた回数')} <b>1${t('회', '回')}</b></span></div>
                     <div class="sleep-stage-bar" aria-hidden="true"><i class="stage-deep" style="flex:20.78"></i><i class="stage-light" style="flex:55.84"></i><i class="stage-rem" style="flex:23.38"></i></div>
-                    <dl class="sleep-stage-values"><div><dt><i class="stage-deep"></i>${t('깊은 수면', '深い睡眠')}</dt><dd>1h 36m</dd></div><div><dt><i class="stage-light"></i>${t('얕은 수면', '浅い睡眠')}</dt><dd>4h 18m</dd></div><div><dt><i class="stage-rem"></i>${t('렘 수면', 'レム睡眠')}</dt><dd>1h 48m</dd></div></dl>
+                    <dl class="sleep-stage-values">
+                      <div><dt><i class="stage-deep"></i>${t('깊은 수면', '深い睡眠')}</dt><dd>1h 36m</dd></div>
+                      <div><dt><i class="stage-light"></i>${t('얕은 수면', '浅い睡眠')}</dt><dd>4h 18m</dd></div>
+                      <div><dt><i class="stage-rem"></i>${t('렘 수면', 'レム睡眠')}</dt><dd>1h 48m</dd></div>
+                    </dl>
                     <div class="received-sleep-note"><span>${t('직접 남긴 컨디션', '本人からのひと言')}</span><p>${t('“푹 잤어. 오늘은 개운해.”', '「ぐっすり眠って、今日はすっきり。」')}</p></div>
                   </div>
                 </article>
