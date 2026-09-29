@@ -2254,8 +2254,8 @@
       border-radius: 28px;
       background: #ffffff;
       color: var(--text-dark);
-      padding: 1.8rem 2.0rem 2.0rem;
-      max-width: 520px;
+      padding: 2.0rem 2.0rem 2.2rem;
+      max-width: 480px;
       width: calc(100% - 2rem);
       max-height: 90vh;
       overflow-y: auto;
@@ -2265,6 +2265,13 @@
       inset: 0;
       margin: auto;
       z-index: 1000;
+      font-family: var(--font-sans) !important;
+    }
+    dialog#modal input,
+    dialog#modal button,
+    dialog#modal select,
+    dialog#modal textarea {
+      font-family: var(--font-sans) !important;
     }
     dialog#modal::backdrop {
       background: rgba(15, 15, 20, 0.45);
@@ -2273,34 +2280,40 @@
     }
     .modal-close-btn {
       position: absolute;
-      top: 1.1rem;
-      right: 1.1rem;
+      top: 1.2rem;
+      right: 1.2rem;
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #FAF9F6;
-      color: var(--text-dark);
-      font-size: 1.1rem;
+      background: #f4f3ee;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      color: #333333;
+      font-size: 0.95rem;
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
     .modal-close-btn:hover {
-      background: #f0eee9;
+      background: #000000;
+      color: #ffffff;
+      border-color: #000000;
     }
     .modal-head {
       margin-bottom: 0.9rem;
     }
     .modal-head h2 {
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       font-weight: 800;
-      margin: 0.35rem 0 0.2rem;
+      margin: 0.25rem 0 0.25rem;
       letter-spacing: -0.025em;
-      color: var(--text-dark);
+      color: #000000;
     }
     .modal-head p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+      font-size: 0.86rem;
+      color: #666666;
+      line-height: 1.45;
     }
     .form-group {
       margin-bottom: 0.85rem;
@@ -2310,26 +2323,26 @@
       display: block;
       font-size: 0.76rem;
       font-weight: 700;
-      color: var(--text-muted);
+      color: #333333;
       margin-bottom: 0.4rem;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
     .form-sublabel {
       display: block;
       font-size: 0.70rem;
       font-weight: 500;
-      color: var(--text-subtle);
+      color: #888888;
       margin-top: -0.2rem;
       margin-bottom: 0.45rem;
       letter-spacing: -0.01em;
     }
     .form-input {
       width: 100%;
-      padding: 0.7rem 0.95rem;
+      padding: 0.75rem 0.95rem;
       border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      background: #fafafa;
+      border: 1px solid #dedad2;
+      background: #faf9f6;
       color: var(--text-dark);
       font-size: 0.92rem;
       font-family: inherit;
@@ -2337,12 +2350,12 @@
       transition: all 0.2s ease;
     }
     .form-input:focus {
-      border-color: var(--red-primary);
+      border-color: #000000;
       background: #ffffff;
-      box-shadow: 0 0 0 3px var(--red-glow);
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
     }
 
-    /* Unfolded Selection Chips & Cards */
+    /* Selection Chips & Cards */
     .choice-pills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -2362,25 +2375,26 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      padding: 0.45rem 0.85rem;
+      padding: 0.48rem 0.85rem;
       border-radius: 9999px;
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      background: #fafafa;
-      color: var(--text-muted);
+      border: 1px solid #dedad2;
+      background: #faf9f6;
+      color: #555555;
       font-size: 0.82rem;
       font-weight: 600;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       white-space: nowrap;
     }
     .choice-pill-item:hover span {
-      border-color: rgba(0, 0, 0, 0.25);
+      border-color: #000000;
       background: #ffffff;
+      color: #000000;
     }
     .choice-pill-item input[type="radio"]:checked + span {
-      background: var(--text-dark);
+      background: #000000;
       color: #ffffff;
-      border-color: var(--text-dark);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      border-color: #000000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
     }
 
     .choice-cards-grid {
@@ -2402,22 +2416,33 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 0.6rem 0.75rem;
+      padding: 0.65rem 0.75rem;
       border-radius: 14px;
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      background: #fafafa;
+      border: 1px solid #dedad2;
+      background: #faf9f6;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .choice-card-item:hover .card-inner {
-      border-color: rgba(0, 0, 0, 0.25);
+      border-color: #000000;
       background: #ffffff;
       transform: translateY(-1px);
     }
     .choice-card-item input[type="radio"]:checked + .card-inner,
     .choice-card-item input[type="checkbox"]:checked + .card-inner {
-      border-color: var(--red-primary);
-      background: var(--red-soft-bg);
-      box-shadow: 0 4px 14px rgba(229, 72, 87, 0.12);
+      border-color: #000000;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+    .choice-card-item input[type="radio"]:checked + .card-inner .card-icon,
+    .choice-card-item input[type="checkbox"]:checked + .card-inner .card-icon {
+      background: #000000;
+      color: #ffffff;
+      border-color: #000000;
+    }
+    .choice-card-item input[type="radio"]:checked + .card-inner .card-texts strong,
+    .choice-card-item input[type="checkbox"]:checked + .card-inner .card-texts strong {
+      color: #000000;
+      font-weight: 700;
     }
     .choice-card-item .card-icon {
       width: 28px;
@@ -2428,8 +2453,9 @@
       align-items: center;
       justify-content: center;
       font-size: 0.88rem;
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid #dedad2;
       flex-shrink: 0;
+      transition: all 0.2s ease;
     }
     .choice-card-item .card-texts {
       display: flex;
@@ -2452,14 +2478,17 @@
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
+      font-size: 0.82rem;
+      color: #555555;
       cursor: pointer;
-      line-height: 1.35;
+      line-height: 1.4;
     }
     .form-checkbox-label input {
-      accent-color: var(--red-primary);
+      accent-color: #000000;
       margin-top: 3px;
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
     }
 
     /* Mobile Responsive Optimizations */
@@ -3036,23 +3065,185 @@
 
   
     .survey-fieldset { border:0; padding:0; min-width:0; }
-    .signup-head h2 { font-size:clamp(1.25rem,5vw,1.8rem); margin:0; }
-    .signup-benefits { display:grid; grid-template-columns:1fr; gap:8px; margin:20px 0 24px; padding:20px; border-radius:18px; background:#fff0f3; color:#c52f49; }
-    .signup-benefits strong { font-size:clamp(1.2rem,5vw,1.6rem); }
+    .signup-head h2 { font-size:clamp(1.25rem,5vw,1.6rem); margin:0 0 0.35rem; font-weight:800; color:#000000; letter-spacing:-0.025em; }
+    .signup-benefits {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      margin: 16px 0 20px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: #f7f6f1;
+      border: 1px solid #e7e5de;
+      text-align: left;
+    }
+    .signup-benefit-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      background: #000000;
+      color: #ffffff;
+      font-size: 0.70rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+    .signup-benefits strong,
+    .signup-benefit-title {
+      font-size: clamp(1.4rem, 5vw, 1.7rem);
+      font-weight: 800;
+      color: #000000;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin: 0;
+    }
+    .signup-benefit-desc {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #555555;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
     .survey-ages { grid-template-columns:repeat(3,minmax(0,1fr)); }
     .survey-features { grid-template-columns:repeat(3,minmax(0,1fr)); }
-    .survey-free-note { margin:0 0 14px; padding:12px; border-radius:10px; background:#fff0f3; color:#b52c45; font-weight:700; font-size:.88rem; }
-    .survey-plans { display:grid; grid-template-columns:minmax(0,1fr); gap:12px; }
-    .survey-plan { display:flex; align-items:center; gap:12px; border:1px solid #ded9dd; border-radius:14px; padding:16px; cursor:pointer; }
-    .survey-plan:has(input:checked) { border-color:#e54857; background:#fff5f6; }
-    .survey-plan input { accent-color:#e54857; flex:0 0 auto; }
-    .survey-plan>span { min-width:0; display:grid; gap:5px; }
-    .survey-plan-price { font-size:.94rem; color:#584f57; }
-    .survey-plan small { color:#7c707b; }
+    .survey-free-note {
+      margin: 0 0 12px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #f7f6f1;
+      border: 1px solid #e7e5de;
+      color: #333333;
+      font-weight: 600;
+      font-size: 0.82rem;
+    }
+    .survey-plans { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; }
+    .survey-plan {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid #dedad2;
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: #faf9f6;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .survey-plan:hover {
+      border-color: #000000;
+      background: #ffffff;
+    }
+    .survey-plan:has(input:checked) {
+      border-color: #000000;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+    .survey-plan input {
+      accent-color: #000000;
+      flex: 0 0 auto;
+      width: 16px;
+      height: 16px;
+    }
+    .survey-plan>span { min-width:0; display:grid; gap:3px; }
+    .survey-plan strong { font-size:0.94rem; font-weight:700; color:#000000; }
+    .survey-plan-price { font-size:0.88rem; color:#444444; font-weight:600; }
+    .survey-plan small { color:#777777; font-size:0.78rem; }
     .survey-fieldset .choice-pill-item span { white-space:normal; }
 
-    .survey-features .card-inner { flex-direction:column; text-align:center; padding:12px 4px; gap:6px; }
-    .survey-features .card-texts strong { white-space:nowrap; font-size:.72rem; }
+    .survey-features .card-inner {
+      flex-direction: column;
+      text-align: center;
+      padding: 12px 6px;
+      gap: 6px;
+      border-radius: 14px;
+      border: 1px solid #dedad2;
+      background: #faf9f6;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .survey-features .choice-card-item:hover .card-inner {
+      border-color: #000000;
+      background: #ffffff;
+      transform: translateY(-1px);
+    }
+    .survey-features .choice-card-item input:checked + .card-inner {
+      border-color: #000000;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+    .survey-features .choice-card-item input:checked + .card-inner .card-icon {
+      background: #000000;
+      color: #ffffff;
+      border-color: #000000;
+    }
+    .survey-features .choice-card-item input:checked + .card-inner .card-texts strong {
+      color: #000000;
+      font-weight: 700;
+    }
+    .survey-features .card-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #dedad2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    .survey-features .card-texts strong {
+      white-space: nowrap;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #444444;
+    }
+
+    /* Modal Submit Button (Hero Style) */
+    .hero-modal-submit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: #000000;
+      color: #ffffff;
+      border: 1px solid #000000;
+      border-radius: 9999px;
+      padding: 0.95rem 1.8rem;
+      font-size: 1.0rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+    .hero-modal-submit-btn:hover {
+      background: #1a1a1a;
+      border-color: #1a1a1a;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+    }
+    .hero-modal-submit-btn:active {
+      transform: translateY(0);
+    }
+    .hero-modal-submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status-pill-dark {
+      display: inline-block;
+      padding: 0.3rem 0.95rem;
+      border-radius: 9999px;
+      background: #000000;
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
 </style>
 <link rel="canonical" href="https://42sai.io/teaser10">
   <link rel="alternate" hreflang="ja" href="https://42sai.io/teaser10">
@@ -3530,8 +3721,9 @@
           <h2>${t('sai - 사전 예약 신청', 'sai - 事前登録')}</h2>
           <p>${t('지금 Waitlist에 등록하고 두 가지 혜택을 받으세요.', '今ウェイトリストに登録して、2つの特典を受け取ろう。')}</p>
           <div class="signup-benefits">
-            <strong>${t('20% 할인', '20% OFF')}</strong>
-            <strong>${t('구독료 평생 무료', 'サブスク料金が永久無料')}</strong>
+            <span class="signup-benefit-badge">${t('사전 등록 한정 혜택', '事前登録 限定特典')}</span>
+            <strong class="signup-benefit-title">${t('20% 할인', '20% OFF')}</strong>
+            <span class="signup-benefit-desc">${t('구독료 평생 무료', 'サブスク料金が永久無料')}</span>
           </div>
         </div>
         <form id="signup-form">
@@ -3570,8 +3762,8 @@
               <span>${t('SAI 신제품 출시 및 사전 예약 알림 수신에 동의합니다.', 'SAIの新製品リリースおよび事前登録案内の受信に同意します。')}</span>
             </label>
           </div>
-          <button class="btn-gradient btn-coral" type="submit" style="width:100%; margin-top:0.8rem;">
-            <span>${t('사전 신청 완료하기 ↗', '事前登録を完了する ↗')}</span>
+          <button class="hero-modal-submit-btn" type="submit" style="width:100%; margin-top:1.0rem;">
+            <span>${t('사전 신청 완료하기 →', '事前登録を完了する →')}</span>
           </button>
         </form>
       `);
@@ -3646,12 +3838,12 @@
           $('#modal').close();
           modal(`
             <div class="modal-head" style="text-align:center;">
-              <img src="/assets/user-sai-logo.png" alt="SAI" class="modal-logo-img" style="height:28px; width:auto; margin:0 auto 1.0rem; display:block;">
-              <span class="gradient-pill red">${t('신청 완료', '登録完了')}</span>
-              <h2 style="margin-top:1.0rem;">${t('사이의 가장 따뜻한 순간,<br>전달받았어요.', 'SAIの特別な瞬間、<br>受け取りました。')}</h2>
-              <p>${t('사전 신청이 완료되었습니다.<br>가장 먼저 소식을 전해드릴게요.', '事前登録が完了しました。<br>いち早く特別な案内をお届けします。')}</p>
+              <img src="/assets/user-sai-logo.png" alt="SAI" class="modal-logo-img" style="height:32px; width:auto; margin:0 auto 1.0rem; display:block;">
+              <span class="status-pill-dark">${t('신청 완료', '登録完了')}</span>
+              <h2 style="margin-top:1.0rem; font-size:1.45rem; font-weight:800; letter-spacing:-0.025em; color:#000000;">${t('사이의 가장 따뜻한 순간,<br>전달받았어요.', 'SAIの特別な瞬間、<br>受け取りました。')}</h2>
+              <p style="color:#555555; font-size:0.88rem; line-height:1.55; margin-top:0.4rem;">${t('사전 신청이 완료되었습니다.<br>가장 먼저 소식을 전해드릴게요.', '事前登録が完了しました。<br>いち早く特別な案内をお届けします。')}</p>
             </div>
-            <button class="btn-gradient" id="modal-ok-btn" style="width:100%; margin-top:1.5rem;">
+            <button class="hero-modal-submit-btn" id="modal-ok-btn" style="width:100%; margin-top:1.5rem;">
               <span>${t('확인', '確認')}</span>
             </button>
           `);
@@ -4107,6 +4299,16 @@
 
       // Modal Triggers for sub sections
       $$('.rhythm-archive-btn').forEach(btn => btn.onclick = openSignupModal);
+
+      // Auto open modal on hash link
+      if (location.hash === '#signup' || location.hash === '#modal') {
+        openSignupModal();
+      }
+      window.addEventListener('hashchange', () => {
+        if (location.hash === '#signup' || location.hash === '#modal') {
+          openSignupModal();
+        }
+      });
 
       // FAQ Accordion Interaction
       $$('.faq-question-btn').forEach(btn => {
