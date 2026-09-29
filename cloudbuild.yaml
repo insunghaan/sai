@@ -33,7 +33,19 @@ steps:
       - '--allow-unauthenticated'
       - '--min-instances=0'
       - '--port=8080'
+      - '--quiet'
+
+  # 4. Route 100% traffic to latest revision
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'services'
+      - 'update-traffic'
+      - '$_SERVICE_NAME'
       - '--to-latest'
+      - '--region=$_DEPLOY_REGION'
+      - '--platform=managed'
       - '--quiet'
 
 substitutions:
