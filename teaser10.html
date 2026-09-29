@@ -489,16 +489,41 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
     }
-    .hero-desktop-bottom-copy {
+    .hero-desktop-bottom-area {
       position: absolute;
-      bottom: 28px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
       max-width: 760px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      pointer-events: none;
-      z-index: 2;
+      z-index: 3;
+      pointer-events: auto;
+    }
+    .hero-rings-duo-preview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.55rem;
+    }
+    .hero-rings-duo-img {
+      width: clamp(100px, 10vw, 126px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.08));
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .hero-rings-duo-img:hover {
+      transform: scale(1.05);
+    }
+    .hero-desktop-bottom-copy {
+      width: 100%;
+      text-align: center;
     }
     .hero-desktop-bottom-copy p {
       margin: 0;
@@ -507,6 +532,42 @@
       color: #555555;
       font-weight: 500;
       letter-spacing: -0.01em;
+    }
+    .hero-scroll-more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 0.65rem;
+      padding: 0.35rem 0.85rem;
+      font-size: clamp(0.76rem, 0.88vw, 0.84rem);
+      font-weight: 600;
+      color: #666666;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 9999px;
+      transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+      animation: heroScrollBob 2.2s ease-in-out infinite;
+    }
+    .hero-scroll-more:hover {
+      color: #000000;
+      animation-play-state: paused;
+      transform: translateY(2px);
+    }
+    .hero-scroll-icon {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+    }
+    @keyframes heroScrollBob {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: 0.75;
+      }
+      50% {
+        transform: translateY(5px);
+        opacity: 1;
+      }
     }
 
     /* Mobile Editorial Hero Stage */
@@ -563,6 +624,18 @@
         text-align: center;
         letter-spacing: -0.01em;
         width: 100%;
+      }
+      .hero-rings-duo-mobile {
+        margin: 0.35rem auto 0.75rem;
+      }
+      .hero-rings-duo-mobile .hero-rings-duo-img {
+        width: 88px;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+      }
+      .hero-scroll-more-mobile {
+        margin-top: 0.75rem;
+        margin-bottom: 0.2rem;
+        font-size: 0.78rem;
       }
       .hero-mobile-visual {
         position: relative;
@@ -3032,8 +3105,25 @@
                   <span>ふたりではじめる →</span>
                 </button>
               </div>
-              <div class="hero-desktop-bottom-copy">
-                <p>眠りや心拍、日々の小さな変化を、言葉にしなくてもそっと分かち合う。<br>SAIは、ふたりの毎日に寄り添いながら、見えない気持ちやリズムを静かにつなぐスマートリングです。</p>
+              <div class="hero-desktop-bottom-area">
+                <div class="hero-rings-duo-preview">
+                  <img src="/assets/teaser10/rings-duo.webp"
+                       srcset="/assets/teaser10/rings-duo.webp 1x, /assets/teaser10/rings-duo@2x.webp 2x"
+                       alt="SAIスマートリング"
+                       class="hero-rings-duo-img"
+                       width="126"
+                       height="110"
+                       loading="eager">
+                </div>
+                <div class="hero-desktop-bottom-copy">
+                  <p>眠りや心拍、日々の小さな変化を、言葉にしなくてもそっと分かち合う。<br>SAIは、ふたりの毎日に寄り添いながら、見えない気持ちやリズムを静かにつなぐスマートリングです。</p>
+                </div>
+                <a href="#sleep-share" class="hero-scroll-more" aria-label="スクロールして詳しく見る">
+                  <span class="hero-scroll-text">スクロールして詳しく見る</span>
+                  <svg class="hero-scroll-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </a>
               </div>
             </div>
 
@@ -3043,9 +3133,24 @@
                 <div class="hero-mobile-tag">SAI・ふたりのためのスマートリング</div>
                 <h1 class="hero-mobile-title">ふたりの間に、</h1>
                 <img src="/assets/user-sai-logo.png" alt="sai" class="hero-mobile-logo" width="149" height="89">
+                <div class="hero-rings-duo-preview hero-rings-duo-mobile">
+                  <img src="/assets/teaser10/rings-duo.webp"
+                       srcset="/assets/teaser10/rings-duo.webp 1x, /assets/teaser10/rings-duo@2x.webp 2x"
+                       alt="SAIスマートリング"
+                       class="hero-rings-duo-img"
+                       width="88"
+                       height="76"
+                       loading="eager">
+                </div>
                 <p class="hero-mobile-desc">
                   眠りや心拍、日々の小さな変化を、<br>言葉にしなくてもそっと分かち合う。<br>SAIは、ふたりの毎日に寄り添いながら、<br>見えない気持ちやリズムを静かにつなぐスマートリングです。
                 </p>
+                <a href="#sleep-share" class="hero-scroll-more hero-scroll-more-mobile" aria-label="スクロールして詳しく見る">
+                  <span class="hero-scroll-text">スクロールして詳しく見る</span>
+                  <svg class="hero-scroll-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </a>
               </div>
               <div class="hero-mobile-visual">
                 <img src="/assets/teaser10/hero-hands-mobile.webp"
@@ -3598,8 +3703,25 @@
                   <span>${t('둘이서 시작하기 →', 'ふたりではじめる →')}</span>
                 </button>
               </div>
-              <div class="hero-desktop-bottom-copy">
-                <p>${t('수면과 심박, 일상의 작은 변화를 말하지 않아도 가만히 나누는 사이.<br>SAI는 두 사람의 매일에 스며들어, 보이지 않는 마음과 리듬을 조용히 이어주는 스마트링입니다.', '眠りや心拍、日々の小さな変化を、言葉にしなくてもそっと分かち合う。<br>SAIは、ふたりの毎日に寄り添いながら、見えない気持ちやリズムを静かにつなぐスマートリングです。')}</p>
+              <div class="hero-desktop-bottom-area">
+                <div class="hero-rings-duo-preview">
+                  <img src="/assets/teaser10/rings-duo.webp"
+                       srcset="/assets/teaser10/rings-duo.webp 1x, /assets/teaser10/rings-duo@2x.webp 2x"
+                       alt="${t('SAI 스마트링', 'SAIスマートリング')}"
+                       class="hero-rings-duo-img"
+                       width="126"
+                       height="110"
+                       loading="eager">
+                </div>
+                <div class="hero-desktop-bottom-copy">
+                  <p>${t('수면과 심박, 일상의 작은 변화를 말하지 않아도 가만히 나누는 사이.<br>SAI는 두 사람의 매일에 스며들어, 보이지 않는 마음과 리듬을 조용히 이어주는 스마트링입니다.', '眠りや心拍、日々の小さな変化を、言葉にしなくてもそっと分かち合う。<br>SAIは、ふたりの毎日に寄り添いながら、見えない気持ちやリズムを静かにつなぐスマートリングです。')}</p>
+                </div>
+                <a href="#sleep-share" class="hero-scroll-more" aria-label="${t('스크롤해서 더보기', 'スクロールして詳しく見る')}">
+                  <span class="hero-scroll-text">${t('스크롤해서 더보기', 'スクロールして詳しく見る')}</span>
+                  <svg class="hero-scroll-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </a>
               </div>
             </div>
 
@@ -3609,9 +3731,24 @@
                 <div class="hero-mobile-tag">${t('SAI · 둘만을 위한 스마트링', 'SAI・ふたりのためのスマートリング')}</div>
                 <h1 class="hero-mobile-title">${t('둘 사이에,', 'ふたりの間に、')}</h1>
                 <img src="/assets/user-sai-logo.png" alt="sai" class="hero-mobile-logo" width="149" height="89">
+                <div class="hero-rings-duo-preview hero-rings-duo-mobile">
+                  <img src="/assets/teaser10/rings-duo.webp"
+                       srcset="/assets/teaser10/rings-duo.webp 1x, /assets/teaser10/rings-duo@2x.webp 2x"
+                       alt="${t('SAI 스마트링', 'SAIスマートリング')}"
+                       class="hero-rings-duo-img"
+                       width="88"
+                       height="76"
+                       loading="eager">
+                </div>
                 <p class="hero-mobile-desc">
                   ${t('수면과 심박, 일상의 작은 변화를<br>말하지 않아도 가만히 나누는 사이.<br>SAI는 두 사람의 매일에 스며들어,<br>보이지 않는 마음과 리듬을 조용히 이어주는 스마트링입니다.', '眠りや心拍、日々の小さな変化を、<br>言葉にしなくてもそっと分かち合う。<br>SAIは、ふたりの毎日に寄り添いながら、<br>見えない気持ちやリズムを静かにつなぐスマートリングです。')}
                 </p>
+                <a href="#sleep-share" class="hero-scroll-more hero-scroll-more-mobile" aria-label="${t('스크롤해서 더보기', 'スクロールして詳しく見る')}">
+                  <span class="hero-scroll-text">${t('스크롤해서 더보기', 'スクロールして詳しく見る')}</span>
+                  <svg class="hero-scroll-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </a>
               </div>
               <div class="hero-mobile-visual">
                 <img src="/assets/teaser10/hero-hands-mobile.webp"
