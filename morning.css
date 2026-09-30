@@ -96,7 +96,27 @@ body.morning-modal-open {overflow:hidden;}
  .morning-demo-heading {font-size:14px;}.morning-demo-heading button {font-size:13px;}
  .morning-own-label,.morning-received-label {font-size:14px;}
  .morning-received {padding:16px 12px;}
- body:has(#morning-feature.morning-in-view) .mobile-floating-bar {visibility:hidden;pointer-events:none;}
+}
+
+.morning-sub-action {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  min-height: 44px;
+  border-radius: 12px;
+  background: #f1f2f5;
+  border: 1px solid #e0e2e8;
+  color: #787a86;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.morning-sub-action:hover {
+  background: #e8e9ee;
+  color: #484a54;
+  border-color: #d1d3db;
 }
 
 .morning-demo-heading {justify-content:flex-end;}

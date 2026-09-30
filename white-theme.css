@@ -120,6 +120,7 @@ html[lang="ja"] body { word-break:normal; overflow-wrap:anywhere; line-break:str
 }
 
 @media(min-width:768px){.bento-card-sensor {grid-column:1 / -1;}}
+@media(max-width:767px){.bento-card-sensor {justify-content:flex-start;gap:16px;}.bento-sensor-content{flex:0 0 auto;}.bento-sensor-visual{flex:0 0 auto;margin-top:4px;}}
 /* Divider between the feature label and the traditional-ring column. */
 .compare-grid > .col-feature {border-right:1px solid var(--border-subtle);}
 

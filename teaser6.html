@@ -822,16 +822,23 @@
       .bento-card-sensor {
         flex-direction: column;
         align-items: flex-start;
-        padding: 28px;
-        gap: 20px;
+        justify-content: flex-start;
+        padding: 28px 24px;
+        gap: 16px;
       }
       .bento-sensor-content {
+        flex: 0 0 auto;
         max-width: 100%;
       }
+      .bento-sensor-content p {
+        margin-bottom: 4px;
+      }
       .bento-sensor-visual {
+        flex: 0 0 auto;
         align-self: center;
-        width: 200px;
-        max-width: 200px;
+        width: 180px;
+        max-width: 180px;
+        margin-top: 6px;
       }
     }
 
@@ -1780,6 +1787,10 @@
       color: var(--text-secondary);
       transition: all 0.2s ease;
       text-decoration: none;
+      cursor: pointer;
+      padding: 0;
+      outline: none;
+      font-family: inherit;
     }
 
     .footer-icon-link:hover {
@@ -1788,6 +1799,41 @@
       border-color: var(--accent-rose);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(206, 54, 87, 0.12);
+    }
+
+    /* Toast Notification */
+    .toast-message {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: rgba(30, 32, 40, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 11px 22px;
+      border-radius: 9999px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-message.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      color: #34c759;
+      flex-shrink: 0;
     }
 
     /* Mobile Floating CTA Button */
@@ -2341,15 +2387,21 @@
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         </a>
-        <a href="mailto:contact@42sai.io" class="footer-icon-link" aria-label="Contact contact@42sai.io" title="Contact: contact@42sai.io">
+        <button type="button" onclick="copyContactEmail(event)" class="footer-icon-link" aria-label="Copy Contact Email contact@42sai.io" title="contact@42sai.io 복사하기">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
     </div>
   </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast-message" id="toast-message" role="alert" aria-live="polite">
+    <svg class="toast-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span class="toast-text" id="toast-text">메일주소가 클립보드로 복사되었습니다</span>
+  </div>
 
   <!-- Mobile Floating Sticky CTA -->
   <div class="mobile-floating-bar" id="mobile-floating-cta-bar">
@@ -2978,22 +3030,64 @@
       }
     }
 
+    // Copy Contact Email with Toast
+    let toastTimer = null;
+    function copyContactEmail(e) {
+      if (e) e.preventDefault();
+      const email = 'contact@42sai.io';
+      const msg = currentLang === 'ja'
+        ? 'メールアドレスをクリップボードにコピーしました'
+        : '메일주소가 클립보드로 복사되었습니다';
+
+      const showNotification = () => {
+        const toast = document.getElementById('toast-message');
+        const toastText = document.getElementById('toast-text');
+        if (!toast || !toastText) return;
+        toastText.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2400);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(showNotification).catch(() => {
+          fallbackCopy(email, showNotification);
+        });
+      } else {
+        fallbackCopy(email, showNotification);
+      }
+    }
+
+    function fallbackCopy(text, cb) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        if (cb) cb();
+      } catch (err) {}
+      document.body.removeChild(ta);
+    }
+
     // Sticky Floating CTA Bar Observer
+    // 유저가 처음 온 후 스크롤하는 순간부터 바로 나타나며, 제일 아래 혜택영역을 지나 폼에 도달할 때까지 고정 노출
     window.addEventListener('scroll', () => {
       const floatBar = document.getElementById('mobile-floating-cta-bar');
-      const heroSection = document.querySelector('.hero-section');
       const waitlistSection = document.getElementById('waitlist-section');
-      
-      if (!floatBar || !heroSection || !waitlistSection) return;
+      if (!floatBar) return;
 
-      const heroRect = heroSection.getBoundingClientRect();
-      const waitlistRect = waitlistSection.getBoundingClientRect();
+      const scrolled = window.scrollY > 30;
+      const waitlistRect = waitlistSection ? waitlistSection.getBoundingClientRect() : null;
+      // 폼 입력 영역에 진입하기 전(혜택 영역 통과 구간 포함)까지 상시 고정 노출
+      const isAtForm = waitlistRect && waitlistRect.top < (window.innerHeight - 80);
 
-      // Show after hero is passed, hide when waitlist form is visible
-      const isPastHero = heroRect.bottom < 50;
-      const isAtForm = waitlistRect.top < window.innerHeight && waitlistRect.bottom > 0;
-
-      if (isPastHero && !isAtForm) {
+      if (scrolled && !isAtForm) {
         floatBar.classList.add('visible');
       } else {
         floatBar.classList.remove('visible');
