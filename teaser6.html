@@ -1762,6 +1762,34 @@
       }
     }
 
+    .footer-social-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .footer-icon-link:hover {
+      background: #fff;
+      color: var(--accent-rose);
+      border-color: var(--accent-rose);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(206, 54, 87, 0.12);
+    }
+
     /* Mobile Floating CTA Button */
     .mobile-floating-bar {
       position: fixed;
@@ -1850,32 +1878,6 @@
     </div>
   </header>
 
-  <!-- ========================================================
-       HEADLINE VARIATION TESTER BAR (Requirement #5)
-       상단에 버튼을 두어 헤드라인 타이틀만 변경된 것을 볼 수 있도록 구현
-       ======================================================== -->
-  <section class="headline-tester-bar">
-    <div class="headline-tester-inner">
-      <div class="headline-tester-label">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        <span id="headline-tester-title">헤드라인 A/B 테스트:</span>
-      </div>
-      <div class="headline-tester-options" id="headline-btn-group">
-        <button type="button" class="headline-pill-btn active" onclick="selectHeadlinePreset(0)" id="h-preset-0">
-          A. 기준 제시 (기본)
-        </button>
-        <button type="button" class="headline-pill-btn" onclick="selectHeadlinePreset(1)" id="h-preset-1">
-          B. 감성 & 건강
-        </button>
-        <button type="button" class="headline-pill-btn" onclick="selectHeadlinePreset(2)" id="h-preset-2">
-          C. 거리 극복 & 심박
-        </button>
-        <button type="button" class="headline-pill-btn" onclick="selectHeadlinePreset(3)" id="h-preset-3">
-          D. 애플 선언형
-        </button>
-      </div>
-    </div>
-  </section>
 
   <!-- ========================================================
        HERO SECTION (Apple iPhone Keynote Style)
@@ -2331,8 +2333,20 @@
         <div style="font-weight: 700; color:var(--text-primary); margin-bottom: 6px;">sai — Smart Couple Ring</div>
         <p>© 2026 sai Inc. All rights reserved.</p>
       </div>
-      <div>
-        <p>Instagram: @42sai.io · Contact: contact@42sai.io</p>
+      <div class="footer-social-links">
+        <a href="https://instagram.com/42sai.io" target="_blank" rel="noopener noreferrer" class="footer-icon-link" aria-label="Instagram @42sai.io" title="Instagram @42sai.io">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="mailto:contact@42sai.io" class="footer-icon-link" aria-label="Contact contact@42sai.io" title="Contact: contact@42sai.io">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </a>
       </div>
     </div>
   </footer>
@@ -2719,7 +2733,6 @@
       document.getElementById('nav-item-interactions').textContent = dict.navInteractions;
       document.getElementById('nav-item-benefits').textContent = dict.navBenefits;
       document.getElementById('nav-reserve-btn').textContent = dict.navReserveBtn;
-      document.getElementById('headline-tester-title').textContent = dict.testerTitle;
       document.getElementById('hero-badge').textContent = dict.heroBadge;
       document.getElementById('hero-perks-capsule').innerHTML = dict.heroPerksCapsule;
       document.getElementById('hero-primary-cta').firstElementChild.textContent = dict.heroPrimaryCta;
@@ -2827,49 +2840,18 @@
       document.getElementById('m-float-desc').textContent = dict.mFloatDesc;
       document.getElementById('m-float-btn').textContent = dict.mFloatBtn;
 
-      // Update Pill texts
-      for (let i = 0; i < 4; i++) {
-        const btn = document.getElementById(`h-preset-${i}`);
-        if (btn) {
-          btn.textContent = HEADLINE_PRESETS[i][lang].pill;
-        }
-      }
-
       window.renderMorning?.();
       window.renderDateDemo?.();
-      // Re-apply selected headline
-      updateHeadlineDisplay();
-    }
-
-    // Headline Variation Switcher (Requirement #5)
-    function selectHeadlinePreset(index) {
-      currentHeadlineIdx = index;
-      for (let i = 0; i < 4; i++) {
-        const btn = document.getElementById(`h-preset-${i}`);
-        if (btn) {
-          if (i === index) btn.classList.add('active');
-          else btn.classList.remove('active');
-        }
-      }
+      // Apply default '기준 제시' headline
       updateHeadlineDisplay();
     }
 
     function updateHeadlineDisplay() {
       const headlineEl = document.getElementById('hero-headline');
       const subtextEl = document.getElementById('hero-subtext');
-      const preset = HEADLINE_PRESETS[currentHeadlineIdx][currentLang];
-
-      headlineEl.style.opacity = '0';
-      headlineEl.style.transform = 'translateY(-6px)';
-      subtextEl.style.opacity = '0';
-
-      setTimeout(() => {
-        headlineEl.innerHTML = preset.title;
-        subtextEl.textContent = preset.sub;
-        headlineEl.style.opacity = '1';
-        headlineEl.style.transform = 'translateY(0)';
-        subtextEl.style.opacity = '1';
-      }, 180);
+      const preset = HEADLINE_PRESETS[0][currentLang];
+      if (headlineEl) headlineEl.innerHTML = preset.title;
+      if (subtextEl) subtextEl.textContent = preset.sub;
     }
 
     // Interactive Demo 1: Send Care Tea with Flying Packet & Reaction Motion
@@ -3021,7 +3003,6 @@
     // Initial load
     window.addEventListener('DOMContentLoaded', () => {
       initLanguage();
-      selectHeadlinePreset(0);
     });
   </script>
 <script src="/morning.js"></script>
