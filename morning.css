@@ -119,7 +119,7 @@ body.morning-modal-open {overflow:hidden;}
   border-color: #d1d3db;
 }
 
-.morning-demo-heading {justify-content:flex-end;}
+.morning-demo-heading {display: none !important;}
 
 .morning-avatar {width:48px;height:48px;flex-shrink:0;font-size:13px;white-space:nowrap;}
 

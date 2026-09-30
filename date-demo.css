@@ -61,3 +61,8 @@
 }
 
 .date-graph {aspect-ratio:300 / 145;}
+
+.date-demo-top button,
+.date-demo-top button[data-date="reset"] {
+  display: none !important;
+}
