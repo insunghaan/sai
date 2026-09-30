@@ -1,0 +1,42 @@
+.date-demo {min-width:0;border:1px solid #e4e4ea;border-radius:24px;background:#f8f8fa;padding:24px;}
+.date-demo-top {display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;font-weight:650;}
+.date-demo-top button {font-size:12px;min-height:44px;color:#676773;text-decoration:underline;text-underline-offset:4px;}
+.date-steps {list-style:none;display:flex;justify-content:space-between;padding:0;margin:12px 0 24px;gap:6px;}
+.date-steps li {display:flex;gap:6px;align-items:center;font-size:12px;color:#797782;}
+.date-steps b {display:grid;place-items:center;width:23px;height:23px;border-radius:50%;background:#e9e7ed;font-size:11px;}
+.date-steps [aria-current] {color:#b92f50;font-weight:700;}.date-steps [aria-current] b {background:#f7dfe7;}
+.date-demo-content h4 {font-size:19px;line-height:1.5;margin-bottom:12px;word-break:keep-all;}
+.date-start {padding:24px 4px 30px;text-align:center;}
+.date-start>span {display:block;font-size:52px;color:#ce3657;margin-bottom:16px;}
+.date-start p {font-size:14px;line-height:1.7;color:#626471;}
+.date-primary {display:block;width:100%;min-height:48px;background:#ce3657;color:#fff;border-radius:12px;padding:12px;font-size:14px;font-weight:650;margin-top:18px;}
+.date-primary:disabled {background:#e7e1e5;color:#81717a;cursor:default;}
+.date-recording {display:flex;justify-content:space-between;align-items:center;font-size:13px;}
+.date-recording strong {display:flex;align-items:center;gap:7px;}.date-recording i {width:7px;height:7px;background:#ce3657;border-radius:50%;}
+.date-recording>span {color:#777581;font-variant-numeric:tabular-nums;}
+.date-graph {display:block;width:100%;height:auto;margin:12px 0;}
+.date-graph text {font-family:inherit;font-size:11px;fill:#777581;}
+.date-stats {display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#666471;flex-wrap:wrap;}
+.date-stats span {display:flex;align-items:baseline;gap:4px;}.date-stats strong {font-size:20px;color:#25252d;}
+.date-stats i {display:inline-block;width:6px;height:6px;border-radius:50%;background:#ce3657;}.date-stats span+span i {background:#8d83ad;}
+.date-choices {display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+.date-choices button {background:#fff;border:1px solid #dedde4;border-radius:10px;padding:10px;min-height:44px;font-size:13px;flex-grow:1;}
+.date-choices [aria-pressed=true] {background:#fff0f4;border-color:#ce3657;color:#a82a49;}
+.date-note-label {display:block;font-size:13px;margin:16px 0 8px;}
+#date-note {box-sizing:border-box;width:100%;border:1px solid #d6d5de;border-radius:10px;background:#fff;padding:12px;font:inherit;font-size:16px;resize:vertical;color:#202126;}
+.date-calendar {margin:20px 0;background:#fff;border:1px solid #e3e2e8;border-radius:16px;padding:14px;}
+.date-calendar h4 {font-size:16px;margin-bottom:16px;}
+.date-grid {display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;}
+.date-grid small {font-size:11px;color:#787681;text-align:center;margin-bottom:8px;}
+.date-grid button {min-width:0;min-height:38px;position:relative;border-radius:9px;font-size:13px;color:#92909a;}
+.date-grid .has-memory {background:#fbeaf0;color:#b02d4d;font-weight:750;}.date-grid .selected {background:#ce3657;color:#fff;}
+.date-grid i {position:absolute;bottom:4px;left:calc(50% - 2px);width:4px;height:4px;border-radius:50%;background:currentColor;}
+.date-saved {font-size:13px;line-height:1.7;color:#626471;}
+.date-memory {border:1px solid #e9d1da;background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;}
+.date-memory>small {font-size:11px;color:#a13955;}.date-memory h4 {font-size:16px;margin:8px 0 12px;overflow-wrap:anywhere;}
+.date-demo-note {font-size:11px;color:#777581;line-height:1.6;margin:16px 0 0;}
+@media(max-width:700px){.date-demo {padding:18px 14px;border-radius:18px;}.date-steps li {font-size:11px;}.date-stats strong {font-size:19px;}}
+
+@media(max-width:700px){.date-feature.interaction-card {padding:28px 12px;}.date-feature .interaction-info {padding:0 8px;}body:has(.date-in-view) .mobile-floating-bar {visibility:hidden;pointer-events:none;}}
+
+.date-graph {aspect-ratio:300 / 145;}

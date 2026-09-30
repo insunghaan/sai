@@ -1,0 +1,188 @@
+.morning-feature.interaction-card {display:block;padding:48px;}
+.morning-feature .interaction-info {max-width:650px;margin-bottom:36px;}
+.morning-demo-heading {display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:13px;color:#696b75;}
+.morning-demo-heading button {font-size:12px;text-decoration:underline;text-underline-offset:4px;}
+.morning-screens {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:stretch;}
+.morning-screen {min-width:0;background:#f8f8fa;padding:24px;border:1px solid #e6e7eb;border-radius:24px;}
+.morning-person {display:flex;align-items:center;gap:10px;margin-bottom:24px;}
+.morning-avatar {display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#e6ede7;color:#426652;font-weight:700;font-size:14px;}
+.morning-avatar.peach {background:#f3e5df;color:#885949;}
+.morning-person strong,.morning-person small {display:block;}
+.morning-person strong {font-size:14px;}
+.morning-person small {font-size:11px;color:#6c6e78;margin-top:3px;}
+.morning-day {margin-left:auto;font-size:12px;color:#737581;font-variant-numeric:tabular-nums;}
+.morning-score {display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 20px;}
+.morning-score span {font-size:13px;color:#5c5e68;}
+.morning-score strong {display:block;font-size:54px;line-height:1.25;letter-spacing:-2px;font-weight:750;font-variant-numeric:tabular-nums;}
+.morning-score strong small {font-size:15px;letter-spacing:0;margin-left:6px;color:#757782;font-weight:500;}
+.morning-score p {font-size:11px;color:#6c6e78;margin-top:4px;}
+.morning-orbit {flex-shrink:0;width:80px;height:80px;border-radius:50%;background:conic-gradient(#ce3657 var(--score),#e9e5e9 0);display:grid;place-items:center;transform:rotate(-90deg);}
+.morning-orbit span {display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:#f8f8fa;font-size:29px;color:#ce3657;transform:rotate(90deg);}
+.morning-metrics {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:20px;}
+.morning-metric {background:#fff;border:1px solid #e9e9ee;border-radius:14px;padding:15px;min-width:0;}
+.morning-metric>span {display:block;font-size:12px;color:#626471;margin-bottom:9px;}
+.morning-metric strong {display:block;font-size:25px;line-height:1.3;letter-spacing:-.7px;font-variant-numeric:tabular-nums;}
+.morning-metric strong small {font-size:12px;letter-spacing:0;margin-left:3px;color:#626471;font-weight:500;}
+.morning-metric>small {display:block;font-size:10px;color:#757782;margin-top:7px;}
+.morning-bar {height:4px;background:#f0e9ec;border-radius:8px;margin-top:12px;overflow:hidden;}
+.morning-bar i {display:block;height:100%;background:#cf778c;border-radius:8px;}
+.morning-primary {width:100%;border-radius:12px;padding:15px 10px;background:#ce3657;color:#fff;font-size:13px;font-weight:700;line-height:1.5;}
+.morning-primary:hover {background:#b82b4b;}
+.morning-primary:disabled {background:#e9e2e5;color:#765c65;cursor:default;}
+.morning-status {font-size:11px!important;line-height:1.7;margin-top:10px!important;text-align:center;min-height:38px;color:#61636e;}
+.morning-mobile-open {display:none;}
+.morning-empty {text-align:center;padding:28px 12px 36px;}
+.morning-empty>span {display:grid;place-items:center;margin:0 auto 18px;width:54px;height:54px;border-radius:50%;background:#eeebf0;color:#806476;font-size:23px;}
+.morning-empty h4 {font-size:16px;margin-bottom:10px;}
+.morning-empty p {font-size:13px;line-height:1.8;color:#6c6e78;max-width:250px;margin:auto;}
+.morning-own {background:#fff;border:1px solid #e9e9ee;border-radius:14px;padding:20px;}
+.morning-own>small,.morning-own>span {display:block;font-size:12px;color:#626471;}
+.morning-own>strong {display:block;font-size:35px;margin:8px 0;}
+.morning-own strong small {font-size:13px;font-weight:400;}
+.morning-received-label {font-size:12px;color:#aa304e;font-weight:700;margin-bottom:18px;}
+.morning-received {animation:morning-arrive .3s ease-out;}
+@keyframes morning-arrive {from {opacity:.4;transform:translateY(8px)} to {opacity:1;transform:none}}
+.morning-dialog {color:#202126;background:#f8f8fa;border:0;border-radius:24px 24px 0 0;padding:20px;position:fixed;inset:auto 0 0;margin:0 auto;width:100%;max-width:520px;max-height:90dvh;overflow-y:auto;overscroll-behavior:contain;padding-bottom:max(24px,env(safe-area-inset-bottom));}
+.morning-dialog::backdrop {background:rgba(24,25,32,.45);backdrop-filter:blur(4px);}
+.morning-dialog-top {display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.morning-dialog-top strong {font-size:14px;}
+.morning-dialog-top button {width:40px;height:40px;border-radius:50%;background:#eaeaf0;font-size:25px;}
+body.morning-modal-open {overflow:hidden;}
+@media(max-width:700px){
+ .morning-feature.interaction-card {padding:24px 16px;}
+ .morning-feature .interaction-info {padding:0 4px;margin-bottom:24px;}
+ .morning-screens {grid-template-columns:minmax(0,1fr);}
+ .morning-desktop-partner {display:none;}
+ .morning-screen {padding:18px 14px;border-radius:20px;}
+ .morning-metric {padding:12px 10px;}
+ .morning-metric strong {font-size:23px;}
+ .morning-mobile-open {display:block;margin:12px auto 0;color:#a62948;font-size:12px;padding:8px;text-decoration:underline;text-underline-offset:4px;}
+ .morning-orbit {width:68px;height:68px;}.morning-orbit span {width:60px;height:60px;}
+ .morning-score strong {font-size:46px;}
+}
+.morning-own-label {font-size:12px;font-weight:700;color:#626471;margin-bottom:16px;}
+.morning-received {background:#fff5f7;border:1px solid #edcbd5;border-radius:18px;padding:18px;margin-bottom:24px;}
+.morning-received .morning-orbit span {background:#fff5f7;}
+/* Mobile-first morning sharing: readable labels and generous touch targets. */
+.morning-moods {border:0;padding:0;margin:24px 0 18px;min-width:0;}
+.morning-moods legend {font-size:15px;font-weight:650;margin-bottom:12px;}
+.morning-mood-options {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.morning-mood-options button {border:1px solid #dadce3;border-radius:14px;background:#fff;padding:14px 4px;min-height:82px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.morning-mood-options button>span {font-size:21px;line-height:1.2;}
+.morning-mood-options strong {font-size:14px;font-weight:600;}
+.morning-mood-options button[aria-pressed="true"] {background:#fff0f4;border:2px solid #ce3657;padding:13px 3px;color:#a62948;}
+.morning-mood-options button:disabled {cursor:default;}
+.morning-shared-mood {display:flex;gap:12px;align-items:center;background:#fff;border-radius:12px;padding:14px;margin-bottom:20px;}
+.morning-shared-mood>span {font-size:24px;}
+.morning-shared-mood small {display:block;font-size:12px;color:#646671;margin-bottom:5px;}
+.morning-shared-mood strong {font-size:17px;}
+.morning-status:empty {display:none;}
+.morning-primary {font-size:15px;min-height:52px;}
+.morning-demo-heading button,.morning-mobile-open {min-height:44px;}
+.morning-dialog-top {position:sticky;top:-20px;background:#f8f8fa;z-index:2;padding:8px 0;}
+@media(max-width:700px){
+ #morning-feature {scroll-margin-top:80px;}
+ .morning-feature.interaction-card {padding:28px 12px;}
+ .morning-feature .interaction-info {padding:0 8px;}
+ .morning-feature .interaction-info h3 {font-size:clamp(25px,6.8vw,32px);line-height:1.4;letter-spacing:-1.1px;word-break:keep-all;overflow-wrap:break-word;}
+ .morning-feature .interaction-info p {font-size:16px;line-height:1.8;word-break:keep-all;}
+ html[lang="ja"] .morning-feature .interaction-info h3,html[lang="ja"] .morning-feature .interaction-info p {word-break:normal;}
+ .morning-screen {padding:20px 12px;}
+ .morning-person strong {font-size:16px;}.morning-person small {font-size:12px;}
+ .morning-score span {font-size:14px;}.morning-score p {font-size:12px;line-height:1.6;}
+ .morning-metric>span {font-size:13px;}.morning-metric strong {font-size:28px;}
+ .morning-metric strong small {font-size:12px;}.morning-metric>small {font-size:11px;}
+ .morning-status {font-size:13px!important;}.morning-mobile-open {font-size:14px;}
+ .morning-demo-heading {font-size:14px;}.morning-demo-heading button {font-size:13px;}
+ .morning-own-label,.morning-received-label {font-size:14px;}
+ .morning-received {padding:16px 12px;}
+ body:has(#morning-feature.morning-in-view) .mobile-floating-bar {visibility:hidden;pointer-events:none;}
+}
+
+.morning-demo-heading {justify-content:flex-end;}
+
+.morning-avatar {width:48px;height:48px;flex-shrink:0;font-size:13px;white-space:nowrap;}
+
+.morning-shared-list {border-top:1px solid #dedfe5;margin-top:24px;padding-top:20px;}
+.morning-shared-list header {display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.morning-shared-list header strong {font-size:15px;font-weight:600;}
+.morning-shared-list dl {margin:0;}
+.morning-shared-list dl>div {display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #e8e8ed;font-size:14px;line-height:1.5;}
+.morning-shared-list dt {color:#626471;}
+.morning-shared-list dd {margin:0;font-weight:650;font-variant-numeric:tabular-nums;text-align:right;}
+
+/* Compact data cards: supporting labels are now part of the metric title. */
+.morning-metric {padding:12px;}
+.morning-metric>span {margin-bottom:6px;}
+.morning-bar {margin-top:9px;}
+@media(max-width:700px){
+ .morning-metric {padding:11px 9px;}
+ .morning-metric>span {font-size:12px;letter-spacing:-.35px;}
+}
+.morning-tabs,.morning-transfer {display:none;}
+@media(max-width:700px){
+ .morning-inline {position:relative;background:#f8f8fa;border:1px solid #e6e7eb;border-radius:20px;scroll-margin-top:80px;}
+ .morning-tabs {display:flex;gap:6px;padding:6px;margin:12px;background:#eaeaf0;border-radius:14px;}
+ .morning-tabs button {flex:1;min-height:44px;border-radius:10px;font-size:15px;font-weight:650;color:#696b75;}
+ .morning-tabs button[aria-selected="true"] {background:#fff;color:#202126;box-shadow:0 2px 6px #2021260d;}
+ .morning-tabs i {font-style:normal;color:#ce3657;margin-left:6px;}
+ .morning-inline .morning-screen {border:0;background:transparent;border-radius:0;padding-top:12px;}
+ .morning-inline[data-active="sumin"] #morning-panel-jiwoo,.morning-inline[data-active="jiwoo"] #morning-panel-sumin {display:none;}
+ .morning-inline[data-active="jiwoo"] #morning-panel-jiwoo {display:block;}
+ .morning-transfer {display:flex;align-items:center;justify-content:center;gap:20px;position:absolute;inset:70px 0 0;border-radius:0 0 20px 20px;background:rgba(248,248,250,.97);z-index:3;font-size:17px;font-weight:650;align-content:center;}
+ .morning-transfer i {font-style:normal;color:#ce3657;font-size:26px;animation:morning-send .65s ease-in-out;}
+ @keyframes morning-send {from {transform:translateX(-12px);opacity:.2} to {transform:translateX(12px);opacity:1}}
+}
+/* Original two-person illustration, framed with CSS without altering the asset. */
+.morning-cartoon {height:190px;position:relative;overflow:hidden;border-radius:16px;margin-bottom:20px;background:#efe4d5;}
+.morning-cartoon img {position:absolute;top:0;left:0;width:200%;max-width:none;height:100%;object-fit:cover;object-position:center 33%;}
+.morning-cartoon-jiwoo img {left:-100%;}
+.morning-sleep-details {border:1px solid #e2e3e9;border-radius:12px;background:#fff;margin:0 0 20px;}
+.morning-sleep-details summary {cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 14px;min-height:46px;font-size:14px;font-weight:600;}
+.morning-sleep-details summary::-webkit-details-marker {display:none;}
+.morning-sleep-details summary>span {font-size:18px;font-weight:400;color:#73707d;}
+.morning-sleep-details[open] summary>span {transform:rotate(45deg);}
+.morning-sleep-body {padding:0 14px 14px;}
+.morning-sleep-heading {display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px;padding-top:10px;border-top:1px solid #ececf0;}
+.morning-sleep-heading span {color:#686a75;}
+.morning-stage-bar {display:flex;gap:3px;height:10px;border-radius:6px;overflow:hidden;margin:16px 0;}
+.morning-stage-0 {background:#71627f;}.morning-stage-1 {background:#b9a9c5;}.morning-stage-2 {background:#ddccdF;}
+.morning-sleep-body dl {margin:0;}
+.morning-sleep-body dl>div {display:flex;justify-content:space-between;gap:8px;padding:6px 0;font-size:13px;}
+.morning-sleep-body dt {display:flex;align-items:center;gap:8px;color:#60616d;}
+.morning-sleep-body dt i {width:8px;height:8px;border-radius:3px;}
+.morning-sleep-body dd {margin:0;font-weight:600;font-variant-numeric:tabular-nums;}
+@media(max-width:700px){
+ .morning-cartoon {height:170px;border-radius:14px;margin-bottom:18px;}
+ .morning-cartoon img {object-position:center 30%;}
+}
+/* Score and identity sit on the illustration; measurements share one chart. */
+.morning-cartoon {height:250px;}
+.morning-art-overlay {position:absolute;inset:0;padding:18px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(180deg,rgba(27,23,22,.32),transparent 40%,rgba(27,23,22,.78));color:#fff;}
+.morning-art-overlay header {display:flex;align-items:center;justify-content:space-between;}
+.morning-art-overlay time {font-size:13px;font-weight:600;text-shadow:0 1px 5px #0008;}
+.morning-art-overlay .morning-avatar {background:rgba(255,255,255,.92);color:#474c42;}
+.morning-art-overlay .morning-avatar.peach {color:#885949;}
+.morning-art-overlay .morning-score {margin:0;}
+.morning-art-overlay .morning-score strong {color:#fff;font-size:52px;text-shadow:0 2px 6px #0004;}
+.morning-art-overlay .morning-score strong small {color:#f5f1ee;}
+.morning-art-overlay .morning-orbit {background:conic-gradient(#ffdbe4 var(--score),#ffffff45 0);width:66px;height:66px;}
+.morning-art-overlay .morning-orbit span {background:#55433b;width:58px;height:58px;color:#ffe1c1;font-size:25px;}
+.morning-chart {background:#fff;border:1px solid #e2e3e9;border-radius:16px;padding:16px;margin-bottom:20px;}
+.morning-chart-row+.morning-chart-row {margin-top:14px;}
+.morning-chart-label {display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.morning-chart-label>span {font-size:13px;color:#626471;}
+.morning-chart-label strong {font-size:21px;letter-spacing:-.5px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.morning-chart-label strong small {font-size:12px;font-weight:500;margin-left:3px;letter-spacing:0;}
+.morning-chart-track {height:6px;border-radius:6px;background:#eee9ed;overflow:hidden;}
+.morning-chart-track i {display:block;height:100%;background:#c97d92;border-radius:6px;}
+.morning-chart-scale {display:flex;justify-content:space-between;font-size:10px;color:#737580;margin-top:4px;}
+.morning-chart-foot {display:flex;align-items:center;justify-content:space-between;padding-top:12px;margin-top:12px;border-top:1px solid #ececf0;font-size:13px;color:#626471;}
+.morning-chart-foot strong {color:#202126;font-size:17px;}.morning-chart-foot small {font-size:12px;font-weight:400;}
+@media(max-width:700px){
+ .morning-cartoon {height:220px;margin-bottom:14px;}
+ .morning-art-overlay {padding:14px;}
+ .morning-chart {padding:14px 12px;}
+ .morning-chart-label>span {font-size:12px;letter-spacing:-.3px;}
+ .morning-chart-label strong {font-size:20px;}
+}
