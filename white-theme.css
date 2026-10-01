@@ -76,37 +76,89 @@ html[lang="ja"] body { word-break:normal; overflow-wrap:anywhere; line-break:str
 .interaction-card > *, .bento-card, .compare-cell, .partner-card { min-width:0; }
 .compare-grid { border-bottom-color:var(--border-subtle); }
 @media(max-width:680px) {
-  .compare-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .compare-grid.header-row .col-feature { display:none; }
+  .compare-table-wrapper {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    overflow: visible !important;
+  }
+  .compare-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    background: #ffffff !important;
+    border: 1px solid #eadde2 !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 16px rgba(26, 30, 40, 0.04) !important;
+    border-bottom: 1px solid #eadde2 !important;
+  }
+  .compare-grid.header-row {
+    padding: 0 !important;
+  }
+  .compare-grid.header-row .col-feature {
+    display: none !important;
+  }
+  .compare-grid.header-row .col-legacy {
+    background: #fbfbfc !important;
+    padding: 16px 14px !important;
+    font-weight: 700 !important;
+    font-size: 13.5px !important;
+  }
+  .compare-grid.header-row .col-sai {
+    background: #fdf5f7 !important;
+    border-left: 1px solid #f3dbe1 !important;
+    border-right: none !important;
+    padding: 16px 14px !important;
+  }
   .compare-grid:not(.header-row) .col-feature {
-    display:flex;
-    align-items:center;
-    grid-column:1 / -1;
-    grid-row:1;
-    padding:10px 14px 8px;
-    background:#f4f3f6;
-    border-right:none!important;
-    border-bottom:1px solid rgba(0,0,0,0.05);
-    font-size:12px;
-    font-weight:700;
-    color:#48484a;
-    letter-spacing:-0.2px;
+    display: flex !important;
+    align-items: center !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    padding: 11px 16px 10px !important;
+    background: #f7f6f9 !important;
+    border-right: none !important;
+    border-bottom: 1px solid #eeebee !important;
+    font-size: 12.5px !important;
+    font-weight: 750 !important;
+    color: #2c2c2e !important;
+    letter-spacing: -0.2px !important;
   }
   .compare-grid:not(.header-row) .col-feature::before {
-    content:'';
-    display:inline-block;
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:var(--accent-rose,#ce3657);
-    margin-right:7px;
-    flex-shrink:0;
+    content: '' !important;
+    display: inline-block !important;
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: var(--accent-rose, #ce3657) !important;
+    margin-right: 8px !important;
+    flex-shrink: 0 !important;
   }
-  .compare-grid:not(.header-row) .col-legacy { grid-column:1; grid-row:2; padding:16px 14px 20px; }
-  .compare-grid:not(.header-row) .col-sai { grid-column:2; grid-row:2; padding:16px 14px 20px; }
-  .compare-cell { padding:20px 14px; }
-  .sai-highlight-badge { max-width:100%; white-space:normal; }
-  .section-title span { white-space:normal!important; }
+  .compare-grid:not(.header-row) .col-legacy {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    background: #ffffff !important;
+    padding: 16px 14px 20px !important;
+    border-right: none !important;
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+    color: #48484a !important;
+  }
+  .compare-grid:not(.header-row) .col-sai {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    background: #fdf5f7 !important;
+    border-left: 1px solid #f3dbe1 !important;
+    border-right: none !important;
+    padding: 16px 14px 20px !important;
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+  }
+  .sai-highlight-badge { max-width: 100%; white-space: normal; }
+  .section-title span { white-space: normal !important; }
 }
 
 /* Hero caption on the original photo. */
