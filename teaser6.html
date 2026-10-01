@@ -469,6 +469,20 @@
       font-weight: 800;
     }
 
+    @media (max-width: 640px) {
+      .hero-benefits-capsule {
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 20px;
+        border-radius: 18px;
+        text-align: center;
+        line-height: 1.45;
+      }
+      .hero-benefits-capsule .capsule-dot {
+        display: none !important;
+      }
+    }
+
     /* Hero Product Visual Stage */
     .hero-visual-stage {
       position: relative;
@@ -1948,11 +1962,10 @@
       </p>
 
       <div class="hero-benefits-capsule" id="hero-perks-capsule">
-        <span>✨ <strong>사전 예약 단독 혜택</strong></span>
+        <span class="capsule-title">✨ <strong>사전 예약 단독 혜택</strong></span>
         <span class="benefit-tag">반지 20% 특별 할인</span>
-        <span>•</span>
+        <span class="capsule-dot">•</span>
         <span class="benefit-tag">평생 구독료 전액 면제 (0원)</span>
-        
       </div>
 
       <div class="hero-cta-group">
@@ -2309,7 +2322,7 @@
           </div>
 
           <button type="submit" class="form-submit-btn" id="submit-btn">
-            <span id="submit-btn-text">20% 할인 & 평생 구독료 면제 신청하기</span>
+            <span id="submit-btn-text">20% 할인 & 평생 구독료 무료 신청하기</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
 
@@ -2503,7 +2516,7 @@
         navReserveBtn: '사전예약 20% OFF',
         testerTitle: '헤드라인 A/B 테스트:',
         heroBadge: 'THE NEXT COUPLE RING · SAI',
-        heroPerksCapsule: '<span>✨ <strong>사전 예약 단독 혜택</strong></span><span class="benefit-tag">반지 20% 특별 할인</span><span>•</span><span class="benefit-tag">평생 구독료 전액 면제 (0원)</span>',
+        heroPerksCapsule: '<span class="capsule-title">✨ <strong>사전 예약 단독 혜택</strong></span><span class="benefit-tag">반지 20% 특별 할인</span><span class="capsule-dot">•</span><span class="benefit-tag">평생 구독료 전액 면제 (0원)</span>',
         heroPrimaryCta: '사전 예약하고 혜택 받기',
         heroSecondaryCta: '일반 커플링과 비교 보기',
         heroCaptionTitle: 'sai 스마트 커플링',
@@ -2595,7 +2608,7 @@
         lblEmail: '이메일 주소 *',
         lblAge: '연령대를 선택해주세요 *',
         lblFeature: '가장 기대되는 기능을 골라주세요 *',
-        submitBtnText: '20% 할인 & 평생 구독료 면제 신청하기',
+        submitBtnText: '20% 할인 & 평생 구독료 무료 신청하기',
         formNote: '* 스팸 메일은 절대 발송되지 않으며, 출시 소식 및 쿠폰 발송 용도로만 안전하게 보관됩니다.',
 
         // FAQ
@@ -2628,7 +2641,7 @@
         navReserveBtn: '事前登録 20% OFF',
         testerTitle: '見出しA/Bテスト：',
         heroBadge: 'THE NEXT COUPLE RING · SAI',
-        heroPerksCapsule: '<span>✨ <strong>事前登録限定特典</strong></span><span class="benefit-tag">指輪20%特別割引</span><span>•</span><span class="benefit-tag">生涯サブスク完全無料（0円）</span>',
+        heroPerksCapsule: '<span class="capsule-title">✨ <strong>事前登録限定特典</strong></span><span class="benefit-tag">指輪20%特別割引</span><span class="capsule-dot">•</span><span class="benefit-tag">生涯サブスク完全無料（0円）</span>',
         heroPrimaryCta: '事前登録して特典を受け取る',
         heroSecondaryCta: '一般的なペアリングと比較する',
         heroCaptionTitle: 'sai スマートペアリング',
