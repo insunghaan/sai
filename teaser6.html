@@ -609,11 +609,44 @@
 
     @media (max-width: 680px) {
       .compare-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      .compare-grid.header-row .col-feature,
-      .compare-grid .col-feature {
+      .compare-grid.header-row .col-feature {
         display: none;
+      }
+      .compare-grid:not(.header-row) .col-feature {
+        display: flex;
+        align-items: center;
+        grid-column: 1 / -1;
+        grid-row: 1;
+        padding: 10px 16px 8px;
+        background: #f4f3f6;
+        border-right: none !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        font-size: 12px;
+        font-weight: 700;
+        color: #48484a;
+        letter-spacing: -0.2px;
+      }
+      .compare-grid:not(.header-row) .col-feature::before {
+        content: '';
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent-rose, #ce3657);
+        margin-right: 7px;
+        flex-shrink: 0;
+      }
+      .compare-grid:not(.header-row) .col-legacy {
+        grid-column: 1;
+        grid-row: 2;
+        padding: 16px 14px 20px;
+      }
+      .compare-grid:not(.header-row) .col-sai {
+        grid-column: 2;
+        grid-row: 2;
+        padding: 16px 14px 20px;
       }
     }
 
@@ -1909,7 +1942,7 @@
       display: none !important;
     }
   </style>
-<link rel="stylesheet" href="/white-theme.css?v=20261001_5">
+<link rel="stylesheet" href="/white-theme.css?v=20261001_7">
 <link rel="stylesheet" href="/morning.css?v=20261001_5">
 <link rel="stylesheet" href="/date-demo.css?v=20261001_6">
 </head>
