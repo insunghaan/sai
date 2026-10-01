@@ -2124,7 +2124,7 @@
       display: none !important;
     }
   </style>
-<link rel="stylesheet" href="/white-theme.css?v=20261001_10">
+<link rel="stylesheet" href="/white-theme.css?v=20261001_11">
 <link rel="stylesheet" href="/morning.css?v=20261001_5">
 <link rel="stylesheet" href="/date-demo.css?v=20261001_6">
 </head>
@@ -2501,7 +2501,7 @@
           <span class="perk-badge" id="perk2-badge">평생 무료</span>
           <div class="perk-icon">♾️</div>
           <h3 id="perk2-title">데이터 분석 구독료 평생 면제</h3>
-          <div class="perk-val">₩0 / 평생</div>
+          <div class="perk-val" id="perk2-val">₩0 / 평생</div>
           <p class="perk-desc" id="perk2-desc">
             데이터 분석 구독료를 평생 무료로 이용하세요
           </p>
@@ -2529,7 +2529,7 @@
               <div class="option-chip" data-age="20-24" onclick="selectAge(this)">20-24</div>
               <div class="option-chip selected" data-age="25-30" onclick="selectAge(this)">25-30</div>
               <div class="option-chip" data-age="31-34" onclick="selectAge(this)">31-34</div>
-              <div class="option-chip" data-age="35+" onclick="selectAge(this)">35세 이상</div>
+              <div class="option-chip" data-age="35+" id="age-chip-35plus" onclick="selectAge(this)">35세 이상</div>
             </div>
           </div>
 
@@ -2682,7 +2682,7 @@
           pill: 'A. 기준 제시 (기본)'
         },
         ja: {
-          title: 'ペアリングの新しい基準、<br>指輪で測る<span class="highlight">ふたりのいま。</span>',
+          title: 'ペアリングの新しい基準、<br>指輪で測る<br class="m-br"><span class="highlight">ふたりのいま。</span>',
           sub: 'ただの金属ジュエリーを超えて、お互いの心拍・睡眠・体調まで24時間見守る次世代のスマートペアリング。',
           pill: 'A. 基準提示（基本）'
         }
@@ -2694,7 +2694,7 @@
           pill: 'B. 감성 & 건강'
         },
         ja: {
-          title: '美しいペアリングに、<br>お互いの<span class="highlight">健康を込めて。</span>',
+          title: '美しいペアリングに、<br>お互いの<br class="m-br"><span class="highlight">健康を込めて。</span>',
           sub: 'ジュエリーの気品はそのままに。24時間ふたりのバイオデータと体調をやさしく繋ぎます。',
           pill: 'B. 感性＆健康'
         }
@@ -2706,7 +2706,7 @@
           pill: 'C. 거리 극복 & 심박'
         },
         ja: {
-          title: '離れていても届く鼓動、<br>ふたりだけの<span class="highlight">スマートペアリング。</span>',
+          title: '離れていても届く鼓動、<br>ふたりだけの<br class="m-br"><span class="highlight">スマートペアリング。</span>',
           sub: '指輪にそっと触れるだけで、遠く離れていても私の心拍があなたの指先に光と振動で届きます。',
           pill: 'C. 距離克服＆心拍'
         }
@@ -2718,7 +2718,7 @@
           pill: 'D. 애플 선언형'
         },
         ja: {
-          title: '愛を誓う指輪から、<br>互いを<span class="highlight">見守る指輪へ。</span>',
+          title: '愛を誓う指輪から、<br>互いを<br class="m-br"><span class="highlight">見守る指輪へ。</span>',
           sub: '変わらない金属ではなく、毎日一緒に呼吸し、お互いの日々を支え合うまったく新しい愛のカタチ。',
           pill: 'D. アップル宣言型'
         }
@@ -2801,6 +2801,7 @@
         feat2Pt1: '실시간 심장 박동수를 그대로 재현하는 미세 햅틱 피드백',
         feat2Pt2: '300km 떨어져 있어도 손끝으로 전해지는 즉각적인 생체 터치',
         touchHintText: '👆 위 반지를 탭하여 심박 신호를 전송해보세요',
+        hapticWaiting: '💓 74 BPM 동기화 대기 중',
 
         feat3Badge: 'INTERACTION 03 · DATE RHYTHM',
         feat3Title: '우리가 처음 손잡았던 순간,<br>심박수까지 기억하는 달력',
@@ -2820,6 +2821,7 @@
         perk1Desc: '출시 일정에 맞춰 20% 할인 바우처를 전달 드립니다.',
         perk2Badge: '평생 무료',
         perk2Title: '데이터 분석 구독료 평생 면제',
+        perk2Val: '₩0 / 평생',
         perk2Desc: '데이터 분석 구독료를 평생 무료로 이용하세요',
 
         // Form
@@ -2827,6 +2829,7 @@
         formDesc: '이메일만 등록하면 20% 할인권과 평생 무료 구독권이 제공 됩니다.',
         lblEmail: '이메일 주소 *',
         lblAge: '연령대를 선택해주세요 *',
+        age35Plus: '35세 이상',
         lblFeature: '가장 기대되는 기능을 골라주세요 *',
         submitBtnText: '20% 할인 & 평생 구독료<br class="btn-br"> 무료 신청하기',
         formNote: '* 스팸 메일은 절대 발송되지 않으며, 출시 소식 및 쿠폰 발송 용도로만 안전하게 보관됩니다.',
@@ -2889,12 +2892,12 @@
         row5Feature: 'コストパフォーマンス',
         row5Legacy: 'ブランドの上乗せ（10万〜30万円台）',
         row5Sai: '納得の価格 ＋ 20%事前登録割引 ＋ 生涯サブスク0円',
-        calloutTitle: '「もう、見た目がおしゃれなだけでは物足りない。」',
+        calloutTitle: '「もう、見た目がおしゃれなだけでは<br class="m-br">物足りない。」',
         calloutDesc: '日本の20〜30代カップルがSAIを選ぶ理由：毎日つける指輪ひとつで互いの健康を見守り、ふたりの絆をより深くします。',
 
         // Hardware Bento
         hwTag: 'PRECISION ENGINEERING',
-        hwTitle: '驚くほど軽く、どこまでも強固。',
+        hwTitle: '驚くほど軽く、<br class="m-br">どこまでも強固。',
         hwDesc: '着けていることを忘れるわずか4.0g。24時間シャワーの時も、就寝時も究極の快適さをお届けします。',
         bento1Title: '超軽量',
         bento1Desc: '羽のように軽く、人間工学に基づいたインナーカーブ設計で睡眠中も圧迫感がありません。',
@@ -2907,10 +2910,10 @@
 
         // Interactions
         interactTag: 'COUPLE DATA INTERACTION',
-        interactTitle: 'ひとりで見るスマートリングではありません。<br><span style="color:var(--accent-coral)">ふたりだからこそ完成する温もり。</span>',
+        interactTitle: 'ひとりで見るスマートリングでは<br class="m-br">ありません。<br><span style="color:var(--accent-coral)">ふたりだからこそ<br class="m-br">完成する温もり。</span>',
         interactDesc: 'スマートウォッチのようにひとりで数字を眺めるだけではありません。SAIは指輪を通してお互いのコンディションを気遣い合えます。',
         feat1Badge: 'INTERACTION 01 · MORNING SYNC',
-        feat1Title: '目覚めた瞬間に届く<br>あの人の睡眠と今日の体調',
+        feat1Title: '目覚めた瞬間に届く<br>あの人の睡眠と<br class="m-br">今日の体調',
         feat1Desc: '「よく眠れた？」と聞かなくても、朝起きた時にパートナーがどれだけぐっすり眠れたか、今日のエネルギー状態を指輪がそっと教えてくれます。',
         feat1Pt1: '睡眠ステージ（深い睡眠・レム睡眠）に基づく体調スコアを自動算出',
         feat1Pt2: '寝不足のパートナーへワンタップで温かい応援メッセージを送信',
@@ -2921,14 +2924,15 @@
         demoCareBtn: '☕️ 今日お疲れのソウタへ温かいお茶を贈る',
 
         feat2Badge: 'INTERACTION 02 · LIVE PULSE',
-        feat2Title: '言葉の代わりに指先で、<br>あなたの心臓の鼓動を感じる瞬間',
+        feat2Title: '言葉の代わりに指先で、<br>あなたの心臓の鼓動を<br class="m-br">感じる瞬間',
         feat2Desc: '会議中や、図書館で、あるいは遠く離れている時でも。指輪を1秒長押しするだけで、私のリアルタイム心拍（BPM）がパートナーの指輪にやさしいハプティクス振動とローズゴールドの光で届きます。',
         feat2Pt1: 'リアルタイムの鼓動を忠実に再現する微細ハプティクスフィードバック',
         feat2Pt2: '何百キロ離れていても指先へダイレクトに届く生体タッチ',
         touchHintText: '👆 上の指輪をタップして心拍シグナルを送ってみてください',
+        hapticWaiting: '💓 74 BPM 同期待機中',
 
         feat3Badge: 'INTERACTION 03 · DATE RHYTHM',
-        feat3Title: 'ふたりが初めて手をつないだ瞬間、<br>ドキドキした鼓動まで覚えているカレンダー',
+        feat3Title: 'ふたりが初めて<br class="m-br">手をつないだ瞬間、<br>ドキドキした鼓動まで<br class="m-br">覚えているカレンダー',
         feat3Desc: 'デート中に特別なときめきが訪れた時、saiがふたりの同時心拍ピークを検知し、ふたりのカレンダーに写真と一緒に保存します。',
         feat3Pt1: '映画館、夕日の前、旅行先で一緒に高鳴った心拍タイムライン',
         feat3Pt2: '記念日ごとに振り返るふたりだけのバイオリズムダイアリー',
@@ -2945,6 +2949,7 @@
         perk1Desc: '発売スケジュールに合わせて、20%割引クーポンをお届けします。',
         perk2Badge: '生涯無料',
         perk2Title: 'データ分析のサブスクが生涯無料',
+        perk2Val: '¥0 / 生涯',
         perk2Desc: 'データ分析のサブスクを生涯無料で利用できます。',
 
         // Form
@@ -2952,6 +2957,7 @@
         formDesc: 'メールアドレスを登録するだけで、20%割引券と生涯無料サブスク権が提供されます。',
         lblEmail: 'メールアドレス *',
         lblAge: '年齢層を選択してください *',
+        age35Plus: '35歳以上',
         lblFeature: '最も期待する機能を選択してください *',
         submitBtnText: '20%割引＆生涯サブスク無料を<br class="btn-br">申し込む',
         formNote: '※ 迷惑メールは一切送信いたしません。発売通知および特典配布のみに使用されます。',
@@ -3099,6 +3105,8 @@
       document.getElementById('feat2-pt1').textContent = dict.feat2Pt1;
       document.getElementById('feat2-pt2').textContent = dict.feat2Pt2;
       document.getElementById('touch-hint-text').textContent = dict.touchHintText;
+      const hapticMsgEl = document.getElementById('haptic-msg');
+      if (hapticMsgEl) hapticMsgEl.innerHTML = '<span>' + dict.hapticWaiting + '</span>';
 
       document.getElementById('feat3-badge').textContent = dict.feat3Badge;
       document.getElementById('feat3-title').innerHTML = dict.feat3Title;
@@ -3115,6 +3123,8 @@
       document.getElementById('perk1-desc').textContent = dict.perk1Desc;
       document.getElementById('perk2-badge').textContent = dict.perk2Badge;
       document.getElementById('perk2-title').textContent = dict.perk2Title;
+      const perk2ValEl = document.getElementById('perk2-val');
+      if (perk2ValEl) perk2ValEl.textContent = dict.perk2Val;
       document.getElementById('perk2-desc').textContent = dict.perk2Desc;
 
       // Form
@@ -3122,6 +3132,8 @@
       document.getElementById('form-desc').textContent = dict.formDesc;
       document.getElementById('lbl-email').textContent = dict.lblEmail;
       document.getElementById('lbl-age').textContent = dict.lblAge;
+      const age35El = document.getElementById('age-chip-35plus');
+      if (age35El) age35El.textContent = dict.age35Plus;
       document.getElementById('lbl-feature').textContent = dict.lblFeature;
       const featureLabels = lang === 'ja' ? ['心拍を送る', '睡眠の共有', 'ふたりの記録'] : ['심박 보내기', '수면 공유', '둘만의 기록'];
       document.querySelectorAll('#feature-selector .option-chip').forEach((el, i) => { el.textContent = featureLabels[i]; });
