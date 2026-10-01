@@ -241,6 +241,14 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .earlybird-tag-wrap {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
     }
 
     .earlybird-bar .tag {
@@ -250,6 +258,38 @@
       font-size: 0.72rem;
       font-weight: 800;
       text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .earlybird-ticker {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .earlybird-track {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .earlybird-text {
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .earlybird-clone {
+      display: none;
+    }
+
+    @keyframes earlybird-marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     /* ========================================================
@@ -617,6 +657,70 @@
     @media (max-width: 680px) {
       .m-br {
         display: block;
+      }
+
+      .earlybird-bar {
+        justify-content: flex-start !important;
+        padding: 7px 0 7px 14px !important;
+        gap: 0 !important;
+        overflow: hidden !important;
+        position: relative !important;
+        height: 38px !important;
+        box-sizing: border-box !important;
+      }
+
+      .earlybird-tag-wrap {
+        position: relative !important;
+        z-index: 5 !important;
+        flex-shrink: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        background: #f9eef1 !important;
+        padding-right: 10px !important;
+      }
+
+      .earlybird-bar .tag {
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+      }
+
+      .earlybird-tag-wrap::after {
+        content: '';
+        position: absolute;
+        right: -12px;
+        top: 0;
+        bottom: 0;
+        width: 12px;
+        background: linear-gradient(90deg, #f9eef1 0%, rgba(249, 238, 241, 0) 100%);
+        pointer-events: none;
+      }
+
+      .earlybird-ticker {
+        flex: 1 !important;
+        overflow: hidden !important;
+        min-width: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        position: relative !important;
+        z-index: 1 !important;
+      }
+
+      .earlybird-track {
+        display: inline-flex !important;
+        white-space: nowrap !important;
+        will-change: transform !important;
+        animation: earlybird-marquee 13s linear infinite !important;
+      }
+
+      .earlybird-text {
+        display: inline-block !important;
+        white-space: nowrap !important;
+        padding-right: 48px !important;
+        flex-shrink: 0 !important;
+      }
+
+      .earlybird-clone {
+        display: inline-block !important;
       }
 
       .compare-table-wrapper {
@@ -2020,7 +2124,7 @@
       display: none !important;
     }
   </style>
-<link rel="stylesheet" href="/white-theme.css?v=20261001_9">
+<link rel="stylesheet" href="/white-theme.css?v=20261001_10">
 <link rel="stylesheet" href="/morning.css?v=20261001_5">
 <link rel="stylesheet" href="/date-demo.css?v=20261001_6">
 </head>
@@ -2029,8 +2133,15 @@
 
   <!-- Early-bird Banner -->
   <div class="earlybird-bar" id="earlybird-banner">
-    <span class="tag">EARLY BIRD</span>
-    <span id="banner-text">지금 사전 예약 시: 20% 즉시 할인 + 평생 구독료 0원 혜택</span>
+    <div class="earlybird-tag-wrap">
+      <span class="tag">EARLY BIRD</span>
+    </div>
+    <div class="earlybird-ticker">
+      <div class="earlybird-track">
+        <span class="earlybird-text" id="banner-text">지금 사전 예약 시: 20% 즉시 할인 + 평생 구독료 0원 혜택</span>
+        <span class="earlybird-text earlybird-clone" id="banner-text-clone" aria-hidden="true">지금 사전 예약 시: 20% 즉시 할인 + 평생 구독료 0원 혜택</span>
+      </div>
+    </div>
   </div>
 
   <!-- Apple Minimal Navigation -->
@@ -2121,8 +2232,8 @@
       <div class="section-header">
         <div class="section-tag" id="compare-tag">COMPARE TO TRADITIONAL RINGS</div>
         <h2 class="section-title" id="compare-title">
-          수백만 원짜리 일반 커플링 대신,<br>
-          왜 <span style="color:var(--accent-coral)">스마트 커플링 SAI</span>일까요?
+          수백만 원짜리<br class="m-br">일반 커플링 대신,<br>
+          왜 <span style="color:var(--accent-coral)">스마트 커플링<br class="m-br">SAI</span>일까요?
         </h2>
         <p class="section-desc" id="compare-desc">
           시간이 지나면 서랍에 보관되는 변함없는 금속 대신, 매일 서로의 건강과 마음을 돌보는 살아있는 반지를 만나보세요.
@@ -2633,7 +2744,7 @@
 
         // Compare Section
         compareTag: 'COMPARE TO TRADITIONAL RINGS',
-        compareTitle: '수백만 원짜리 일반 커플링 대신,<br>왜 <span style="color:var(--accent-coral)">스마트 커플링 SAI</span>일까요?',
+        compareTitle: '수백만 원짜리<br class="m-br">일반 커플링 대신,<br>왜 <span style="color:var(--accent-coral)">스마트 커플링<br class="m-br">SAI</span>일까요?',
         compareDesc: '시간이 지나면 서랍에 보관되는 변함없는 금속 대신, 매일 서로의 건강과 마음을 돌보는 살아있는 반지를 만나보세요.',
         thFeature: '구분',
         thLegacy: '일반 브랜드 커플링',
@@ -2758,7 +2869,7 @@
 
         // Compare Section
         compareTag: 'COMPARE TO TRADITIONAL RINGS',
-        compareTitle: '何十万円もする普通のペアリングより、<br>なぜ<span style="color:var(--accent-coral)">スマートペアリングSAI</span>なのか？',
+        compareTitle: '何十万円もする<br class="m-br">普通のペアリングより、<br>なぜ<span style="color:var(--accent-coral)">スマートペアリング<br class="m-br">SAI</span>なのか？',
         compareDesc: '時間が経てば引き出しに眠ってしまう金属ではなく、毎日お互いの健康と心を寄り添って守る生きた指輪に出会ってください。',
         thFeature: '項目',
         thLegacy: '一般的なブランド指輪',
@@ -2922,6 +3033,8 @@
       // Update texts
       const dict = I18N[lang];
       document.getElementById('banner-text').textContent = dict.bannerText;
+      const bannerTextClone = document.getElementById('banner-text-clone');
+      if (bannerTextClone) bannerTextClone.textContent = dict.bannerText;
       document.getElementById('nav-item-compare').textContent = dict.navCompare;
       document.getElementById('nav-item-hardware').textContent = dict.navHardware;
       document.getElementById('nav-item-interactions').textContent = dict.navInteractions;
