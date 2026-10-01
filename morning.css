@@ -206,3 +206,55 @@ body.morning-modal-open {overflow:hidden;}
  .morning-chart-label>span {font-size:12px;letter-spacing:-.3px;}
  .morning-chart-label strong {font-size:20px;}
 }
+
+/* Morning tab tooltip & mood hint */
+.morning-tab-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: fit-content;
+  margin: 0 auto 12px;
+  padding: 6px 14px;
+  background: #ffffff;
+  border: 1px solid #e1e4ea;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #3f424d;
+  line-height: 1.3;
+  animation: morningTabHintFloat 2.6s ease-in-out infinite;
+}
+
+.morning-tab-hint-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e54857;
+  box-shadow: 0 0 0 3px rgba(229, 72, 87, 0.18);
+}
+
+@keyframes morningTabHintFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.morning-moods-legend {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.morning-mood-hint {
+  font-size: 11px;
+  font-weight: 500;
+  color: #7b7e8d;
+  background: #f1f2f6;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #e5e7ed;
+  letter-spacing: -0.2px;
+}

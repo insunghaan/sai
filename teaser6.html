@@ -15,6 +15,7 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
   <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <meta name="robots" content="noindex, nofollow">
+  <script defer src="/sai-analytics.js"></script>
   <style>
     :root {
       /* Apple Dark Tech Palette */
@@ -1894,9 +1895,9 @@
       display: none !important;
     }
   </style>
-<link rel="stylesheet" href="/white-theme.css?v=20261001_2">
-<link rel="stylesheet" href="/morning.css?v=20261001_2">
-<link rel="stylesheet" href="/date-demo.css?v=20261001_2">
+<link rel="stylesheet" href="/white-theme.css?v=20261001_3">
+<link rel="stylesheet" href="/morning.css?v=20261001_3">
+<link rel="stylesheet" href="/date-demo.css?v=20261001_3">
 </head>
 <body>
   <div class="bg-grid-ambient"></div>
@@ -2750,8 +2751,23 @@
       }
     };
 
+    // Save UTM parameters to sessionStorage to preserve across navigations
+    function saveUtmParams() {
+      const p = new URLSearchParams(window.location.search);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(k => {
+        const val = p.get(k);
+        if (val) {
+          try { sessionStorage.setItem('sai_' + k, val); } catch (e) {}
+        }
+      });
+    }
+    function getStoredUtm(k) {
+      try { return sessionStorage.getItem('sai_' + k) || undefined; } catch (e) { return undefined; }
+    }
+
     // Initialize Language & URL params
     function initLanguage() {
+      saveUtmParams();
       const urlParams = new URLSearchParams(window.location.search);
       const urlLang = urlParams.get('lang');
       const isJaPath = window.location.pathname.startsWith('/ja');
@@ -2995,11 +3011,11 @@
         headline_preset_index: currentHeadlineIdx,
         consent: true,
         consent_version: '2026-09-17',
-        utm_source: urlParams.get('utm_source') || undefined,
-        utm_medium: urlParams.get('utm_medium') || undefined,
-        utm_campaign: urlParams.get('utm_campaign') || undefined,
-        utm_content: urlParams.get('utm_content') || undefined,
-        utm_term: urlParams.get('utm_term') || undefined,
+        utm_source: urlParams.get('utm_source') || getStoredUtm('utm_source'),
+        utm_medium: urlParams.get('utm_medium') || getStoredUtm('utm_medium'),
+        utm_campaign: urlParams.get('utm_campaign') || getStoredUtm('utm_campaign'),
+        utm_content: urlParams.get('utm_content') || getStoredUtm('utm_content'),
+        utm_term: urlParams.get('utm_term') || getStoredUtm('utm_term'),
         submitted_at: new Date().toISOString()
       };
 
@@ -3106,7 +3122,7 @@
       initLanguage();
     });
   </script>
-<script src="/morning.js?v=20261001_2"></script>
-<script src="/date-demo.js?v=20261001_2"></script>
+<script src="/morning.js?v=20261001_3"></script>
+<script src="/date-demo.js?v=20261001_3"></script>
 </body>
 </html>

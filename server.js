@@ -276,7 +276,10 @@ async function sendSlackWaitlistNotification(params) {
     ...(!params.age_group ? [`• *구독 희망 예산:* ${params.budget_label || params.budget || '미선택'}`] : []),
     `• *접속 위치:* ${locationStr}`,
     `• *타임존:* ${tzStr}`,
-    params.utm_source ? `• *유입 경로 (UTM):* ${params.utm_source}${params.utm_campaign ? ` / ${params.utm_campaign}` : ''}` : null,
+    params.utm_campaign ? `• *캠페인 (UTM):* \`${params.utm_campaign}\`` : null,
+    params.utm_source ? `• *유입 경로 (UTM):* ${params.utm_source}${params.utm_medium ? ` / ${params.utm_medium}` : ''}` : null,
+    params.utm_content ? `• *광고 소재 (UTM):* \`${params.utm_content}\`` : null,
+    params.utm_term ? `• *타겟 키워드 (UTM):* \`${params.utm_term}\`` : null,
     `• *접수 일시:* ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })} (KST)`,
   ].filter(Boolean).join('\n');
 
@@ -463,7 +466,10 @@ const server = http.createServer(async (req, res) => {
           budget_label: BUDGET_LABELS[language]?.[docData.budget] || docData.budget,
           geo_location: geoLocation,
           utm_source: docData.utm_source,
+          utm_medium: docData.utm_medium,
           utm_campaign: docData.utm_campaign,
+          utm_content: docData.utm_content,
+          utm_term: docData.utm_term,
           alreadyExisted: saveResult.alreadyExisted,
           createdAt: saveResult.createdAt
         }).catch(err => {
@@ -493,11 +499,12 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Only choose a regional default at the entry URL. Explicit /ja/ links remain stable.
-  if (pathname === '/' && !new URL(req.url, 'http://localhost').searchParams.has('lang')) {
+  if (['/', '/teaser6', '/teaser6/'].includes(pathname) && !new URL(req.url, 'http://localhost').searchParams.has('lang')) {
     res.setHeader('Vary', 'Cookie');
     res.setHeader('Cache-Control', 'private, no-store');
     if (await defaultLanguage(req, lookupLocaleCountry) === 'ja') {
-      res.writeHead(302, { Location: '/ja/' + new URL(req.url, 'http://localhost').search });
+      const targetPath = pathname === '/' ? '/ja/' : '/ja/teaser6';
+      res.writeHead(302, { Location: targetPath + new URL(req.url, 'http://localhost').search });
       res.end();
       return;
     }
