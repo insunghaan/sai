@@ -97,14 +97,14 @@
 .date-btn-tooltip::after {
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: -4.5px;
   left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid #ffffff;
+  transform: translateX(-50%) rotate(45deg);
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
+  border-right: 1px solid #f2cdd6;
+  border-bottom: 1px solid #f2cdd6;
 }
 
 @keyframes dateTooltipBounce {
