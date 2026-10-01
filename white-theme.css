@@ -82,6 +82,7 @@
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
 /* Japanese uses character boundaries; Korean retains the original word wrapping. */
 html[lang="ja"] body { word-break:normal; overflow-wrap:anywhere; line-break:strict; }
+html[lang="ja"] .hero-main-title { word-break:normal; overflow-wrap:anywhere; line-break:strict; }
 .interaction-card > *, .bento-card, .compare-cell, .partner-card { min-width:0; }
 .compare-grid { border-bottom-color:var(--border-subtle); }
 .m-br { display: none; }
