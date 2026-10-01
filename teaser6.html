@@ -607,7 +607,18 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
+    .m-br {
+      display: none;
+    }
+    .btn-br {
+      display: none;
+    }
+
     @media (max-width: 680px) {
+      .m-br {
+        display: block;
+      }
+
       .compare-table-wrapper {
         background: transparent !important;
         border: none !important;
@@ -653,6 +664,8 @@
 
       .compare-grid:not(.header-row) .col-feature {
         display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
         align-items: center !important;
         grid-column: 1 / -1 !important;
         grid-row: 1 !important;
@@ -664,6 +677,7 @@
         font-weight: 750 !important;
         color: #2c2c2e !important;
         letter-spacing: -0.2px !important;
+        text-align: center !important;
       }
 
       .compare-grid:not(.header-row) .col-feature::before {
@@ -674,6 +688,7 @@
         border-radius: 50% !important;
         background: var(--accent-rose, #ce3657) !important;
         margin-right: 8px !important;
+        margin-bottom: 0 !important;
         flex-shrink: 0 !important;
       }
 
@@ -697,6 +712,19 @@
         padding: 16px 14px 20px !important;
         font-size: 13.5px !important;
         line-height: 1.55 !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn-br {
+        display: block;
+      }
+      .form-submit-btn {
+        min-height: 58px !important;
+        height: auto !important;
+        padding: 12px 16px !important;
+        line-height: 1.35 !important;
+        font-size: 0.98rem !important;
       }
     }
 
@@ -1992,7 +2020,7 @@
       display: none !important;
     }
   </style>
-<link rel="stylesheet" href="/white-theme.css?v=20261001_8">
+<link rel="stylesheet" href="/white-theme.css?v=20261001_9">
 <link rel="stylesheet" href="/morning.css?v=20261001_5">
 <link rel="stylesheet" href="/date-demo.css?v=20261001_6">
 </head>
@@ -2117,7 +2145,7 @@
         <div class="compare-grid">
           <div class="compare-cell col-feature" id="row1-feature">일상의 역할</div>
           <div class="compare-cell col-legacy">
-            <span id="row1-legacy">손가락에 끼우는 단순 장식품</span>
+            <span id="row1-legacy">손가락에 끼우는<br class="m-br">단순장식품</span>
           </div>
           <div class="compare-cell col-sai">
             <strong id="row1-sai">24시간 서로의 건강·수면·심박을 돌보는 케어링</strong>
@@ -2128,7 +2156,7 @@
         <div class="compare-grid">
           <div class="compare-cell col-feature" id="row2-feature">떨어져 있을 때의 연결</div>
           <div class="compare-cell col-legacy">
-            <span id="row2-legacy">연결 없음 (몸이 멀어지면 단절)</span>
+            <span id="row2-legacy">연결 없음<br class="m-br">(몸이 멀어지면 단절)</span>
           </div>
           <div class="compare-cell col-sai">
             <strong id="row2-sai">터치 한 번으로 실시간 심박(BPM) 햅틱 전송</strong>
@@ -2139,7 +2167,7 @@
         <div class="compare-grid">
           <div class="compare-cell col-feature" id="row3-feature">연인의 컨디션 파악</div>
           <div class="compare-cell col-legacy">
-            <span id="row3-legacy">직접 묻기 전까지는 알 수 없음</span>
+            <span id="row3-legacy">직접 묻기 전까지는<br class="m-br">알 수 없음</span>
           </div>
           <div class="compare-cell col-sai">
             <strong id="row3-sai">기상 시 수면 점수 및 피로도 자동 공유</strong>
@@ -2150,7 +2178,7 @@
         <div class="compare-grid">
           <div class="compare-cell col-feature" id="row4-feature">데이트 추억 기록</div>
           <div class="compare-cell col-legacy">
-            <span id="row4-legacy">기록 불가 (사진에만 의존)</span>
+            <span id="row4-legacy">기록 불가<br class="m-br">(사진에만 의존)</span>
           </div>
           <div class="compare-cell col-sai">
             <strong id="row4-sai">두 손 잡은 설렘의 순간, 심박수 그래프 자동 기록</strong>
@@ -2161,7 +2189,7 @@
         <div class="compare-grid">
           <div class="compare-cell col-feature" id="row5-feature">가격 대비 가치</div>
           <div class="compare-cell col-legacy">
-            <span id="row5-legacy">브랜드 거품 (100만~300만 원대)</span>
+            <span id="row5-legacy">브랜드 거품<br class="m-br">(100만~300만 원대)</span>
           </div>
           <div class="compare-cell col-sai">
             <strong id="row5-sai">합리적 가격 + 20% 사전할인 + 평생 구독료 0원</strong>
@@ -2170,7 +2198,7 @@
       </div>
 
       <div class="compare-callout">
-        <h3 id="callout-title">"이제 예쁜 것만으로는 부족합니다."</h3>
+        <h3 id="callout-title">"이제 예쁜 것만으로는<br class="m-br">부족합니다."</h3>
         <p id="callout-desc">
           2030 스마트 커플들이 SAI를 선택하는 이유: 매일 착용하는 반지 하나로 서로의 건강을 살피고 둘만의 유대감을 더욱 깊게 만듭니다.
         </p>
@@ -2186,7 +2214,7 @@
       <div class="section-header">
         <div class="section-tag" id="hw-tag">PRECISION ENGINEERING</div>
         <h2 class="section-title" id="hw-title">
-          놀랍도록 가볍고, 영원히 견고하게.
+          놀랍도록 가볍고,<br class="m-br">영원히 견고하게.
         </h2>
         <p class="section-desc" id="hw-desc">
           손가락에 낀 것을 잊을 만큼 가벼운 4.0g. 24시간 샤워할 때도, 잠들 때도 완벽한 편안함을 선사합니다.
@@ -2248,8 +2276,8 @@
       <div class="section-header">
         <div class="section-tag" id="interact-tag">COUPLE DATA INTERACTION</div>
         <h2 class="section-title" id="interact-title">
-          혼자 보는 스마트링이 아닙니다.<br>
-          <span style="color:var(--accent-coral)">둘이기에 비로소 완성되는 교감.</span>
+          혼자 보는 스마트링이<br class="m-br">아닙니다.<br>
+          <span style="color:var(--accent-coral)">둘이기에 비로소<br class="m-br">완성되는 교감.</span>
         </h2>
         <p class="section-desc" id="interact-desc">
           스마트워치처럼 혼자 숫자만 들여다보지 마세요. sai는 반지를 통해 서로의 컨디션을 살피고 따뜻한 온도를 나눕니다.
@@ -2269,7 +2297,7 @@
       <div class="interaction-card reversed">
         <div class="interaction-info">
           <span class="interaction-badge" id="feat2-badge">INTERACTION 02 · LIVE PULSE</span>
-          <h3 id="feat2-title">말 대신 손끝으로,<br>너의 심장 박동을 느끼는 순간</h3>
+          <h3 id="feat2-title">말 대신 손끝으로,<br>너의 심장 박동을 느끼는<br class="m-br">순간</h3>
           <p id="feat2-desc">
             회의 중일 때, 도서관에서, 혹은 서로 먼 거리에 있을 때. 반지를 1초간 길게 터치하면 내 실시간 심박(BPM)이 연인의 반지에 빛과 함께 은은한 햅틱 진동이 전해집니다.
           </p>
@@ -2405,7 +2433,7 @@
           </div>
 
           <button type="submit" class="form-submit-btn" id="submit-btn">
-            <span id="submit-btn-text">20% 할인 & 평생 구독료 무료 신청하기</span>
+            <span id="submit-btn-text">20% 할인 & 평생 구독료<br class="btn-br"> 무료 신청하기</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
 
@@ -2613,26 +2641,26 @@
         thLegacy: '일반 브랜드 커플링',
         thSai: 'SAI 스마트 커플링',
         row1Feature: '일상의 역할',
-        row1Legacy: '손가락에 끼우는 단순 장식품',
+        row1Legacy: '손가락에 끼우는<br class="m-br">단순장식품',
         row1Sai: '24시간 서로의 건강·수면·심박을 돌보는 케어링',
         row2Feature: '떨어져 있을 때의 연결',
-        row2Legacy: '연결 없음 (몸이 멀어지면 단절)',
+        row2Legacy: '연결 없음<br class="m-br">(몸이 멀어지면 단절)',
         row2Sai: '터치 한 번으로 실시간 심박(BPM) 햅틱 전송',
         row3Feature: '연인의 컨디션 파악',
-        row3Legacy: '직접 묻기 전까지는 알 수 없음',
+        row3Legacy: '직접 묻기 전까지는<br class="m-br">알 수 없음',
         row3Sai: '기상 시 수면 점수 및 피로도 자동 공유',
         row4Feature: '데이트 추억 기록',
-        row4Legacy: '기록 불가 (사진에만 의존)',
+        row4Legacy: '기록 불가<br class="m-br">(사진에만 의존)',
         row4Sai: '두 손 잡은 설렘의 순간, 심박수 그래프 자동 기록',
         row5Feature: '가격 대비 가치',
-        row5Legacy: '브랜드 거품 (100만~300만 원대)',
+        row5Legacy: '브랜드 거품<br class="m-br">(100만~300만 원대)',
         row5Sai: '합리적 가격 + 20% 사전할인 + 평생 구독료 0원',
-        calloutTitle: '"이제 예쁜 것만으로는 부족합니다."',
+        calloutTitle: '"이제 예쁜 것만으로는<br class="m-br">부족합니다."',
         calloutDesc: '2030 스마트 커플들이 SAI를 선택하는 이유: 매일 착용하는 반지 하나로 서로의 건강을 살피고 둘만의 유대감을 더욱 깊게 만듭니다.',
 
         // Hardware Bento
         hwTag: 'PRECISION ENGINEERING',
-        hwTitle: '놀랍도록 가볍고, 영원히 견고하게.',
+        hwTitle: '놀랍도록 가볍고,<br class="m-br">영원히 견고하게.',
         hwDesc: '손가락에 낀 것을 잊을 만큼 가벼운 4.0g. 24시간 샤워할 때도, 잠들 때도 완벽한 편안함을 선사합니다.',
         bento1Title: '초경량',
         bento1Desc: '깃털 같은 무게감과 인체공학적 이너 커브 디자인으로 수면 중에도 답답함이 없습니다.',
@@ -2645,7 +2673,7 @@
 
         // Interactions
         interactTag: 'COUPLE DATA INTERACTION',
-        interactTitle: '혼자 보는 스마트링이 아닙니다.<br><span style="color:var(--accent-coral)">둘이기에 비로소 완성되는 교감.</span>',
+        interactTitle: '혼자 보는 스마트링이<br class="m-br">아닙니다.<br><span style="color:var(--accent-coral)">둘이기에 비로소<br class="m-br">완성되는 교감.</span>',
         interactDesc: '스마트워치처럼 혼자 숫자만 들여다보지 마세요. sai는 반지를 통해 서로의 컨디션을 살피고 따뜻한 온도를 나눕니다.',
         feat1Badge: 'INTERACTION 01 · MORNING SYNC',
         feat1Title: '눈뜨자마자 닿는<br>너의 수면과 오늘 컨디션',
@@ -2659,7 +2687,7 @@
         demoCareBtn: '☕️ 오늘 피곤한 민서에게 따뜻한 차 보내기',
 
         feat2Badge: 'INTERACTION 02 · LIVE PULSE',
-        feat2Title: '말 대신 손끝으로,<br>너의 심장 박동을 느끼는 순간',
+        feat2Title: '말 대신 손끝으로,<br>너의 심장 박동을 느끼는<br class="m-br">순간',
         feat2Desc: '회의 중일 때, 도서관에서, 혹은 서로 먼 거리에 있을 때. 반지를 1초간 길게 터치하면 내 실시간 심박(BPM)이 연인의 반지에 빛과 함께 은은한 햅틱 진동이 전해집니다.',
         feat2Pt1: '실시간 심장 박동수를 그대로 재현하는 미세 햅틱 피드백',
         feat2Pt2: '300km 떨어져 있어도 손끝으로 전해지는 즉각적인 생체 터치',
@@ -2691,7 +2719,7 @@
         lblEmail: '이메일 주소 *',
         lblAge: '연령대를 선택해주세요 *',
         lblFeature: '가장 기대되는 기능을 골라주세요 *',
-        submitBtnText: '20% 할인 & 평생 구독료 무료 신청하기',
+        submitBtnText: '20% 할인 & 평생 구독료<br class="btn-br"> 무료 신청하기',
         formNote: '* 스팸 메일은 절대 발송되지 않으며, 출시 소식 및 쿠폰 발송 용도로만 안전하게 보관됩니다.',
 
         // FAQ
@@ -2816,7 +2844,7 @@
         lblEmail: 'メールアドレス *',
         lblAge: '年齢層を選択してください *',
         lblFeature: '最も期待する機能を選択してください *',
-        submitBtnText: '20%割引＆生涯サブスク無料を申し込む',
+        submitBtnText: '20%割引＆生涯サブスク無料を<br class="btn-br">申し込む',
         formNote: '※ 迷惑メールは一切送信いたしません。発売通知および特典配布のみに使用されます。',
 
         // FAQ
@@ -2916,21 +2944,21 @@
       document.getElementById('th-legacy').textContent = dict.thLegacy;
       document.getElementById('th-sai').textContent = dict.thSai;
       document.getElementById('row1-feature').textContent = dict.row1Feature;
-      document.getElementById('row1-legacy').textContent = dict.row1Legacy;
+      document.getElementById('row1-legacy').innerHTML = dict.row1Legacy;
       document.getElementById('row1-sai').textContent = dict.row1Sai;
       document.getElementById('row2-feature').textContent = dict.row2Feature;
-      document.getElementById('row2-legacy').textContent = dict.row2Legacy;
+      document.getElementById('row2-legacy').innerHTML = dict.row2Legacy;
       document.getElementById('row2-sai').textContent = dict.row2Sai;
       document.getElementById('row3-feature').textContent = dict.row3Feature;
-      document.getElementById('row3-legacy').textContent = dict.row3Legacy;
+      document.getElementById('row3-legacy').innerHTML = dict.row3Legacy;
       document.getElementById('row3-sai').textContent = dict.row3Sai;
       document.getElementById('row4-feature').textContent = dict.row4Feature;
-      document.getElementById('row4-legacy').textContent = dict.row4Legacy;
+      document.getElementById('row4-legacy').innerHTML = dict.row4Legacy;
       document.getElementById('row4-sai').textContent = dict.row4Sai;
       document.getElementById('row5-feature').textContent = dict.row5Feature;
-      document.getElementById('row5-legacy').textContent = dict.row5Legacy;
+      document.getElementById('row5-legacy').innerHTML = dict.row5Legacy;
       document.getElementById('row5-sai').textContent = dict.row5Sai;
-      document.getElementById('callout-title').textContent = dict.calloutTitle;
+      document.getElementById('callout-title').innerHTML = dict.calloutTitle;
       document.getElementById('callout-desc').textContent = dict.calloutDesc;
 
       // Hardware
@@ -2986,7 +3014,7 @@
       document.getElementById('lbl-feature').textContent = dict.lblFeature;
       const featureLabels = lang === 'ja' ? ['心拍を送る', '睡眠の共有', 'ふたりの記録'] : ['심박 보내기', '수면 공유', '둘만의 기록'];
       document.querySelectorAll('#feature-selector .option-chip').forEach((el, i) => { el.textContent = featureLabels[i]; });
-      document.getElementById('submit-btn-text').textContent = dict.submitBtnText;
+      document.getElementById('submit-btn-text').innerHTML = dict.submitBtnText;
       document.getElementById('form-note').textContent = dict.formNote;
 
       // FAQ
