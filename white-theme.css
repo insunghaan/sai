@@ -73,7 +73,7 @@
 .form-input,.option-chip { background:#f8f8fa; color:var(--text-primary); border-color:#d6d7de; }
 .form-input:focus { background:#fff; box-shadow:0 0 0 3px rgba(206,54,87,.1); }
 .option-chip:hover { color:var(--text-primary); border-color:#aeb0bb; }
-.option-chip.selected { background:#fceff3; color:#a62948; }
+.option-chip.selected, .option-chip:has(input:checked) { background:#fceff3; color:#a62948; }
 .apple-modal-overlay { background:rgba(30,32,40,.4); }
 .section-faq { background:#f8f8fa; }
 .apple-footer { background:#fff; }

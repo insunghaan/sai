@@ -1830,7 +1830,7 @@
       color: #ffffff;
     }
 
-    .option-chip.selected {
+    .option-chip.selected, .option-chip:has(input:checked) {
       background: rgba(255, 77, 109, 0.15);
       border-color: var(--accent-rose);
       color: #ffffff;
@@ -2131,7 +2131,6 @@
     #color-selector { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     #color-selector .color-option { position: relative; min-width: 0; padding: 12px 4px; white-space: nowrap; }
     #color-selector input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
-    #color-selector .color-option:has(input:checked) { background: rgba(255,77,109,.15); border-color: var(--accent-rose); color: #fff; font-weight: 700; }
     #color-selector .color-option:has(input:focus-visible) { outline: 2px solid var(--accent-rose); outline-offset: 2px; }
   </style>
 <link rel="stylesheet" href="/white-theme.css?v=20261001_14">
