@@ -67,3 +67,17 @@ test('invalid survey never writes or sends notifications',async()=>{const a=app(
 test('Japan entry temporarily redirects with campaign parameters and no shared cache',async()=>{const a=app({country:'JP'});const r=await a.entry();assert.equal(r.status,302);assert.equal(r.headers.Location,'/ja/?utm_source=instagram');assert.equal(r.headers['Cache-Control'],'private, no-store');});
 test('Japan entry on /teaser6 temporarily redirects to /ja/teaser6 with preserved UTM parameters',async()=>{const a=app({country:'JP'});const r=await a.entry('/teaser6?utm_source=instagram&utm_campaign=sai_japan_slide_20260924');assert.equal(r.status,302);assert.equal(r.headers.Location,'/ja/teaser6?utm_source=instagram&utm_campaign=sai_japan_slide_20260924');});
 test('Slack notification includes utm_campaign and UTM fields when provided',async()=>{const a=app();await a.submit({...payload('ko'),email:'utm-test@example.com',utm_source:'instagram',utm_campaign:'sai_japan_slide_20260924'});const slack=a.calls.find(c=>c.url?.includes('slack'));assert(slack.body.blocks[1].text.text.includes('sai_japan_slide_20260924'));assert(slack.body.blocks[1].text.text.includes('instagram'));});
+
+test('color signup stores each allowed preference and rejects absent or invalid colors before writes',async()=>{
+ for(const [ring_color,label] of Object.entries({gold:'골드',silver:'실버',rose_gold:'로즈골드',black:'블랙'})) {
+  const a=app();const result=await a.submit({...payload('ko'),survey_version:'2026-10-27-color',ring_color});
+  assert.equal(result.status,200);
+  const saved=a.db.docs.get('sai_waitlist_kr/test@example.com');
+  assert.equal(saved.ring_color,ring_color);assert.equal(saved.ring_color_label,label);
+  assert.equal(saved.dropdown_selections.ring_color,label);
+ }
+ for(const ring_color of [undefined,'','blue','toString']) {
+  const a=app();assert.equal((await a.submit({...payload('ko'),survey_version:'2026-10-27-color',ring_color})).status,400);
+  assert.equal(a.db.docs.size,0);assert.equal(a.calls.length,0);
+ }
+});

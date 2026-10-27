@@ -243,7 +243,7 @@ async function saveWaitlistEntry(collection, email, data) {
   return welcome.saveSignup(db, collection, email, {
     ...data, country, feature, budget,
     country_label: countryLabel, feature_label: featureLabel, budget_label: budgetLabel,
-    dropdown_selections: { country: countryLabel, feature: featureLabel, budget: budgetLabel, age_group: data.age_group || null, subscription_plan: data.subscription_plan || null }
+    dropdown_selections: { country: countryLabel, feature: featureLabel, budget: budgetLabel, ring_color: data.ring_color_label || null, age_group: data.age_group || null, subscription_plan: data.subscription_plan || null }
   });
 }
 
