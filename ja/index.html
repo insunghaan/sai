@@ -826,11 +826,6 @@
       .btn-br {
         display: block;
       }
-      .color-fieldset { border: 0; padding: 0; min-width: 0; }
-    .color-option { gap: 8px; }
-    .color-option input { accent-color: var(--accent-rose); }
-    .color-option:has(input:checked) { border-color: var(--accent-rose); background: rgba(255,77,109,.15); color: #fff; }
-    .color-option:focus-within { outline: 2px solid var(--accent-rose); outline-offset: 2px; }
 
     .form-submit-btn {
         min-height: 58px !important;
@@ -2132,6 +2127,12 @@
     .date-demo-top button[data-date="reset"] {
       display: none !important;
     }
+  
+    #color-selector { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    #color-selector .color-option { position: relative; min-width: 0; padding: 12px 4px; white-space: nowrap; }
+    #color-selector input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+    #color-selector .color-option:has(input:checked) { background: rgba(255,77,109,.15); border-color: var(--accent-rose); color: #fff; font-weight: 700; }
+    #color-selector .color-option:has(input:focus-visible) { outline: 2px solid var(--accent-rose); outline-offset: 2px; }
   </style>
 <link rel="stylesheet" href="/white-theme.css?v=20261001_14">
 <link rel="stylesheet" href="/morning.css?v=20261001_5">
@@ -2552,15 +2553,15 @@
             </div>
           </div>
 
-          <fieldset class="form-group color-fieldset">
-            <legend class="form-label" id="lbl-color">어떤 색상의 반지를 선호하시나요? *</legend>
-            <div class="form-options-grid" id="color-selector">
+          <div class="form-group">
+            <label class="form-label" id="lbl-color">어떤 색상의 반지를 선호하시나요? *</label>
+            <div class="form-options-grid" id="color-selector" role="radiogroup" aria-labelledby="lbl-color">
               <label class="option-chip color-option"><input type="radio" name="ring_color" value="gold" required><span data-color-label="gold">골드</span></label>
               <label class="option-chip color-option"><input type="radio" name="ring_color" value="silver" required><span data-color-label="silver">실버</span></label>
               <label class="option-chip color-option"><input type="radio" name="ring_color" value="rose_gold" required><span data-color-label="rose_gold">로즈골드</span></label>
               <label class="option-chip color-option"><input type="radio" name="ring_color" value="black" required><span data-color-label="black">블랙</span></label>
             </div>
-          </fieldset>
+          </div>
 
           <button type="submit" class="form-submit-btn" id="submit-btn">
             <span id="submit-btn-text">20% 할인 & 평생 구독료<br class="btn-br"> 무료 신청하기</span>
