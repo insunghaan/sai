@@ -75,9 +75,17 @@ test('color signup stores each allowed preference and rejects absent or invalid 
   const saved=a.db.docs.get('sai_waitlist_kr/test@example.com');
   assert.equal(saved.ring_color,ring_color);assert.equal(saved.ring_color_label,label);
   assert.equal(saved.dropdown_selections.ring_color,label);
+  const slack=a.calls.find(c=>c.url?.includes('slack'));
+  assert(slack.body.blocks[1].text.text.includes(`• *선호 반지 색상:* ${label}`));
  }
  for(const ring_color of [undefined,'','blue','toString']) {
   const a=app();assert.equal((await a.submit({...payload('ko'),survey_version:'2026-10-27-color',ring_color})).status,400);
   assert.equal(a.db.docs.size,0);assert.equal(a.calls.length,0);
  }
+});
+
+test('Japanese signup includes chosen color in Slack notification',async()=>{
+ const a=app();assert.equal((await a.submit({...payload('ja'),survey_version:'2026-10-27-color',ring_color:'rose_gold'})).status,200);
+ const slack=a.calls.find(c=>c.url?.includes('slack'));
+ assert(slack.body.blocks[1].text.text.includes('선호 반지 색상:* 로즈골드'));
 });
