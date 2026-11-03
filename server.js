@@ -557,15 +557,7 @@ const server = http.createServer(async (req, res) => {
   } else if (['/teaser-review', '/teaser-review/'].includes(pathname)) {
     targetFile = 'teaser-review.html';
   } else if (pathname === '/favicon.ico') {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'image/svg+xml');
-    res.setHeader('Cache-Control', 'public, max-age=86400');
-    if (req.method === 'HEAD') {
-      res.end();
-    } else {
-      res.end(FAVICON_SVG);
-    }
-    return;
+    targetFile = 'hello/favicon.ico';
   } else {
     targetFile = pathname.replace(/^\/+/, '');
   }
