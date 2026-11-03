@@ -7,31 +7,52 @@
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0, lastTime = null, elapsed = 0, width = 0, height = 0;
   const fields = [
-    { x:.14, y:.55, r:.73, rgb:'245,178,119', phase:1.3, rate:.035 },
-    { x:.84, y:.66, r:.64, rgb:'223,97,14', phase:3.8, rate:.027 },
-    { x:.48, y:.97, r:.78, rgb:'235,111,17', phase:5.1, rate:.031 },
-    { x:.65, y:.14, r:.70, rgb:'254,248,239', phase:2.1, rate:.023 },
-    { x:.06, y:.03, r:.65, rgb:'254,248,239', phase:4.3, rate:.020 }
+    { x:.14, y:.55, r:.73, rgb:'245,178,119', c:[245,178,119], phase:1.3, rate:.035 },
+    { x:.84, y:.66, r:.64, rgb:'223,97,14', c:[223,97,14], phase:3.8, rate:.027 },
+    { x:.48, y:.97, r:.78, rgb:'235,111,17', c:[235,111,17], phase:5.1, rate:.031 },
+    { x:.65, y:.14, r:.70, rgb:'254,248,239', c:[254,248,239], phase:2.1, rate:.023 },
+    { x:.06, y:.03, r:.65, rgb:'254,248,239', c:[254,248,239], phase:4.3, rate:.020 }
   ];
+  let lastTopColor = '', topOffset = 0;
   function resize() {
     // Modest backing resolution keeps motion light on mobile screens.
-    const scale = Math.min(1, 960 / Math.max(innerWidth, innerHeight));
-    width = canvas.width = Math.max(1, Math.round(innerWidth * scale));
-    height = canvas.height = Math.max(1, Math.round(innerHeight * scale));
+    const rect = canvas.getBoundingClientRect();
+    const viewW = Math.max(innerWidth, rect.width || 0);
+    const viewH = Math.max(innerHeight, rect.height || 0);
+    const scale = Math.min(1, 960 / Math.max(viewW, viewH));
+    width = canvas.width = Math.max(1, Math.round(viewW * scale));
+    height = canvas.height = Math.max(1, Math.round(viewH * scale));
+    topOffset = rect.top < 0 ? Math.min(height * .2, Math.round(-rect.top * scale)) : 0;
     draw(elapsed);
   }
   function draw(t) {
-    const base = context.createLinearGradient(0,0,0,height);
+    const base = context.createLinearGradient(0,topOffset,0,height);
     base.addColorStop(0,'#fef8ef');base.addColorStop(.42,'#edc5a0');base.addColorStop(1,'#e86d13');
     context.fillStyle=base;context.fillRect(0,0,width,height);
+    let tr=254,tg=248,tb=239;
+    const sampleX=width*.5,sampleY=topOffset,maxDim=Math.max(width,height);
     for(const f of fields){
       const a=t*f.rate+f.phase;
       const x=width*(f.x+.19*Math.sin(a)+.065*Math.sin(a*Math.SQRT2+.8));
       const y=height*(f.y+.16*Math.cos(a*.83)+.055*Math.sin(a*Math.sqrt(3)));
-      const radius=Math.max(width,height)*f.r*(1+.065*Math.sin(a*.71));
+      const radius=maxDim*f.r*(1+.065*Math.sin(a*.71));
       const gradient=context.createRadialGradient(x,y,0,x,y,radius);
       gradient.addColorStop(0,`rgba(${f.rgb},.84)`);gradient.addColorStop(.45,`rgba(${f.rgb},.45)`);gradient.addColorStop(1,`rgba(${f.rgb},0)`);
       context.fillStyle=gradient;context.fillRect(0,0,width,height);
+      const d=Math.hypot(sampleX-x,sampleY-y);
+      if(d<radius){
+        const u=d/radius;
+        const alpha=u<=.45?.84+(.45-.84)*(u/.45):.45*(1-(u-.45)/.55);
+        tr=tr*(1-alpha)+f.c[0]*alpha;
+        tg=tg*(1-alpha)+f.c[1]*alpha;
+        tb=tb*(1-alpha)+f.c[2]*alpha;
+      }
+    }
+    const topColor=`rgb(${Math.round(tr)},${Math.round(tg)},${Math.round(tb)})`;
+    if(topColor!==lastTopColor){
+      lastTopColor=topColor;
+      document.documentElement.style.backgroundColor=topColor;
+      if(document.body)document.body.style.backgroundColor=topColor;
     }
   }
   function tick(now){
@@ -44,6 +65,7 @@
     else draw(elapsed);
   }
   window.addEventListener('resize',resize,{passive:true});
+  if(window.visualViewport)window.visualViewport.addEventListener('resize',resize,{passive:true});
   document.addEventListener('visibilitychange',sync);
   preference.addEventListener('change',sync);
   resize();sync();
