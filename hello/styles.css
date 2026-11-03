@@ -1,0 +1,24 @@
+:root{color-scheme:light;background:#e86d13;font-synthesis:none}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none;background:#e86d13}
+.landing{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,#fef8ef 0%,#f3cda5 40%,#e86d13 100%)}
+.atmosphere{position:absolute;inset:0;z-index:-1;overflow:hidden}
+#flow{display:block;width:100%;height:100%;opacity:1}
+.brand{position:absolute;top:max(4.48%,env(safe-area-inset-top));left:50%;transform:translateX(-50%);opacity:0;animation:appear 1.8s cubic-bezier(.2,.65,.3,1) .15s both}
+.brand img,.signature img{display:block;max-width:none}
+.copy{position:absolute;inset:0;margin:0;display:grid;place-items:center;font-family:Georgia,'Times New Roman',serif;font-size:clamp(28px,3.8376vw,76px);font-weight:400;line-height:1.12;letter-spacing:-.01em;color:#f3e8d6}
+.phrase{position:absolute;white-space:nowrap;opacity:0;padding:.2em .04em;mask-image:url("/hello/assets/copy-dissolve.svg");-webkit-mask-image:url("/hello/assets/copy-dissolve.svg");mask-size:100% 400%;-webkit-mask-size:100% 400%;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-position:50% 0%;-webkit-mask-position:50% 0%;animation:copy-cycle 44s ease-in-out infinite;animation-delay:2s}
+.phrase:nth-child(2){animation-delay:13s}.phrase:nth-child(3){animation-delay:24s}.phrase:nth-child(4){animation-delay:35s}
+em{font-weight:600;font-style:italic}
+.signature{position:absolute;left:50%;bottom:max(3.61%,env(safe-area-inset-bottom));transform:translateX(-50%);opacity:0;animation:appear 1.8s ease 2s both}
+@keyframes appear{from{opacity:0}to{opacity:1}}
+@keyframes copy-cycle{0%{opacity:0;transform:translateY(14px);mask-position:50% 0%;-webkit-mask-position:50% 0%}4.5455%,13.6364%{opacity:1;transform:translateY(0);mask-position:50% 0%;-webkit-mask-position:50% 0%}23.1818%,25%,100%{opacity:0;transform:translateY(0);mask-position:50% 100%;-webkit-mask-position:50% 100%}}
+@media(max-width:700px){.copy{font-size:clamp(26px,9.83vw,54.264px)}.brand{top:max(4.48%,env(safe-area-inset-top))}}
+@media(max-height:420px){.brand{top:20px}.signature{bottom:20px}.copy{font-size:clamp(26px,5vw,48px)}}
+@media(prefers-reduced-motion:reduce){.brand,.signature{animation:none;opacity:1}.phrase{animation:none;opacity:0}.phrase:first-child{opacity:1;mask-image:none;-webkit-mask-image:none;transform:none}}
+
+.signature{display:flex;flex-direction:column;align-items:center;gap:10px}
+.instagram{width:44px;height:44px;display:grid;place-items:center;color:#f3e8d6;text-decoration:none;border-radius:50%;opacity:.78;transition:opacity .4s ease,background-color .4s ease;touch-action:manipulation}
+.instagram:hover,.instagram:focus-visible{opacity:1;background:rgba(243,232,214,.1)}
+.instagram:focus-visible{outline:1px solid currentColor;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.instagram{transition:none}}
