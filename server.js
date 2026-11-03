@@ -614,7 +614,7 @@ const server = http.createServer(async (req, res) => {
     res.setHeader('Content-Length', stats.size);
     if (targetFile.startsWith('archive/')) res.setHeader('X-Robots-Tag', 'noindex, follow');
 
-    if (ext === '.html') {
+    if (ext === '.html' || targetFile.startsWith('hello/')) {
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     } else {
       res.setHeader('Cache-Control', 'public, max-age=86400');
