@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAI — 내 하루에서 우리의 순간까지</title>
+  <link rel="icon" type="image/png" href="assets/appicon/sai-icon-favicon.png">
+  <link rel="apple-touch-icon" href="assets/appicon/sai-icon-default.png">
+  <link rel="stylesheet" href="style.css?v=20261105_figma13">
+  <link rel="stylesheet" href="snapshot.css?v=20261105_figma13">
+  <link rel="stylesheet" href="figma-calm.css?v=20261105_figma13">
+</head>
+<body>
+  <aside class="review">
+    <a class="brand" href="#welcome">
+      <img src="assets/appicon/sai-icon-default.png" alt="SAI App Icon" class="brand-appicon">
+      <img src="assets/sai-logo-orange.png" alt="SAI" class="brand-wordmark">
+      <span>FIGMA CALM + URL</span>
+    </a>
+    <h1>내 하루에서<br>우리의 순간까지</h1>
+    <p>한 번에 하나씩,<br>나를 알아가는 가벼운 시작.</p>
+    <div id="screen-list"></div>
+    <footer>
+      SAI · FOUNDATIONS &amp; CALM DESIGN SYSTEM<br>
+      Figma 디자인시스템 + 기획 URL 확장 화면 + QRing SDK<br>
+      <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+        <button id="reset">처음부터 다시 보기 ↗</button>
+        <a href="admin.html" target="_blank" class="review-admin-btn" style="text-decoration:none;">🛠️ SAI 어드민 콘솔 ↗</a>
+      </div>
+    </footer>
+  </aside>
+
+  <div class="stage">
+    <header class="review-top">
+      <div class="review-top-head">
+        <div>
+          <span>SAI / CALM · MOBILE EXPERIENCE</span>
+          <span style="margin-left:10px; opacity:0.75;">FIGMA 01–12 &amp; URL FULL SYNC · FW SAI_11C1</span>
+        </div>
+        <div class="review-actions-bar">
+          <button type="button" id="toggle-today-compare" class="review-compare-btn" style="display:none;">A/B 화면 비교</button>
+          <a href="admin.html" target="_blank" class="review-admin-btn">🛠️ SAI 어드민 페이지 열기 ↗</a>
+        </div>
+      </div>
+    </header>
+    <div class="device">
+      <div class="status">
+        <b>9:41</b>
+        <div>▮▮▮ &nbsp; ◒ &nbsp; ▰</div>
+      </div>
+      <main id="app"></main>
+      <div class="home-line"></div>
+    </div>
+    <div class="caption">
+      <span id="screen-number"></span>
+      <span>화면을 눌러 다음 경험으로 이어가세요</span>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <span class="eyebrow">DESIGN NOTES</span>
+    <h2 id="note-title"></h2>
+    <p id="note-body"></p>
+    <div class="swatches" title="Figma SAI · Foundations Palette">
+      <i></i><i></i><i></i><i></i>
+    </div>
+    <small>PAPER / CREAM / ORANGE / CHOCOLATE</small>
+    <div class="note-line"></div>
+    <span class="eyebrow" style="margin-top:4px;display:block;">OFFICIAL APP ICON</span>
+    <div class="appicon-showcase" title="SAI iOS App Icons (Default / Dark / Clear / Tinted)">
+      <img src="assets/appicon/sai-icon-default.png" alt="SAI Default App Icon">
+      <img src="assets/appicon/sai-icon-dark.png" alt="SAI Dark App Icon">
+      <img src="assets/appicon/sai-icon-clear.png" alt="SAI Clear App Icon">
+      <img src="assets/appicon/sai-icon-tinted.png" alt="SAI Tinted App Icon">
+    </div>
+    <small>DEFAULT / DARK / CLEAR / TINTED</small>
+    <div class="note-line"></div>
+    <p>나의 기록이 먼저.<br>함께 나누는 것은 나의 선택.</p>
+    <span class="pill">Figma SAI / Calm 시스템</span>
+    <span class="pill">URL 신규 화면 통합</span>
+    <span class="pill">QRing SDK 1.0.0.79 연동</span>
+  </aside>
+
+  <script src="legal-data.js?v=20261105_figma13"></script>
+  <script src="sai-store.js?v=20261105_figma13"></script>
+  <script src="swift-charts.js?v=20261105_figma13"></script>
+  <script src="pair-model.js?v=20261105_figma13"></script>
+  <script src="app.js?v=20261105_figma13"></script>
+  <script src="date-heart.js?v=20261105_figma13"></script>
+  <script src="week-picker.js?v=20261105_figma13"></script>
+  <script src="care-comparison.js?v=20261105_figma13"></script>
+  <script src="features.js?v=20261105_figma13"></script>
+  <script src="activity.js?v=20261105_figma13"></script>
+  <script src="snapshot.js?v=20261105_figma13"></script>
+  <script src="heart.js?v=20261105_figma13"></script>
+  <script src="shared.js?v=20261105_figma13"></script>
+  <script src="moment.js?v=20261105_figma13"></script>
+  <script src="health-cards.js?v=20261105_figma13"></script>
+  <script src="health-details.js?v=20261105_figma13"></script>
+  <script src="comments.js?v=20261105_figma13"></script>
+  <script src="diary.js?v=20261105_figma13"></script>
+  <script src="profile.js?v=20261105_figma13"></script>
+  <script src="ring-management.js?v=20261105_figma13"></script>
+  <script src="partner-management.js?v=20261105_figma13"></script>
+  <script src="sharing-settings.js?v=20261105_figma13"></script>
+  <script src="account-lifecycle.js?v=20261105_figma13"></script>
+  <script src="sdk-experience.js?v=20261105_figma13"></script>
+  <script src="qring-sdk/sdk-core.js?v=20261105_figma13"></script>
+  <script src="figma-sdk-bridge.js?v=20261105_figma13"></script>
+</body>
+</html>

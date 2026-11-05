@@ -1,0 +1,30 @@
+.snapshot-entry{display:block;flex-shrink:0;width:100%;text-align:left;background:#f3e8d6;color:#30231b;border:1px solid #d9cfc2;border-radius:22px;padding:22px;margin-top:25px}
+.snapshot-entry small{font-size:9px;letter-spacing:1.5px}.snapshot-entry strong{display:block;font-size:20px;font-weight:500;margin:10px 0}.snapshot-entry>span{font-size:11px;color:#9d4200}
+.snapshot-preview-wrap{flex-shrink:0;background:#f3e8d6;border-radius:22px;padding:20px 28px 12px;text-align:center;margin:8px 0 24px}
+#snapshot-preview{display:block;width:100%;max-width:260px;height:auto;margin:auto;box-shadow:0 8px 26px #30213920;border-radius:3px}
+.snapshot-preview-wrap>span{display:block;font-size:9px;letter-spacing:1px;color:#766559;margin-top:12px}
+.snapshot-controls{flex-shrink:0}.snapshot-controls .section-label{margin:23px 0 12px}
+.snapshot-choices{display:flex;gap:6px;margin:12px 0}.snapshot-choices button{flex:1;min-width:0;border:1px solid #d9cfc2;border-radius:12px;background:transparent;color:#766559;padding:12px 6px;font-size:11px}
+.snapshot-choices button.selected{background:#f8dec9;border-color:#e86d13;color:#30231b}
+.snapshot-field{display:block;font-size:12px;color:#766559;margin:16px 0}
+.snapshot-field select,.snapshot-field input{display:block;width:100%;min-width:0;margin-top:8px;padding:13px 10px;border:1px solid #c7b69e;border-radius:12px;background:#fef8ef;color:#30231b;font-size:12px}
+.snapshot-fields{display:flex;flex-wrap:wrap;gap:9px}.snapshot-fields label{display:flex;align-items:center;gap:6px;border:1px solid #d9cfc2;border-radius:10px;padding:9px;font-size:11px;color:#503b2b}.snapshot-fields input{accent-color:#e86d13}
+.snapshot-upload{display:block;padding:12px;border:1px dashed #c7b69e;border-radius:12px;color:#9d4200;font-size:12px}.snapshot-upload input{display:block;width:100%;font-size:11px;margin-top:8px}
+[data-snap-export]{flex-shrink:0}[data-snap-export]:disabled{opacity:.5}
+/* Sport poster treatments and photo-overlay stickers. */
+.snapshot-preview-wrap{background:#deded7;border-radius:14px;padding:18px 22px 12px}
+.snapshot-preview-wrap.is-sticker{background-color:#373936;background-image:linear-gradient(45deg,#454743 25%,transparent 25%),linear-gradient(-45deg,#454743 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#454743 75%),linear-gradient(-45deg,transparent 75%,#454743 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}.snapshot-preview-wrap.is-sticker>span{color:#e0e0d9}
+.snapshot-choices:has([data-snap-theme]) button{padding:14px 5px 12px;border-radius:9px;font-size:9px;font-weight:700;letter-spacing:.3px}
+[data-snap-theme]::before{content:'Aa +';display:block;font-size:23px;font-weight:900;letter-spacing:-1px;margin-bottom:10px;padding:15px 2px}
+[data-snap-theme="night"]::before{background:#171a14;color:#d5ff45}[data-snap-theme="lilac"]::before{background:#eeece6;color:#7952f5}[data-snap-theme="photo"]::before{background:linear-gradient(145deg,#8c977a,#27342f);color:white}
+.snapshot-sticker{display:flex;align-items:center;gap:12px;padding:16px 12px;border-top:1px solid #d9cfc2;border-bottom:1px solid #d9cfc2;margin-top:18px}.snapshot-sticker input{accent-color:#e86d13}.snapshot-sticker>span:nth-child(2){flex:1}.snapshot-sticker b{display:block;font-size:12px;font-weight:500}.snapshot-sticker small{display:block;font-size:10px;color:#766559;margin-top:4px}
+/* Quiet route-led editorial compositions. */
+.snapshot-preview-wrap{background:#e5e5dd;border-radius:8px;padding:20px 22px 12px}
+.snapshot-choices button.selected{background:#e5e9e1;border-color:#98a596;color:#37483b}
+[data-snap-theme]::before{content:'⌁';font-family:Georgia,serif;font-size:38px;font-weight:400;letter-spacing:0;line-height:1;padding:17px 2px}
+[data-snap-theme="night"]::before{background:#25332f;color:#c5d0bd}
+[data-snap-theme="lilac"]::before{background:#f1efe7;color:#6d8073}
+[data-snap-theme="photo"]::before{background:linear-gradient(150deg,#aeb6a1,#536b61);color:#faf8f0}
+.snapshot-upload{padding:18px 14px;border-color:#a5b19f;background:#eef0e9;border-radius:9px;color:#4d5e50}
+.snapshot-field input[type="range"]{padding:0;accent-color:#7a8c78;background:none;border:0}
+.snapshot-preview-wrap.is-sticker{background-color:#344239}

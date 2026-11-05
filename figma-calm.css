@@ -1,0 +1,3938 @@
+/* ==========================================================================
+   SAI — Official Figma Design System Stylesheet (1:1 Faithful Implementation)
+   Sources:
+   - 01 · Foundations (Colors, Pretendard Typography, Official SAI Vector Logos)
+   - 02 · Components & Patterns (12:18 Button, 12:166 Input, 12:1013 Record Row, 19:267 Nav)
+   - 03 · App — Sequences & States (01 Welcome, 12 Login, 03 Ring Pairing, 19B Today, 20-22 Metrics, 24 Together)
+   - 04 · Full-height Review
+   ========================================================================== */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+:root {
+  --bg: #F8F4EC;
+  --surface: #FEF8EF;
+  --card: #F3E8D6;
+  --line: #C7B69E;
+  --ink: #30231B;
+  --muted: #796C60;
+  --accent: #E86D13;
+  --deep: #9D4200;
+  --sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  --serif: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: #EDE5D7;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   1. Device Frame & Base Screen Container (390 × 844 Figma Frame)
+   -------------------------------------------------------------------------- */
+.device {
+  width: 390px;
+  height: 844px;
+  background: var(--bg);
+  color: var(--ink);
+  border: 0 !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  border-radius: 50px !important;
+  box-shadow: 0 28px 68px rgba(24, 18, 14, 0.28), 0 0 0 10px #18120E !important;
+  position: relative;
+  overflow: hidden !important;
+}
+
+.status {
+  height: 44px;
+  padding: 14px 32px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  background: transparent !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 55 !important;
+  pointer-events: none;
+}
+
+main,
+#app,
+.peer-app,
+.care-panel-content,
+.page,
+.device,
+.device *,
+.care-board-phone,
+.care-board-phone * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+main,
+#app,
+.peer-app {
+  height: 100% !important;
+  width: 100% !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+}
+
+main::-webkit-scrollbar,
+#app::-webkit-scrollbar,
+.peer-app::-webkit-scrollbar,
+.care-panel-content::-webkit-scrollbar,
+.page::-webkit-scrollbar,
+.device::-webkit-scrollbar,
+.device *::-webkit-scrollbar,
+.care-board-phone::-webkit-scrollbar,
+.care-board-phone *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+@keyframes saiPageReveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.page,
+.page.welcome {
+  min-height: 100% !important;
+  padding: 52px 32px 0 !important;
+  background: transparent !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+  animation: saiPageReveal 0.28s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+#app[data-same-screen="1"] .page,
+#app[data-same-screen="1"] .page.welcome,
+.device[data-same-screen="1"] .page {
+  animation: none !important;
+}
+
+.page > * {
+  flex-shrink: 0;
+}
+
+.hero-ring::before,
+.hero-ring::after {
+  display: none !important;
+  content: none !important;
+}
+
+.hero-ring img {
+  mix-blend-mode: normal !important;
+}
+
+/* Hide legacy English eyebrows on standard pages to match Figma 03 · App */
+.page > .eyebrow {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Top Bar & Official SAI Vector Wordmark
+   -------------------------------------------------------------------------- */
+.top,
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 36px;
+  margin-bottom: 24px;
+}
+
+.sai-wordmark {
+  height: 24px;
+  width: auto;
+  display: block;
+}
+
+.top .back,
+.record-header .back {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 4px 8px 4px 0 !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+.progress {
+  display: flex;
+  gap: 6px;
+}
+.progress i {
+  width: 20px;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(199, 182, 158, 0.55);
+}
+.progress i.on {
+  background: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   3. Figma Typography (30px / 34px Pretendard Regular Headlines)
+   -------------------------------------------------------------------------- */
+h2 {
+  font-family: var(--sans);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.7px;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+
+h3 {
+  font-family: var(--sans);
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.4px;
+  margin: 16px 0 8px;
+  color: var(--ink);
+}
+
+.sub {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+
+.tiny {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   4. Figma Component 12:166 — Underline Input (SAI / Calm / Input)
+   -------------------------------------------------------------------------- */
+.field {
+  margin: 16px 0;
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 6px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.field input {
+  width: 100%;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--line) !important;
+  border-radius: 0 !important;
+  padding: 8px 0 11px !important;
+  font-family: var(--sans);
+  font-size: 19px !important;
+  font-weight: 400 !important;
+  color: var(--ink) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.field input::placeholder {
+  color: var(--line);
+}
+
+.field input:focus {
+  border-bottom: 2px solid var(--ink) !important;
+}
+
+.field textarea {
+  width: 100%;
+  background: rgba(243, 232, 214, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   5. Figma Component 12:18 — Pill Buttons (SAI / Calm / Button)
+   -------------------------------------------------------------------------- */
+.primary,
+.secondary,
+.text-btn {
+  width: 100%;
+  border-radius: 28px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.12s ease;
+}
+
+.primary {
+  min-height: 56px;
+  background: var(--ink);
+  color: var(--card);
+  border: 0;
+  box-shadow: none;
+}
+
+.secondary {
+  min-height: 56px;
+  background: var(--card);
+  color: var(--ink);
+  border: 0;
+  box-shadow: none;
+  margin-top: 10px;
+}
+
+.text-btn {
+  min-height: 40px;
+  background: transparent;
+  color: var(--muted);
+  border: 0;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.push {
+  margin-top: auto !important;
+  position: sticky !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: calc(100% + 64px) !important;
+  margin-left: -32px !important;
+  margin-right: -32px !important;
+  padding: 14px 32px 28px !important;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 244, 236, 0) 0%,
+    rgba(248, 244, 236, 0.94) 24%,
+    #F8F4EC 100%
+  ) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  z-index: 45 !important;
+  box-sizing: border-box !important;
+}
+.push .secondary,
+.push .text-btn {
+  margin-top: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Figma Component 12:1013 — Editorial Record Row (SAI / Calm / Record row)
+   -------------------------------------------------------------------------- */
+.row {
+  width: 100%;
+  min-height: 58px;
+  padding: 14px 0;
+  margin: 0;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(199, 182, 158, 0.5) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row .row-icon {
+  display: none !important;
+}
+
+.row .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.row strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.28;
+}
+
+.row small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.35;
+}
+
+.row .arrow,
+.row > span:last-child:not(.grow) {
+  font-size: 16px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Consent & Choice Rows (04 동의 선택, 07 성별, 09 관심사)
+   -------------------------------------------------------------------------- */
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(199, 182, 158, 0.45);
+  border-radius: 0;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.check-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--ink);
+  flex-shrink: 0;
+}
+
+.check-row small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.choice {
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 16px;
+  margin: 8px 0;
+  border-radius: 14px;
+  background: rgba(243, 232, 214, 0.55);
+  border: 1px solid transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.choice.selected {
+  background: var(--card);
+  border-color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   8. Figma Component 19:267 — Floating Dark-Chocolate Bottom Navigation
+   -------------------------------------------------------------------------- */
+.bottom-nav {
+  position: sticky;
+  bottom: 14px;
+  width: 288px;
+  height: 60px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(48, 35, 27, 0.98) !important;
+  border: 0 !important;
+  box-shadow: 0 6px 9px rgba(48, 35, 27, 0.16) !important;
+  display: grid;
+  grid-template-columns: repeat(4, 64px);
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  z-index: 25;
+}
+
+.bottom-nav button {
+  width: 64px;
+  height: 44px;
+  padding: 2px 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent !important;
+  color: #C7B69E !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-family: var(--sans);
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 15px !important;
+  cursor: pointer;
+}
+
+.bottom-nav button .svg-icon {
+  width: 20px !important;
+  height: 20px !important;
+  stroke-width: 1.65 !important;
+}
+
+.bottom-nav button.active {
+  background: transparent !important;
+  color: #E86D13 !important;
+  font-weight: 600 !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Full-Screen Warm Dusk Backdrop (01 Welcome & 12 Login / Account Recovery)
+   -------------------------------------------------------------------------- */
+.device[data-figma-backdrop="dusk"] {
+  background: #30231B url('assets/backdrop-dusk.png') center center / 100% 100% no-repeat !important;
+  color: #F3E8D6;
+}
+
+.device[data-figma-backdrop="dusk"] .push {
+  background: transparent !important;
+}
+
+.device[data-figma-backdrop="dusk"] .status,
+.device[data-figma-backdrop="dusk"] .top,
+.device[data-figma-backdrop="dusk"] h2,
+.device[data-figma-backdrop="dusk"] .sub {
+  color: #F3E8D6 !important;
+}
+
+.device[data-figma-backdrop="dusk"] h2 {
+  font-size: 34px;
+  line-height: 1.12;
+  letter-spacing: -0.7px;
+  margin-bottom: 12px;
+}
+
+.device[data-figma-backdrop="dusk"] .sub {
+  font-size: 15px;
+  line-height: 1.38;
+  opacity: 0.94;
+}
+
+.device[data-figma-backdrop="dusk"] .welcome .hero-ring {
+  flex: 1;
+  min-height: 210px;
+  margin: 12px 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.device[data-figma-backdrop="dusk"] .welcome .hero-ring img {
+  width: 210px;
+  height: 210px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 28px rgba(24, 14, 8, 0.42));
+}
+
+.device[data-figma-backdrop="dusk"] .figma-auth-fields {
+  margin-top: 18px;
+}
+
+.device[data-figma-backdrop="dusk"] .field label {
+  color: #F3E8D6 !important;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.device[data-figma-backdrop="dusk"] .field input {
+  color: #F3E8D6 !important;
+  border-bottom-color: rgba(243, 232, 214, 0.55) !important;
+}
+
+.device[data-figma-backdrop="dusk"] .field input::placeholder {
+  color: rgba(243, 232, 214, 0.45) !important;
+}
+
+.device[data-figma-backdrop="dusk"] .field input:focus {
+  border-bottom-color: #F3E8D6 !important;
+}
+
+.device[data-figma-backdrop="dusk"] .primary {
+  background: #E86D13 !important;
+  color: #30231B !important;
+  font-weight: 600 !important;
+}
+
+.device[data-figma-backdrop="dusk"] .secondary {
+  background: #F3E8D6 !important;
+  color: #30231B !important;
+  font-weight: 500 !important;
+}
+
+.auth-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  margin-top: 8px;
+}
+
+.auth-links button {
+  background: transparent;
+  border: 0;
+  padding: 6px 4px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: #F3E8D6;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   10. Full-Screen Ring Pairing Backdrop (10~16 Ring Pairing Sequence)
+   -------------------------------------------------------------------------- */
+.device[data-figma-backdrop="pairing"] {
+  background: #30231B url('assets/backdrop-pairing.png') center center / 100% 100% no-repeat !important;
+  color: #F3E8D6;
+}
+
+.device[data-figma-backdrop="pairing"] .push {
+  background: transparent !important;
+}
+
+.device[data-figma-backdrop="pairing"] .status,
+.device[data-figma-backdrop="pairing"] .top,
+.device[data-figma-backdrop="pairing"] h2,
+.device[data-figma-backdrop="pairing"] .sub,
+.device[data-figma-backdrop="pairing"] .tiny {
+  color: #F3E8D6 !important;
+}
+
+.device[data-figma-backdrop="pairing"] .sub,
+.device[data-figma-backdrop="pairing"] .tiny {
+  opacity: 0.9;
+}
+
+.device[data-figma-backdrop="pairing"] .hero-ring {
+  height: 150px;
+  margin: 12px 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.device[data-figma-backdrop="pairing"] .hero-ring img {
+  width: 145px;
+  height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.45));
+}
+
+.device[data-figma-backdrop="pairing"] .primary {
+  background: #E86D13 !important;
+  color: #30231B !important;
+  font-weight: 600 !important;
+}
+
+.device[data-figma-backdrop="pairing"] .secondary {
+  background: #F3E8D6 !important;
+  color: #30231B !important;
+  font-weight: 500 !important;
+}
+
+.device[data-figma-backdrop="pairing"] .row {
+  border-bottom-color: rgba(199, 182, 158, 0.28) !important;
+}
+
+.device[data-figma-backdrop="pairing"] .row strong,
+.device[data-figma-backdrop="pairing"] .row .arrow {
+  color: #F3E8D6 !important;
+}
+
+.device[data-figma-backdrop="pairing"] .row small {
+  color: #C7B69E !important;
+}
+
+.device[data-figma-backdrop="pairing"] .callout {
+  background: rgba(48, 35, 27, 0.36);
+  border: 1px solid rgba(243, 232, 214, 0.16);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 8px 0;
+  color: #F3E8D6;
+  font-size: 13px;
+}
+
+/* Figma 10 링 연결 (30:1166, 37:6610, 37:6657, 37:6715) */
+.figma-ring-prep {
+  width: 100%;
+  min-height: 356px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  gap: 8px;
+  margin: 4px 0 12px;
+}
+
+.figma-prep-art-wrap {
+  width: 100%;
+  height: 256px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.figma-prep-ctrl-bar {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.figma-pairing-progress {
+  position: relative;
+  width: 248px;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(243, 232, 214, 0.28);
+  overflow: visible;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.figma-pairing-progress span,
+.figma-prep-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: #F3E8D6;
+  transition: width 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.figma-pairing-progress.is-orange span {
+  background: #E86D13;
+}
+
+.figma-prep-step-hits {
+  position: absolute;
+  inset: -12px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.figma-prep-step-hit {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  cursor: pointer;
+}
+
+.figma-prep-play-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: #F3E8D6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.figma-prep-play-btn .icon-play {
+  display: none;
+}
+
+.figma-prep-play-btn.is-paused .icon-pause {
+  display: none;
+}
+
+.figma-prep-play-btn.is-paused .icon-play {
+  display: inline;
+}
+
+.figma-pairing-caption {
+  font-size: 14px;
+  line-height: 19px;
+  color: #F3E8D6;
+  text-align: center;
+  margin: 2px 0 0;
+}
+
+/* Figma Pairing Unified Graphic Container (224px height, 30:1232 / 30:1909 / 30:2123 / 31:1623 / 31:2000) */
+.figma-pairing-graphic {
+  width: 100%;
+  height: 224px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 4px 0 10px;
+}
+
+.figma-pairing-graphic .hero-ring {
+  margin: 0 !important;
+  height: 164px !important;
+}
+
+.figma-pairing-graphic .hero-ring img {
+  width: 156px !important;
+  height: 156px !important;
+}
+
+.figma-graphic-mini-bar {
+  width: 142px;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(243, 232, 214, 0.28);
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.figma-graphic-mini-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: #F3E8D6;
+}
+
+.figma-graphic-mini-bar.is-orange span {
+  background: #E86D13;
+}
+
+.figma-pairing-status-line {
+  font-size: 13px;
+  line-height: 18px;
+  color: #C7B69E;
+  margin: 4px 0 12px;
+  text-align: left;
+}
+
+.figma-pairing-helper-sub {
+  font-size: 12px;
+  line-height: 16px;
+  color: #C7B69E;
+  margin: -4px 0 12px;
+  text-align: left;
+}
+
+/* Figma 13 내 링 확인 (30:2112) */
+.figma-ring-select-row {
+  min-height: 50px;
+  padding: 8px 12px;
+  margin: 4px 0 14px;
+  border-radius: 12px;
+  background: rgba(48, 35, 27, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.figma-radio-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.25px solid #C7B69E;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.figma-radio-dot i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #F3E8D6;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.figma-radio-dot.is-checked i,
+.selected .figma-radio-dot i {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.figma-ring-select-row strong {
+  display: block;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+  color: #F3E8D6;
+}
+
+.figma-ring-select-row small {
+  display: block;
+  font-size: 11px;
+  line-height: 15px;
+  color: #C7B69E;
+  margin-top: 2px;
+}
+
+.figma-pairing-note {
+  margin: 4px 0 14px;
+}
+
+.figma-pairing-note strong {
+  display: block;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 500;
+  color: #F3E8D6;
+}
+
+.figma-pairing-note small {
+  display: block;
+  font-size: 12px;
+  line-height: 16px;
+  color: #C7B69E;
+  margin-top: 3px;
+}
+
+/* Figma 15 연결 도움말 (31:1925) Editorial List */
+.figma-help-editorial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 18px 0 24px;
+}
+
+.figma-help-editorial-item strong {
+  display: block;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 500;
+  color: #F3E8D6;
+  margin-bottom: 3px;
+}
+
+.figma-help-editorial-item p {
+  font-size: 12px;
+  line-height: 17px;
+  color: #C7B69E;
+  margin: 0;
+}
+
+/* Figma 16 연결 완료 (31:1989) */
+.figma-ring-done-art {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.figma-done-check {
+  position: absolute;
+  top: 6px;
+  right: -4px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #FEF8EF;
+  color: #30231B;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+}
+
+.figma-done-caption {
+  font-size: 12px;
+  line-height: 16px;
+  color: #F3E8D6;
+  margin: 6px 0 0;
+  text-align: center;
+}
+
+.figma-ringdone-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.device[data-figma-backdrop="pairing"] .secondary.figma-cream-btn {
+  background: #F3E8D6 !important;
+  color: #30231B !important;
+  border: 0 !important;
+  font-weight: 600 !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. Figma 19B 오늘 / 원형 지표 (Node 26:500)
+   -------------------------------------------------------------------------- */
+.device[data-screen-id="today"] .status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: #F3E8D6;
+}
+
+.device[data-screen-id="today"] main {
+  height: 100%;
+}
+
+.device[data-screen-id="today"] .page {
+  padding: 0;
+  min-height: 100%;
+}
+
+.today-hero {
+  background: #30231B url('assets/backdrop-dusk.png') center top / cover no-repeat;
+  padding: 44px 32px 36px;
+  color: #F3E8D6;
+  position: relative;
+  z-index: 1;
+}
+
+.today-hero .home-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.today-hero .gear-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent !important;
+  border: 0 !important;
+  color: #F3E8D6 !important;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.today-date-overline {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  color: #C7B69E;
+  margin-bottom: 4px;
+}
+
+.today-hero .greeting {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.7px;
+  color: #F3E8D6;
+  margin: 0 0 16px;
+}
+
+.today-rhythm {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.metric-orbits {
+  display: grid;
+  grid-template-columns: repeat(3, 92px);
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.orbit-metric {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.metric-disc {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: rgba(38, 27, 20, 0.46) !important;
+  border: 1.5px solid rgba(243, 232, 214, 0.42) !important;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.steps-orbit .metric-disc {
+  background: conic-gradient(#E86D13 calc(var(--step-progress, 68%) * 1), rgba(243, 232, 214, 0.38) 0) !important;
+  border: 0 !important;
+}
+
+.steps-orbit .metric-disc::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 2px !important;
+  border-radius: 50% !important;
+  background: rgba(38, 27, 20, 0.92) !important;
+  z-index: -1 !important;
+}
+
+.metric-disc strong {
+  font-family: var(--sans);
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  color: #F3E8D6 !important;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+}
+
+.metric-disc small {
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  color: #C7B69E !important;
+  margin-top: 3px;
+}
+
+.orbit-label {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #F3E8D6 !important;
+}
+
+.today-sheet {
+  background: #F8F4EC;
+  border-radius: 28px 28px 0 0;
+  margin-top: -22px;
+  padding: 20px 32px 88px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.today-sheet .row {
+  min-height: 50px !important;
+  padding: 9px 0 !important;
+}
+
+.today-sheet-head {
+  margin-bottom: 6px;
+}
+
+.today-sheet-head h3 {
+  font-size: 22px;
+  font-weight: 400;
+  color: #30231B;
+  margin: 0 0 4px;
+}
+
+.today-sheet-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #796C60;
+}
+
+.today-sync-btn {
+  background: transparent;
+  border: 0;
+  padding: 2px 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: #796C60;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   12. Figma 20~22 수면 · 활동 · 심박 (Two-Tier #F8F4EC + #F3E8D6 Sheet & Week Strip)
+   -------------------------------------------------------------------------- */
+.week-picker {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 0 18px !important;
+}
+
+.week-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.week-range-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #796C60;
+}
+
+.week-nav-btns {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.week-nav {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 0 !important;
+  background: transparent !important;
+  color: #30231B !important;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.week-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.week-day {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 8px 0 !important;
+  min-height: 62px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.week-day svg {
+  display: none !important;
+}
+
+.week-day small {
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  color: #796C60 !important;
+}
+
+.week-day strong,
+.week-day span {
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #30231B !important;
+  background: transparent !important;
+}
+
+.week-day.selected {
+  background: #30231B !important;
+  color: #F3E8D6 !important;
+  box-shadow: none !important;
+}
+
+.week-day.selected small {
+  color: #C7B69E !important;
+  font-weight: 500 !important;
+}
+
+.week-day.selected strong,
+.week-day.selected span {
+  background: transparent !important;
+  color: #F3E8D6 !important;
+  font-weight: 600 !important;
+}
+
+.sleep-hero strong,
+.sleep-score strong,
+.heart-day-summary div {
+  font-family: var(--sans) !important;
+  font-size: 56px !important;
+  font-weight: 400 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -1.5px !important;
+  color: #30231B !important;
+}
+
+.sleep-summary {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 20px 22px !important;
+  margin: 12px 0 !important;
+  box-shadow: none !important;
+}
+
+.sleep-stage-card,
+.sleep-section,
+.heart-plot,
+.trend-panel,
+.sdk-card,
+.lifecycle-card {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 20px !important;
+  margin: 12px 0 !important;
+  box-shadow: none !important;
+}
+
+/* Figma 21 나의 활동 (26:2150) — Circular Step Gauge */
+.ring-progress {
+  flex-shrink: 0 !important;
+  width: 220px !important;
+  height: 220px !important;
+  margin: 18px auto 22px !important;
+  padding: 10px !important;
+  border-radius: 50% !important;
+  background: conic-gradient(#9D4200 0 68%, #E5DAC9 68% 100%) !important;
+  transform: none !important;
+}
+
+.ring-progress > div {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  background: #F8F4EC !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: none !important;
+}
+
+.ring-progress strong {
+  font-family: var(--sans) !important;
+  font-size: 52px !important;
+  font-weight: 400 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -1.5px !important;
+  color: #30231B !important;
+  margin: 4px 0 !important;
+}
+
+.ring-progress small {
+  font-size: 11px !important;
+  color: #796C60 !important;
+}
+
+.heart-lenses {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin-bottom: 14px !important;
+}
+
+.heart-lens,
+.chips button {
+  background: #F8F4EC !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  height: 34px !important;
+  padding: 0 12px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #796C60 !important;
+  white-space: nowrap !important;
+}
+
+.heart-lens.selected,
+.chips button.on {
+  background: #30231B !important;
+  color: #F3E8D6 !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. Figma 24 우리 (Node 31:1551)
+   -------------------------------------------------------------------------- */
+.together-copy {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #796C60;
+  margin: 18px 0 24px;
+}
+
+.together-actions {
+  margin-bottom: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   14. Sidebar Badges & QRing SDK Hardware Simulator Dock
+   -------------------------------------------------------------------------- */
+.screen-link .figma-badge {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 99px;
+  background: rgba(232, 109, 19, 0.14);
+  color: #9D4200;
+}
+
+.qring-sim-dock {
+  width: 100%;
+  max-width: 520px;
+  margin-top: 12px;
+  background: #FEF8EF;
+  border: 1px solid #E5DAC9;
+  border-radius: 18px;
+  padding: 10px 14px;
+  font-size: 12px;
+}
+
+.qring-sim-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.qring-sim-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #E86D13;
+  margin-right: 6px;
+}
+
+.qring-sim-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.qring-sim-actions button {
+  background: #F3E8D6;
+  border: 0;
+  border-radius: 99px;
+  padding: 5px 10px;
+  font-size: 11px;
+  color: #30231B;
+  cursor: pointer;
+}
+
+.qring-sim-log {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #30231B;
+  color: #F3E8D6;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+}
+
+@media (max-width: 900px) {
+  .qring-sim-dock,
+  .caption,
+  .review-top {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   15. Figma 1:1 Screen Architecture & Extracted Asset Rules
+   ========================================================================== */
+
+/* Left-aligned Figma Back Header (← + 16px + Korean Title) */
+.figma-back-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start !important;
+  gap: 16px;
+  min-height: 36px;
+  margin-bottom: 18px;
+}
+
+.figma-back-header .back {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 4px 4px 4px 0 !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  color: inherit !important;
+  cursor: pointer;
+}
+
+.figma-header-title {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: inherit;
+  letter-spacing: -0.01em;
+}
+
+.figma-back-header.is-light,
+.device[data-figma-backdrop="dusk"] .figma-back-header,
+.device[data-figma-backdrop="pairing"] .figma-back-header,
+.device[data-figma-backdrop="checkin"] .figma-back-header {
+  color: #F3E8D6 !important;
+}
+
+/* Tab Header (우리, 순간 달력, 내 설정) */
+.figma-tab-header {
+  margin: 4px 0 8px;
+}
+
+.figma-tab-header h2 {
+  font-size: 28px !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.02em;
+  color: #30231B;
+  margin: 0;
+}
+
+/* Extracted Figma Ring Prep & Connecting Artworks */
+.figma-prep-img {
+  width: 248px;
+  height: 248px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.figma-ring-phone-img {
+  width: 256px;
+  height: 158px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Figma 18 · 체크인 (Node 31:2610) */
+.device[data-figma-backdrop="checkin"] {
+  background: #30231B url('assets/figma/backdrop-checkin.png') center center / 100% 100% no-repeat !important;
+  color: #F3E8D6;
+}
+
+.device[data-figma-backdrop="checkin"] .page {
+  padding-top: 44px !important;
+  padding-bottom: 14px !important;
+}
+
+.device[data-figma-backdrop="checkin"] .top.figma-checkin-top {
+  margin-bottom: 8px !important;
+}
+
+.device[data-figma-backdrop="checkin"] .push {
+  background: transparent !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+.device[data-figma-backdrop="checkin"] .status,
+.device[data-figma-backdrop="checkin"] .top,
+.device[data-figma-backdrop="checkin"] h2,
+.device[data-figma-backdrop="checkin"] .sub {
+  color: #F3E8D6 !important;
+}
+
+.device[data-figma-backdrop="checkin"] h2 {
+  font-size: 28px !important;
+  line-height: 1.24 !important;
+  margin: 0 0 4px !important;
+}
+
+.device[data-figma-backdrop="checkin"] .sub {
+  font-size: 13.5px !important;
+  line-height: 1.35 !important;
+  margin: 0 0 10px !important;
+}
+
+.device[data-figma-backdrop="checkin"] .primary {
+  background: #E86D13 !important;
+  color: #30231B !important;
+  font-weight: 600 !important;
+  min-height: 52px !important;
+}
+
+.figma-checkin-glass-card {
+  width: 100%;
+  border-radius: 24px;
+  background: rgba(254, 248, 239, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-sizing: border-box;
+}
+
+.figma-checkin-glass-card.is-sleep {
+  padding: 12px 16px;
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.figma-checkin-sleep-label {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #C7B69E;
+}
+
+.figma-checkin-sleep-val {
+  font-size: 26px;
+  line-height: 34px;
+  font-weight: 400;
+  color: #F3E8D6;
+  letter-spacing: -0.02em;
+}
+
+.figma-checkin-sleep-time {
+  font-size: 11px;
+  line-height: 15px;
+  color: #C7B69E;
+}
+
+.figma-checkin-glass-card.is-moods {
+  padding: 8px 13px;
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.figma-checkin-mood-row {
+  width: 100%;
+  min-height: 40px;
+  padding: 4px 2px;
+  border: 0 !important;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  color: #F3E8D6 !important;
+  cursor: pointer;
+}
+
+.figma-checkin-mood-label {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+  color: #F3E8D6;
+}
+
+.figma-checkin-field {
+  margin: 4px 0 6px !important;
+}
+
+.figma-checkin-field label {
+  display: block;
+  font-size: 13px !important;
+  line-height: 18px !important;
+  font-weight: 500 !important;
+  color: #F3E8D6 !important;
+  margin-bottom: 4px !important;
+}
+
+.figma-checkin-field input {
+  width: 100%;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #C7B69E !important;
+  border-radius: 0 !important;
+  padding: 4px 0 8px !important;
+  font-size: 18px !important;
+  line-height: 24px !important;
+  color: #F3E8D6 !important;
+  text-align: left !important;
+}
+
+.figma-checkin-field input::placeholder {
+  color: rgba(243, 232, 214, 0.55) !important;
+}
+
+.figma-checkin-privacy {
+  font-size: 12px;
+  line-height: 16px;
+  color: #F3E8D6;
+  margin: 2px 0 6px;
+}
+
+.figma-checkin-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+}
+
+.figma-checkin-defer {
+  min-height: 36px !important;
+  padding: 6px 0 !important;
+  font-size: 13px !important;
+  color: #F3E8D6 !important;
+  background: transparent !important;
+  border: 0 !important;
+  text-align: center !important;
+}
+
+/* Figma 20~23B Detail Hero & Full-Bleed #F3E8D6 Bottom Sheet */
+.figma-detail-hero {
+  padding: 6px 0 18px;
+}
+
+.figma-detail-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #796C60;
+  margin-bottom: 6px;
+}
+
+.figma-detail-big {
+  display: block;
+  font-family: var(--sans);
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: #30231B;
+  margin-bottom: 8px;
+}
+
+.figma-detail-sub {
+  font-size: 13px;
+  color: #796C60;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.figma-bottom-sheet {
+  background: #F3E8D6;
+  border-radius: 28px 28px 0 0;
+  margin: 16px -32px 0 !important;
+  padding: 24px 32px 0 !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+
+.figma-bottom-sheet > .push {
+  background: linear-gradient(
+    180deg,
+    rgba(243, 232, 214, 0) 0%,
+    rgba(243, 232, 214, 0.95) 24%,
+    #F3E8D6 100%
+  ) !important;
+}
+
+.figma-bottom-sheet > button.primary:last-child,
+.figma-bottom-sheet > button.secondary:last-child {
+  margin-top: auto !important;
+  position: sticky !important;
+  bottom: 28px !important;
+  z-index: 45 !important;
+  box-shadow: 0 -10px 24px #F3E8D6 !important;
+}
+
+.figma-sheet-title {
+  font-size: 18px;
+  font-weight: 400;
+  color: #30231B;
+  margin: 0 0 12px;
+}
+
+/* Figma 20 · 나의 수면 Stage Bar & Flat Stage List */
+.figma-sleep-stage-bar {
+  height: 12px;
+  border-radius: 99px;
+  overflow: hidden;
+  display: flex;
+  gap: 2px;
+  margin: 8px 0 16px;
+  background: rgba(199, 182, 158, 0.35);
+}
+
+.figma-sleep-stage-bar .stage-deep {
+  background: #30231B;
+}
+
+.figma-sleep-stage-bar .stage-light {
+  background: #9D4200;
+}
+
+.figma-sleep-stage-bar .stage-rem {
+  background: #E86D13;
+}
+
+.figma-sleep-stage-bar .stage-awake {
+  background: #C7B69E;
+}
+
+.figma-stage-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.figma-stage-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(199, 182, 158, 0.45);
+  font-size: 14px;
+  color: #30231B;
+}
+
+.figma-stage-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.stage-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.stage-dot.stage-deep {
+  background: #30231B;
+}
+
+.stage-dot.stage-light {
+  background: #9D4200;
+}
+
+.stage-dot.stage-rem {
+  background: #E86D13;
+}
+
+.stage-dot.stage-awake {
+  background: #C7B69E;
+}
+
+.figma-stage-val {
+  font-size: 13px;
+  color: #796C60;
+}
+
+/* Figma 21 · 나의 활동 Progress Bar & Inline Metrics */
+.figma-step-progress-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 99px;
+  background: #E5DAC9;
+  overflow: hidden;
+  margin: 14px 0 18px;
+}
+
+.figma-step-progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: #E86D13;
+}
+
+.figma-inline-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(199, 182, 158, 0.5);
+}
+
+.figma-inline-metrics small {
+  display: block;
+  font-size: 11px;
+  color: #796C60;
+  margin-bottom: 4px;
+}
+
+.figma-inline-metrics strong {
+  font-size: 17px;
+  font-weight: 500;
+  color: #30231B;
+}
+
+.figma-inline-row-Wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(199, 182, 158, 0.5);
+}
+
+.figma-inline-row-Wrap .row {
+  border-bottom: 0 !important;
+}
+
+.figma-mini-share-btn {
+  background: transparent;
+  border: 1px solid rgba(48, 35, 27, 0.25);
+  border-radius: 99px;
+  padding: 5px 10px;
+  font-family: var(--sans);
+  font-size: 11px;
+  color: #30231B;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* Figma 22~25 Lens Filter Pills & Chart Card */
+.lens-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 16px;
+}
+
+.lens-pill {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 0;
+  background: #F3E8D6;
+  color: #796C60;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.lens-pill.selected {
+  background: #30231B !important;
+  color: #F3E8D6 !important;
+}
+
+.figma-chart-card {
+  margin: 4px 0 8px;
+}
+
+.figma-chart-card svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Figma 23B · 나의 주기 기록 Phase Bar */
+.figma-cycle-phase-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 99px;
+  overflow: hidden;
+  gap: 3px;
+  margin: 6px 0 18px;
+}
+
+.figma-cycle-phase-bar .phase-menstrual {
+  background: #9D4200;
+}
+
+.figma-cycle-phase-bar .phase-follicular {
+  background: #C7B69E;
+}
+
+.figma-cycle-phase-bar .phase-ovulation {
+  background: #E86D13;
+}
+
+.figma-cycle-phase-bar .phase-luteal {
+  background: #DFC9AC;
+}
+
+/* Figma 17 · 파트너 초대 / 24 · 우리 / 25 · 순간 달력 / 27 · 내 설정 */
+.figma-partner-card,
+.figma-unpaired-card,
+.figma-profile-card {
+  background: #F3E8D6;
+  border-radius: 22px;
+  padding: 20px 22px;
+  margin: 8px 0 18px;
+}
+
+.figma-partner-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.figma-partner-card-top strong,
+.figma-unpaired-card strong,
+.figma-profile-card strong {
+  font-size: 18px;
+  font-weight: 500;
+  color: #30231B;
+}
+
+.figma-partner-card-top span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9D4200;
+}
+
+.figma-partner-card p,
+.figma-unpaired-card p {
+  font-size: 13px;
+  color: #796C60;
+  margin: 4px 0 0;
+  line-height: 1.45;
+}
+
+.figma-partner-metrics {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(199, 182, 158, 0.5);
+  font-size: 12px;
+  color: #30231B;
+}
+
+.figma-profile-card small {
+  display: block;
+  font-size: 12px;
+  color: #796C60;
+  margin-top: 4px;
+}
+
+.figma-invite-code-card {
+  background: rgba(48, 35, 27, 0.48);
+  border: 1px solid rgba(243, 232, 214, 0.24);
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin: 12px 0 18px;
+}
+
+.figma-invite-code-card small {
+  display: block;
+  font-size: 11px;
+  color: #C7B69E;
+  margin-bottom: 6px;
+}
+
+.figma-invite-code-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.figma-invite-code-row strong {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #F3E8D6;
+}
+
+.figma-copy-pill {
+  background: rgba(243, 232, 214, 0.18);
+  border: 0;
+  border-radius: 99px;
+  padding: 6px 12px;
+  font-family: var(--sans);
+  font-size: 12px;
+  color: #F3E8D6;
+  cursor: pointer;
+}
+
+.shared-calendar {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 18px 20px !important;
+  margin: 8px 0 18px !important;
+  box-shadow: none !important;
+}
+
+.shared-record {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  padding: 14px 16px !important;
+  margin: 8px 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   16. Complete Figma 1:1 Component Polish (Sub-headers, Prep Dots, Sheet Links,
+       Stage Axis, Filter Pills, Activity Totals, Profile Avatar, Calendar Pill)
+   -------------------------------------------------------------------------- */
+.figma-sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  min-height: 36px;
+  margin-bottom: 16px;
+}
+
+.figma-sub-header-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.figma-sub-header-title,
+.figma-back-title {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: inherit;
+  letter-spacing: -0.01em;
+}
+
+/* Figma 10 · 링 연결 준비 Step Pills */
+.figma-prep-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 6px;
+}
+
+.figma-prep-dot {
+  background: rgba(243, 232, 214, 0.14) !important;
+  border: 1px solid rgba(243, 232, 214, 0.28) !important;
+  color: #C7B69E !important;
+  border-radius: 999px !important;
+  height: 28px !important;
+  padding: 0 12px !important;
+  font-family: var(--sans) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+
+.figma-prep-dot.active {
+  background: #E86D13 !important;
+  border-color: #E86D13 !important;
+  color: #30231B !important;
+  font-weight: 600 !important;
+}
+
+/* Figma 19C · 상태 체크인 Top Skip Button & Mood Name */
+.figma-skip-top {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 4px 0 !important;
+  font-family: var(--sans) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #C7B69E !important;
+  cursor: pointer;
+}
+
+.figma-checkin-mood-name {
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  color: #F3E8D6;
+  margin-top: 8px;
+}
+
+.figma-checkin-field label {
+  color: #C7B69E !important;
+  text-align: center;
+}
+
+.figma-checkin-field input {
+  color: #F3E8D6 !important;
+  border-bottom-color: rgba(243, 232, 214, 0.42) !important;
+  text-align: center;
+  font-size: 15px !important;
+}
+
+.figma-checkin-field input::placeholder {
+  color: rgba(243, 232, 214, 0.52) !important;
+}
+
+/* Figma 20~23 Bottom Sheet Header & Text Link */
+.figma-sheet-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.figma-sheet-section-head h3,
+.figma-section-h3 {
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  color: #30231B !important;
+  margin: 0 !important;
+}
+
+.figma-section-h3 {
+  margin: 18px 0 6px !important;
+}
+
+.figma-sheet-link,
+.record-trend-link {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 4px 0 !important;
+  font-family: var(--sans) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #9D4200 !important;
+  cursor: pointer;
+}
+
+/* Figma 20 · 수면 & 23B · 주기 Axis and Stage Rows */
+.figma-stage-axis {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #796C60;
+  margin: -6px 0 14px;
+}
+
+.figma-stage-row {
+  gap: 10px;
+}
+
+.figma-stage-row .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.figma-stage-row .grow strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #30231B;
+}
+
+.figma-stage-row .grow small {
+  display: block;
+  font-size: 12px;
+  color: #796C60;
+  margin-top: 2px;
+}
+
+.figma-stage-val {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #30231B !important;
+}
+
+/* Figma 21 · 나의 활동 Day Totals Grid */
+.activity-day-totals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 12px 0 4px;
+  border-top: 1px solid rgba(199, 182, 158, 0.55);
+}
+
+.activity-day-totals small {
+  display: block;
+  font-size: 11px;
+  color: #796C60;
+  margin-bottom: 4px;
+}
+
+.activity-day-totals strong {
+  font-size: 18px;
+  font-weight: 500;
+  color: #30231B;
+}
+
+.activity-day-totals strong span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #796C60;
+  margin-left: 2px;
+}
+
+/* Figma 23 & 25 Lens Pills */
+.lens-pills button {
+  height: 34px !important;
+  padding: 0 14px !important;
+  border-radius: 999px !important;
+  border: 0 !important;
+  background: #F3E8D6 !important;
+  color: #796C60 !important;
+  font-family: var(--sans) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+
+.lens-pills button.on,
+.lens-pills button.selected {
+  background: #30231B !important;
+  color: #F3E8D6 !important;
+}
+
+/* Figma 17 · 파트너 초대 / 24 · 우리 / 27 · 내 설정 Cards & Avatars */
+.figma-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  margin: 6px 0 12px;
+  cursor: pointer;
+}
+
+.figma-profile-avatar,
+.figma-partner-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #30231B;
+  color: #F3E8D6;
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.figma-partner-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.figma-partner-card-top small {
+  display: block;
+  font-size: 12px;
+  color: #796C60;
+  margin-top: 2px;
+}
+
+.figma-partner-card-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(199, 182, 158, 0.5);
+  font-size: 12px;
+  font-weight: 500;
+  color: #30231B;
+}
+
+.figma-invite-code-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.figma-invite-code-top strong {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #F3E8D6;
+}
+
+.figma-invite-code-card p {
+  font-size: 12px;
+  color: #C7B69E;
+  margin: 10px 0 0;
+}
+
+.device[data-screen-id="settings"] .row,
+.device[data-screen-id="together"] .row {
+  min-height: 48px !important;
+  padding: 8px 0 !important;
+}
+
+/* Figma 25 · 순간 달력 Selected Day Pill */
+.calendar button.selected {
+  background: #30231B !important;
+  color: #F3E8D6 !important;
+  border-radius: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* --------------------------------------------------------------------------
+   17. All Sub-Screens & Charts Unified to Figma `SAI / Calm` Design System
+       (Health Dashboard & Detail, Trends, Cycle, Heart, Workout, Moment,
+        Breathing, Care, Date, Diary, Ring/Partner/Sharing/Account, SDK)
+   -------------------------------------------------------------------------- */
+
+/* Unified SVG Chart Typography & Layout */
+.figma-svg-chart,
+.night-chart,
+.trend-chart,
+.heart-chart,
+.hd-chart,
+.moment-live-chart,
+.health-card-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.figma-svg-chart text,
+.night-chart text,
+.trend-chart text,
+.heart-chart text,
+.hd-chart text,
+.moment-live-chart text,
+.health-card-chart text,
+.swim-heart-panel svg text {
+  font-family: var(--sans) !important;
+  fill: #796C60;
+}
+
+/* Health Dashboard (#health) — Unified Warm Cream Cards */
+.health-dashboard {
+  gap: 14px !important;
+}
+
+.health-dashboard-card {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 22px !important;
+  color: #30231B !important;
+  box-shadow: none !important;
+}
+
+.health-tone-sage,
+.health-tone-lilac,
+.health-tone-sand,
+.health-tone-rose {
+  --health-card-bg: #F3E8D6 !important;
+  --health-card-end: #F3E8D6 !important;
+  --health-card-ink: #30231B !important;
+}
+
+.health-card-head strong {
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: #30231B !important;
+}
+
+.health-card-head small {
+  font-size: 11px !important;
+  color: #796C60 !important;
+  opacity: 1 !important;
+}
+
+.health-card-arrow {
+  background: rgba(48, 35, 27, 0.08) !important;
+  color: #30231B !important;
+}
+
+.health-card-gauge strong {
+  font-family: var(--sans) !important;
+  font-size: 46px !important;
+  font-weight: 400 !important;
+  color: #30231B !important;
+}
+
+.health-card-stats strong {
+  color: #30231B !important;
+  font-weight: 500 !important;
+}
+
+.health-card-stats small,
+.health-card-footer span,
+.health-card-open {
+  color: #796C60 !important;
+  opacity: 1 !important;
+}
+
+.health-card-chart {
+  background: rgba(248, 244, 236, 0.65) !important;
+  border-radius: 16px !important;
+  padding: 10px !important;
+}
+
+/* Health Detail (#health-detail, #health-samples) */
+.hd-panel {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 20px 20px !important;
+  margin: 14px 0 !important;
+}
+
+.hd-panel h3 {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #30231B !important;
+  margin: 0 0 14px !important;
+}
+
+.hd-selected strong {
+  font-size: 34px !important;
+  font-weight: 400 !important;
+  color: #30231B !important;
+  letter-spacing: -0.03em;
+}
+
+.hd-stats strong {
+  font-size: 22px !important;
+  font-weight: 500 !important;
+  color: #30231B !important;
+}
+
+.hd-button {
+  background: #F8F4EC !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 12px 16px !important;
+  font-weight: 500 !important;
+  color: #30231B !important;
+}
+
+.hd-button[aria-pressed="true"] {
+  background: #30231B !important;
+  color: #F3E8D6 !important;
+}
+
+/* Sleep Trends, Cycle Insights, Activity Trends, Heart Trends */
+.trend-panel,
+.sleep-trend-summary,
+.cycle-prediction,
+.cycle-change {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 20px 20px !important;
+}
+
+.sleep-tabs {
+  background: #F3E8D6 !important;
+  border-radius: 999px !important;
+  padding: 4px !important;
+}
+
+.sleep-tabs button {
+  border-radius: 999px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #796C60 !important;
+}
+
+.sleep-tabs button.active {
+  background: #30231B !important;
+  color: #F3E8D6 !important;
+  box-shadow: none !important;
+}
+
+.cycle-calendar .logged,
+.calendar .cycle-mark {
+  background: #F8DEC9 !important;
+  color: #9D4200 !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+}
+
+.calendar .cycle-mark.selected {
+  background: #E86D13 !important;
+  color: #30231B !important;
+}
+
+.cycle-calendar-card {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+}
+
+/* Heart Explorer & Insights (#heart, #heart-trends) */
+.heart-lenses {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+
+.heart-lens {
+  flex: 1 1 auto;
+  height: 34px !important;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #F3E8D6 !important;
+  color: #796C60 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.heart-lens.selected {
+  background: #30231B !important;
+  color: #F3E8D6 !important;
+}
+
+.heart-insight {
+  background: #F3E8D6 !important;
+  border-left: 3px solid #E86D13 !important;
+  border-radius: 18px !important;
+  padding: 18px 20px !important;
+}
+
+/* Manual Workout & Swim Detail (#activity-select, #activity-ready, #activity-live, #activity-detail) */
+.workout-option {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  padding: 18px 20px !important;
+}
+
+.workout-timer strong {
+  font-family: var(--sans) !important;
+  font-size: 64px !important;
+  font-weight: 400 !important;
+  color: #30231B !important;
+}
+
+.swim-heart-panel,
+.breath-hearts {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 20px 20px !important;
+}
+
+.swim-heart-summary strong {
+  color: #E86D13 !important;
+}
+
+.swim-zone-ring:after {
+  background: #F3E8D6 !important;
+}
+
+/* Care, Morning, Notices, Date, Moment (#care, #morning, #notices, #date, #moment-live) */
+.care-fact,
+.care-comparison-item,
+.care-rule,
+.care-reading,
+.date-record-settings,
+.notice-item,
+.morning-message,
+.moment-peak-card {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+}
+
+.care-fact:has(input:checked),
+.notice-item.unread {
+  background: #F8DEC9 !important;
+}
+
+.morning-shared-badge,
+.shared-confirmation {
+  background: #F8DEC9 !important;
+  color: #9D4200 !important;
+}
+
+/* Diary (#diary, #diary-write, #diary-detail, #diary-public) */
+.diary-paper {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 24px 22px !important;
+}
+
+.diary-editor,
+#diary-peer-device .record-comments textarea {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  padding: 18px !important;
+  color: #30231B !important;
+}
+
+/* Ring, Partner, Sharing, Account, SDK Cards (#ring-manage, #partner-manage, #sharing, #account-manage, #ring-fit, #record-status, #charging-reminder, #ring-signal) */
+.ring-manage-hero,
+.ring-management-card,
+.partner-management-card,
+.sharing-settings-card,
+.lifecycle-card,
+.sdk-card {
+  background: #F3E8D6 !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 20px 22px !important;
+  box-shadow: none !important;
+}
+
+.ring-manage-hero {
+  margin: 8px 0 14px !important;
+}
+
+.sai-fw-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #F8DEC9;
+  color: #9D4200;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.figma-ring-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 4px;
+  background: #F3E8D6;
+  border-radius: 999px;
+}
+
+.figma-ring-switcher button {
+  flex: 1;
+  height: 34px;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: #796C60 !important;
+  font-family: var(--sans);
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+
+.figma-ring-switcher button.active {
+  background: #30231B !important;
+  color: #F3E8D6 !important;
+}
+
+.sai-sync-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.sai-sync-metric-chip {
+  background: #F8F4EC;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sai-sync-metric-chip span {
+  font-size: 11px;
+  color: #796C60;
+}
+
+.sai-sync-metric-chip strong {
+  font-size: 15px;
+  font-weight: 500;
+  color: #30231B;
+}
+
+.ring-management-card h3,
+.partner-management-card h3,
+.sharing-settings-card h3,
+.lifecycle-card h3,
+.sdk-card h3 {
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  color: #30231B !important;
+}
+
+.ring-battery-value {
+  font-family: var(--sans) !important;
+  font-weight: 400 !important;
+  color: #30231B !important;
+}
+
+.sdk-notice,
+.sdk-signal-preview {
+  background: #F8F4EC !important;
+  border-radius: 18px !important;
+}
+
+/* Contrast inside .figma-bottom-sheet (#F3E8D6 surface) */
+.figma-bottom-sheet .trend-panel,
+.figma-bottom-sheet .sleep-trend-summary,
+.figma-bottom-sheet .cycle-change {
+  background: #F8F4EC !important;
+  border-radius: 22px !important;
+  padding: 18px 18px !important;
+  margin: 12px 0 !important;
+}
+
+.figma-bottom-sheet .sleep-tabs {
+  background: rgba(199, 182, 158, 0.38) !important;
+}
+
+.figma-bottom-sheet .lens-pills button:not(.selected):not(.on) {
+  background: #F8F4EC !important;
+}
+
+/* Dual-Device Peer Views (#breath-peer-device, #morning-peer-device, #moment-peer-device, #date-peer-device, #diary-peer-device, .care-board-phone) */
+.peer-app,
+#moment-peer-device .peer-app,
+.care-panel-content {
+  display: block !important;
+  height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.device:has(.today-hero) > .status,
+.care-board-phone:has(.today-hero) > .status,
+.device[data-figma-backdrop] > .status {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  color: #F3E8D6 !important;
+}
+
+.device:has(.today-hero) > main,
+.device:has(.today-hero) > .peer-app,
+.care-board-phone:has(.today-hero) > .care-panel-content {
+  height: 100% !important;
+}
+
+.page:has(.today-hero) {
+  padding: 0 !important;
+  min-height: 100% !important;
+}
+
+.page:has(+ .bottom-nav) {
+  padding-bottom: 92px !important;
+}
+
+.page:has(+ .bottom-nav) > .push {
+  bottom: 82px !important;
+  padding: 10px 32px 12px !important;
+}
+
+.peer-app .bottom-nav,
+.care-panel-content .bottom-nav {
+  height: 64px !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
+  flex: 0 0 64px !important;
+}
+
+.care-board-phone {
+  background: var(--bg) !important;
+  border: 0 !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  border-radius: 50px !important;
+  box-shadow: 0 28px 68px rgba(24, 18, 14, 0.28), 0 0 0 10px #18120E !important;
+  overflow: hidden !important;
+}
+
+.care-board-mode .stage > .device {
+  border: 0 !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+/* ==========================================================================
+   18. Luxury Glassmorphism Footer (.bottom-nav), Apple Swift Chart Cards,
+       Bento Metric Grids & Non-Figma Screen Redesign
+   ========================================================================== */
+
+/* 18.1 Liquid Frosted Glass Floating Dock Footer (.bottom-nav) */
+.bottom-nav,
+.peer-app .bottom-nav,
+.care-panel-content .bottom-nav {
+  position: sticky !important;
+  bottom: 14px !important;
+  width: 316px !important;
+  height: 64px !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
+  margin: -78px auto 14px !important;
+  padding: 5px 6px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 253, 249, 0.78) 0%,
+    rgba(248, 239, 226, 0.66) 100%
+  ) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.88) !important;
+  box-shadow:
+    0 18px 42px rgba(48, 35, 27, 0.14),
+    0 4px 12px rgba(48, 35, 27, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    inset 0 -1px 0 rgba(232, 109, 19, 0.08) !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: center !important;
+  gap: 4px !important;
+  z-index: 60 !important;
+}
+
+.bottom-nav::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 999px;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 90% at 50% 0%,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+
+.bottom-nav button {
+  position: relative !important;
+  height: 52px !important;
+  border: 1px solid transparent !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: rgba(48, 35, 27, 0.56) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 3px !important;
+  padding: 4px 2px !important;
+  font-family: var(--sans) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em !important;
+  transition: all 0.22s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  cursor: pointer !important;
+}
+
+.bottom-nav button:hover:not(.active) {
+  color: #30231B !important;
+  background: rgba(255, 255, 255, 0.42) !important;
+}
+
+.bottom-nav button.active {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 247, 236, 0.88) 100%
+  ) !important;
+  color: #E86D13 !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(255, 255, 255, 0.96) !important;
+  box-shadow:
+    0 6px 16px rgba(232, 109, 19, 0.16),
+    0 2px 6px rgba(48, 35, 27, 0.05),
+    inset 0 1px 0 #FFFFFF !important;
+}
+
+.bottom-nav button svg,
+.bottom-nav .nav-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.bottom-nav button.active svg,
+.bottom-nav button.active .nav-icon svg {
+  transform: translateY(-1px) scale(1.04) !important;
+  filter: drop-shadow(0 2px 6px rgba(232, 109, 19, 0.25)) !important;
+}
+
+/* 18.2 Apple Swift Charts Showcase Card (.swift-chart-card) */
+.swift-chart-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(248, 244, 236, 0.94) 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.92) !important;
+  border-radius: 26px !important;
+  padding: 20px 18px 16px !important;
+  margin: 14px 0 !important;
+  box-shadow:
+    0 12px 30px rgba(48, 35, 27, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96) !important;
+}
+
+.swift-chart-head {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  margin-bottom: 12px !important;
+}
+
+.swift-chart-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #796C60 !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 3px !important;
+}
+
+.swift-chart-title {
+  display: block !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #30231B !important;
+  letter-spacing: -0.02em !important;
+}
+
+.swift-chart-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 5px 11px !important;
+  border-radius: 999px !important;
+  background: rgba(232, 109, 19, 0.11) !important;
+  color: #E86D13 !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+
+.swift-chart {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
+.swift-chart-foot {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  margin-top: 10px !important;
+  padding-top: 10px !important;
+  border-top: 1px solid rgba(48, 35, 27, 0.06) !important;
+  font-size: 11.5px !important;
+  color: #796C60 !important;
+}
+
+/* 18.3 2x2 Luxury Bento Metric Grid (.sai-bento-grid & .sai-bento-card) */
+.sai-bento-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  margin: 14px 0 !important;
+}
+
+.sai-bento-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.84) 0%,
+    rgba(248, 244, 236, 0.92) 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.90) !important;
+  border-radius: 22px !important;
+  padding: 16px 16px 15px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 6px !important;
+  box-shadow:
+    0 8px 22px rgba(48, 35, 27, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96) !important;
+  text-align: left !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease !important;
+}
+
+button.sai-bento-card {
+  cursor: pointer !important;
+  font-family: var(--sans) !important;
+}
+
+button.sai-bento-card:hover {
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 12px 26px rgba(48, 35, 27, 0.08),
+    inset 0 1px 0 #FFFFFF !important;
+}
+
+.sai-bento-card > span {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #796C60 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.sai-bento-card > strong {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: #30231B !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.2 !important;
+}
+
+.sai-bento-card > small {
+  font-size: 11.5px !important;
+  color: #796C60 !important;
+  line-height: 1.35 !important;
+}
+
+/* 18.4 Recessed Apple Segmented Controls & Luxury Non-Figma Sub-Screens */
+.chips,
+.lens-pills,
+.heart-lenses,
+.sleep-tabs {
+  background: rgba(226, 214, 195, 0.48) !important;
+  border: 1px solid rgba(255, 255, 255, 0.65) !important;
+  border-radius: 999px !important;
+  padding: 4px !important;
+  box-shadow: inset 0 1px 3px rgba(48, 35, 27, 0.06) !important;
+}
+
+.chips button.on,
+.chips button.active,
+.lens-pills button.selected,
+.lens-pills button.on,
+.heart-lenses button.selected,
+.heart-lenses button.on,
+.sleep-tabs button.active,
+.sleep-tabs button.on {
+  background: #FFFFFF !important;
+  color: #30231B !important;
+  font-weight: 600 !important;
+  border-radius: 999px !important;
+  box-shadow: 0 3px 10px rgba(48, 35, 27, 0.10) !important;
+}
+
+/* Clean Luxury Inset Grouped Lists (.figma-record-list) */
+.figma-record-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+.figma-record-item {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(248, 244, 236, 0.90) 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.88) !important;
+  border-radius: 20px !important;
+  padding: 15px 16px !important;
+  box-shadow:
+    0 6px 18px rgba(48, 35, 27, 0.035),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92) !important;
+  transition: transform 0.16s ease, box-shadow 0.16s ease !important;
+}
+
+.figma-record-item:hover {
+  transform: translateY(-1px) !important;
+}
+
+/* Luxury Non-Figma Screen Surfaces (#cycle, #breathing, #walk, #garden, #care, #morning, #sharing, #ring-manage, #partner-manage, #account-manage) */
+#cycle .card,
+#cycle-insights .card,
+#breathing .card,
+#walk .card,
+#garden .card,
+#care .card,
+#date-session .card,
+#morning .card,
+#sharing .card,
+#ring-manage .card,
+#partner-manage .card,
+#account-manage .card,
+#diary .card,
+#moment-live .card,
+.ring-management-card,
+.partner-management-card,
+.sharing-settings-card,
+.lifecycle-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.84) 0%,
+    rgba(248, 244, 236, 0.92) 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.90) !important;
+  border-radius: 24px !important;
+  box-shadow:
+    0 10px 26px rgba(48, 35, 27, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+/* ==========================================================================
+   19. High-Luxury Motion System (Apple Swift Chart Physics, Tactile Press,
+       Full-Bleed Backdrop Proportions & Staggered Card Choreography)
+   ========================================================================== */
+
+@keyframes saiChartLineDraw {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0.35;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes saiChartAreaFade {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes saiBarRise {
+  0% {
+    transform: scaleY(0.08);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes saiStageReveal {
+  0% {
+    transform: scaleX(0.15);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes saiHaloPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.42;
+  }
+  50% {
+    transform: scale(1.65);
+    opacity: 0.08;
+  }
+}
+
+@keyframes saiRingLevitate {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes saiCardRise {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+   Oura Ring-Grade Luxury Motion, Universal Chart Animations,
+   Compact Consent Screen & Zero-Overflow Tab/Pill System
+   ============================================================================ */
+
+@keyframes saiOuraDotPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes saiOuraBarGrow {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes saiOuraHorizGrow {
+  0% {
+    opacity: 0.2;
+    transform: scaleX(0.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes saiOuraRingSweep {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) rotate(-12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Universal SVG & HTML Chart Motion Classes */
+.swift-line-anim,
+.sai-chart-stroke-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: saiChartLineDraw 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.06s forwards;
+}
+
+.swift-area-anim,
+.sai-chart-area-reveal {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  opacity: 0;
+  animation: saiChartAreaFade 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
+}
+
+.swift-bar-anim,
+.sai-chart-bar-grow {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: saiOuraBarGrow 0.78s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--bar-i, 0) * 0.045s) backwards;
+}
+
+.swift-stage-anim {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: saiStageReveal 0.72s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.swift-dot,
+.sai-chart-dot-pop {
+  transform-box: fill-box;
+  transform-origin: center center;
+  animation: saiOuraDotPop 0.52s cubic-bezier(0.22, 1, 0.36, 1) calc(0.16s + var(--dot-i, 0) * 0.04s) backwards;
+  transition:
+    r 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+    stroke-width 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+    fill 0.26s ease;
+}
+
+.swift-active-pill {
+  transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.swift-live-halo {
+  transform-box: fill-box;
+  transform-origin: center center;
+  animation: saiHaloPulse 2.8s ease-in-out infinite;
+}
+
+.swift-point-group {
+  cursor: pointer;
+}
+
+.swift-point-group:hover .swift-dot,
+.swift-point-group.is-active .swift-dot {
+  r: 5.2px;
+  stroke-width: 2.6px;
+}
+
+.care-week-values > div > i.sai-html-bar-anim {
+  transform-origin: center bottom;
+  animation: saiOuraBarGrow 0.76s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--seg-i, 0) * 0.045s) backwards;
+}
+
+.hd-bars i.sai-html-bar-anim,
+.figma-sleep-stage-bar span.sai-html-bar-anim,
+.figma-step-progress-bar span.sai-html-bar-anim,
+.figma-cycle-phase-bar span.sai-html-bar-anim {
+  transform-origin: left center;
+  animation: saiOuraHorizGrow 0.82s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--seg-i, 0) * 0.05s) backwards;
+}
+
+.hd-ring,
+.figma-score-circle {
+  animation: saiOuraRingSweep 0.68s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Subtle luxury levitation on 3D Ring Hero Artworks */
+.hero-ring img,
+.figma-prep-img,
+.figma-ring-phone-img {
+  animation: saiRingLevitate 4.8s ease-in-out infinite;
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Staggered Luxury Entrance ONLY on Screen Change (Never on Same-Screen Option Selection) */
+#app:not([data-same-screen="1"]) .orbit-metric:nth-child(1) {
+  animation: saiCardRise 0.48s cubic-bezier(0.16, 1, 0.3, 1) 0.03s both;
+}
+#app:not([data-same-screen="1"]) .orbit-metric:nth-child(2) {
+  animation: saiCardRise 0.48s cubic-bezier(0.16, 1, 0.3, 1) 0.09s both;
+}
+#app:not([data-same-screen="1"]) .orbit-metric:nth-child(3) {
+  animation: saiCardRise 0.48s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+#app:not([data-same-screen="1"]) .swift-chart-card,
+#app:not([data-same-screen="1"]) .figma-bottom-sheet,
+#app:not([data-same-screen="1"]) .sai-bento-card,
+#app:not([data-same-screen="1"]) .figma-partner-card,
+#app:not([data-same-screen="1"]) .figma-unpaired-card {
+  animation: saiCardRise 0.46s cubic-bezier(0.16, 1, 0.3, 1) 0.04s both;
+}
+
+#app[data-same-screen="1"] .orbit-metric,
+#app[data-same-screen="1"] .swift-chart-card,
+#app[data-same-screen="1"] .figma-bottom-sheet,
+#app[data-same-screen="1"] .sai-bento-card,
+#app[data-same-screen="1"] .figma-partner-card,
+#app[data-same-screen="1"] .figma-unpaired-card,
+#app[data-same-screen="1"] .hd-ring,
+#app[data-same-screen="1"] .figma-score-circle {
+  animation: none !important;
+}
+
+/* Oura Ring-Grade Smooth Spring Transitions on Interactive Controls & Option Rows */
+.primary,
+.secondary,
+.choice,
+.check-row,
+.consent-all-row,
+.row,
+.orbit-metric,
+.figma-score-circle,
+.week-day,
+.chips button,
+.sleep-tabs button,
+.lens-pills button,
+.heart-lenses button,
+.role-switch button,
+.care-version-nav button,
+.snapshot-choices button {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.24s ease !important;
+}
+
+.primary:active,
+.secondary:active,
+.choice:active,
+.check-row:active,
+.consent-all-row:active,
+.row:active,
+.orbit-metric:active,
+.figma-score-circle:active,
+.week-day:active {
+  transform: scale(0.982) !important;
+}
+
+.choice.selected {
+  box-shadow: 0 8px 22px rgba(232, 109, 19, 0.14) !important;
+}
+
+/* ============================================================================
+   Onboarding Consent Screen (#consent): Select-All Toggle & Compact Layout
+   Fits 100% within 390x844 without vertical overflow
+   ============================================================================ */
+.device[data-screen-id="consent"] .page {
+  padding-top: 44px !important;
+}
+
+.device[data-screen-id="consent"] .top {
+  margin-bottom: 6px !important;
+}
+
+.device[data-screen-id="consent"] h2 {
+  font-size: 23px !important;
+  line-height: 1.26 !important;
+  margin: 0 0 4px !important;
+}
+
+.device[data-screen-id="consent"] .sub {
+  font-size: 13px !important;
+  line-height: 1.38 !important;
+  margin: 0 0 10px !important;
+}
+
+.consent-all-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 11px !important;
+  padding: 11px 14px !important;
+  margin: 0 0 8px !important;
+  border-radius: 14px !important;
+  background: rgba(48, 35, 27, 0.065) !important;
+  border: 1.5px solid rgba(48, 35, 27, 0.14) !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+.consent-all-row.is-checked {
+  background: rgba(232, 109, 19, 0.11) !important;
+  border-color: rgba(232, 109, 19, 0.45) !important;
+  box-shadow: 0 6px 18px rgba(232, 109, 19, 0.1) !important;
+}
+
+.consent-all-row input[type="checkbox"] {
+  width: 19px !important;
+  height: 19px !important;
+  margin: 0 !important;
+  accent-color: #e86d13 !important;
+  flex-shrink: 0 !important;
+  cursor: pointer !important;
+}
+
+.consent-all-copy,
+.consent-all-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+}
+
+.consent-all-copy strong,
+.consent-all-text strong {
+  display: block !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--ink) !important;
+  line-height: 1.25 !important;
+}
+
+.consent-all-copy small,
+.consent-all-text small {
+  display: block !important;
+  font-size: 11.5px !important;
+  color: var(--muted) !important;
+  line-height: 1.3 !important;
+}
+
+.consent-list-compact {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  margin: 0 !important;
+}
+
+.device[data-screen-id="consent"] .consent-list-compact .check-row {
+  padding: 8.5px 12px !important;
+  margin: 0 !important;
+  border-radius: 12px !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+.device[data-screen-id="consent"] .consent-list-compact .check-row input[type="checkbox"] {
+  width: 17px !important;
+  height: 17px !important;
+  margin: 0 !important;
+}
+
+.device[data-screen-id="consent"] .consent-list-compact .check-row > span {
+  font-size: 13px !important;
+  line-height: 1.24 !important;
+}
+
+.device[data-screen-id="consent"] .consent-list-compact .check-row > span small {
+  display: block !important;
+  font-size: 11px !important;
+  line-height: 1.26 !important;
+  margin-top: 1.5px !important;
+}
+
+.device[data-screen-id="consent"] .consent-legal-links {
+  margin: 8px 0 2px !important;
+  gap: 6px !important;
+}
+
+.device[data-screen-id="consent"] .consent-legal-links .secondary {
+  min-height: 34px !important;
+  padding: 6px 10px !important;
+  font-size: 11.5px !important;
+}
+
+.device[data-screen-id="consent"] .error {
+  min-height: 14px !important;
+  margin: 2px 0 !important;
+  font-size: 11.5px !important;
+}
+
+.device[data-screen-id="consent"] .bottom {
+  padding-top: 6px !important;
+  padding-bottom: 22px !important;
+}
+
+/* Ensure Full-Bleed Backdrop Screens Fit 844px Cleanly With Fixed Bottom CTA */
+.device[data-figma-backdrop="checkin"] .top,
+.device[data-figma-backdrop="pairing"] .top,
+.device[data-figma-backdrop="dusk"] .top {
+  margin-bottom: 14px !important;
+}
+
+.device[data-figma-backdrop="checkin"] .figma-checkin-score-hero {
+  margin: 14px 0 12px !important;
+}
+
+.device[data-figma-backdrop="checkin"] .figma-checkin-circles {
+  margin: 4px 0 14px !important;
+}
+
+.device[data-figma-backdrop="checkin"] .field {
+  margin: 10px 0 !important;
+}
+
+/* ============================================================================
+   Zero-Overflow Tab / Segmented Pill System Across All Screens
+   Prevents vertical character wrapping, clipping, and horizontal overflow
+   ============================================================================ */
+.sleep-tabs button,
+.chips button,
+.lens-pills button,
+.heart-lenses button,
+.role-switch button,
+.care-version-nav button,
+.hd-inline button,
+.snapshot-choices button,
+.figma-ring-switcher button,
+.figma-prep-dots button,
+.record-header .record-trend-link {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  line-height: 1.2 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 1. .heart-lenses (4 buttons: 심박 / HRV / 수면 심박 / 일일 추세) */
+.heart-lenses {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 4px !important;
+  padding: 4px !important;
+  border-radius: 999px !important;
+  overflow: visible !important;
+}
+
+.heart-lenses button {
+  padding: 8px 4px !important;
+  font-size: 12px !important;
+  letter-spacing: -0.025em !important;
+  min-width: 0 !important;
+}
+
+/* 2. .lens-pills: 5 items (#health) vs 8 items (#calendar) */
+.lens-pills {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 3px !important;
+  padding: 4px !important;
+  border-radius: 999px !important;
+  overflow: visible !important;
+}
+
+.lens-pills button {
+  padding: 7.5px 2px !important;
+  font-size: 11.5px !important;
+  letter-spacing: -0.03em !important;
+  min-width: 0 !important;
+}
+
+.lens-pills:has(> :nth-child(6)) {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 4px !important;
+  padding: 5px !important;
+  border-radius: 16px !important;
+}
+
+.lens-pills:has(> :nth-child(6)) button {
+  padding: 7px 4px !important;
+  font-size: 12px !important;
+  border-radius: 11px !important;
+}
+
+/* 3. .chips (2, 3, 4, or 6+ segmented buttons) */
+.chips {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 4px !important;
+  padding: 4px !important;
+  border-radius: 999px !important;
+  overflow: visible !important;
+}
+
+.chips button {
+  padding: 8px 6px !important;
+  font-size: 12.5px !important;
+  letter-spacing: -0.02em !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+/* 3-item .chips (#planning, #cycle-insights, #received) */
+.chips:has(> :nth-child(3):last-child) {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.chips:has(> :nth-child(3):last-child) button {
+  padding: 8px 3px !important;
+  font-size: 11.2px !important;
+  letter-spacing: -0.04em !important;
+}
+
+/* 4-item .chips (#activity, #sleep trend) */
+.chips:has(> :nth-child(4):last-child) {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.chips:has(> :nth-child(4):last-child) button {
+  padding: 8px 3px !important;
+  font-size: 11.5px !important;
+  letter-spacing: -0.035em !important;
+}
+
+/* 6+ item .chips (#availability time slots) */
+.chips:has(> :nth-child(5)) {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+  padding: 6px !important;
+  border-radius: 16px !important;
+}
+
+.chips:has(> :nth-child(5)) button {
+  padding: 8.5px 4px !important;
+  font-size: 12.5px !important;
+  border-radius: 11px !important;
+}
+
+/* 4. .care-version-nav (3 buttons in #care) */
+.care-version-nav {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 4px !important;
+  padding: 4px !important;
+  border-radius: 999px !important;
+  background: rgba(48, 35, 27, 0.06) !important;
+  margin: 8px 0 14px !important;
+}
+
+.care-version-nav button {
+  padding: 8px 3px !important;
+  font-size: 11px !important;
+  letter-spacing: -0.04em !important;
+  border-radius: 999px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--muted) !important;
+  font-weight: 500 !important;
+  min-width: 0 !important;
+}
+
+.care-version-nav button.active {
+  background: #30231b !important;
+  color: #fef8ef !important;
+  font-weight: 600 !important;
+  box-shadow: 0 3px 10px rgba(48, 35, 27, 0.16) !important;
+}
+
+/* 5. .hd-inline (최근 기록 / 추세 toggle in #health-details) */
+.hd-inline {
+  display: inline-grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 3px !important;
+  padding: 3px !important;
+  border-radius: 999px !important;
+  background: rgba(48, 35, 27, 0.06) !important;
+}
+
+.hd-inline button {
+  padding: 5px 10px !important;
+  font-size: 11.5px !important;
+  border-radius: 999px !important;
+}
+
+/* Official SAI App Icon Styling (Default / Dark / Clear / Tinted) */
+.brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 11px !important;
+}
+
+.brand-appicon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(24, 18, 14, 0.16);
+  flex-shrink: 0;
+}
+
+.brand-wordmark {
+  height: 22px !important;
+  width: auto !important;
+  max-width: 72px !important;
+  object-fit: contain !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+
+.appicon-showcase {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 6px;
+}
+
+.appicon-showcase img {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(24, 18, 14, 0.14);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.appicon-showcase img:hover {
+  transform: translateY(-2px) scale(1.06);
+}
+
+.invite-notice-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.invite-notice-appicon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4.5px;
+  object-fit: cover;
+}
+
+.settings-app-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.settings-app-badge img {
+  width: 22px;
+  height: 22px;
+  border-radius: 5.5px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(24, 18, 14, 0.12);
+}
+
+/* ============================================================================
+   20. Flush Black Mobile Bezel (No Bright Inner Border) & Zero Scrollbars
+   ============================================================================ */
+.device,
+.care-board-phone {
+  border: 0 !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  border-radius: 48px !important;
+  box-shadow:
+    0 28px 68px rgba(24, 18, 14, 0.28),
+    0 0 0 10px #18120e !important;
+  overflow: hidden !important;
+}
+
+.care-board-mode .stage > .device {
+  border: 0 !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+*,
+*::before,
+*::after {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+
+
+
+
+
+
+

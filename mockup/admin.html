@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SAI Admin — 운영 센터</title>
+  <link rel="icon" type="image/png" href="assets/appicon/sai-icon-favicon.png">
+  <link rel="apple-touch-icon" href="assets/appicon/sai-icon-default.png">
+  <link rel="stylesheet" href="admin.css?v=20261105_admin13">
+</head>
+<body>
+  <!-- =====================================================================
+       1. ADMIN LOGIN SCREEN
+       ===================================================================== -->
+  <section class="admin-login-viewport" id="admin-login-screen" aria-label="사이 어드민 로그인">
+    <div class="admin-login-card">
+      <div class="admin-login-visual">
+        <div class="admin-login-brand">
+          <img src="assets/appicon/sai-icon-default.png" alt="SAI App Icon" class="admin-login-appicon">
+          <img src="assets/sai-logo-chocolate.png" alt="SAI" class="admin-login-wordmark">
+        </div>
+
+        <div class="admin-login-visual-copy">
+          <p class="admin-login-eyebrow">SAI OPERATIONS</p>
+          <h1 class="admin-login-quote">
+            회원 현황과 스마트링 연결을<br>
+            한눈에 살피는 운영 공간
+          </h1>
+        </div>
+      </div>
+
+      <div class="admin-login-form-wrap">
+        <form class="admin-login-form" id="admin-login-form" novalidate>
+          <div class="admin-login-top-marks">
+            <img src="assets/appicon/sai-icon-default.png" alt="SAI" class="admin-login-form-appicon">
+            <div class="admin-login-asterisk" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                <path d="M14 3V25M4.47 8.5L23.53 19.5M23.53 8.5L4.47 19.5" stroke="#D96B27" stroke-width="2.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <h2 class="admin-login-title">어드민 로그인</h2>
+          <p class="admin-login-subtitle">운영자 계정으로 접속해 회원·기기·주문 현황을 관리하세요.</p>
+
+          <div class="admin-login-field">
+            <label for="admin-login-id">아이디 (이메일)</label>
+            <input
+              type="text"
+              id="admin-login-id"
+              name="adminId"
+              value="admin@sai.io"
+              placeholder="admin@sai.io"
+              autocomplete="username"
+              required
+            >
+          </div>
+
+          <div class="admin-login-field">
+            <label for="admin-login-pw">비밀번호</label>
+            <div class="admin-login-pw-box">
+              <input
+                type="password"
+                id="admin-login-pw"
+                name="adminPw"
+                value="sai2026admin!"
+                placeholder="비밀번호 입력"
+                autocomplete="current-password"
+                required
+              >
+              <button
+                type="button"
+                class="admin-pw-toggle"
+                id="btn-toggle-pw"
+                aria-label="비밀번호 표시 전환"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <p class="admin-login-error" id="admin-login-error" hidden></p>
+
+          <button type="submit" class="admin-login-submit" id="btn-admin-login">
+            로그인
+          </button>
+
+          <p class="admin-login-footnote">
+            전체 회원 <strong>20,480명</strong> · 스마트링 <strong>17,890대</strong> 연동 중
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       2. ADMIN CONSOLE SHELL
+       ===================================================================== -->
+  <div class="admin-shell" id="admin-console-shell" hidden>
+    <!-- Left Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <img src="assets/appicon/sai-icon-default.png" alt="SAI" class="brand-logo-img">
+        <div class="brand-meta">
+          <div class="brand-meta-head">
+            <img src="assets/sai-logo-chocolate.png" alt="SAI" class="admin-sidebar-wordmark">
+            <strong>운영 센터</strong>
+          </div>
+          <span>스마트링 · 회원 관리</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="운영 메뉴">
+        <span class="nav-group-label">현황 · 여정 분석</span>
+        <button type="button" class="nav-item is-active" data-tab="overview">
+          <span class="nav-dot"></span>
+          <span>전체 요약</span>
+        </button>
+        <button type="button" class="nav-item" data-tab="journey">
+          <span class="nav-dot"></span>
+          <span>유저 여정 맵</span>
+          <em class="nav-pill">FLOW</em>
+        </button>
+
+        <span class="nav-group-label">회원 · 기기 · 주문</span>
+        <button type="button" class="nav-item" data-tab="members">
+          <span class="nav-dot"></span>
+          <span>회원 관리</span>
+          <em class="nav-count" id="nav-count-members">20,480</em>
+        </button>
+        <button type="button" class="nav-item" data-tab="devices">
+          <span class="nav-dot"></span>
+          <span>스마트링 · 컬러 현황</span>
+          <em class="nav-count" id="nav-count-devices">17,890</em>
+        </button>
+        <button type="button" class="nav-item" data-tab="orders">
+          <span class="nav-dot"></span>
+          <span>주문 · 배송 관리</span>
+          <em class="nav-count" id="nav-count-orders">240건</em>
+        </button>
+        <button type="button" class="nav-item" data-tab="couples">
+          <span class="nav-dot"></span>
+          <span>커플 · 공유 현황</span>
+          <em class="nav-count" id="nav-count-couples">7,320쌍</em>
+        </button>
+
+        <span class="nav-group-label">설정 · 고객 지원</span>
+        <button type="button" class="nav-item" data-tab="support">
+          <span class="nav-dot"></span>
+          <span>앱 설정 · 1:1 문의</span>
+          <em class="nav-count" id="nav-count-support">12</em>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="live-status-card">
+          <div class="live-status-head">
+            <span class="live-dot"></span>
+            <strong>앱 실시간 연동 중</strong>
+          </div>
+          <div class="live-active-box">
+            <small>적용 설정</small>
+            <strong id="sidebar-active-member">전체동의 ON · 도움말 4초</strong>
+          </div>
+        </div>
+        <a href="index.html#welcome" class="btn-open-app">모바일 앱 열기 ↗</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-titles">
+          <span class="topbar-eyebrow" id="topbar-eyebrow" hidden>OVERVIEW</span>
+          <h1 id="topbar-title">전체 요약</h1>
+          <p id="topbar-desc">핵심 지표와 우선 개선 과제를 한눈에 확인합니다.</p>
+        </div>
+        <div class="topbar-actions">
+          <button type="button" class="btn-soft" id="btn-Quick-Sync">데이터 동기화</button>
+          <button type="button" class="btn-soft" id="btn-Reset-Seed">초기화</button>
+          <button type="button" class="btn-outline" id="btn-Admin-Logout">로그아웃</button>
+        </div>
+      </header>
+
+      <!-- ===============================================================
+           TAB 1: OVERVIEW (전체 요약)
+           =============================================================== -->
+      <section class="admin-view is-active" data-view="overview">
+        <div id="testflight-phase1-panel" class="testflight-phase1-panel"></div>
+
+        <div class="sim-dataset-banner">
+          <span>시뮬레이션 목업 데이터 (20,480명)</span>
+          <small>아래 지표는 localStorage 시뮬레이션 데이터이며, 상단 1단계 실제 테스트 계정(로컬 서버 127.0.0.1:8787) 데이터와 완전히 분리되어 있습니다.</small>
+        </div>
+
+        <div class="kpi-strip">
+          <article class="kpi-card">
+            <span class="kpi-label">전체 회원</span>
+            <strong class="kpi-value" id="kpi-total-members">20,480명</strong>
+            <p class="kpi-sub" id="kpi-active-members">활성 19,120명 (93.4%) · 오늘 +184명</p>
+          </article>
+          <article class="kpi-card">
+            <span class="kpi-label">연결된 스마트링</span>
+            <strong class="kpi-value" id="kpi-connected-rings">17,890대</strong>
+            <p class="kpi-sub" id="kpi-ring-rate">착용률 93.6% · 평균 배터리 84%</p>
+          </article>
+          <article class="kpi-card">
+            <span class="kpi-label">연결된 커플</span>
+            <strong class="kpi-value" id="kpi-paired-couples">7,320쌍</strong>
+            <p class="kpi-sub" id="kpi-couple-rate">14,640명 연결 · 수락 대기 1,840명</p>
+          </article>
+          <article class="kpi-card">
+            <span class="kpi-label">오늘 건강 동기화</span>
+            <strong class="kpi-value" id="kpi-daily-syncs">142,840건</strong>
+            <p class="kpi-sub">평균 수면 7시간 18분 · 심박 57bpm</p>
+          </article>
+        </div>
+
+        <article class="surface-card">
+          <div class="card-header">
+            <div>
+              <h2>핵심 개선 과제 TOP 3</h2>
+              <p>이탈률과 오류 로그 기준 시급한 개선 항목입니다.</p>
+            </div>
+            <button type="button" class="btn-primary-sm" data-goto-tab="journey">여정 맵 보기 →</button>
+          </div>
+          <div id="overview-action-insights" class="insight-action-grid"></div>
+        </article>
+
+        <div class="grid-two-col">
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>주간 가입 · 링 연결 추이</h2>
+                <p>신규 가입자 대비 스마트링 연결 완료 추이</p>
+              </div>
+            </div>
+            <div id="chart-weekly-growth" class="admin-chart-wrap"></div>
+          </article>
+
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>시간대별 앱 접속량</h2>
+                <p>오전 7~9시 기상 직후와 밤 9~11시 접속 집중</p>
+              </div>
+            </div>
+            <div id="chart-hourly-syncs" class="admin-chart-wrap"></div>
+          </article>
+        </div>
+
+        <div class="grid-two-col">
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>현재 앱 운영 설정</h2>
+                <p>온보딩·블루투스·알림 적용 상태</p>
+              </div>
+              <button type="button" class="btn-soft" data-goto-tab="support">설정 변경 →</button>
+            </div>
+            <div id="overview-settings-summary" class="friendly-log-list"></div>
+          </article>
+
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>평균 건강 지표 · 컬러 비중</h2>
+                <p>착용 회원 17,890명의 오늘 평균 데이터</p>
+              </div>
+            </div>
+            <div class="health-summary-tiles" id="overview-health-tiles"></div>
+            <div class="finish-bar-section" id="overview-finish-bars"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===============================================================
+           TAB 2: USER JOURNEY MAP (유저 여정 맵)
+           =============================================================== -->
+      <section class="admin-view" data-view="journey">
+        <article class="surface-card journey-period-bar-card">
+          <div class="journey-period-top">
+            <div>
+              <h2>기간별 유저 여정 요약</h2>
+              <p>화면별 체류 시간, 이동 경로, 이탈 구간을 분석합니다.</p>
+            </div>
+            <div class="journey-period-controls">
+              <div class="period-segmented" role="tablist" aria-label="조회 기간 선택">
+                <button type="button" class="period-btn" data-journey-period="today">오늘</button>
+                <button type="button" class="period-btn" data-journey-period="7d">7일</button>
+                <button type="button" class="period-btn is-active" data-journey-period="30d">30일</button>
+                <button type="button" class="period-btn" data-journey-period="all">90일</button>
+              </div>
+              <select id="journey-segment-select" class="select-clean" aria-label="회원 그룹 필터">
+                <option value="all">전체 회원</option>
+                <option value="new">신규 가입자</option>
+                <option value="ring">링 착용 회원</option>
+                <option value="couple">커플 회원</option>
+              </select>
+              <button type="button" class="btn-soft" id="btn-simulate-flow">+ 실시간 로그 반영</button>
+            </div>
+          </div>
+
+          <div class="journey-date-meta-row">
+            <span class="date-range-badge" id="journey-date-range-badge">조회 기간: 2026.10.06 – 2026.11.04 (30일) · 전체 회원</span>
+            <span class="clarity-live-pill">빠른 뒤로가기 · 반복 연타 · 체류시간 실시간 집계</span>
+          </div>
+
+          <div class="kpi-strip journey-kpi-strip" id="journey-kpi-strip"></div>
+        </article>
+
+        <article class="surface-card product-map-card">
+          <div class="card-header">
+            <div>
+              <h2>화면별 체류시간 · 이동 경로 맵</h2>
+              <p>카드를 누르면 다음 이동 경로와 이탈 원인을 확인할 수 있습니다.</p>
+            </div>
+            <div class="product-map-head-actions">
+              <div class="journey-summary-pill">
+                <span>누적 이동 <strong id="pmap-total-transitions">148,150회</strong></span>
+                <span>·</span>
+                <span>14개 화면</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pmap-toolbar">
+            <div class="pmap-filter-group" role="tablist" aria-label="여정 경로 필터">
+              <button type="button" class="pmap-filter-btn is-active" data-pmap-filter="all">전체 경로</button>
+              <button type="button" class="pmap-filter-btn" data-pmap-filter="friction">⚠️ 주의 구간</button>
+              <button type="button" class="pmap-filter-btn" data-pmap-filter="onboarding">가입 · 링 연결</button>
+              <button type="button" class="pmap-filter-btn" data-pmap-filter="health">오늘 홈 · 건강</button>
+              <button type="button" class="pmap-filter-btn" data-pmap-filter="couple">우리 · 공유</button>
+            </div>
+
+            <div class="pmap-legend" aria-label="연결선 안내">
+              <span class="pmap-legend-item"><i class="pmap-line-sample is-thick"></i>주류 이동</span>
+              <span class="pmap-legend-item"><i class="pmap-line-sample is-mid"></i>보조 이동</span>
+              <span class="pmap-legend-item"><i class="pmap-line-sample is-dashed"></i>이탈 · 되돌아감</span>
+            </div>
+          </div>
+
+          <div class="pmap-stage-headers">
+            <span>STEP 0 · 시작</span>
+            <span>STEP 1 · 가입</span>
+            <span>STEP 2 · 프로필 · 링</span>
+            <span>STEP 3 · 오늘 홈</span>
+            <span>STEP 4 · 상세 · 우리</span>
+            <span>STEP 5 · 공유 · 탈퇴</span>
+          </div>
+          <div class="pmap-canvas-scroll">
+            <div class="pmap-canvas" id="product-flow-canvas"></div>
+          </div>
+
+          <div class="pmap-inspector" id="product-flow-inspector"></div>
+        </article>
+
+        <article class="surface-card">
+          <div class="card-header">
+            <div>
+              <h2>화면별 체류 · 이탈 상세표</h2>
+              <p>화면별 방문 수, 평균 체류시간, 다음 이동 화면을 비교합니다.</p>
+            </div>
+            <div class="filter-bar">
+              <select id="journey-table-sort" class="select-clean" aria-label="정렬 기준">
+                <option value="sessions">방문 많은 순</option>
+                <option value="dwell">체류시간 긴 순</option>
+                <option value="friction">주의 신호 많은 순</option>
+                <option value="dropoff">이탈률 높은 순</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="clean-table journey-behavior-table">
+              <thead>
+                <tr>
+                  <th>화면명</th>
+                  <th>방문자 · 세션</th>
+                  <th>평균 체류</th>
+                  <th>다음 이동 화면 (1 · 2위)</th>
+                  <th>빠른 뒤로가기</th>
+                  <th>반복 연타</th>
+                  <th>이탈률</th>
+                  <th>상태</th>
+                </tr>
+              </thead>
+              <tbody id="journey-behavior-table-body"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===============================================================
+           TAB 3: MEMBERS (회원 관리)
+           =============================================================== -->
+      <section class="admin-view" data-view="members">
+        <div class="grid-two-col">
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>가입 채널별 비중</h2>
+                <p>소셜·이메일 가입 수단별 회원 분포</p>
+              </div>
+            </div>
+            <div id="members-provider-breakdown" class="finish-bar-section"></div>
+          </article>
+
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>탈퇴 사유 분석 (1,360명)</h2>
+                <p>주요 이탈 원인과 앱 내 개선 조치</p>
+              </div>
+            </div>
+            <div id="members-churn-breakdown" class="finish-bar-section"></div>
+          </article>
+        </div>
+
+        <article class="surface-card">
+          <div class="card-header">
+            <div>
+              <h2>전체 회원 목록</h2>
+              <p>이름·이메일·링 이름으로 검색하고 계정 상태를 변경합니다.</p>
+            </div>
+            <div class="filter-bar">
+              <input type="search" id="member-search-input" class="input-clean" placeholder="이름, 이메일, SAI_11C1 검색">
+              <select id="member-status-filter" class="select-clean" aria-label="회원 상태 필터">
+                <option value="ALL">전체 상태</option>
+                <option value="ACTIVE">이용 중</option>
+                <option value="WITHDRAWN">탈퇴</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="clean-table">
+              <thead>
+                <tr>
+                  <th>회원명 · ID</th>
+                  <th>가입 채널 · 이메일</th>
+                  <th>신체 정보</th>
+                  <th>스마트링 · 컬러</th>
+                  <th>커플 상태</th>
+                  <th>계정 상태</th>
+                  <th>관리</th>
+                </tr>
+              </thead>
+              <tbody id="members-table-body"></tbody>
+            </table>
+          </div>
+
+          <div class="pagination-bar">
+            <span id="members-page-info">20,480명 중 1–12명</span>
+            <div class="pagination-btns">
+              <button type="button" class="btn-soft" id="btn-members-prev">이전</button>
+              <button type="button" class="btn-soft" id="btn-members-next">다음</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===============================================================
+           TAB 4: SMART RINGS (스마트링 · 컬러 현황)
+           =============================================================== -->
+      <section class="admin-view" data-view="devices">
+        <div id="devices-testflight-phase1-panel" class="testflight-phase1-panel"></div>
+
+        <div class="kpi-strip">
+          <article class="kpi-card">
+            <span class="kpi-label">활성 스마트링</span>
+            <strong class="kpi-value">17,890대</strong>
+            <p class="kpi-sub">출고 기기 대비 93.6% 착용 중</p>
+          </article>
+          <article class="kpi-card">
+            <span class="kpi-label">인기 컬러 1위</span>
+            <strong class="kpi-value">18K 골드 (47%)</strong>
+            <p class="kpi-sub">골드 8,410 · 실버 5,900 · 로즈골드 3,580</p>
+          </article>
+          <article class="kpi-card">
+            <span class="kpi-label">블루투스 연결 성공률</span>
+            <strong class="kpi-value">96.4%</strong>
+            <p class="kpi-sub">첫 시도 85.8% · 도움말 경유 +10.6%</p>
+          </article>
+          <article class="kpi-card">
+            <span class="kpi-label">배터리 20% 이하</span>
+            <strong class="kpi-value" style="color:#B54708;">412대 (2.3%)</strong>
+            <p class="kpi-sub">취침 전 충전 알림 자동 발송</p>
+          </article>
+        </div>
+
+        <article class="surface-card">
+          <div class="card-header">
+            <div>
+              <h2>컬러별 착용 현황 · 재고</h2>
+              <p>마감 컬러별 사용 비중, 주요 호수, 잔여 재고 현황</p>
+            </div>
+            <button type="button" class="btn-primary-sm" data-goto-tab="orders">주문 · 배송 관리 →</button>
+          </div>
+          <div id="devices-color-usage-grid" class="ring-color-usage-grid"></div>
+        </article>
+
+        <div class="grid-two-col">
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>블루투스 연결 지연 원인</h2>
+                <p>페어링 지연 로그 2,510건 분석 및 조치 현황</p>
+              </div>
+            </div>
+            <div id="devices-pairing-diagnostics" class="friendly-log-list" style="margin-bottom:14px;"></div>
+            <div id="devices-version-breakdown" class="finish-bar-section"></div>
+          </article>
+
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>기기 표시명 변환 (<code>R22</code> → <code>SAI</code>)</h2>
+                <p>BLE 뒤 4자리를 추출해 <code>SAI_11C1</code> 형식으로 자동 변환합니다.</p>
+              </div>
+            </div>
+            <div class="clean-form">
+              <div class="form-row-2">
+                <label>기기 고유번호 (BLE)
+                  <input type="text" id="fw-ble-input" value="F1BE85F511C1" maxlength="17">
+                </label>
+                <label>마감 컬러
+                  <select id="fw-finish-select">
+                    <option value="Gold">18K 골드 (Gold)</option>
+                    <option value="Silver">퓨어 실버 (Silver)</option>
+                    <option value="Rose Gold">로즈골드 (Rose Gold)</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="naming-preview-box">
+                <div>
+                  <small>출고 펌웨어명</small>
+                  <strong id="preview-legacy-name">R22_11C1</strong>
+                </div>
+                <span class="naming-arrow">→</span>
+                <div class="is-highlight">
+                  <small>앱 표시 이름</small>
+                  <strong id="preview-sai-name">SAI_11C1</strong>
+                </div>
+              </div>
+
+              <button type="button" class="btn-dark-full" id="btn-register-standby-ring">신규 기기 등록</button>
+            </div>
+          </article>
+        </div>
+
+        <article class="surface-card">
+          <div class="card-header">
+            <div>
+              <h2>등록 기기 목록</h2>
+              <p>기기별 컬러·호수, 배터리, 최근 동기화 시각</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="clean-table">
+              <thead>
+                <tr>
+                  <th>앱 표시명</th>
+                  <th>출고명</th>
+                  <th>BLE 번호</th>
+                  <th>컬러 · 호수</th>
+                  <th>배터리</th>
+                  <th>연결 회원</th>
+                  <th>최근 동기화</th>
+                  <th>상태</th>
+                </tr>
+              </thead>
+              <tbody id="devices-table-body"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===============================================================
+           TAB 4.5: ORDERS & SHIPPING (주문 · 배송 관리)
+           =============================================================== -->
+      <section class="admin-view" data-view="orders">
+        <div class="kpi-strip" id="orders-kpi-strip"></div>
+
+        <div class="grid-two-col">
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>판매 채널별 주문 현황</h2>
+                <p>연동 쇼핑몰 주문 수집 및 송장 자동 역전송 상태</p>
+              </div>
+            </div>
+            <div id="orders-channel-breakdown" class="friendly-log-list"></div>
+          </article>
+
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>신규 주문 수동 등록</h2>
+                <p>제휴·선물 주문을 직접 등록하고 출고 방식을 지정합니다.</p>
+              </div>
+            </div>
+            <form id="form-create-order" class="clean-form">
+              <div class="form-row-2">
+                <label>판매 채널
+                  <select id="ord-channel-select">
+                    <option value="자사 공식몰">자사 공식몰</option>
+                    <option value="카카오 선물하기">카카오 선물하기</option>
+                    <option value="네이버 스마트스토어">네이버 스마트스토어</option>
+                    <option value="29CM 스페셜">29CM · 무신사</option>
+                  </select>
+                </label>
+                <label>패키지 구성
+                  <select id="ord-package-select">
+                    <option value="SAI 커플 링 패키지 (2개입)">커플 패키지 (2개입)</option>
+                    <option value="SAI 싱글 스마트링 (1개입)">싱글 패키지 (1개입)</option>
+                  </select>
+                </label>
+              </div>
+              <div class="form-row-2">
+                <label>주문자명
+                  <input type="text" id="ord-buyer-name" placeholder="예: 김도윤" value="김도윤" required>
+                </label>
+                <label>연락처
+                  <input type="text" id="ord-buyer-phone" placeholder="010-0000-0000" value="010-5820-1194" required>
+                </label>
+              </div>
+              <div class="form-row-2">
+                <label>컬러 · 호수
+                  <select id="ord-color-spec">
+                    <option value="18K 골드 (11호) + 퓨어 실버 (17호)">골드 11호 + 실버 17호</option>
+                    <option value="18K 골드 (12호) + 로즈골드 (10호)">골드 12호 + 로즈골드 10호</option>
+                    <option value="18K 골드 (13호 · 단품)">18K 골드 13호 (단품)</option>
+                    <option value="퓨어 실버 (16호 · 단품)">퓨어 실버 16호 (단품)</option>
+                    <option value="로즈골드 (10호 · 단품)">로즈골드 10호 (단품)</option>
+                  </select>
+                </label>
+                <label>출고 방식
+                  <select id="ord-sizing-mode">
+                    <option value="direct">본품 바로 출고</option>
+                    <option value="kit">사이징 키트 선발송</option>
+                  </select>
+                </label>
+              </div>
+              <button type="submit" class="btn-dark-full">주문 등록</button>
+            </form>
+          </article>
+        </div>
+
+        <article class="surface-card">
+          <div class="card-header">
+            <div>
+              <h2>주문 · 배송 목록</h2>
+              <p>사이징 키트 발송, 본품 시리얼(<code>SAI_XXXX</code>) 매핑, 송장 처리를 관리합니다.</p>
+            </div>
+            <div class="filter-bar">
+              <input
+                type="search"
+                id="order-search-input"
+                class="input-clean"
+                placeholder="주문번호, 주문자, 컬러, 송장 검색"
+              >
+            </div>
+          </div>
+
+          <div class="pmap-toolbar" style="margin-bottom: 14px;">
+            <div class="pmap-filter-group" role="tablist" aria-label="배송 단계 필터">
+              <button type="button" class="pmap-filter-btn is-active" data-order-status-filter="ALL">전체</button>
+              <button type="button" class="pmap-filter-btn" data-order-status-filter="NEW_ORDER">신규 접수</button>
+              <button type="button" class="pmap-filter-btn" data-order-status-filter="SIZING_KIT">사이징 키트</button>
+              <button type="button" class="pmap-filter-btn" data-order-status-filter="SHIPPING">배송 중</button>
+              <button type="button" class="pmap-filter-btn" data-order-status-filter="DELIVERED">배송 완료</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="clean-table">
+              <thead>
+                <tr>
+                  <th>주문번호 · 일시</th>
+                  <th>채널</th>
+                  <th>주문자 · 연락처</th>
+                  <th>주문 상품 · 옵션</th>
+                  <th>매핑 기기 · 송장번호</th>
+                  <th>배송 · 연결 상태</th>
+                  <th>처리</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table-body"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===============================================================
+           TAB 5: COUPLES & HEALTH (커플 · 공유 현황)
+           =============================================================== -->
+      <section class="admin-view" data-view="couples">
+        <div class="kpi-strip" id="couples-status-kpi-strip"></div>
+
+        <div class="grid-two-col">
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>커플 연결 단계별 분포</h2>
+                <p>항목 클릭 시 하단 목록이 해당 상태로 필터링됩니다.</p>
+              </div>
+            </div>
+            <div id="couple-status-breakdown-panel"></div>
+          </article>
+
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>건강 공유 항목 · 외부 앱 연동</h2>
+                <p>연결 커플(7,320쌍)의 공유 항목 및 외부 헬스 앱 연동률</p>
+              </div>
+            </div>
+            <div id="health-control-panel"></div>
+          </article>
+        </div>
+
+        <article class="surface-card">
+          <div class="card-header">
+            <div>
+              <h2>커플 연결 목록</h2>
+              <p>커플 연결 상태 확인 및 초대 대기 회원을 관리합니다.</p>
+            </div>
+            <div class="filter-bar">
+              <input
+                type="search"
+                id="couple-search-input"
+                class="input-clean"
+                placeholder="이름, 초대코드(SAI1024), 링 이름 검색"
+              >
+            </div>
+          </div>
+
+          <div class="pmap-toolbar" style="margin-bottom: 14px;">
+            <div class="pmap-filter-group" role="tablist" aria-label="커플 연결 상태 필터">
+              <button type="button" class="pmap-filter-btn is-active" data-couple-status-filter="ALL">전체</button>
+              <button type="button" class="pmap-filter-btn" data-couple-status-filter="CONNECTED">연결 완료 (6,700쌍)</button>
+              <button type="button" class="pmap-filter-btn" data-couple-status-filter="PENDING">수락 대기 (1,840명)</button>
+              <button type="button" class="pmap-filter-btn" data-couple-status-filter="PARTIAL">선택 공유 (620쌍)</button>
+              <button type="button" class="pmap-filter-btn" data-couple-status-filter="UNLINKED">단독 이용 (2,760명)</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="clean-table couple-status-table">
+              <thead>
+                <tr>
+                  <th>연결 상태</th>
+                  <th>회원 (스마트링)</th>
+                  <th>파트너 (스마트링)</th>
+                  <th>초대코드 · 기간</th>
+                  <th>공유 항목</th>
+                  <th>최근 교감</th>
+                  <th>관리</th>
+                </tr>
+              </thead>
+              <tbody id="couples-status-table-body"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===============================================================
+           TAB 6: APP SETTINGS & SUPPORT (앱 설정 · 1:1 문의)
+           =============================================================== -->
+      <section class="admin-view" data-view="support">
+        <article class="surface-card">
+          <div class="card-header">
+            <div>
+              <h2>앱 기능 · 알림 설정</h2>
+              <p>변경 사항은 저장 즉시 모바일 앱에 반영됩니다.</p>
+            </div>
+            <span class="date-range-badge" id="app-settings-updated-badge">최근 반영: 2026-11-04 09:00</span>
+          </div>
+
+          <form id="form-app-settings" class="app-settings-grid">
+            <div class="settings-group-card">
+              <div class="settings-group-head">
+                <h3>온보딩 · 약관 동의</h3>
+              </div>
+              <label class="setting-toggle-row">
+                <div>
+                  <strong>약관 전체 동의 버튼 노출</strong>
+                  <small>가입 화면 상단에 원클릭 전체 동의 표시</small>
+                </div>
+                <input type="checkbox" id="set-show-select-all" checked>
+              </label>
+              <label class="setting-toggle-row">
+                <div>
+                  <strong>링 배송 전 [나중에 연결] 허용</strong>
+                  <small>기기 수령 전 앱 홈 둘러보기 허용</small>
+                </div>
+                <input type="checkbox" id="set-allow-skip-ring" checked>
+              </label>
+              <label class="setting-toggle-row">
+                <div>
+                  <strong>만 14세 이상 필수 확인</strong>
+                  <small>온보딩 단계에서 만 14세 미만 가입 제한</small>
+                </div>
+                <input type="checkbox" id="set-require-age14" checked>
+              </label>
+            </div>
+
+            <div class="settings-group-card">
+              <div class="settings-group-head">
+                <h3>스마트링 연결 · 동기화</h3>
+              </div>
+              <label class="setting-field-row">
+                <span>블루투스 표시명 규칙</span>
+                <select id="set-ring-prefix" class="select-clean">
+                  <option value="SAI_">SAI_XXXX (권장)</option>
+                  <option value="SAI-RING_">SAI-RING_XXXX</option>
+                </select>
+              </label>
+              <label class="setting-field-row">
+                <span>링 검색 도움말 노출 시점</span>
+                <select id="set-ring-help-delay" class="select-clean">
+                  <option value="4">4초 경과 시 노출 (권장)</option>
+                  <option value="6">6초 경과 시 노출</option>
+                  <option value="0">진입 즉시 노출</option>
+                </select>
+              </label>
+              <label class="setting-field-row">
+                <span>백그라운드 동기화 주기</span>
+                <select id="set-auto-sync" class="select-clean">
+                  <option value="15m">15분마다 동기화 (권장)</option>
+                  <option value="30m">30분마다 동기화</option>
+                  <option value="morning">기상 및 앱 실행 시</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="settings-group-card">
+              <div class="settings-group-head">
+                <h3>아침 체크인 · 커플 공유</h3>
+              </div>
+              <label class="setting-field-row">
+                <span>아침 체크인 알림 시각</span>
+                <select id="set-morning-time" class="select-clean">
+                  <option value="08:00">오전 08:00 (권장)</option>
+                  <option value="07:30">오전 07:30</option>
+                  <option value="09:00">오전 09:00</option>
+                </select>
+              </label>
+              <label class="setting-field-row">
+                <span>커플 기본 공유 범위</span>
+                <select id="set-couple-scope" class="select-clean">
+                  <option value="all_4">수면·심박·기분·주기 전체 켜짐</option>
+                  <option value="mood_sleep">기분·수면만 기본 켜짐</option>
+                </select>
+              </label>
+              <label class="setting-field-row">
+                <span>함께 호흡하기 기본 시간</span>
+                <select id="set-breath-sec" class="select-clean">
+                  <option value="24">24초 호흡 (권장)</option>
+                  <option value="60">60초 호흡</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="settings-submit-bar">
+              <p>저장 시 모바일 앱과 전체 요약 화면에 즉시 반영됩니다.</p>
+              <button type="submit" class="btn-primary-sm">설정 저장</button>
+            </div>
+          </form>
+        </article>
+
+        <div class="grid-two-col">
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>1:1 고객 문의 (VOC)</h2>
+                <p>접수된 문의를 확인하고 답변 상태를 변경합니다.</p>
+              </div>
+            </div>
+            <div id="support-inquiry-list" class="inquiry-list"></div>
+          </article>
+
+          <article class="surface-card">
+            <div class="card-header">
+              <div>
+                <h2>약관 · 개인정보 운영 원칙</h2>
+                <p>현재 앱에 적용된 필수·선택 약관 기준</p>
+              </div>
+            </div>
+            <div class="policy-summary-list">
+              <div class="policy-item">
+                <strong>[필수 4종] 만 14세 · 이용약관 · 개인정보 · 민감 건강정보</strong>
+                <p>생체 데이터(수면·심박·체온·주기) 분석을 위한 필수 동의 항목입니다.</p>
+              </div>
+              <div class="policy-item">
+                <strong>[선택 2종] 파트너 건강 공유 · 케어/마케팅 알림</strong>
+                <p>미동의 시에도 개인 건강 기록 기능은 정상 이용 가능합니다.</p>
+              </div>
+              <div class="policy-item">
+                <strong>비의료 웰니스 · 파트너 선택 공유 원칙</strong>
+                <p>질병 진단 목적이 아닌 일상 참고용이며, 허용 항목만 파트너에게 공유됩니다.</p>
+              </div>
+              <div class="policy-item">
+                <strong>회원 탈퇴 시 건강 기록 즉시 파기</strong>
+                <p>탈퇴 즉시 개인 기록과 커플 연결이 해제되며 30일 내 완전 파기됩니다.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="admin-toast" id="admin-toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="sai-store.js?v=20261105_admin13"></script>
+  <script src="admin.js?v=20261105_admin13"></script>
+</body>
+</html>
