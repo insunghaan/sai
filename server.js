@@ -29,6 +29,7 @@ const MIME_TYPES = {
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.ttf': 'font/ttf',
+  '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   '.xml': 'application/xml; charset=utf-8',
   '.txt': 'text/plain; charset=utf-8'
 };
@@ -544,6 +545,8 @@ const server = http.createServer(async (req, res) => {
     targetFile = 'ja/index.html';
   } else if (['/hello', '/hello/', '/hello.html'].includes(pathname)) {
     targetFile = 'hello/index.html';
+  } else if (['/hello99', '/hello99/', '/hello99.html'].includes(pathname)) {
+    targetFile = 'hello99/index.html';
   } else if (['/teaser10', '/teaser10/', '/teaser10.html'].includes(pathname)) {
     targetFile = 'teaser10.html';
   } else if (['/teaser6', '/teaser6/', '/teaser6.html', '/ja/teaser6', '/ja/teaser6/'].includes(pathname)) {
@@ -606,7 +609,7 @@ const server = http.createServer(async (req, res) => {
     res.setHeader('Content-Length', stats.size);
     if (targetFile.startsWith('archive/')) res.setHeader('X-Robots-Tag', 'noindex, follow');
 
-    if (ext === '.html' || targetFile.startsWith('hello/')) {
+    if (ext === '.html' || targetFile.startsWith('hello/') || targetFile.startsWith('hello99/')) {
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     } else {
       res.setHeader('Cache-Control', 'public, max-age=86400');
