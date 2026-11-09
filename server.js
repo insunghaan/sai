@@ -503,11 +503,11 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Only choose a regional default at the entry URL. Explicit /ja/ links remain stable.
-  if (['/', '/teaser6', '/teaser6/'].includes(pathname) && !new URL(req.url, 'http://localhost').searchParams.has('lang')) {
+  if (['/', '/teaser6', '/teaser6/', '/teaser7', '/teaser7/'].includes(pathname) && !new URL(req.url, 'http://localhost').searchParams.has('lang')) {
     res.setHeader('Vary', 'Cookie');
     res.setHeader('Cache-Control', 'private, no-store');
     if (await defaultLanguage(req, lookupLocaleCountry) === 'ja') {
-      const targetPath = pathname === '/' ? '/ja/' : '/ja/teaser6';
+      const targetPath = pathname === '/' ? '/ja/' : pathname.startsWith('/teaser7') ? '/ja/teaser7' : '/ja/teaser6';
       res.writeHead(302, { Location: targetPath + new URL(req.url, 'http://localhost').search });
       res.end();
       return;
@@ -549,6 +549,8 @@ const server = http.createServer(async (req, res) => {
     targetFile = 'hello99/index.html';
   } else if (['/teaser10', '/teaser10/', '/teaser10.html'].includes(pathname)) {
     targetFile = 'teaser10.html';
+  } else if (['/teaser7', '/teaser7/', '/teaser7.html', '/ja/teaser7', '/ja/teaser7/'].includes(pathname)) {
+    targetFile = 'teaser7.html';
   } else if (['/teaser6', '/teaser6/', '/teaser6.html', '/ja/teaser6', '/ja/teaser6/'].includes(pathname)) {
     targetFile = 'teaser6.html';
   } else if (['/teaser5', '/teaser5/', '/teaser5.html'].includes(pathname)) {
