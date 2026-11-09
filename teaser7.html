@@ -1228,24 +1228,29 @@
     }
 
     .bento-sensor-visual {
-      flex: 0 0 280px;
-      max-width: 280px;
+      flex: 0 0 360px;
+      max-width: 360px;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #E4D4BE;
+      box-shadow: 0 12px 28px rgba(48, 35, 27, 0.1);
     }
 
     .sensor-ring-img {
       width: 100%;
       height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 15px 28px rgba(48, 35, 27, 0.2));
+      object-fit: cover;
+      border-radius: 20px;
+      filter: none !important;
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .bento-card-sensor:hover .sensor-ring-img {
-      transform: scale(1.06) rotate(-3deg);
+      transform: scale(1.04);
     }
 
     @media (max-width: 820px) {
@@ -1254,7 +1259,7 @@
         align-items: flex-start;
         justify-content: flex-start;
         padding: 28px 24px;
-        gap: 16px;
+        gap: 18px;
       }
       .bento-sensor-content {
         flex: 0 0 auto;
@@ -1262,9 +1267,9 @@
       }
       .bento-sensor-visual {
         flex: 0 0 auto;
-        align-self: center;
-        width: 220px;
-        max-width: 220px;
+        align-self: stretch;
+        width: 100%;
+        max-width: 100%;
         margin-top: 6px;
       }
     }
@@ -2864,8 +2869,8 @@
           </div>
           <div class="bento-sensor-visual">
             <picture>
-              <source srcset="/assets/teaser7/product-rings-trio-clean.webp" type="image/webp">
-              <img src="/assets/teaser7/product-rings-trio-clean.png" alt="SAI Silver, Rose Gold, Gold Rings Sensors" class="sensor-ring-img">
+              <source srcset="/assets/teaser7/sensor-rings-studio.webp" type="image/webp">
+              <img src="/assets/teaser7/sensor-rings-studio.jpg" alt="SAI Smart Rings 3-Channel Biosensor Studio" class="sensor-ring-img">
             </picture>
           </div>
         </div>
