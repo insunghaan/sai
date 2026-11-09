@@ -720,7 +720,7 @@
        SECTION 02: WHY SMART RING? THE COMPARISON
        ======================================================== */
     .section-compare {
-      padding: 100px 0 80px;
+      padding: 100px 0 36px;
       background: var(--bg-dark);
       position: relative;
     }
@@ -1381,15 +1381,117 @@
        SECTION 03: HARDWARE & SENSOR BENTO GRID
        ======================================================== */
     .section-hardware {
-      padding: 100px 0;
+      padding: 16px 0 100px;
       background: var(--bg-dark);
+    }
+
+    .hardware-brand-unified {
+      margin-top: 0;
+      background: #FFFFFF;
+      border: 1px solid #E5CEB2;
+      border-radius: 28px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow-ambient);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .unified-brand-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .unified-callout-group h3 {
+      font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 0 0 10px;
+      line-height: 1.35;
+      word-break: keep-all;
+    }
+
+    .unified-callout-group p {
+      color: var(--text-secondary);
+      font-size: 0.98rem !important;
+      line-height: 1.65;
+      margin: 0 auto;
+      max-width: 680px;
+      word-break: keep-all;
+      white-space: normal !important;
+    }
+
+    .unified-divider {
+      height: 1px;
+      width: 100%;
+      background: #EADBC6;
+      margin: 24px auto;
+    }
+
+    .unified-hw-group .section-tag {
+      margin-bottom: 10px;
+    }
+
+    .unified-hw-group .section-title {
+      font-size: clamp(1.75rem, 3.8vw, 2.5rem);
+      margin-bottom: 14px;
+    }
+
+    .unified-hw-group .section-desc {
+      font-size: 1rem;
+      margin: 0 auto;
+      max-width: 680px;
+    }
+
+    .unified-brand-media {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid #E4D4BE;
+      box-shadow: 0 16px 36px rgba(48, 35, 27, 0.14);
+    }
+
+    .unified-brand-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    @media (min-width: 860px) {
+      .hardware-brand-unified {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 44px;
+        padding: 46px 48px;
+        text-align: left;
+      }
+      .unified-callout-group p,
+      .unified-hw-group .section-desc {
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .hardware-brand-unified {
+        padding: 28px 22px;
+        border-radius: 24px;
+        gap: 24px;
+      }
+      .unified-divider {
+        margin: 20px auto;
+      }
     }
 
     .bento-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 20px;
-      margin-top: 48px;
+      margin-top: 28px;
     }
 
     @media (min-width: 768px) {
@@ -2906,13 +3008,6 @@
           </div>
         </div>
       </div>
-
-      <div class="compare-callout">
-        <h3 id="callout-title">"이제 예쁜 것만으로는<br class="m-br">부족합니다."</h3>
-        <p id="callout-desc">
-          2030 스마트 커플들이 SAI를 선택하는 이유: 매일 착용하는 반지 하나로 서로의 건강을 살피고 둘만의 유대감을 더욱 깊게 만듭니다.
-        </p>
-      </div>
     </div>
   </section>
 
@@ -2921,14 +3016,31 @@
        ======================================================== -->
   <section class="section-hardware" id="hardware">
     <div class="container">
-      <div class="section-header">
-        <div class="section-tag" id="hw-tag">PRECISION ENGINEERING</div>
-        <h2 class="section-title" id="hw-title">
-          놀랍도록 가볍고,<br class="m-br">영원히 견고하게.
-        </h2>
-        <p class="section-desc" id="hw-desc">
-          손가락에 낀 것을 잊을 만큼 가벼운 2.7g. 24시간 샤워할 때도, 잠들 때도 완벽한 편안함을 선사합니다.
-        </p>
+      <div class="hardware-brand-unified compare-callout">
+        <div class="unified-brand-copy">
+          <div class="unified-callout-group">
+            <h3 id="callout-title">"이제 예쁜 것만으로는<br class="m-br">부족합니다."</h3>
+            <p id="callout-desc">
+              2030 스마트 커플들이 SAI를 선택하는 이유: 매일 착용하는 반지 하나로 서로의 건강을 살피고 둘만의 유대감을 더욱 깊게 만듭니다.
+            </p>
+          </div>
+          <div class="unified-divider" aria-hidden="true"></div>
+          <div class="unified-hw-group">
+            <div class="section-tag" id="hw-tag">PRECISION ENGINEERING</div>
+            <h2 class="section-title" id="hw-title">
+              놀랍도록 가볍고,<br class="m-br">영원히 견고하게.
+            </h2>
+            <p class="section-desc" id="hw-desc">
+              손가락에 낀 것을 잊을 만큼 가벼운 2.7g. 24시간 샤워할 때도, 잠들 때도 완벽한 편안함을 선사합니다.
+            </p>
+          </div>
+        </div>
+        <div class="unified-brand-media">
+          <picture>
+            <source srcset="/assets/teaser7/brand-coat-ring.webp" type="image/webp">
+            <img src="/assets/teaser7/brand-coat-ring.jpg" alt="SAI 스마트 커플링 브랜드 이미지" class="unified-brand-img" width="768" height="1024" loading="lazy">
+          </picture>
+        </div>
       </div>
 
       <div class="bento-grid">
