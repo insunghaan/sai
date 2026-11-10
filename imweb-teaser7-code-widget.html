@@ -1,7 +1,74 @@
 <!-- =====================================================================
      SAI SMART COUPLE RING - IMWEB (아임웹) ALL-IN-ONE CODE WIDGET (v2)
      아임웹 디자인 모드 > 코드 위젯에 이 코드 전체를 그대로 붙여넣으세요.
+     (Microsoft Clarity: yk2omp3xul / GA4: G-SKG7ZN4LEH 내장)
      ===================================================================== -->
+<script>
+  // Microsoft Clarity (yk2omp3xul) & Google Analytics 4 (G-SKG7ZN4LEH)
+  (function () {
+    'use strict';
+    if (window.__saiAnalyticsInstalled) return;
+    window.__saiAnalyticsInstalled = true;
+
+    var host = (window.location.hostname || '').toLowerCase();
+    var path = window.location.pathname || '';
+    var isLocalOrEditor =
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      path.indexOf('/admin') === 0 ||
+      window.location.search.indexOf('edit_mode=') !== -1;
+
+    var measurementId = 'G-SKG7ZN4LEH';
+    var clarityProjectId = 'yk2omp3xul';
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+
+    function language() {
+      return (document.documentElement.lang || 'ko').toLowerCase().split('-')[0] === 'ja' ? 'ja' : 'ko';
+    }
+
+    function startAnalytics() {
+      var currentLanguage = language();
+      window.gtag('js', new Date());
+      window.gtag('set', { site_language: currentLanguage });
+
+      if (!isLocalOrEditor) {
+        // 1. Google Analytics 4
+        window.gtag('config', measurementId);
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+        document.head.appendChild(gaScript);
+
+        // 2. Microsoft Clarity (yk2omp3xul)
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", clarityProjectId);
+      }
+
+      new MutationObserver(function () {
+        var nextLanguage = language();
+        if (nextLanguage === currentLanguage) return;
+        var previousLanguage = currentLanguage;
+        currentLanguage = nextLanguage;
+        window.gtag('set', { site_language: nextLanguage });
+        window.gtag('event', 'language_change', {
+          site_language: nextLanguage,
+          previous_language: previousLanguage
+        });
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startAnalytics, { once: true });
+    } else {
+      startAnalytics();
+    }
+  }());
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
