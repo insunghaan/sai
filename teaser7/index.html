@@ -1938,6 +1938,106 @@
       line-height: 1.55;
     }
 
+    .perk-desc:empty {
+      display: none;
+    }
+
+    .perk-price-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .perk-price-row {
+      background: #FFFFFF;
+      border: 1px solid #EADBC6;
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .perk-price-row.couple-highlight {
+      background: #FFF7EC;
+      border: 1.5px solid #F0B87D;
+    }
+
+    .perk-price-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .perk-pkg-label {
+      font-size: 0.86rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .perk-save-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      background: rgba(232, 109, 19, 0.14);
+      color: #C85608;
+    }
+
+    .perk-price-nums {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .perk-price-origin {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #8C7E72;
+      letter-spacing: -0.01em;
+    }
+
+    .perk-price-origin s {
+      text-decoration: line-through;
+      color: #8C7E72;
+    }
+
+    .perk-price-sale {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 5px;
+      color: var(--accent-rose);
+    }
+
+    .perk-price-arrow {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #B89F86;
+      margin-right: 2px;
+    }
+
+    .perk-sale-lbl {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #C85608;
+    }
+
+    .perk-price-sale strong {
+      font-size: clamp(1.28rem, 4vw, 1.52rem);
+      font-weight: 900;
+      color: #E86D13;
+      letter-spacing: -0.035em;
+      font-variant-numeric: tabular-nums;
+    }
+
     /* Waitlist Registration Form Stage */
     .waitlist-form-card {
       max-width: 760px;
@@ -3013,13 +3113,6 @@
     <div class="container">
       <div class="hardware-brand-unified compare-callout">
         <div class="unified-brand-copy">
-          <div class="unified-callout-group">
-            <h3 id="callout-title">"이제 예쁜 것만으로는<br class="m-br">부족합니다."</h3>
-            <p id="callout-desc">
-              2030 스마트 커플들이 SAI를 선택하는 이유: 매일 착용하는 반지 하나로 서로의 건강을 살피고 둘만의 유대감을 더욱 깊게 만듭니다.
-            </p>
-          </div>
-          <div class="unified-divider" aria-hidden="true"></div>
           <div class="unified-hw-group">
             <div class="section-tag" id="hw-tag">PRECISION ENGINEERING</div>
             <h2 class="section-title" id="hw-title">
@@ -3196,10 +3289,31 @@
           <span class="perk-badge" id="perk1-badge">20% 특별 할인</span>
           <div class="perk-icon">🏷️</div>
           <h3 id="perk1-title">커플링 20% 할인</h3>
-          <div class="perk-val" id="perk1-val">정가 349,000원 → 할인가 279,000원</div>
-          <p class="perk-desc" id="perk1-desc">
-            7만원 할인
-          </p>
+          <div class="perk-val" id="perk1-val">
+            <div class="perk-price-list">
+              <div class="perk-price-row">
+                <div class="perk-price-head">
+                  <span class="perk-pkg-label">싱글 (1개)</span>
+                  <span class="perk-save-tag">7만원 할인</span>
+                </div>
+                <div class="perk-price-nums">
+                  <span class="perk-price-origin">정가 <s>349,000원</s></span>
+                  <span class="perk-price-sale"><span class="perk-price-arrow" aria-hidden="true">→</span><span class="perk-sale-lbl">할인가</span> <strong>279,000원</strong></span>
+                </div>
+              </div>
+              <div class="perk-price-row couple-highlight">
+                <div class="perk-price-head">
+                  <span class="perk-pkg-label">커플 세트 (2개)</span>
+                  <span class="perk-save-tag">14만원 할인</span>
+                </div>
+                <div class="perk-price-nums">
+                  <span class="perk-price-origin">정가 <s>698,000원</s></span>
+                  <span class="perk-price-sale"><span class="perk-price-arrow" aria-hidden="true">→</span><span class="perk-sale-lbl">할인가</span> <strong>558,000원</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="perk-desc" id="perk1-desc"></p>
         </div>
 
         <!-- Perk 2 -->
@@ -3564,8 +3678,8 @@
         perksDesc: '정식 런칭 후 유료화되는 모든 구독 혜택을 사전 예약 고객님께만 평생 무료로 제공합니다.',
         perk1Badge: '20% 특별 할인',
         perk1Title: '커플링 20% 할인',
-        perk1Val: '정가 349,000원 → 할인가 279,000원',
-        perk1Desc: '7만원 할인',
+        perk1Val: '<div class="perk-price-list"><div class="perk-price-row"><div class="perk-price-head"><span class="perk-pkg-label">싱글 (1개)</span><span class="perk-save-tag">7만원 할인</span></div><div class="perk-price-nums"><span class="perk-price-origin">정가 <s>349,000원</s></span><span class="perk-price-sale"><span class="perk-price-arrow" aria-hidden="true">→</span><span class="perk-sale-lbl">할인가</span> <strong>279,000원</strong></span></div></div><div class="perk-price-row couple-highlight"><div class="perk-price-head"><span class="perk-pkg-label">커플 세트 (2개)</span><span class="perk-save-tag">14만원 할인</span></div><div class="perk-price-nums"><span class="perk-price-origin">정가 <s>698,000원</s></span><span class="perk-price-sale"><span class="perk-price-arrow" aria-hidden="true">→</span><span class="perk-sale-lbl">할인가</span> <strong>558,000원</strong></span></div></div></div>',
+        perk1Desc: '',
         perk2Badge: '평생 무료',
         perk2Title: '데이터 분석 구독료 평생 면제',
         perk2Val: '₩0 / 평생',
@@ -3676,8 +3790,8 @@
         perksDesc: '正式リリース後は有料となるすべてのサブスクリプション特典を、事前登録のお客様限定で生涯無料で提供いたします。',
         perk1Badge: '20%特別割引',
         perk1Title: 'ペアリング 20%割引',
-        perk1Val: '通常価格 349,000ウォン → 割引価格 279,000ウォン',
-        perk1Desc: '7万ウォン割引',
+        perk1Val: '<div class="perk-price-list"><div class="perk-price-row"><div class="perk-price-head"><span class="perk-pkg-label">シングル (1個)</span><span class="perk-save-tag">7万ウォン割引</span></div><div class="perk-price-nums"><span class="perk-price-origin">定価 <s>349,000ウォン</s></span><span class="perk-price-sale"><span class="perk-price-arrow" aria-hidden="true">→</span><span class="perk-sale-lbl">特価</span> <strong>279,000ウォン</strong></span></div></div><div class="perk-price-row couple-highlight"><div class="perk-price-head"><span class="perk-pkg-label">ペアセット (2個)</span><span class="perk-save-tag">14万ウォン割引</span></div><div class="perk-price-nums"><span class="perk-price-origin">定価 <s>698,000ウォン</s></span><span class="perk-price-sale"><span class="perk-price-arrow" aria-hidden="true">→</span><span class="perk-sale-lbl">特価</span> <strong>558,000ウォン</strong></span></div></div></div>',
+        perk1Desc: '',
         perk2Badge: '生涯無料',
         perk2Title: 'データ分析のサブスクが生涯無料',
         perk2Val: '¥0 / 生涯',
@@ -3843,7 +3957,7 @@
       setText('perks-desc', dict.perksDesc);
       setText('perk1-badge', dict.perk1Badge);
       setText('perk1-title', dict.perk1Title);
-      setText('perk1-val', dict.perk1Val);
+      setHtml('perk1-val', dict.perk1Val);
       setText('perk1-desc', dict.perk1Desc);
       setText('perk2-badge', dict.perk2Badge);
       setText('perk2-title', dict.perk2Title);
