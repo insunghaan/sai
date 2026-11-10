@@ -938,45 +938,129 @@
       border: 1px solid rgba(48, 35, 27, 0.2);
     }
 
-    .studio-main-img-wrap {
-      width: 240px;
-      height: 240px;
+    .studio-slide-counter {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #DFCBB2;
+      color: var(--text-secondary);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      z-index: 3;
+    }
+
+    .studio-slider-viewport {
+      position: relative;
+      width: 100%;
+      margin: 26px auto 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 18px auto 16px;
+    }
+
+    .studio-slider-track {
+      display: flex;
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .studio-slider-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .studio-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 230px;
     }
 
     .studio-main-img {
-      width: 100%;
-      height: 100%;
+      width: 220px;
+      height: 220px;
       object-fit: contain;
       filter: drop-shadow(0 18px 28px rgba(48, 35, 27, 0.22));
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
-    .studio-main-img-wrap:hover .studio-main-img {
-      transform: scale(1.05);
+    .studio-slide-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #DFCBB2;
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      z-index: 4;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(48, 35, 27, 0.08);
+      transition: all 0.2s ease;
+    }
+
+    .studio-slide-nav:hover {
+      background: var(--accent-rose);
+      border-color: var(--accent-rose);
+      color: #ffffff;
+    }
+
+    .studio-slide-nav.prev {
+      left: 4px;
+    }
+
+    .studio-slide-nav.next {
+      right: 4px;
     }
 
     .studio-angle-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 8px;
       width: 100%;
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
     .studio-angle-btn {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid #DFCBB2;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1.5px solid #DFCBB2;
       color: var(--text-secondary);
-      padding: 7px 13px;
-      border-radius: 999px;
-      font-size: 0.78rem;
+      padding: 8px 4px 7px;
+      border-radius: 14px;
+      font-size: 0.7rem;
       font-weight: 700;
       transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      line-height: 1.2;
+      word-break: keep-all;
+    }
+
+    .studio-angle-thumb {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 6px rgba(48, 35, 27, 0.15));
+      pointer-events: none;
     }
 
     .studio-angle-btn:hover {
@@ -985,10 +1069,10 @@
     }
 
     .studio-angle-btn.active {
-      background: var(--accent-rose);
+      background: #FFF6EB;
       border-color: var(--accent-rose);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(232, 109, 19, 0.25);
+      color: var(--accent-deep);
+      box-shadow: 0 4px 12px rgba(232, 109, 19, 0.18);
     }
 
     /* Right column of studio: 3 Finishes selector + Size kit info */
@@ -3160,20 +3244,114 @@
           <p id="bento3-desc">한 번 충전으로 최대 7일. 소중한 사람과의 연결을 더 오래 이어갑니다.</p>
         </div>
 
-        <!-- Bento 4: HEART CONNECTION -->
-        <div class="bento-card bento-col-12 bento-card-sensor">
-          <div class="bento-sensor-content">
-            <div class="bento-eyebrow" id="bento4-eyebrow">HEART CONNECTION</div>
-            <h3 id="bento4-title">멀리 있어도, 서로의 심장 가까이</h3>
-            <p id="bento4-desc">
-              스마트 센서로 감지한 심박을 소중한 사람과 공유하세요. 떨어져 있어도 서로의 순간을 느낄 수 있습니다.
-            </p>
-          </div>
-          <div class="bento-sensor-visual">
-            <picture>
-              <source srcset="/assets/teaser7/sensor-rings-studio.webp" type="image/webp">
-              <img src="/assets/teaser7/sensor-rings-studio.jpg" alt="SAI Smart Rings Biosensor Studio" class="sensor-ring-img">
-            </picture>
+        <!-- Bento 4: Interactive Model & Angle Slide Studio -->
+        <div class="model-studio-card bento-col-12" style="margin-bottom: 0;">
+          <div class="model-studio-grid">
+            <!-- Left: Multi-Angle Ring Slide Preview + Thumbnail Strip -->
+            <div class="studio-preview-stage">
+              <div class="studio-finish-pill">
+                <span class="studio-finish-dot" id="studio-active-dot"></span>
+                <span id="studio-active-label">로즈골드 · Rose Gold</span>
+              </div>
+              <span class="studio-slide-counter" id="studio-slide-counter">1 / 5</span>
+
+              <div class="studio-slider-viewport">
+                <button type="button" class="studio-slide-nav prev" onclick="stepStudioAngle(-1)" aria-label="이전 각도">‹</button>
+                <div class="studio-slider-track" id="studio-slider-track">
+                  <div class="studio-slide" data-angle-idx="0">
+                    <img src="/hello/assets/profileimage/4.png" alt="SAI Ring 3/4 측면 뷰" class="studio-main-img" id="studio-slide-img-0">
+                  </div>
+                  <div class="studio-slide" data-angle-idx="1">
+                    <img src="/hello/assets/profileimage/8.png" alt="SAI Ring 이너 센서 뷰" class="studio-main-img" id="studio-slide-img-1">
+                  </div>
+                  <div class="studio-slide" data-angle-idx="2">
+                    <img src="/hello/assets/profileimage/16.png" alt="SAI Ring 정면 서클 뷰" class="studio-main-img" id="studio-slide-img-2">
+                  </div>
+                  <div class="studio-slide" data-angle-idx="3">
+                    <img src="/hello/assets/profileimage/20.png" alt="SAI Ring 슬림 밴드 뷰" class="studio-main-img" id="studio-slide-img-3">
+                  </div>
+                  <div class="studio-slide" data-angle-idx="4">
+                    <img src="/hello/assets/profileimage/24.png" alt="SAI Ring 디테일 뷰" class="studio-main-img" id="studio-slide-img-4">
+                  </div>
+                </div>
+                <button type="button" class="studio-slide-nav next" onclick="stepStudioAngle(1)" aria-label="다음 각도">›</button>
+              </div>
+
+              <div class="studio-angle-tabs" role="tablist" aria-label="반지 각도 썸네일 선택">
+                <button type="button" class="studio-angle-btn active" data-angle="right34" data-angle-idx="0" onclick="selectRingAngle('right34')">
+                  <img src="/hello/assets/profileimage/4.png" alt="" class="studio-angle-thumb" id="studio-thumb-img-0">
+                  <span id="angle-btn-1">3/4 측면 뷰</span>
+                </button>
+                <button type="button" class="studio-angle-btn" data-angle="left34" data-angle-idx="1" onclick="selectRingAngle('left34')">
+                  <img src="/hello/assets/profileimage/8.png" alt="" class="studio-angle-thumb" id="studio-thumb-img-1">
+                  <span id="angle-btn-2">이너 센서 뷰</span>
+                </button>
+                <button type="button" class="studio-angle-btn" data-angle="front" data-angle-idx="2" onclick="selectRingAngle('front')">
+                  <img src="/hello/assets/profileimage/16.png" alt="" class="studio-angle-thumb" id="studio-thumb-img-2">
+                  <span id="angle-btn-3">정면 서클 뷰</span>
+                </button>
+                <button type="button" class="studio-angle-btn" data-angle="side" data-angle-idx="3" onclick="selectRingAngle('side')">
+                  <img src="/hello/assets/profileimage/20.png" alt="" class="studio-angle-thumb" id="studio-thumb-img-3">
+                  <span id="angle-btn-4">슬림 밴드 뷰</span>
+                </button>
+                <button type="button" class="studio-angle-btn" data-angle="engraved" data-angle-idx="4" onclick="selectRingAngle('engraved')">
+                  <img src="/hello/assets/profileimage/24.png" alt="" class="studio-angle-thumb" id="studio-thumb-img-4">
+                  <span id="angle-btn-5">디테일 뷰</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right: 3 Finish Cards + Size Guide -->
+            <div class="studio-details-col">
+              <div class="studio-details-header">
+                <h3 id="studio-heading">영원히 변치 않는 3가지 브러시드 피니시</h3>
+                <p id="studio-subdesc">원하는 컬러를 선택하고 좌우 슬라이드 또는 각도별 썸네일을 탭하여 실제 SAI 스마트링의 마감과 내부 생체 센서 구조를 확인해보세요.</p>
+              </div>
+
+              <div class="finish-cards-grid" role="radiogroup" aria-label="반지 컬러 선택">
+                <!-- Finish 1: Rose Gold -->
+                <div class="finish-select-card active" data-finish="rose_gold" onclick="selectStudioFinish('rose_gold')">
+                  <img src="/hello/assets/profileimage/4.png" alt="로즈골드 모델" class="finish-card-thumb">
+                  <div class="finish-card-name" id="finish-name-rg">로즈골드</div>
+                  <div class="finish-card-sub" id="finish-sub-rg">웜 로즈골드 브러시드</div>
+                </div>
+
+                <!-- Finish 2: Silver -->
+                <div class="finish-select-card" data-finish="silver" onclick="selectStudioFinish('silver')">
+                  <img src="/hello/assets/profileimage/1.png" alt="실버 모델" class="finish-card-thumb">
+                  <div class="finish-card-name" id="finish-name-sv">실버</div>
+                  <div class="finish-card-sub" id="finish-sub-sv">퓨어 실버 브러시드</div>
+                </div>
+
+                <!-- Finish 3: Gold -->
+                <div class="finish-select-card" data-finish="gold" onclick="selectStudioFinish('gold')">
+                  <img src="/hello/assets/profileimage/2.png" alt="골드 모델" class="finish-card-thumb">
+                  <div class="finish-card-name" id="finish-name-gd">골드</div>
+                  <div class="finish-card-sub" id="finish-sub-gd">18K 샴페인 골드 브러시드</div>
+                </div>
+              </div>
+
+              <!-- Size Guide & Sizing Kit -->
+              <div class="size-info-banner">
+                <div class="size-info-top">
+                  <span class="size-info-title" id="size-guide-title">📏 전 사이즈 지원 (6호 ~ 13호)</span>
+                  <span class="size-kit-badge" id="size-kit-tag">사이즈 키트 지원</span>
+                </div>
+                <div class="size-chips-row">
+                  <span class="size-num-pill">6호</span>
+                  <span class="size-num-pill">7호</span>
+                  <span class="size-num-pill">8호</span>
+                  <span class="size-num-pill">9호</span>
+                  <span class="size-num-pill">10호</span>
+                  <span class="size-num-pill">11호</span>
+                  <span class="size-num-pill">12호</span>
+                  <span class="size-num-pill">13호</span>
+                </div>
+                <p class="size-info-desc" id="size-guide-desc">
+                  반지 호수를 몰라도 걱정하지 마세요. 정식 주문 시 집에서 정확히 측정할 수 있는 <strong>사이즈 키트</strong>를 먼저 보내드리며, 커플 세트도 두 분이 각자 다른 컬러와 호수를 자유롭게 선택할 수 있습니다.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -3332,7 +3510,7 @@
       <div class="waitlist-form-card" id="waitlist-section">
         <div class="form-header">
           <h3 id="form-title">SAI 얼리버드 사전 예약</h3>
-          <p id="form-desc">이메일만 등록하면 20% 할인권과 평생 무료 구독권이 제공 됩니다.</p>
+          <p id="form-desc">이메일 등록하면 20% 할인권과 평생 무료 구독권이 제공 됩니다.</p>
         </div>
 
         <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)">
@@ -3515,6 +3693,107 @@
     let selectedFeatureGroup = 'heartbeat_send';
     let currentHeadlineIdx = 0;
     let beatTimer = null;
+    let selectedStudioFinish = 'rose_gold';
+    let selectedStudioAngle = 'right34';
+    const STUDIO_ANGLES = ['right34', 'left34', 'front', 'side', 'engraved'];
+
+    const RING_MODELS_MAP = {
+      rose_gold: {
+        dotColor: '#E5A996',
+        labelKo: '로즈골드 · Rose Gold',
+        labelJa: 'ローズゴールド · Rose Gold',
+        images: {
+          right34: '/hello/assets/profileimage/4.png',
+          left34: '/hello/assets/profileimage/8.png',
+          front: '/hello/assets/profileimage/16.png',
+          side: '/hello/assets/profileimage/20.png',
+          engraved: '/hello/assets/profileimage/24.png'
+        }
+      },
+      silver: {
+        dotColor: '#CBD5E1',
+        labelKo: '실버 · Pure Silver',
+        labelJa: 'シルバー · Pure Silver',
+        images: {
+          right34: '/hello/assets/profileimage/1.png',
+          left34: '/hello/assets/profileimage/5.png',
+          front: '/hello/assets/profileimage/13.png',
+          side: '/hello/assets/profileimage/17.png',
+          engraved: '/hello/assets/profileimage/21.png'
+        }
+      },
+      gold: {
+        dotColor: '#D4AF37',
+        labelKo: '골드 · Champagne Gold',
+        labelJa: 'ゴールド · Champagne Gold',
+        images: {
+          right34: '/hello/assets/profileimage/2.png',
+          left34: '/hello/assets/profileimage/6.png',
+          front: '/hello/assets/profileimage/14.png',
+          side: '/hello/assets/profileimage/18.png',
+          engraved: '/hello/assets/profileimage/22.png'
+        }
+      }
+    };
+
+    function updateStudioView(scrollToSlide = true) {
+      const model = RING_MODELS_MAP[selectedStudioFinish];
+      const dotEl = document.getElementById('studio-active-dot');
+      const labelEl = document.getElementById('studio-active-label');
+      const counterEl = document.getElementById('studio-slide-counter');
+      const trackEl = document.getElementById('studio-slider-track');
+      if (!model) return;
+
+      STUDIO_ANGLES.forEach((angleKey, idx) => {
+        const src = model.images[angleKey] || model.images.right34;
+        const slideImg = document.getElementById('studio-slide-img-' + idx);
+        const thumbImg = document.getElementById('studio-thumb-img-' + idx);
+        if (slideImg && slideImg.getAttribute('src') !== src) slideImg.src = src;
+        if (thumbImg && thumbImg.getAttribute('src') !== src) thumbImg.src = src;
+      });
+
+      const activeIdx = Math.max(0, STUDIO_ANGLES.indexOf(selectedStudioAngle));
+      if (counterEl) counterEl.textContent = `${activeIdx + 1} / ${STUDIO_ANGLES.length}`;
+      if (dotEl) dotEl.style.background = model.dotColor;
+      if (labelEl) labelEl.textContent = currentLang === 'ja' ? model.labelJa : model.labelKo;
+
+      document.querySelectorAll('.studio-angle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.angle === selectedStudioAngle);
+      });
+
+      if (scrollToSlide && trackEl) {
+        const slides = trackEl.querySelectorAll('.studio-slide');
+        const targetSlide = slides[activeIdx];
+        if (targetSlide) {
+          trackEl.scrollTo({
+            left: targetSlide.offsetLeft,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+
+    function selectStudioFinish(finish) {
+      selectedStudioFinish = finish;
+      document.querySelectorAll('.finish-select-card').forEach(card => {
+        card.classList.toggle('active', card.dataset.finish === finish);
+      });
+      updateStudioView(false);
+      const radio = document.querySelector(`input[name="ring_color"][value="${finish}"]`);
+      if (radio) radio.checked = true;
+    }
+
+    function selectRingAngle(angle) {
+      selectedStudioAngle = angle;
+      updateStudioView(true);
+    }
+
+    function stepStudioAngle(dir) {
+      const curIdx = Math.max(0, STUDIO_ANGLES.indexOf(selectedStudioAngle));
+      const nextIdx = (curIdx + dir + STUDIO_ANGLES.length) % STUDIO_ANGLES.length;
+      selectedStudioAngle = STUDIO_ANGLES[nextIdx];
+      updateStudioView(true);
+    }
 
     // App 5-Screen Showcase Data & Handlers (From hello99)
     const APP_SCREENS_DATA = [
@@ -3646,9 +3925,22 @@
         bento3Title: '오래도록 이어지는 연결',
         bento3Unit: 'DAYS',
         bento3Desc: '한 번 충전으로 최대 7일. 소중한 사람과의 연결을 더 오래 이어갑니다.',
-        bento4Eyebrow: 'HEART CONNECTION',
-        bento4Title: '멀리 있어도, 서로의 심장 가까이',
-        bento4Desc: '스마트 센서로 감지한 심박을 소중한 사람과 공유하세요. 떨어져 있어도 서로의 순간을 느낄 수 있습니다.',
+        studioHeading: '영원히 변치 않는 3가지 브러시드 피니시',
+        studioSubdesc: '원하는 컬러를 선택하고 좌우 슬라이드 또는 각도별 썸네일을 탭하여 실제 SAI 스마트링의 마감과 내부 생체 센서 구조를 확인해보세요.',
+        angleBtn1: '3/4 측면 뷰',
+        angleBtn2: '이너 센서 뷰',
+        angleBtn3: '정면 서클 뷰',
+        angleBtn4: '슬림 밴드 뷰',
+        angleBtn5: '디테일 뷰',
+        finishNameRg: '로즈골드',
+        finishSubRg: '웜 로즈골드 브러시드',
+        finishNameSv: '실버',
+        finishSubSv: '퓨어 실버 브러시드',
+        finishNameGd: '골드',
+        finishSubGd: '18K 샴페인 골드 브러시드',
+        sizeGuideTitle: '📏 전 사이즈 지원 (6호 ~ 13호)',
+        sizeKitTag: '사이즈 키트 지원',
+        sizeGuideDesc: '반지 호수를 몰라도 걱정하지 마세요. 정식 주문 시 집에서 정확히 측정할 수 있는 <strong>사이즈 키트</strong>를 먼저 보내드리며, 커플 세트도 두 분이 각자 다른 컬러와 호수를 자유롭게 선택할 수 있습니다.',
 
         // Interactions
         interactTag: 'COUPLE DATA INTERACTION',
@@ -3687,7 +3979,7 @@
 
         // Form
         formTitle: 'SAI 얼리버드 사전 예약',
-        formDesc: '이메일만 등록하면 20% 할인권과 평생 무료 구독권이 제공 됩니다.',
+        formDesc: '이메일 등록하면 20% 할인권과 평생 무료 구독권이 제공 됩니다.',
         lblEmail: '이메일 주소 *',
         lblAge: '연령대를 선택해주세요 *',
         age35Plus: '35세 이상',
@@ -3758,9 +4050,22 @@
         bento3Title: '長く続くつながり',
         bento3Unit: 'DAYS',
         bento3Desc: '1回の充電で最大7日間。大切な人とのつながりをより長く保ちます。',
-        bento4Eyebrow: 'HEART CONNECTION',
-        bento4Title: '離れていても、互いの鼓動のそばに',
-        bento4Desc: 'スマートセンサーが検知した心拍を大切な人と共有しましょう。離れていてもお互いの瞬間を感じることができます。',
+        studioHeading: '色褪せない3つのブラッシュド仕上げ',
+        studioSubdesc: 'カラーを選び、左右のスライドまたはアングル別サムネイルをタップして、SAIスマートリングの質感と内部センサー構造をご確認ください。',
+        angleBtn1: '3/4 サイド',
+        angleBtn2: '内部センサー',
+        angleBtn3: '正面サークル',
+        angleBtn4: 'スリムバンド',
+        angleBtn5: 'ディテール',
+        finishNameRg: 'ローズゴールド',
+        finishSubRg: 'ウォームローズ ブラッシュド',
+        finishNameSv: 'シルバー',
+        finishSubSv: 'ピュアシルバー ブラッシュド',
+        finishNameGd: 'ゴールド',
+        finishSubGd: 'シャンパンゴールド ブラッシュド',
+        sizeGuideTitle: '📏 全サイズ対応（6号 〜 13号）',
+        sizeKitTag: 'サイズキット対応',
+        sizeGuideDesc: '指輪のサイズが分からなくてもご安心ください。正式注文時にご自宅で正確に測れる<strong>サイズ測定キット</strong>を先にお届けし、ペアセットでもおふたりそれぞれ別のカラー・号数を自由に選べます。',
 
         // Interactions
         interactTag: 'ふたりのデータ連携',
@@ -3799,7 +4104,7 @@
 
         // Form
         formTitle: 'SAI アーリーバード事前登録',
-        formDesc: 'メールアドレスを登録するだけで、20%割引券と生涯無料サブスク権が提供されます。',
+        formDesc: 'メールアドレスを登録すると、20%割引券と生涯無料サブスク権が提供されます。',
         lblEmail: 'メールアドレス *',
         lblAge: '年齢層を選択してください *',
         age35Plus: '35歳以上',
@@ -3925,9 +4230,27 @@
       setText('bento3-title', dict.bento3Title);
       setText('bento3-unit', dict.bento3Unit);
       setText('bento3-desc', dict.bento3Desc);
-      setText('bento4-eyebrow', dict.bento4Eyebrow);
-      setText('bento4-title', dict.bento4Title);
-      setText('bento4-desc', dict.bento4Desc);
+      setText('studio-heading', dict.studioHeading);
+      setText('studio-subdesc', dict.studioSubdesc);
+      setText('angle-btn-1', dict.angleBtn1);
+      setText('angle-btn-2', dict.angleBtn2);
+      setText('angle-btn-3', dict.angleBtn3);
+      setText('angle-btn-4', dict.angleBtn4);
+      setText('angle-btn-5', dict.angleBtn5);
+      setText('finish-name-rg', dict.finishNameRg);
+      setText('finish-sub-rg', dict.finishSubRg);
+      setText('finish-name-sv', dict.finishNameSv);
+      setText('finish-sub-sv', dict.finishSubSv);
+      setText('finish-name-gd', dict.finishNameGd);
+      setText('finish-sub-gd', dict.finishSubGd);
+      setText('size-guide-title', dict.sizeGuideTitle);
+      setText('size-kit-tag', dict.sizeKitTag);
+      setHtml('size-guide-desc', dict.sizeGuideDesc);
+      const sizeSuffix = lang === 'ja' ? '号' : '호';
+      document.querySelectorAll('.size-num-pill').forEach((el, i) => {
+        el.textContent = (6 + i) + sizeSuffix;
+      });
+      updateStudioView(false);
 
       // Interactions
       setText('interact-tag', dict.interactTag);
@@ -4211,6 +4534,24 @@
         modal.addEventListener('click', (e) => {
           if (e.target === modal) closeAppScreenModal();
         });
+      }
+      const studioTrack = document.getElementById('studio-slider-track');
+      if (studioTrack) {
+        let studioScrollTick = false;
+        studioTrack.addEventListener('scroll', () => {
+          if (studioScrollTick) return;
+          studioScrollTick = true;
+          requestAnimationFrame(() => {
+            studioScrollTick = false;
+            const slideWidth = studioTrack.clientWidth || 1;
+            const idx = Math.min(STUDIO_ANGLES.length - 1, Math.max(0, Math.round(studioTrack.scrollLeft / slideWidth)));
+            const angleKey = STUDIO_ANGLES[idx];
+            if (angleKey && angleKey !== selectedStudioAngle) {
+              selectedStudioAngle = angleKey;
+              updateStudioView(false);
+            }
+          });
+        }, { passive: true });
       }
     });
   </script>
