@@ -3026,6 +3026,40 @@
       background: #FFFBF5;
     }
 
+    @media (min-width: 768px) {
+      .perks-grid .perk-card {
+        display: flex;
+        flex-direction: column;
+      }
+      .perks-grid .perk-card .perk-badge {
+        align-self: flex-start;
+      }
+      .perks-grid .perk-card:nth-child(2) .perk-val {
+        background: #FFF7EC;
+        border: 1.5px solid #F0B87D;
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-top: 8px;
+        margin-bottom: 10px;
+        font-size: 1.6rem;
+        line-height: 1.2;
+        display: flex;
+        align-items: center;
+      }
+      .perks-grid .perk-card:nth-child(2) .perk-desc {
+        background: #FFFFFF;
+        border: 1px solid #EADBC6;
+        border-radius: 14px;
+        padding: 12px 16px;
+        margin: 0;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+    }
+
     .waitlist-form-card, .apple-modal {
       background: #FFFFFF;
       border-color: #E3D3BE;

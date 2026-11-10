@@ -3717,6 +3717,40 @@ body.morning-modal-open {overflow:hidden;}
       background: #FFFBF5;
     }
 
+    @media (min-width: 768px) {
+      #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .perks-grid .perk-card {
+        display: flex;
+        flex-direction: column;
+      }
+      #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .perks-grid .perk-card .perk-badge {
+        align-self: flex-start;
+      }
+      #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .perks-grid .perk-card:nth-child(2) .perk-val {
+        background: #FFF7EC;
+        border: 1.5px solid #F0B87D;
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-top: 8px;
+        margin-bottom: 10px;
+        font-size:  1.6rem !important;
+        line-height:  1.2 !important;
+        display: flex;
+        align-items: center;
+      }
+      #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .perks-grid .perk-card:nth-child(2) .perk-desc {
+        background: #FFFFFF;
+        border: 1px solid #EADBC6;
+        border-radius: 14px;
+        padding: 12px 16px;
+        margin: 0;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        font-size:  0.88rem !important;
+        line-height:  1.55 !important;
+      }
+    }
+
     #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .waitlist-form-card, #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .apple-modal {
       background: #FFFFFF;
       border-color: #E3D3BE;
@@ -3795,54 +3829,75 @@ body {
   font-weight: 900 !important;
   color: #E86D13 !important;
 }
-/* Explicit White Text on All CTA Buttons & Badges */
+/* Explicit White Text & Uniform Background on All CTA Buttons & Badges */
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn span,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn:hover,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn:focus,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn:visited {
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn:link,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn:visited,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn:focus {
+  background: #30231B !important;
   background-color: #30231B !important;
   color: #FEF8EF !important;
   -webkit-text-fill-color: #FEF8EF !important;
   font-weight: 700 !important;
   font-size: 0.82rem !important;
 }
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn:hover {
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn:hover,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn:active {
+  background: #E86D13 !important;
   background-color: #E86D13 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
 }
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary span,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary:hover,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary:focus,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary:link,
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary:visited,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary:focus,
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .form-submit-btn,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .form-submit-btn span,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .form-submit-btn:focus,
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta span,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta:hover,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta:focus,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta:link,
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta:visited,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta:focus,
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .morning-primary,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .morning-primary span,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .morning-primary:focus,
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .date-primary,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .date-primary span {
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .date-primary:focus {
+  background: #E86D13 !important;
   background-color: #E86D13 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-weight: 800 !important;
 }
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary:hover,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary:active,
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .form-submit-btn:hover,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .morning-primary:hover,
-#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .date-primary:hover {
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .form-submit-btn:active,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta:hover,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta:active,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .morning-primary:hover:not(:disabled),
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .morning-primary:active:not(:disabled),
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .date-primary:hover:not(:disabled),
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .date-primary:active:not(:disabled) {
+  background: #C85608 !important;
   background-color: #C85608 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
 }
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .nav-cta-btn span,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .btn-apple-primary span,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .form-submit-btn span,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .mobile-floating-cta span,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .morning-primary span,
+#sai-imweb-app.sai-imweb-root.sai-imweb-v7 .date-primary span {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  font-weight: inherit !important;
+}
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .morning-primary:disabled,
 #sai-imweb-app.sai-imweb-root.sai-imweb-v7 .date-primary:disabled {
+  background: #E8DEC9 !important;
   background-color: #E8DEC9 !important;
   color: #796C60 !important;
   -webkit-text-fill-color: #796C60 !important;
