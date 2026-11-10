@@ -364,9 +364,17 @@ const server = http.createServer(async (req, res) => {
 
   // Waitlist API endpoint
   if (pathname === '/api/waitlist') {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    if (req.method === 'OPTIONS') {
+      res.statusCode = 204;
+      res.end();
+      return;
+    }
     if (req.method !== 'POST') {
       res.statusCode = 405;
-      res.setHeader('Allow', 'POST');
+      res.setHeader('Allow', 'POST, OPTIONS');
       res.setHeader('Content-Type', 'application/json; charset=utf-8');
       res.end(JSON.stringify({ error: 'Method Not Allowed' }));
       return;
@@ -410,7 +418,8 @@ const server = http.createServer(async (req, res) => {
         let survey;
         try { survey = parseSurvey(data); }
         catch (error) {
-          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.statusCode = 400;
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
           res.end(JSON.stringify({ error: error.message }));
           return;
         }
