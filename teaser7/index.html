@@ -885,18 +885,23 @@
       padding: 40px 36px;
       box-shadow: var(--shadow-ambient);
       margin-bottom: 36px;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .model-studio-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 36px;
       align-items: center;
+      min-width: 0;
+      max-width: 100%;
     }
 
     @media (min-width: 880px) {
       .model-studio-grid {
-        grid-template-columns: 1fr 1.05fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
         gap: 48px;
       }
     }
@@ -912,6 +917,10 @@
       justify-content: center;
       position: relative;
       min-height: 380px;
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+      overflow: hidden;
     }
 
     .studio-finish-pill {
@@ -957,15 +966,18 @@
     .studio-slider-viewport {
       position: relative;
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       margin: 26px auto 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
+      overflow: hidden;
     }
 
     .studio-slider-track {
       display: flex;
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
@@ -1040,6 +1052,8 @@
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 8px;
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       margin-top: 6px;
     }
 
@@ -1058,6 +1072,7 @@
       gap: 5px;
       line-height: 1.2;
       word-break: keep-all;
+      min-width: 0;
     }
 
     .studio-angle-thumb {
@@ -1082,11 +1097,13 @@
       box-shadow: 0 4px 12px rgba(232, 109, 19, 0.18);
     }
 
-    /* Right column of studio: 3 Finishes selector + Size kit info */
+    /* Left column of studio: Copy + 3 Finishes selector */
     .studio-details-col {
       display: flex;
       flex-direction: column;
       gap: 22px;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .studio-details-header h3 {
@@ -1443,24 +1460,65 @@
     @media (max-width: 680px) {
       .model-studio-card {
         padding: 24px 18px;
+        border-radius: 24px;
+      }
+      .model-studio-grid {
+        gap: 24px;
       }
       .studio-preview-stage {
-        min-height: 320px;
-        padding: 28px 16px 18px;
+        min-height: 0;
+        padding: 46px 12px 16px;
+        border-radius: 20px;
       }
-      .studio-main-img-wrap {
-        width: 190px;
-        height: 190px;
+      .studio-finish-pill {
+        top: 14px;
+        left: 14px;
+        padding: 4px 10px;
+        font-size: 0.72rem;
+      }
+      .studio-slide-counter {
+        top: 14px;
+        right: 14px;
+        padding: 4px 10px;
+        font-size: 0.72rem;
+      }
+      .studio-slider-viewport {
+        margin: 6px auto 8px;
+      }
+      .studio-slide {
+        height: 220px;
+        padding: 8px 12px 34px;
+      }
+      .studio-main-img {
+        width: 160px;
+        height: 160px;
+        padding: 4px 10px 18px;
+      }
+      .studio-angle-tabs {
+        gap: 5px;
+      }
+      .studio-angle-btn {
+        padding: 6px 2px 5px;
+        font-size: 0.62rem;
+        border-radius: 11px;
+        gap: 4px;
+      }
+      .studio-angle-thumb {
+        width: 28px;
+        height: 28px;
+        padding: 2px 2px 5px;
       }
       .finish-cards-grid {
         gap: 8px;
       }
       .finish-select-card {
         padding: 12px 6px;
+        min-width: 0;
       }
       .finish-card-thumb {
         width: 56px;
         height: 56px;
+        padding: 2px 4px 8px;
       }
       .finish-card-name {
         font-size: 0.82rem;
@@ -1577,19 +1635,26 @@
 
     .bento-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 20px;
       margin-top: 28px;
     }
 
     @media (min-width: 768px) {
       .bento-grid {
-        grid-template-columns: repeat(12, 1fr);
+        grid-template-columns: repeat(12, minmax(0, 1fr));
       }
       .bento-col-12 { grid-column: span 12; }
       .bento-col-8 { grid-column: span 8; }
       .bento-col-4 { grid-column: span 4; }
       .bento-col-6 { grid-column: span 6; }
+    }
+
+    @media (max-width: 680px) {
+      .bento-card {
+        padding: 28px 22px;
+        border-radius: 24px;
+      }
     }
 
     .bento-card {
@@ -1742,19 +1807,32 @@
       padding: 40px 32px;
       margin-bottom: 32px;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 36px;
       align-items: center;
       transition: all 0.3s ease;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    @media (max-width: 680px) {
+      .interaction-card {
+        padding: 28px 20px;
+        border-radius: 24px;
+        gap: 24px;
+      }
+      .interaction-demo-box {
+        padding: 16px;
+      }
     }
 
     @media (min-width: 900px) {
       .interaction-card {
-        grid-template-columns: 1fr 1.15fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
         padding: 50px;
       }
       .interaction-card.reversed {
-        grid-template-columns: 1.15fr 1fr;
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
       }
       .interaction-card.reversed .interaction-info {
         order: 2;
@@ -1970,14 +2048,14 @@
 
     .perks-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 20px;
       margin-bottom: 40px;
     }
 
     @media (min-width: 768px) {
       .perks-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -2615,6 +2693,8 @@
     html, body {
       background-color: #FEF8EF;
       color: #30231B;
+      overflow-x: clip;
+      max-width: 100%;
     }
 
     .apple-nav {
