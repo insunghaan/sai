@@ -427,7 +427,8 @@
     /* Hero Product Visual Stage */
     .hero-visual-stage {
       position: relative;
-      max-width: 860px;
+      width: 100%;
+      max-width: 100%;
       margin: 0 auto;
       border-radius: 28px;
       overflow: hidden;
@@ -895,7 +896,7 @@
 
     @media (min-width: 880px) {
       .model-studio-grid {
-        grid-template-columns: 1.05fr 1fr;
+        grid-template-columns: 1fr 1.05fr;
         gap: 48px;
       }
     }
@@ -982,14 +983,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 230px;
+      height: 272px;
+      padding: 16px 24px 48px;
+      box-sizing: border-box;
+      filter: drop-shadow(0 12px 18px rgba(48, 35, 27, 0.18));
     }
 
     .studio-main-img {
-      width: 220px;
-      height: 220px;
+      width: 196px;
+      height: 196px;
+      padding: 6px 16px 24px;
+      box-sizing: content-box;
       object-fit: contain;
-      filter: drop-shadow(0 18px 28px rgba(48, 35, 27, 0.22));
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
       -webkit-user-drag: none;
@@ -1056,10 +1061,12 @@
     }
 
     .studio-angle-thumb {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
+      padding: 2px 4px 8px;
+      box-sizing: content-box;
       object-fit: contain;
-      filter: drop-shadow(0 4px 6px rgba(48, 35, 27, 0.15));
+      filter: drop-shadow(0 3px 5px rgba(48, 35, 27, 0.14));
       pointer-events: none;
     }
 
@@ -1131,10 +1138,12 @@
     }
 
     .finish-card-thumb {
-      width: 74px;
-      height: 74px;
+      width: 72px;
+      height: 72px;
+      padding: 4px 6px 12px;
+      box-sizing: content-box;
       object-fit: contain;
-      filter: drop-shadow(0 8px 14px rgba(48, 35, 27, 0.16));
+      filter: drop-shadow(0 6px 10px rgba(48, 35, 27, 0.15));
       transition: transform 0.25s ease;
     }
 
@@ -3247,7 +3256,35 @@
         <!-- Bento 4: Interactive Model & Angle Slide Studio -->
         <div class="model-studio-card bento-col-12" style="margin-bottom: 0;">
           <div class="model-studio-grid">
-            <!-- Left: Multi-Angle Ring Slide Preview + Thumbnail Strip -->
+            <!-- Left: Copy & 3 Finish Cards -->
+            <div class="studio-details-col">
+              <div class="studio-details-header">
+                <h3 id="studio-heading">영원히 변치 않는 3가지 브러시드 피니시</h3>
+                <p id="studio-subdesc">원하는 컬러를 선택하고 좌우 슬라이드 또는 각도별 썸네일을 탭하여 실제 SAI 스마트링의 마감과 내부 생체 센서 구조를 확인해보세요.</p>
+              </div>
+
+              <div class="finish-cards-grid" role="radiogroup" aria-label="반지 컬러 선택">
+                <!-- Finish 1: Rose Gold -->
+                <div class="finish-select-card active" data-finish="rose_gold" onclick="selectStudioFinish('rose_gold')">
+                  <img src="/hello/assets/profileimage/4.png" alt="로즈골드 모델" class="finish-card-thumb">
+                  <div class="finish-card-name" id="finish-name-rg">로즈골드</div>
+                </div>
+
+                <!-- Finish 2: Silver -->
+                <div class="finish-select-card" data-finish="silver" onclick="selectStudioFinish('silver')">
+                  <img src="/hello/assets/profileimage/1.png" alt="실버 모델" class="finish-card-thumb">
+                  <div class="finish-card-name" id="finish-name-sv">실버</div>
+                </div>
+
+                <!-- Finish 3: Gold -->
+                <div class="finish-select-card" data-finish="gold" onclick="selectStudioFinish('gold')">
+                  <img src="/hello/assets/profileimage/2.png" alt="골드 모델" class="finish-card-thumb">
+                  <div class="finish-card-name" id="finish-name-gd">골드</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Multi-Angle Ring Slide Preview + Thumbnail Strip -->
             <div class="studio-preview-stage">
               <div class="studio-finish-pill">
                 <span class="studio-finish-dot" id="studio-active-dot"></span>
@@ -3256,7 +3293,6 @@
               <span class="studio-slide-counter" id="studio-slide-counter">1 / 5</span>
 
               <div class="studio-slider-viewport">
-                <button type="button" class="studio-slide-nav prev" onclick="stepStudioAngle(-1)" aria-label="이전 각도">‹</button>
                 <div class="studio-slider-track" id="studio-slider-track">
                   <div class="studio-slide" data-angle-idx="0">
                     <img src="/hello/assets/profileimage/4.png" alt="SAI Ring 3/4 측면 뷰" class="studio-main-img" id="studio-slide-img-0">
@@ -3274,7 +3310,6 @@
                     <img src="/hello/assets/profileimage/24.png" alt="SAI Ring 디테일 뷰" class="studio-main-img" id="studio-slide-img-4">
                   </div>
                 </div>
-                <button type="button" class="studio-slide-nav next" onclick="stepStudioAngle(1)" aria-label="다음 각도">›</button>
               </div>
 
               <div class="studio-angle-tabs" role="tablist" aria-label="반지 각도 썸네일 선택">
@@ -3298,58 +3333,6 @@
                   <img src="/hello/assets/profileimage/24.png" alt="" class="studio-angle-thumb" id="studio-thumb-img-4">
                   <span id="angle-btn-5">디테일 뷰</span>
                 </button>
-              </div>
-            </div>
-
-            <!-- Right: 3 Finish Cards + Size Guide -->
-            <div class="studio-details-col">
-              <div class="studio-details-header">
-                <h3 id="studio-heading">영원히 변치 않는 3가지 브러시드 피니시</h3>
-                <p id="studio-subdesc">원하는 컬러를 선택하고 좌우 슬라이드 또는 각도별 썸네일을 탭하여 실제 SAI 스마트링의 마감과 내부 생체 센서 구조를 확인해보세요.</p>
-              </div>
-
-              <div class="finish-cards-grid" role="radiogroup" aria-label="반지 컬러 선택">
-                <!-- Finish 1: Rose Gold -->
-                <div class="finish-select-card active" data-finish="rose_gold" onclick="selectStudioFinish('rose_gold')">
-                  <img src="/hello/assets/profileimage/4.png" alt="로즈골드 모델" class="finish-card-thumb">
-                  <div class="finish-card-name" id="finish-name-rg">로즈골드</div>
-                  <div class="finish-card-sub" id="finish-sub-rg">웜 로즈골드 브러시드</div>
-                </div>
-
-                <!-- Finish 2: Silver -->
-                <div class="finish-select-card" data-finish="silver" onclick="selectStudioFinish('silver')">
-                  <img src="/hello/assets/profileimage/1.png" alt="실버 모델" class="finish-card-thumb">
-                  <div class="finish-card-name" id="finish-name-sv">실버</div>
-                  <div class="finish-card-sub" id="finish-sub-sv">퓨어 실버 브러시드</div>
-                </div>
-
-                <!-- Finish 3: Gold -->
-                <div class="finish-select-card" data-finish="gold" onclick="selectStudioFinish('gold')">
-                  <img src="/hello/assets/profileimage/2.png" alt="골드 모델" class="finish-card-thumb">
-                  <div class="finish-card-name" id="finish-name-gd">골드</div>
-                  <div class="finish-card-sub" id="finish-sub-gd">18K 샴페인 골드 브러시드</div>
-                </div>
-              </div>
-
-              <!-- Size Guide & Sizing Kit -->
-              <div class="size-info-banner">
-                <div class="size-info-top">
-                  <span class="size-info-title" id="size-guide-title">📏 전 사이즈 지원 (6호 ~ 13호)</span>
-                  <span class="size-kit-badge" id="size-kit-tag">사이즈 키트 지원</span>
-                </div>
-                <div class="size-chips-row">
-                  <span class="size-num-pill">6호</span>
-                  <span class="size-num-pill">7호</span>
-                  <span class="size-num-pill">8호</span>
-                  <span class="size-num-pill">9호</span>
-                  <span class="size-num-pill">10호</span>
-                  <span class="size-num-pill">11호</span>
-                  <span class="size-num-pill">12호</span>
-                  <span class="size-num-pill">13호</span>
-                </div>
-                <p class="size-info-desc" id="size-guide-desc">
-                  반지 호수를 몰라도 걱정하지 마세요. 정식 주문 시 집에서 정확히 측정할 수 있는 <strong>사이즈 키트</strong>를 먼저 보내드리며, 커플 세트도 두 분이 각자 다른 컬러와 호수를 자유롭게 선택할 수 있습니다.
-                </p>
               </div>
             </div>
           </div>
