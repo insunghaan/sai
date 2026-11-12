@@ -21,8 +21,6 @@
   <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://42sai.io/">
-  <link rel="alternate" hreflang="ko" href="https://42sai.io/">
-  <link rel="alternate" hreflang="ja" href="https://42sai.io/ja/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SAI">
   <meta property="og:url" content="https://42sai.io/">
@@ -32,7 +30,6 @@
   <meta name="twitter:title" content="SAI 스마트 커플링 | 수면·심박 공유와 둘만의 데이트 기록">
   <meta name="twitter:description" content="서로의 수면·심박·컨디션을 공유하고 둘만의 데이트를 기록하는 SAI 스마트 커플링. 싱글 279,000원, 커플 세트 558,000원. 사전예약 20% 할인과 평생 구독료 면제 혜택을 확인하세요.">
   <meta name="twitter:image" content="https://42sai.io/assets/teaser7/hero-hands-sunset.jpg">
-  <link rel="alternate" hreflang="x-default" href="https://42sai.io/">
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://42sai.io/#organization", "name": "SAI", "url": "https://42sai.io/"}, {"@type": "WebSite", "@id": "https://42sai.io/#website", "name": "SAI 스마트 커플링", "url": "https://42sai.io/", "inLanguage": ["ko", "ja"], "publisher": {"@id": "https://42sai.io/#organization"}}, {"@type": "WebPage", "@id": "https://42sai.io/#webpage", "url": "https://42sai.io/", "name": "SAI 스마트 커플링 | 수면·심박 공유와 둘만의 데이트 기록", "description": "서로의 수면·심박·컨디션을 공유하고 둘만의 데이트를 기록하는 SAI 스마트 커플링. 싱글 279,000원, 커플 세트 558,000원. 사전예약 20% 할인과 평생 구독료 면제 혜택을 확인하세요.", "inLanguage": "ko", "isPartOf": {"@id": "https://42sai.io/#website"}}]}</script>
   <script defer src="/sai-analytics.js"></script>
   <!-- Meta Pixel Code -->
@@ -4319,21 +4316,7 @@
 
     function initLanguage() {
       saveUtmParams();
-      const urlParams = new URLSearchParams(window.location.search);
-      const urlLang = urlParams.get('lang');
-      const isJaPath = window.location.pathname.startsWith('/ja');
-      if (urlLang === 'ja' || urlLang === 'jp' || isJaPath) {
-        setLanguage('ja');
-      } else if (urlLang === 'ko' || urlLang === 'kr') {
-        setLanguage('ko');
-      } else {
-        const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-        if (browserLang.startsWith('ja')) {
-          setLanguage('ja');
-        } else {
-          setLanguage('ko');
-        }
-      }
+      setLanguage('ko');
     }
 
     function setText(id, val) {

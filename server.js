@@ -5,7 +5,6 @@ const path = require('node:path');
 const { Firestore } = require('@google-cloud/firestore');
 const welcome = require('./server/welcome');
 const { parseSurvey } = require('./server/survey');
-const { defaultLanguage } = require('./server/locale');
 
 const PORT = parseInt(process.env.PORT, 10) || 8080;
 const HOST = '0.0.0.0';
@@ -514,18 +513,6 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Only choose a regional default at the entry URL. Explicit /ja/ links remain stable.
-  if (['/', '/teaser6', '/teaser6/', '/teaser7', '/teaser7/'].includes(pathname) && !new URL(req.url, 'http://localhost').searchParams.has('lang')) {
-    res.setHeader('Vary', 'Cookie');
-    res.setHeader('Cache-Control', 'private, no-store');
-    if (await defaultLanguage(req, lookupLocaleCountry) === 'ja') {
-      const targetPath = pathname === '/' ? '/ja/' : pathname.startsWith('/teaser7') ? '/ja/teaser7' : '/ja/teaser6';
-      res.writeHead(302, { Location: targetPath + new URL(req.url, 'http://localhost').search });
-      res.end();
-      return;
-    }
-  }
-
   // Preserve old landing pages while making teaser5 the canonical home page.
   const legacyMatch = pathname.match(/^\/teaser([1-4])(?:\.html|\/)?$/);
   const oldRoot = ['/teaser.html', '/teaser', '/teaser-v9.html'];
@@ -533,15 +520,10 @@ const server = http.createServer(async (req, res) => {
   const pageUrl = new URL(req.url, 'http://localhost');
   const languagePages = ['/', '/index.html', '/ja', '/ja/', '/ja/index.html', '/ko', '/ko/', '/kr', '/kr/'];
   if (languagePages.includes(pathname)) {
-    const requestedLanguage = pageUrl.searchParams.get('lang');
-    const canonicalPath = requestedLanguage === 'ja' ? '/ja/' : requestedLanguage === 'ko' ? '/' : pathname.startsWith('/ja') ? '/ja/' : '/';
-    if (pathname !== canonicalPath || requestedLanguage === 'ja' || requestedLanguage === 'ko') {
-      redirectTo = canonicalPath;
+    // The public site has one Korean landing page. Keep old links working.
+    if (pathname !== '/' || pageUrl.searchParams.has('lang')) {
+      redirectTo = '/';
       pageUrl.searchParams.delete('lang');
-      if (requestedLanguage === 'ja' || requestedLanguage === 'ko') {
-        res.setHeader('Set-Cookie', `sai_language=${requestedLanguage}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`);
-        res.setHeader('Cache-Control', 'private, no-store');
-      }
     }
   } else if (legacyMatch) redirectTo = '/archive/teaser' + legacyMatch[1] + '.html';
   else if (oldRoot.includes(pathname)) redirectTo = '/archive/index.html';
@@ -621,7 +603,7 @@ const server = http.createServer(async (req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Length', stats.size);
-    if (targetFile.startsWith('archive/') || /^(teaser|pair|mobile-single|hello99)/.test(targetFile)) res.setHeader('X-Robots-Tag', 'noindex, follow');
+    if (targetFile.startsWith('archive/') || /^(teaser|pair|mobile-single|hello|ja\/)/.test(targetFile)) res.setHeader('X-Robots-Tag', 'noindex, follow');
 
     if (ext === '.html' || targetFile.startsWith('hello/') || targetFile.startsWith('hello99/')) {
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');

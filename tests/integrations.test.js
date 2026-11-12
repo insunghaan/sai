@@ -64,8 +64,6 @@ for(const language of ['ko','ja'])test(`complete ${language} signup persists sur
 test('Slack failure does not undo a saved signup',async()=>{const a=app({slackFail:true});assert.equal((await a.submit(payload('ko'))).status,200);assert(a.db.docs.has('sai_waitlist_kr/test@example.com'));});
 test('invalid survey never writes or sends notifications',async()=>{const a=app();assert.equal((await a.submit({...payload('ko'),age_group:'invalid'})).status,400);assert.equal(a.db.docs.size,0);assert.equal(a.calls.length,0);});
 
-test('Japan entry temporarily redirects with campaign parameters and no shared cache',async()=>{const a=app({country:'JP'});const r=await a.entry();assert.equal(r.status,302);assert.equal(r.headers.Location,'/ja/?utm_source=instagram');assert.equal(r.headers['Cache-Control'],'private, no-store');});
-test('Japan entry on /teaser6 temporarily redirects to /ja/teaser6 with preserved UTM parameters',async()=>{const a=app({country:'JP'});const r=await a.entry('/teaser6?utm_source=instagram&utm_campaign=sai_japan_slide_20260924');assert.equal(r.status,302);assert.equal(r.headers.Location,'/ja/teaser6?utm_source=instagram&utm_campaign=sai_japan_slide_20260924');});
 test('Slack notification includes utm_campaign and UTM fields when provided',async()=>{const a=app();await a.submit({...payload('ko'),email:'utm-test@example.com',utm_source:'instagram',utm_campaign:'sai_japan_slide_20260924'});const slack=a.calls.find(c=>c.url?.includes('slack'));assert(slack.body.blocks[1].text.text.includes('sai_japan_slide_20260924'));assert(slack.body.blocks[1].text.text.includes('instagram'));});
 
 test('color signup stores each allowed preference and rejects absent or invalid colors before writes',async()=>{
@@ -119,3 +117,5 @@ test('gender update retains one welcome email and updates existing applicant',as
  assert(slack.body.blocks[1].text.text.includes('기존 신청자 정보 업데이트'));
  assert(slack.body.blocks[1].text.text.includes('성별:* 여성'));
 });
+
+for (const url of ['/ja/?utm_source=instagram', '/?lang=ja&utm_source=instagram']) test(`single Korean landing redirects legacy language URL ${url}`,async()=>{const a=app({country:'JP'});const r=await a.entry(url);assert.equal(r.status,301);assert.equal(r.headers.Location,'/?utm_source=instagram');});
