@@ -89,3 +89,33 @@ test('Japanese signup includes chosen color in Slack notification',async()=>{
  const slack=a.calls.find(c=>c.url?.includes('slack'));
  assert(slack.body.blocks[1].text.text.includes('선호 반지 색상:* 로즈골드'));
 });
+
+
+for (const [gender, label] of [['male','남성'],['female','여성']]) {
+ test(`gender ${gender} persists and appears in Slack for both languages`, async()=>{
+  for(const language of ['ko','ja']) {
+   const a=app();
+   const result=await a.submit({...payload(language),survey_version:'2026-11-12-gender',ring_color:'silver',gender});
+   assert.equal(result.status,200);
+   const saved=a.db.docs.get(`sai_waitlist_${language==='ja'?'jp':'kr'}/test@example.com`);
+   assert.equal(saved.gender,gender);assert.equal(saved.gender_label,label);assert.equal(saved.dropdown_selections.gender,label);
+   const slack=a.calls.find(c=>c.url?.includes('slack'));
+   assert(slack.body.blocks[1].text.text.includes(`• *성별:* ${label}`));
+  }
+ });
+}
+test('new survey rejects missing and invalid gender without writes or external calls',async()=>{
+ for(const gender of [undefined,null,'','other','toString',{},[]]){
+  const a=app();assert.equal((await a.submit({...payload('ko'),survey_version:'2026-11-12-gender',ring_color:'gold',gender})).status,400);
+  assert.equal(a.db.docs.size,0);assert.equal(a.calls.length,0);
+ }
+});
+test('gender update retains one welcome email and updates existing applicant',async()=>{
+ const a=app();await a.submit(payload('ko'));
+ await a.submit({...payload('ko'),survey_version:'2026-11-12-gender',ring_color:'gold',gender:'female'});
+ assert.equal(a.db.docs.get('sai_waitlist_kr/test@example.com').gender,'female');
+ assert.equal(a.calls.filter(c=>c.url?.includes('brevo')).length,1);
+ const slack=a.calls.filter(c=>c.url?.includes('slack')).at(-1);
+ assert(slack.body.blocks[1].text.text.includes('기존 신청자 정보 업데이트'));
+ assert(slack.body.blocks[1].text.text.includes('성별:* 여성'));
+});

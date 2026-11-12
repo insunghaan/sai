@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>SAI | Smart Rings for Two</title>
-  <meta name="description" content="단순한 커플링을 넘어, 서로의 심박과 수면, 컨디션까지 함께 나누는 세상에 없던 스마트 커플링 SAI. 사전 예약 시 20% 특별 할인 및 평생 구독료 전액 면제(0원).">
-  <meta property="og:title" content="SAI | Smart Rings for Two">
-  <meta property="og:description" content="단순한 커플링을 넘어, 서로의 심박과 수면, 컨디션까지 함께 나누는 세상에 없던 스마트 커플링 SAI.">
+  <title>SAI 스마트 커플링 | 수면·심박 공유와 둘만의 데이트 기록</title>
+  <meta name="description" content="서로의 수면·심박·컨디션을 공유하고 둘만의 데이트를 기록하는 SAI 스마트 커플링. 싱글 279,000원, 커플 세트 558,000원. 사전예약 20% 할인과 평생 구독료 면제 혜택을 확인하세요.">
+  <meta property="og:title" content="SAI 스마트 커플링 | 수면·심박 공유와 둘만의 데이트 기록">
+  <meta property="og:description" content="서로의 수면·심박·컨디션을 공유하고 둘만의 데이트를 기록하는 SAI 스마트 커플링. 싱글 279,000원, 커플 세트 558,000원. 사전예약 20% 할인과 평생 구독료 면제 혜택을 확인하세요.">
   <meta property="og:image" content="https://42sai.io/assets/teaser7/hero-hands-sunset.jpg">
   <link rel="icon" href="/hello/favicon.ico?v=20261109e" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/hello/assets/favicon-32.png?v=20261109e">
@@ -23,6 +23,17 @@
   <link rel="canonical" href="https://42sai.io/">
   <link rel="alternate" hreflang="ko" href="https://42sai.io/">
   <link rel="alternate" hreflang="ja" href="https://42sai.io/ja/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SAI">
+  <meta property="og:url" content="https://42sai.io/">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:image:alt" content="SAI 스마트 커플링">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SAI 스마트 커플링 | 수면·심박 공유와 둘만의 데이트 기록">
+  <meta name="twitter:description" content="서로의 수면·심박·컨디션을 공유하고 둘만의 데이트를 기록하는 SAI 스마트 커플링. 싱글 279,000원, 커플 세트 558,000원. 사전예약 20% 할인과 평생 구독료 면제 혜택을 확인하세요.">
+  <meta name="twitter:image" content="https://42sai.io/assets/teaser7/hero-hands-sunset.jpg">
+  <link rel="alternate" hreflang="x-default" href="https://42sai.io/">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://42sai.io/#organization", "name": "SAI", "url": "https://42sai.io/"}, {"@type": "WebSite", "@id": "https://42sai.io/#website", "name": "SAI 스마트 커플링", "url": "https://42sai.io/", "inLanguage": ["ko", "ja"], "publisher": {"@id": "https://42sai.io/#organization"}}, {"@type": "WebPage", "@id": "https://42sai.io/#webpage", "url": "https://42sai.io/", "name": "SAI 스마트 커플링 | 수면·심박 공유와 둘만의 데이트 기록", "description": "서로의 수면·심박·컨디션을 공유하고 둘만의 데이트를 기록하는 SAI 스마트 커플링. 싱글 279,000원, 커플 세트 558,000원. 사전예약 20% 할인과 평생 구독료 면제 혜택을 확인하세요.", "inLanguage": "ko", "isPartOf": {"@id": "https://42sai.io/#website"}}]}</script>
   <script defer src="/sai-analytics.js"></script>
   <!-- Meta Pixel Code -->
   <script>
@@ -42,6 +53,13 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
   <style>
+    .gender-fieldset { border: 0; padding: 0; min-width: 0; }
+    .gender-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gender-option { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .gender-option input { width: 18px; height: 18px; accent-color: var(--accent-rose); }
+    .gender-option:has(input:checked) { border-color: var(--accent-rose); background: rgba(255,77,109,.08); }
+    .gender-option:has(input:focus-visible) { outline: 2px solid var(--accent-rose); outline-offset: 2px; }
+
     :root {
       /* SAI Key Color Palette (Warm Cream & Signature Orange) */
       --bg-black: #FEF8EF;
@@ -3638,6 +3656,14 @@
             <input type="email" id="user-email" class="form-input" placeholder="name@example.com" required autocomplete="email">
           </div>
 
+          <fieldset class="form-group gender-fieldset">
+            <legend class="form-label" id="lbl-gender">성별을 선택해주세요 *</legend>
+            <div class="form-options-grid gender-options">
+              <label class="option-chip gender-option"><input type="radio" name="gender" value="male" required><span id="gender-male-label">남성</span></label>
+              <label class="option-chip gender-option"><input type="radio" name="gender" value="female" required><span id="gender-female-label">여성</span></label>
+            </div>
+          </fieldset>
+
           <div class="form-group">
             <label class="form-label" id="lbl-age">연령대를 선택해주세요 *</label>
             <div class="form-options-grid triple" id="age-selector">
@@ -3683,7 +3709,7 @@
           </button>
 
           <p class="form-privacy-note" id="form-note">
-            * 스팸 메일은 절대 발송되지 않으며, 출시 소식 및 쿠폰 발송 용도로만 안전하게 보관됩니다.
+            * 이메일은 출시 소식·혜택 안내에, 성별·연령·선호 응답은 사전예약 수요 분석에 사용됩니다.
           </p>
         </form>
       </div>
@@ -4128,7 +4154,7 @@
         lblColor: '어떤 색상의 반지를 선호하시나요? (3종 라인업) *',
         colors: { gold: '골드', silver: '실버', rose_gold: '로즈골드' },
         submitBtnText: '20% 할인 & 평생 구독료<br class="btn-br"> 무료 신청하기',
-        formNote: '* 스팸 메일은 절대 발송되지 않으며, 출시 소식 및 쿠폰 발송 용도로만 안전하게 보관됩니다.',
+        formNote: '* 이메일은 출시 소식·혜택 안내에, 성별·연령·선호 응답은 사전예약 수요 분석에 사용됩니다.',
 
         // FAQ
         faqTitle: '자주 묻는 질문',
@@ -4253,7 +4279,7 @@
         lblColor: 'どの色のリングがお好みですか？（3種ラインナップ） *',
         colors: { gold: 'ゴールド', silver: 'シルバー', rose_gold: 'ローズゴールド' },
         submitBtnText: '20%割引＆生涯サブスク無料を<br class="btn-br">申し込む',
-        formNote: '※ 迷惑メールは一切送信いたしません。発売通知および特典配布のみに使用されます。',
+        formNote: '※ メールアドレスは発売・特典のご案内に、性別・年齢・希望の回答は事前登録の需要分析に使用します。',
 
         // FAQ
         faqTitle: 'よくあるご質問',
@@ -4432,6 +4458,9 @@
       setText('form-title', dict.formTitle);
       setText('form-desc', dict.formDesc);
       setText('lbl-email', dict.lblEmail);
+      setText('lbl-gender', lang === 'ja' ? '性別を選択してください *' : '성별을 선택해주세요 *');
+      setText('gender-male-label', lang === 'ja' ? '男性' : '남성');
+      setText('gender-female-label', lang === 'ja' ? '女性' : '여성');
       setText('lbl-age', dict.lblAge);
       setText('age-chip-35plus', dict.age35Plus);
       setText('lbl-feature', dict.lblFeature);
@@ -4538,9 +4567,10 @@
       const urlParams = new URLSearchParams(window.location.search);
       const payload = {
         email: email,
+        gender: document.querySelector('[name="gender"]:checked').value,
         age_group: selectedAgeGroup,
         subscription_plan: 'premium',
-        survey_version: '2026-10-27-color',
+        survey_version: '2026-11-12-gender',
         ring_color: document.querySelector('[name=ring_color]:checked').value,
         feature: selectedFeatureGroup,
         features: [selectedFeatureGroup],
@@ -4769,3 +4799,4 @@
   </script>
 </body>
 </html>
+

@@ -244,7 +244,7 @@ async function saveWaitlistEntry(collection, email, data) {
   return welcome.saveSignup(db, collection, email, {
     ...data, country, feature, budget,
     country_label: countryLabel, feature_label: featureLabel, budget_label: budgetLabel,
-    dropdown_selections: { country: countryLabel, feature: featureLabel, budget: budgetLabel, ring_color: data.ring_color_label || null, age_group: data.age_group || null, subscription_plan: data.subscription_plan || null }
+    dropdown_selections: { ...(data.gender_label ? { gender: data.gender_label } : {}), country: countryLabel, feature: featureLabel, budget: budgetLabel, ring_color: data.ring_color_label || null, age_group: data.age_group || null, subscription_plan: data.subscription_plan || null }
   });
 }
 
@@ -271,6 +271,7 @@ async function sendSlackWaitlistNotification(params) {
 
   const details = [
     `• *이메일:* \`${params.email}\` ${statusBadge}`,
+    `• *성별:* ${params.gender_label || '미기재 (이전 신청 양식)'}`,
     `• *마켓 / 언어:* ${flag} (${params.language || 'ko'})`,
     ...(params.age_group ? [`• *연령:* ${params.age_group}`, `• *선호 구독 상품:* ${params.subscription_plan === 'premium' ? '프리미엄' : '베이직'}`] : [`• *거주 국가:* ${params.country_label || params.country || '미선택'}`]),
     `• *기대 기능:* ${params.feature_label || params.feature || '미선택'}`,
@@ -467,6 +468,8 @@ const server = http.createServer(async (req, res) => {
           email,
           market,
           language,
+          gender: docData.gender,
+          gender_label: docData.gender_label,
           age_group: docData.age_group,
           subscription_plan: docData.subscription_plan,
           ring_color: docData.ring_color,
@@ -618,7 +621,7 @@ const server = http.createServer(async (req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Length', stats.size);
-    if (targetFile.startsWith('archive/')) res.setHeader('X-Robots-Tag', 'noindex, follow');
+    if (targetFile.startsWith('archive/') || /^(teaser|pair|mobile-single|hello99)/.test(targetFile)) res.setHeader('X-Robots-Tag', 'noindex, follow');
 
     if (ext === '.html' || targetFile.startsWith('hello/') || targetFile.startsWith('hello99/')) {
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -645,3 +648,4 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, HOST, () => {
   console.log(`SAI production server listening on http://${HOST}:${PORT}`);
 });
+
